@@ -1,0 +1,16 @@
+{
+  "exclude": ["node_modules", "build"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "auto",
+    "moduleResolution": "node",
+    "declaration": true,
+    "outDir": "build",
+    "strict": true,
+    "skipLibCheck": true
+  }
+}

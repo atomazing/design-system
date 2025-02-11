@@ -1,0 +1,38 @@
+{
+  "name": "@atomazing/design-system",
+  "private": false,
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "type": "module",
+  "types": "build/types/index.d.ts",
+  "files": [
+    "build",
+    "README.MD"
+  ],
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "homepage": "https://github.com/atomazing/design-system",
+  "keywords": [
+    "atomazing-org",
+    "styles",
+    "mui",
+    "utils"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "PonomarevBPM + MarkSinD",
+  "license": "MIT",
+  "description": "A library providing a set of useful utils, mui style extensions and components to build your application.",
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/react": "^18.3.3"
+  },
+  "peerDependencies": {
+    "@mui/material": "^5.15.21",
+    "@mui/icons-material": "^5.15.11",
+    "@emotion/css": "^11.11.2"
+  }
+}
