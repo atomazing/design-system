@@ -5,7 +5,7 @@ export {
   displayGreeting,
   getDayIdentifier,
   useResponsiveDisplay,
-} from "./src/utils";
+} from "./build/utils";
 
 export {
   fadeIn,
@@ -21,6 +21,6 @@ export {
   typographyVariants,
   zoomIn,
   commonComponentProps,
-} from "./src/styles";
+} from "./build/styles";
 
-export { DialogBtn, Loading, PathName } from "./src/components";
+export { DialogBtn, Loading, PathName } from "./build/components";

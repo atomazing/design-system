@@ -2,7 +2,7 @@
 
 [![MIT License](https://img.shields.io/npm/l/npm-package-example.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-The `@atomazing/design-system` provides a set of useful utils, mui style extensions and components to build your application the way Atomazing does.
+The `@atomazing-org/design-system` provides a set of useful utils, mui style extensions and components to build your application the way Atomazing does.
 
 ## Build-on
 
@@ -17,7 +17,7 @@ The `@atomazing/design-system` provides a set of useful utils, mui style extensi
 Just install package from npm
 
 ```
-npm i @atomazing/design-system
+npm i @atomazing-org/design-system
 ```
 
 ## Package structure

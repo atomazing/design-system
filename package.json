@@ -1,12 +1,14 @@
 {
-  "name": "@atomazing/design-system",
+  "name": "@atomazing-org/design-system",
   "private": false,
-  "version": "1.0.0",
-  "main": "build/index.js",
+  "version": "1.0.5",
+  "main": "index.js",
   "type": "module",
-  "types": "build/types/index.d.ts",
+  "types": "index.d.ts",
   "files": [
     "build",
+    "index.js",
+    "index.d.ts",
     "README.MD"
   ],
   "scripts": {
