@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 
+/** A default button style extention */
 export const DialogBtn = styled(Button)`
   padding: 10px 16px;
   border-radius: 16px;

@@ -1,5 +1,5 @@
 {
-  "exclude": ["node_modules", "build"],
+  "exclude": ["node_modules", "build", "src/stories"],
   "compilerOptions": {
     "jsx": "react-jsx",
     "lib": ["ESNext", "dom"],
