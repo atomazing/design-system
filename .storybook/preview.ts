@@ -1,7 +1,7 @@
 import { Preview, ReactRenderer } from "@storybook/react";
 import { withThemeFromJSXProvider } from "@storybook/addon-themes";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { theme } from "../src/stories/styles/theme"; // Import your custom theme configs
+import { theme } from "../src/stories/styles/theme";
 
 const preview: Preview = {
   parameters: {

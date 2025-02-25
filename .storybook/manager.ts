@@ -1,6 +1,8 @@
 import { addons } from "@storybook/manager-api";
 import { create } from "@storybook/theming";
 
+import Logo from "../public/logo.png";
+
 addons.setConfig({
   theme: create({
     base: "light",
@@ -10,7 +12,7 @@ addons.setConfig({
 
     brandTitle: "@atomazing-org/design-system",
     brandUrl: "https://github.com/atomazing/design-system",
-    brandImage: "/logo.png",
+    brandImage: Logo,
     brandTarget: "_blank",
 
     //
