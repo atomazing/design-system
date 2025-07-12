@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/class-methods-use-this -- only for ErrorBoundary*/
 import React from "react";
 import styled from "@emotion/styled";
-import { ErrorOutlineRounded } from "@mui/icons-material";
-import { Box, Button } from "@mui/material";
+import ErrorOutlineRounded from "@mui/icons-material/ErrorOutlineRounded";
+import { Box } from "@mui/material";
 
 import type { ErrorInfo } from "react";
 
@@ -18,7 +19,7 @@ interface ErrorBoundaryState {
  * ErrorBoundary component that catches and displays errors.
  */
 
-class ErrorBoundary extends React.Component<
+export class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {
@@ -41,12 +42,6 @@ class ErrorBoundary extends React.Component<
     console.error("Error:", error);
     // eslint-disable-next-line no-console -- Выводим ошибку в консоль
     console.error("Error Info:", errorInfo);
-  }
-
-  handleClearData() {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.reload();
   }
 
   render() {
@@ -107,17 +102,3 @@ const ErrorHeader = styled.h1`
     margin-bottom: 0;
   }
 `;
-
-const StyledButton = styled(Button)`
-  padding: 10px 30px;
-  border-radius: 12px;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-StyledButton.defaultProps = {
-  variant: "outlined",
-  size: "large",
-};
-
-export default ErrorBoundary;

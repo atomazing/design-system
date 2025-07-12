@@ -1,48 +1,92 @@
-import { Theme } from "@mui/material";
+import type { Theme } from "@mui/material";
 
+/**
+ * Common component style overrides and default props shared across the design system.
+ * This object should be spread into the `components` field of the MUI theme.
+ */
 export const commonComponentProps: Theme["components"] = {
   MuiTooltip: {
     defaultProps: {
       disableInteractive: true,
-      style: {
+    },
+    styleOverrides: {
+      tooltip: ({ theme }) => ({
+        color: theme.palette.mode === "dark" ? "#fff" : "#000",
+        backgroundColor:
+          theme.palette.mode === "dark" ? "#141431dd" : "#ededf3dd",
         backdropFilter: "blur(6px)",
         WebkitBackdropFilter: "blur(6px)",
-      },
+        padding: "8px 16px",
+        borderRadius: "8px",
+        fontSize: "12px",
+      }),
     },
   },
+
   MuiButton: {
-    defaultProps: {
-      sx: {
-        p: "12px 24px",
+    styleOverrides: {
+      root: {
+        padding: "12px 24px",
         borderRadius: "14px",
       },
-    },
-  },
-  MuiSelect: {
-    defaultProps: {
-      style: {
-        borderRadius: "18px",
+      contained: {
+        boxShadow: "none",
       },
     },
   },
+
+  MuiSkeleton: {
+    styleOverrides: {
+      root: {
+        borderRadius: "24px",
+      },
+    },
+  },
+
+  MuiSelect: {
+    styleOverrides: {
+      root: {
+        borderRadius: "18px",
+      },
+      select: {
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        gap: "4px",
+      },
+    },
+  },
+
   MuiDialog: {
     defaultProps: {
-      PaperProps: {
-        style: {
-          padding: "12px",
-          borderRadius: "24px",
+      slotProps: {
+        paper: {
+          style: {
+            padding: "12px",
+            borderRadius: "24px",
+            minWidth: "400px",
+          },
+        },
+      },
+    },
+    styleOverrides: {
+      root: {
+        "& .MuiDialog-container": {
+          backdropFilter: "blur(4px)",
         },
       },
     },
   },
+
   MuiAvatar: {
-    defaultProps: {
-      style: {
+    styleOverrides: {
+      root: {
         fontWeight: 500,
         color: "#fff",
       },
     },
   },
+
   MuiAlert: {
     styleOverrides: {
       root: {
@@ -50,6 +94,7 @@ export const commonComponentProps: Theme["components"] = {
       },
     },
   },
+
   MuiTextField: {
     styleOverrides: {
       root: {
@@ -59,11 +104,53 @@ export const commonComponentProps: Theme["components"] = {
       },
     },
   },
-  MuiMenuItem: {
+
+  MuiPaper: {
+    styleOverrides: {
+      elevation8: {
+        borderRadius: "16px",
+      },
+    },
+  },
+
+  MuiBottomNavigationAction: {
     styleOverrides: {
       root: {
-        "& .MuiInputBase-root": {
-          borderRadius: "16px",
+        padding: "12px",
+        margin: 0,
+        maxHeight: "none",
+      },
+    },
+  },
+
+  MuiSlider: {
+    styleOverrides: {
+      valueLabel: ({ theme }) => ({
+        borderRadius: "10px",
+        padding: "6px 14px",
+        color: theme.palette.mode === "dark" ? "#fff" : "#000",
+        backgroundColor:
+          theme.palette.mode === "dark" ? "#141431dd" : "#ededf3dd",
+        "&::before, &::after": {
+          display: "none",
+        },
+      }),
+    },
+  },
+
+  MuiCircularProgress: {
+    styleOverrides: {
+      circle: {
+        strokeLinecap: "round",
+      },
+    },
+  },
+
+  MuiAccordion: {
+    styleOverrides: {
+      root: {
+        "&::before": {
+          display: "none",
         },
       },
     },

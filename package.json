@@ -1,40 +1,64 @@
 {
   "name": "@atomazing-org/design-system",
+  "version": "1.0.6",
   "private": false,
-  "version": "1.0.5",
-  "main": "index.js",
-  "type": "module",
-  "types": "index.d.ts",
-  "files": [
-    "build",
-    "index.js",
-    "index.d.ts",
-    "README.MD"
-  ],
-  "scripts": {
-    "build": "npx tsc"
-  },
+  "description": "A library providing a set of useful utils, MUI style extensions, and components to build your application.",
+  "author": "PonomarevBPM + MarkSinD",
+  "license": "MIT",
   "homepage": "https://github.com/atomazing/design-system",
   "keywords": [
     "atomazing-org",
-    "styles",
+    "design-system",
     "mui",
+    "emotion",
+    "ui",
+    "components",
+    "styles",
     "utils"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
   ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "author": "PonomarevBPM + MarkSinD",
-  "license": "MIT",
-  "description": "A library providing a set of useful utils, mui style extensions and components to build your application.",
-  "devDependencies": {
-    "typescript": "^5.7.3",
-    "@types/react": "^18.3.3"
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "format:eslint": "npm run lint:eslint -- --fix",
+    "format:prettier": "npm run lint:prettier -- --write",
+    "lint:eslint": "eslint \"**/*.{js,ts,tsx}\"",
+    "lint:prettier": "prettier \"**/*.{json,js,ts,tsx}\" --check",
+    "lint:ts": "tsc --noEmit",
+    "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:ts"
   },
   "peerDependencies": {
-    "@mui/material": "^5.15.21",
-    "@mui/icons-material": "^5.15.11",
-    "@emotion/css": "^11.11.2"
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "@emotion/css": "^11.0.0",
+    "@mui/material": "^7.0.0",
+    "@mui/icons-material": "^7.0.0"
+  },
+  "devDependencies": {
+    "@atomazing-org/eslint-config": "2.4.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@types/react": "^19.1.8",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
   }
 }

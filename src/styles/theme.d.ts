@@ -1,55 +1,8 @@
-export {
-  systemInfo,
-  timeAgo,
-  timeAgoFromStart,
-  displayGreeting,
-  getDayIdentifier,
-  useResponsiveDisplay,
-} from "./build/utils";
-
-export {
-  fadeIn,
-  fadeInLeft,
-  pulseAnimation,
-  ring,
-  rotate,
-  rotateSlideBarIcons,
-  scale,
-  slideIn,
-  slideInBottom,
-  typographyProps,
-  typographyVariants,
-  zoomIn,
-  commonComponentProps,
-} from "./build/styles";
-
-export { DialogBtn, Loading, PathName } from "./build/components";
-
-import "@emotion/react";
+// theme.d.ts
 import "@mui/material/styles";
-import "@mui/material/Typography";
-import "react";
 
-declare module "@emotion/react" {
-  export interface Theme {
-    /**
-     * Emotion Primary color
-     */
-    primary: string;
-    /**
-     * Emotion Background color
-     */
-    secondary: string;
-    /**
-     * Emotion darkmode
-     */
-    darkmode: boolean;
-  }
-}
-
-/// <reference types="@mui/types" />
 declare module "@mui/material/styles" {
-  export interface TypographyVariants {
+  interface TypographyVariants {
     text_xl_regular: React.CSSProperties;
     text_lg_regular: React.CSSProperties;
     text_md_regular: React.CSSProperties;
@@ -92,56 +45,10 @@ declare module "@mui/material/styles" {
     display_sm_bold: React.CSSProperties;
     display_xs_bold: React.CSSProperties;
   }
-
-  // allow configuration using `createTheme()`
-  export interface TypographyVariantsOptions {
-    text_xl_regular?: React.CSSProperties;
-    text_lg_regular?: React.CSSProperties;
-    text_md_regular?: React.CSSProperties;
-    text_sm_regular?: React.CSSProperties;
-    text_xs_regular?: React.CSSProperties;
-    text_2xs_regular?: React.CSSProperties;
-
-    text_xl_bold?: React.CSSProperties;
-    text_lg_bold?: React.CSSProperties;
-    text_md_bold?: React.CSSProperties;
-    text_sm_bold?: React.CSSProperties;
-    text_xs_bold?: React.CSSProperties;
-    text_2xs_bold?: React.CSSProperties;
-
-    text_xl_semibold?: React.CSSProperties;
-    text_lg_semibold?: React.CSSProperties;
-    text_md_semibold?: React.CSSProperties;
-    text_sm_semibold?: React.CSSProperties;
-    text_xs_semibold?: React.CSSProperties;
-    text_2xs_semibold?: React.CSSProperties;
-
-    text_xl_thin?: React.CSSProperties;
-    text_lg_thin?: React.CSSProperties;
-    text_md_thin?: React.CSSProperties;
-    text_sm_thin?: React.CSSProperties;
-    text_xs_thin?: React.CSSProperties;
-    text_2xs_thin?: React.CSSProperties;
-
-    display_2xl_regular?: React.CSSProperties;
-    display_xl_regular?: React.CSSProperties;
-    display_lg_regular?: React.CSSProperties;
-    display_md_regular?: React.CSSProperties;
-    display_sm_regular?: React.CSSProperties;
-    display_xs_regular?: React.CSSProperties;
-
-    display_2xl_bold?: React.CSSProperties;
-    display_xl_bold?: React.CSSProperties;
-    display_lg_bold?: React.CSSProperties;
-    display_md_bold?: React.CSSProperties;
-    display_sm_bold?: React.CSSProperties;
-    display_xs_bold?: React.CSSProperties;
-  }
 }
 
-// Update the Typography's variant prop options
 declare module "@mui/material/Typography" {
-  export interface TypographyPropsVariantOverrides {
+  interface TypographyPropsVariantOverrides {
     text_xl_regular: true;
     text_lg_regular: true;
     text_md_regular: true;
