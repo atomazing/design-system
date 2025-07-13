@@ -33,6 +33,7 @@ export const createCustomTheme = (
     components: {
       ...commonComponentProps,
     },
+    shape: { borderRadius: 24 },
   });
 
 /**

@@ -17,7 +17,7 @@ export const commonComponentProps: Theme["components"] = {
         backdropFilter: "blur(6px)",
         WebkitBackdropFilter: "blur(6px)",
         padding: "8px 16px",
-        borderRadius: "8px",
+        borderRadius: theme.shape.borderRadius,
         fontSize: "12px",
       }),
     },
@@ -25,10 +25,10 @@ export const commonComponentProps: Theme["components"] = {
 
   MuiButton: {
     styleOverrides: {
-      root: {
+      root: ({ theme }) => ({
         padding: "12px 24px",
-        borderRadius: "14px",
-      },
+        borderRadius: theme.shape.borderRadius,
+      }),
       contained: {
         boxShadow: "none",
       },
@@ -37,17 +37,17 @@ export const commonComponentProps: Theme["components"] = {
 
   MuiSkeleton: {
     styleOverrides: {
-      root: {
-        borderRadius: "24px",
-      },
+      root: ({ theme }) => ({
+        borderRadius: theme.shape.borderRadius,
+      }),
     },
   },
 
   MuiSelect: {
     styleOverrides: {
-      root: {
-        borderRadius: "18px",
-      },
+      root: ({ theme }) => ({
+        borderRadius: theme.shape.borderRadius,
+      }),
       select: {
         display: "flex",
         justifyContent: "flex-start",
@@ -63,7 +63,7 @@ export const commonComponentProps: Theme["components"] = {
         paper: {
           style: {
             padding: "12px",
-            borderRadius: "24px",
+            borderRadius: 24, // оставить явно, если это критично
             minWidth: "400px",
           },
         },
@@ -89,27 +89,27 @@ export const commonComponentProps: Theme["components"] = {
 
   MuiAlert: {
     styleOverrides: {
-      root: {
-        borderRadius: "16px",
-      },
+      root: ({ theme }) => ({
+        borderRadius: theme.shape.borderRadius,
+      }),
     },
   },
 
   MuiTextField: {
     styleOverrides: {
-      root: {
+      root: ({ theme }) => ({
         "& .MuiInputBase-root": {
-          borderRadius: "16px",
+          borderRadius: theme.shape.borderRadius,
         },
-      },
+      }),
     },
   },
 
   MuiPaper: {
     styleOverrides: {
-      elevation8: {
-        borderRadius: "16px",
-      },
+      elevation8: ({ theme }) => ({
+        borderRadius: theme.shape.borderRadius,
+      }),
     },
   },
 
@@ -126,7 +126,7 @@ export const commonComponentProps: Theme["components"] = {
   MuiSlider: {
     styleOverrides: {
       valueLabel: ({ theme }) => ({
-        borderRadius: "10px",
+        borderRadius: theme.shape.borderRadius,
         padding: "6px 14px",
         color: theme.palette.mode === "dark" ? "#fff" : "#000",
         backgroundColor:
