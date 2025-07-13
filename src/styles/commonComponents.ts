@@ -143,6 +143,14 @@ export const commonComponentProps: Theme["components"] = {
     },
   },
 
+  MuiDialogContent: {
+    styleOverrides: {
+      root: {
+        padding: 0
+      }
+    },
+  },
+
   MuiSlider: {
     styleOverrides: {
       valueLabel: ({ theme }) => ({
