@@ -3,3 +3,4 @@ export { getDayIdentifier } from "./getDayIdentifier";
 export { systemInfo } from "./getSystemInfo";
 export { timeAgo, timeAgoFromStart } from "./timeAgo";
 export { useResponsiveDisplay } from "./useResponsiveDisplay";
+export { useSystemTheme } from "./useSystemTheme";

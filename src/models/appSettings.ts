@@ -22,3 +22,10 @@ export interface AppSettings {
    */
   darkMode: DarkModeOptions;
 }
+
+export interface ThemeContextProps {
+  theme: string;
+  darkMode: DarkModeOptions;
+  setTheme: (theme: string) => void;
+  setDarkMode: (mode: DarkModeOptions) => void;
+}

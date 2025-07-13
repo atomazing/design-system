@@ -45,8 +45,8 @@ declare module "@mui/material/styles" {
     display_xs_bold: React.CSSProperties;
   }
 
-  // Allow configuration using `createTheme`
-  type TypographyVariantsOptions = Partial<TypographyVariants>;
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- Allow configuration using `createTheme`
+  interface TypographyVariantsOptions extends Partial<TypographyVariants> {}
 
   interface TypographyPropsVariantOverrides {
     text_xl_regular: true;
