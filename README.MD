@@ -3,204 +3,243 @@
 1. [Introduction](#1-introduction)
 2. [Installation](#2-installation)
 3. [Usage](#3-usage)  
-   3.1 [Theme Provider Setup](#31-theme-provider-setup)  
-   3.2 [Typography Variants](#32-typography-variants)  
-   3.3 [Global Styles](#33-global-styles)  
-   3.4 [Component Overrides](#34-component-overrides)
-4. [Utilities](#4-utilities)  
-   4.1 [Color Utilities](#41-color-utilities)  
-   4.2 [System Info](#42-system-info)
-5. [Animations](#5-animations)
-6. [Theming](#6-theming)  
-   6.1 [Theme Creation](#61-theme-creation)  
-   6.2 [Dark Mode Strategy](#62-dark-mode-strategy)
-7. [Typography Configuration](#7-typography-configuration)
-8. [Contributing](#8-contributing)
-9. [License](#9-license)
+   3.1 [ThemeProvider Setup](#31-themeprovider-setup)  
+   3.2 [Switching Theme Mode (Light/Dark)](#34-switching-theme-mode-lightdark)  
+   3.3 [Custom Theme Colors](#35-custom-theme-colors)
+4. [Peer Dependencies & Requirements](#4-peer-dependencies--requirements)
+5. [Utilities](#5-utilities)  
+   5.1 [Color Utilities](#51-color-utilities)  
+   5.2 [System Info](#52-system-info)
 
 ## 1. Introduction
 
-**@atomazing-org/design-system** is a reusable, opinionated design system built on top of [Material UI (MUI)](https://mui.com/) and [Emotion](https://emotion.sh/).  
-It offers a consistent foundation for building modern web interfaces with minimal configuration.
+**@atomazing-org/design-system** is a flexible, modern, and themeable design system built on top of [Material UI (MUI)](https://mui.com/) and [Emotion](https://emotion.sh/).
 
-This package provides:
+It provides a unified approach to building consistent, responsive, and accessible UIs across multiple frontend applications — with minimal setup and full customizability.
 
-- 🌈 Customizable MUI theme generator
-- ✍️ Extended typography variants
-- 🎨 Global styles (with dark/light mode support)
-- 🧩 Component style overrides
-- 🛠 Utility functions (e.g., color contrast, system info)
-- 🎞 Smooth keyframe animations
+### 🔧 What’s Included
 
-The design system is ideal for teams working across multiple front-end applications who want to unify styles, reduce duplication, and ship faster with consistent UI patterns.
+- 🌈 **Custom MUI Theme Generator**  
+  Create light/dark themes with primary/background colors in a single line.
+
+- ✍️ **Extended Typography Variants**  
+  Includes consistent, scalable font sizes and weights beyond MUI defaults.
+
+- 🎨 **Global Styles**  
+  Applies CSS resets, adaptive contrast, scrollbar styling, and system theming.
+
+- 🧩 **Component Style Overrides**  
+  Predefined visual rules for MUI components like buttons, dialogs, sliders, etc.
+
+- 🛠 **Utility Functions**  
+  Helpful tools like color contrast calculation, system info detection, and dark mode strategy.
+
+- 🎞 **Predefined Animations**  
+  Keyframes for transitions like fade, slide, pulse, and more.
+
+### 🚀 When to Use
+
+Use this design system when:
+
+- You’re building apps that require a **consistent design language**.
+- You want to **save time on theming and component styling**.
+- You work across multiple projects and need **reusable design tokens**.
+- You want **dark mode support**, animations, and global styles out of the box.
+
+This package is ideal for both small projects and large enterprise frontends looking to maintain style consistency and speed up delivery.
+
+---
 
 ## 2. Installation
 
-To install the design system in your project, use your preferred package manager:
+To install `@atomazing-org/design-system`, use your preferred package manager:
 
 ```bash
-# Using npm
+# npm
 npm install @atomazing-org/design-system
 ```
 
 ```bash
-# Using yarn
+# yarn
 yarn add @atomazing-org/design-system
 ```
 
 ```bash
-# Using pnpm
+# pnpm
 pnpm add @atomazing-org/design-system
 ```
 
+> **Note:** This package includes only the core functionality.  
+> You must also install the required **peer dependencies** to ensure proper integration with MUI and Emotion.
 
-## 3. Peer Dependencies & Requirements
+## 3. Usage
 
-The `@atomazing-org/design-system` package relies on several peer dependencies to integrate properly with your application stack.
+This section describes how to use the design system in your application, including theme setup, global styles, switching between light and dark modes, and accessing theme context via a custom hook.
 
-Make sure the following libraries are installed in your project:
+### 3.1 ThemeProvider Setup
 
-| Package              | Version          | Required For                        |
-|----------------------|------------------|-------------------------------------|
-| `@mui/material`      | `^7.2.0`         | Core MUI theming and components     |
-| `@mui/icons-material`| `^7.2.0`         | Icon support                        |
-| `@emotion/react`     | `^11.0.0`        | Emotion styling engine (required)   |
-| `@emotion/styled`    | `^11.0.0`        | Styled components with Emotion      |
-| `@emotion/css`       | `^11.13.5`       | (Optional) Raw className utility    |
-
-### TypeScript Support
-
-This package is fully written in TypeScript and ships with `.d.ts` type declarations.
-Ensure your project uses TypeScript 4.5+ for best compatibility.
-
-> ✅ **Tip:** If you encounter missing types (e.g., for `@emotion/react`), install them manually:
-```bash
-npm install -D @types/react
-```
-
-## 4. Features Overview
-
-This package provides a modular and extendable foundation for your design system, broken into the following areas:
-
-### 🎨 Theme Generator (`createCustomTheme`)
-- Dynamically generate MUI themes using custom primary and secondary colors.
-- Supports light, dark, system, and auto modes.
-- Automatically adapts based on background contrast.
-
-### 🧩 Component Overrides (`commonComponentProps`)
-- Global style customizations for common MUI components (e.g. `Button`, `Tooltip`, `Dialog`, `Slider`).
-- Shared defaults to ensure consistent spacing, border-radius, shadows, and blur effects.
-
-### ✍️ Typography Variants (`typographyVariants`)
-- Dozens of additional font sizes and weights beyond MUI defaults.
-- Uses names like `text_md_regular`, `display_lg_bold` for clarity and structure.
-- Easily configurable in your MUI theme's `typography` field.
-
-### 🖥 Global Styles (`GlobalStyles`)
-- Applies global CSS resets and base styles (scrollbars, font, highlight colors).
-- Reacts to theme mode (`light` or `dark`) to dynamically adjust UI contrast.
-- Uses Emotion’s `<Global />` component under the hood.
-
-### 🎞 Animations (`keyframes`)
-- Predefined keyframes for fade, slide, scale, and pulse effects.
-- Includes customizable utilities like `pulseAnimation(color)` and `progressPulse(color)`.
-
-### 🛠 Utilities
-- `getFontColor`: Calculates readable font color from a background hex.
-- `isDarkMode`: Detects appropriate mode based on system or color contrast.
-- `systemInfo`: Returns the user's OS and browser in a reliable format.
-
----
-
-These modules are built to be tree-shakable and can be imported individually.
-
-## 5. Usage Examples
-
-This section shows how to integrate the design system in your React application.
-
-### 5.1. Wrapping with ThemeProvider
+To enable theming, wrap your application with the `ThemeProviderWrapper` provided by `@atomazing-org/design-system`.  
+This wrapper handles theme creation, dark mode toggling, system preferences, and context setup — all out of the box.
 
 ```tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import { GlobalStyles, ThemeProviderWrapper } from '@atomazing-org/design-system';
 
+export const App = () => (
+  <ThemeProviderWrapper>
+    <GlobalStyles />
+    {/* Your application content */}
+  </ThemeProviderWrapper>
+);
+```
+
+### 🔍 Key Notes
+
+- `ThemeProviderWrapper` abstracts away the creation and management of the MUI theme.
+- It provides built-in support for dark mode, system preferences, and the `useAppThemeProvider` hook.
+- `GlobalStyles` ensures base UI styles adapt to the current theme.
+- Place the wrapper as high in the component tree as possible to ensure theme availability across the app.
+
+### 3.2 Switching Theme Mode (Light/Dark)
+
+The design system includes a built-in hook — `useThemeSettings()` — to manage theme mode and apply it consistently across your app.
+
+It supports four modes out of the box:
+- `light`
+- `dark`
+- `system` — matches the user’s OS-level preference
+- `auto` — determines best contrast based on theme background
+
+#### 🧩 Example: Custom Toggle with Options
+
+```tsx
 import {
-  createCustomTheme,
-  GlobalStyles,
+  useThemeSettings,
+  themes,
 } from '@atomazing-org/design-system';
 
-import { ThemeProvider, CssBaseline } from '@mui/material';
+const { darkMode, setDarkMode } = useThemeSettings();
 
-const theme = createCustomTheme('#4461F2', '#F9F9FC', 'light');
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <GlobalStyles />
-    <App />
-  </ThemeProvider>,
-);
+<CustomRadioGroup
+  options={[
+    { label: 'Auto', value: 'auto' },
+    { label: 'System', value: 'system' },
+    { label: 'Light', value: 'light' },
+    { label: 'Dark', value: 'dark' },
+  ]}
+  value={darkMode}
+  onChange={val => setDarkMode(val)}
+/>
 ```
 
-## 6. Customization
 
-The design system is built to be flexible and extendable. You can override or extend the default behavior in several ways.
+### 3.3 Custom Theme Colors
 
-### 6.1. Customizing the Theme
+The design system allows you to create and switch between custom color themes using the `createCustomTheme()` function internally via `ThemeProviderWrapper`.
 
-You can generate your own theme using `createCustomTheme`:
+You can define as many themes as needed by specifying:
+- `primaryColor`: main branding color
+- `secondaryColor` (optional): used for background and surface elements
+
+#### 🎨 Example: Theme Definitions
 
 ```ts
-import { createCustomTheme } from '@atomazing-org/design-system';
-
-const theme = createCustomTheme(
-  '#0088cc', // primary color
-  '#f0f4f8', // background (secondary) color
-  'light',   // palette mode
-);
+export const themeConfig = {
+  BPM: {
+    primaryColor: '#203959',
+    secondaryColor: '#ffffff',
+  },
+  Lanit: {
+    primaryColor: '#33ccff',
+    secondaryColor: '#f7f7f7',
+  },
+  "Dark Purple": {
+    primaryColor: '#b624ff',
+  },
+  "Light Orange": {
+    primaryColor: '#F26E56',
+    secondaryColor: '#F6F6F6',
+  },
+};
 ```
 
-## 7. Tree-Shaking & Importing
+## 4. Peer Dependencies & Requirements
 
-The `@atomazing-org/design-system` package is optimized for modern bundlers and supports tree-shaking out of the box.
+The `@atomazing-org/design-system` package is built on top of [Material UI v7](https://mui.com/) and [Emotion](https://emotion.sh/) and requires the following peer dependencies to be present in your project.
 
-To minimize bundle size:
+Install them manually if not already included:
 
-### 7.1. Use Named Imports
+### 📦 Required Peer Dependencies
 
-Instead of importing everything at once, prefer named imports:
+| Package                    | Version    | Purpose                                 |
+|----------------------------|------------|-----------------------------------------|
+| `@mui/material`            | ^7.0.0     | Core MUI components and theming         |
+| `@mui/icons-material`      | ^7.0.0     | MUI icon set                            |
+| `@emotion/react`           | ^11.0.0    | Emotion’s core rendering runtime        |
+| `@emotion/styled`          | ^11.0.0    | Styled components engine                |
+| `@emotion/css`             | ^11.0.0    | (Optional) For raw CSS class generation |
 
-```ts
-// ✅ Recommended (tree-shakable)
-import { fadeIn, getFontColor } from '@atomazing-org/design-system';
-
-// 🚫 Not recommended (bundles everything)
-import * as DesignSystem from '@atomazing-org/design-system';
-```
-
-## 8. Contribution Guide
-
-We welcome contributions to the design system! Whether it's improving styles, fixing bugs, or adding utilities — every improvement helps.
-
-### 8.1. Getting Started
-
-Clone the repository and install dependencies:
+You can install all required peers with:
 
 ```bash
-git clone https://github.com/atomazing/design-system.git
-cd design-system
-npm install
+npm install @mui/material @mui/icons-material @emotion/react @emotion/styled @emotion/css
 ```
 
-## 9. License
+## 5. Utilities
 
-This project is licensed under the [MIT License](./LICENSE).
-
-You are free to use, modify, distribute, and sublicense the design system in your projects, whether personal or commercial.
+The design system includes a collection of lightweight, framework-agnostic utility functions and hooks to support theming, contrast handling, and device detection.
 
 ---
 
-© PonomarevBPM + MarkSinD, 2025  
-Maintained under the Atomazing Org initiative.
+### 5.1 Color Utilities
+
+#### 🎯 `getFontColor(backgroundColor: string): string`
+
+Returns the best readable font color (`dark` or `light`) based on the background brightness.
+
+```ts
+const textColor = getFontColor('#ffffff'); // → "#101727" (dark)
+```
+
+- Accepts any valid hex color (`#fff`, `#ffffff`)
+- Automatically expands short hex (`#abc` → `#aabbcc`)
+- Uses WCAG-recommended brightness formula
+- Returns fallback (`fontDark`) if invalid color
+
+This is useful for generating accessible dynamic UI colors — especially in theme builders or color pickers.
+
+---
+
+### 5.2 System Info
+
+#### 🧩 `systemInfo: { os: OperatingSystem; browser: Browser }`
+
+Detects the user's operating system and browser at runtime based on the `navigator.userAgent`.
+
+```ts
+console.log(systemInfo.os); // "macOS" | "Windows" | "Linux" | ...
+console.log(systemInfo.browser); // "Chrome" | "Safari" | ...
+```
+
+> Uses lightweight string matching for compatibility across most modern devices.
+
+#### 🌓 `useSystemTheme(): 'light' | 'dark' | 'unknown'`
+
+React hook that listens for system-level theme changes.
+
+```ts
+const systemTheme = useSystemTheme();
+
+useEffect(() => {
+  console.log('System prefers:', systemTheme);
+}, [systemTheme]);
+```
+
+- Responds to changes in `(prefers-color-scheme)`
+- Automatically updates the value when system settings are changed
+- Useful for defaulting UI themes before user makes a selection
+
+---
+
+These utilities are tree-shakable and can be used independently of the rest of the design system.
+
 
