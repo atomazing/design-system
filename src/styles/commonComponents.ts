@@ -107,19 +107,39 @@ export const commonComponentProps: Theme["components"] = {
 
   MuiPaper: {
     styleOverrides: {
+      root: ({ theme }) => ({
+        borderRadius: theme.shape.borderRadius,
+      }),
       elevation8: ({ theme }) => ({
         borderRadius: theme.shape.borderRadius,
       }),
-    },
+    }
+  },
+
+  MuiMenuItem: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        borderRadius: theme.shape.borderRadius,
+      }),
+    }
   },
 
   MuiBottomNavigationAction: {
     styleOverrides: {
-      root: {
+      root: ({ theme }) => ({
+        borderRadius: theme.shape.borderRadius,
         padding: "12px",
         margin: 0,
         maxHeight: "none",
-      },
+      }),
+    },
+  },
+
+  MuiIcon: {
+    styleOverrides: {
+      root: {
+        borderRadius: '100%'
+      }
     },
   },
 
@@ -144,6 +164,14 @@ export const commonComponentProps: Theme["components"] = {
         strokeLinecap: "round",
       },
     },
+  },
+
+  MuiTab: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        borderRadius: theme.shape.borderRadius,
+      }),
+    }
   },
 
   MuiAccordion: {
