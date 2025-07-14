@@ -1,5 +1,3 @@
-import "./models/typography";
-
 export * from "./components";
 export * from "./context";
 export * from "./styles";
