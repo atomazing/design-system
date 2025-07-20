@@ -7,6 +7,12 @@
  */
 export type DarkModeOptions = "system" | "auto" | "light" | "dark";
 
+export interface OptionItem {
+  label: string;
+  value: DarkModeOptions;
+  icon: any;
+}
+
 /**
  * Represents user-specific theme preferences stored in the application.
  */

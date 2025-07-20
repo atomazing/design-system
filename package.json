@@ -1,6 +1,6 @@
 {
   "name": "@atomazing-org/design-system",
-  "version": "1.0.18",
+  "version": "1.0.34",
   "private": false,
   "description": "A library providing a set of useful utils, MUI style extensions, and components to build your application.",
   "author": "PonomarevBPM + MarkSinD",

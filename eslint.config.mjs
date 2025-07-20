@@ -6,11 +6,13 @@ export default [
 		'public/**',
 		'dev-dist/**',
 		'src/templates/**',
+		'src/styles/__tests__/**',
 		'src/vite-env.d.ts',
 		'node_modules',
 		'dist',
 		'plopfile.js',
 		'workbox.config.ts',
+		'tsup.config.ts',
 		'manifest.ts',
 		'vite.config.ts',
 	]),
@@ -18,6 +20,8 @@ export default [
 	{
 		rules: {
 			'unicorn/prefer-top-level-await': 'off',
+			'@typescript-eslint/no-empty-object-type': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
 			'unicorn/consistent-function-scoping': 'off',
 			'import/no-unresolved': [
 				'error',

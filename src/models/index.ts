@@ -1,2 +1,8 @@
-export { AppSettings, DarkModeOptions, ThemeContextProps } from "./appSettings";
-export { SystemTheme } from "./systemTheme";
+export type {
+  AppSettings,
+  DarkModeOptions,
+  ThemeContextProps,
+  OptionItem,
+} from "./appSettings";
+export type { SystemTheme } from "./systemTheme";
+export type { CustomTypographyVariants } from "./typography";

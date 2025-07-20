@@ -14,20 +14,36 @@ export const themeConfig: Record<
   { primaryColor: string; secondaryColor?: string }
 > = {
   Lanit: {
-    primaryColor: '#33ccff',
-    secondaryColor: '#f7f7f7',
+    primaryColor: "#33ccff",
+    secondaryColor: "#f7f7f7",
   },
   BPM: {
-    primaryColor: '#203959',
-    secondaryColor: '#ffffff',
+    primaryColor: "#203959",
+    secondaryColor: "#ffffff",
   },
   Pampa: {
-    primaryColor: '#ffe22e',
-    secondaryColor: '#fafafa',
+    primaryColor: "#ffe22e",
+    secondaryColor: "#fafafa",
   },
   Hurma: {
-    primaryColor: '#f6883d',
-    secondaryColor: '#ffffff',
+    primaryColor: "#f6883d",
+    secondaryColor: "#ffffff",
+  },
+  "Neo Mint": {
+    primaryColor: "#00f5d4",
+    secondaryColor: "#e4fff8",
+  },
+  "Cyber Grape": {
+    primaryColor: "#4b0082",
+    secondaryColor: "#f4f0fa",
+  },
+  "Coral Glass": {
+    primaryColor: "#ff6f61",
+    secondaryColor: "#fef2f2",
+  },
+  "Blueberry Ice": {
+    primaryColor: "#3f51b5",
+    secondaryColor: "#e8eaf6",
   },
   "Dark Purple": {
     // Default dark theme

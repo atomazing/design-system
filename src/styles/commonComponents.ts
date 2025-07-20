@@ -113,7 +113,7 @@ export const commonComponentProps: Theme["components"] = {
       elevation8: ({ theme }) => ({
         borderRadius: theme.shape.borderRadius,
       }),
-    }
+    },
   },
 
   MuiMenuItem: {
@@ -121,7 +121,7 @@ export const commonComponentProps: Theme["components"] = {
       root: ({ theme }) => ({
         borderRadius: theme.shape.borderRadius,
       }),
-    }
+    },
   },
 
   MuiBottomNavigationAction: {
@@ -135,19 +135,17 @@ export const commonComponentProps: Theme["components"] = {
     },
   },
 
-  MuiIcon: {
-    styleOverrides: {
-      root: {
-        borderRadius: '100%'
-      }
+  MuiSvgIcon: {
+    defaultProps: {
+      color: "primary",
     },
   },
 
   MuiDialogContent: {
     styleOverrides: {
       root: {
-        padding: 0
-      }
+        padding: 0,
+      },
     },
   },
 
@@ -179,7 +177,7 @@ export const commonComponentProps: Theme["components"] = {
       root: ({ theme }) => ({
         borderRadius: theme.shape.borderRadius,
       }),
-    }
+    },
   },
 
   MuiAccordion: {

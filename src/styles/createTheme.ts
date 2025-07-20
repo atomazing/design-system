@@ -3,18 +3,11 @@ import { createTheme } from "@mui/material";
 import { getFontColor } from "./colorUtils";
 import { commonComponentProps } from "./commonComponents";
 import { ColorPalette, themeConfig } from "./themeConfig";
+import { muiTypography, typographyVariants } from "./typography";
 
 import type { AppSettings, SystemTheme } from "../models";
 import type { PaletteMode, Theme } from "@mui/material";
 
-/**
- * Generates a custom MUI theme using a primary color, background color, and color mode.
- *
- * @param primaryColor - The main color used for primary palette.
- * @param backgroundColor - Background color (used as secondary). Defaults to dark blue.
- * @param mode - MUI palette mode ('light' | 'dark'). Defaults to 'dark'.
- * @returns A MUI Theme object.
- */
 export const createCustomTheme = (
   primaryColor: string,
   backgroundColor = "#232e58",
@@ -32,7 +25,9 @@ export const createCustomTheme = (
     },
     components: {
       ...commonComponentProps,
+      MuiTypography: muiTypography,
     },
+    typography: typographyVariants,
     shape: { borderRadius: 24 },
   });
 
