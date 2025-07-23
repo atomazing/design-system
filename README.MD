@@ -82,11 +82,10 @@ To enable theming, wrap your application with the `ThemeProviderWrapper` provide
 This wrapper handles theme creation, dark mode toggling, system preferences, and context setup — all out of the box.
 
 ```tsx
-import { GlobalStyles, ThemeProviderWrapper } from '@atomazing-org/design-system';
+import { ThemeProviderWrapper } from '@atomazing-org/design-system';
 
 export const App = () => (
   <ThemeProviderWrapper>
-    <GlobalStyles />
     {/* Your application content */}
   </ThemeProviderWrapper>
 );
@@ -96,8 +95,6 @@ export const App = () => (
 
 - `ThemeProviderWrapper` abstracts away the creation and management of the MUI theme.
 - It provides built-in support for dark mode, system preferences, and the `useAppThemeProvider` hook.
-- `GlobalStyles` ensures base UI styles adapt to the current theme.
-- Place the wrapper as high in the component tree as possible to ensure theme availability across the app.
 
 ### 3.2 Switching Theme Mode (Light/Dark)
 
@@ -144,14 +141,6 @@ You can define as many themes as needed by specifying:
 
 ```ts
 export const themeConfig = {
-  BPM: {
-    primaryColor: '#203959',
-    secondaryColor: '#ffffff',
-  },
-  Lanit: {
-    primaryColor: '#33ccff',
-    secondaryColor: '#f7f7f7',
-  },
   "Dark Purple": {
     primaryColor: '#b624ff',
   },
@@ -159,6 +148,7 @@ export const themeConfig = {
     primaryColor: '#F26E56',
     secondaryColor: '#F6F6F6',
   },
+  // Other colors  
 };
 ```
 
