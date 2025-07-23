@@ -62,7 +62,7 @@ export const muiTypography: Components<Theme>["MuiTypography"] = {
 };
 
 /**
- * Custom typography variant definitions.
+ * Custom typography variant definitions with adjusted display sizes.
  */
 export const typographyVariants: TypographyVariantsOptions = {
   text_xl_regular: { font: "400 20px/30px inherit inherit" },
@@ -93,17 +93,17 @@ export const typographyVariants: TypographyVariantsOptions = {
   text_xs_thin: { font: "100 12px/18px inherit inherit" },
   text_2xs_thin: { font: "100 10px/14px inherit inherit" },
 
-  display_2xl_regular: { font: "400 72px/90px inherit inherit" },
-  display_xl_regular: { font: "400 60px/72px inherit inherit" },
-  display_lg_regular: { font: "400 48px/60px inherit inherit" },
-  display_md_regular: { font: "400 36px/44px inherit inherit" },
-  display_sm_regular: { font: "400 30px/38px inherit inherit" },
-  display_xs_regular: { font: "400 24px/32px inherit inherit" },
+  display_2xl_regular: { font: "400 48px/60px inherit inherit" },
+  display_xl_regular: { font: "400 42px/54px inherit inherit" },
+  display_lg_regular: { font: "400 36px/46px inherit inherit" },
+  display_md_regular: { font: "400 30px/38px inherit inherit" },
+  display_sm_regular: { font: "400 26px/34px inherit inherit" },
+  display_xs_regular: { font: "400 22px/30px inherit inherit" },
 
-  display_2xl_bold: { font: "700 72px/90px inherit inherit" },
-  display_xl_bold: { font: "700 60px/72px inherit inherit" },
-  display_lg_bold: { font: "700 48px/60px inherit inherit" },
-  display_md_bold: { font: "700 36px/44px inherit inherit" },
-  display_sm_bold: { font: "700 30px/38px inherit inherit" },
-  display_xs_bold: { font: "700 24px/32px inherit inherit" },
+  display_2xl_bold: { font: "700 48px/60px inherit inherit" },
+  display_xl_bold: { font: "700 42px/54px inherit inherit" },
+  display_lg_bold: { font: "700 36px/46px inherit inherit" },
+  display_md_bold: { font: "700 30px/38px inherit inherit" },
+  display_sm_bold: { font: "700 26px/34px inherit inherit" },
+  display_xs_bold: { font: "700 22px/30px inherit inherit" },
 };
