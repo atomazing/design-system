@@ -109,20 +109,12 @@ It supports four modes out of the box:
 #### 🧩 Example: Custom Toggle with Options
 
 ```tsx
-import {
-  useThemeSettings,
-  themes,
-} from '@atomazing-org/design-system';
+import { darkModeOptions, themes, useThemeSettings } from '@atomazing-org/design-system'
 
 const { darkMode, setDarkMode } = useThemeSettings();
 
 <CustomRadioGroup
-  options={[
-    { label: 'Auto', value: 'auto' },
-    { label: 'System', value: 'system' },
-    { label: 'Light', value: 'light' },
-    { label: 'Dark', value: 'dark' },
-  ]}
+  options={darkModeOptions}
   value={darkMode}
   onChange={val => setDarkMode(val)}
 />
