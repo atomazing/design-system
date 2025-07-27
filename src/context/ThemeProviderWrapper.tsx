@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
-import { themes, createCustomTheme, isDarkMode } from "../styles";
+import { themes, createCustomTheme, isDarkMode, GlobalStyles } from "../styles";
 import { useSystemTheme } from "../utils";
 
 import { ThemeContext } from "./ThemeContext";
@@ -61,6 +61,7 @@ export const ThemeProviderWrapper: FC<PropsWithChildren> = ({ children }) => {
     <ThemeContext.Provider value={{ theme, darkMode, setTheme, setDarkMode }}>
       <MuiThemeProvider theme={muiTheme}>
         <EmotionThemeProvider theme={emotionTheme}>
+          <GlobalStyles />
           {children}
         </EmotionThemeProvider>
       </MuiThemeProvider>
