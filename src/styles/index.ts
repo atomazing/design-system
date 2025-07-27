@@ -2,7 +2,6 @@ export { isFontLight, getFontColor, isHexColor } from "./colorUtils";
 export { commonComponentProps } from "./commonComponents";
 export { themes, createCustomTheme, isDarkMode } from "./createTheme";
 export { darkModeOptions } from "./darkModeOptions";
-export { GlobalStyles } from "./globalStyles";
 export {
   installAppAnimation,
   fadeInLeft,

@@ -43,6 +43,7 @@ export const GlobalStyles: FC = () => {
 
         :root {
           height: 100%;
+          overflow: hidden;
           font-family: "Poppins", sans-serif;
           line-height: 1.5;
           font-weight: 400;
@@ -61,6 +62,7 @@ export const GlobalStyles: FC = () => {
         body {
           margin: 0;
           height: 100%;
+          overflow: hidden;
           touch-action: manipulation;
           background: ${secondaryColor};
           background-attachment: fixed;
