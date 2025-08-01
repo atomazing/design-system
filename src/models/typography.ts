@@ -30,19 +30,19 @@ export interface CustomTypographyVariants {
   text_xs_thin: { font: string };
   text_2xs_thin: { font: string };
 
-  display_2xl_regular: { font: string };
-  display_xl_regular: { font: string };
-  display_lg_regular: { font: string };
-  display_md_regular: { font: string };
-  display_sm_regular: { font: string };
-  display_xs_regular: { font: string };
+  header_2xl_regular: { font: string };
+  header_xl_regular: { font: string };
+  header_lg_regular: { font: string };
+  header_md_regular: { font: string };
+  header_sm_regular: { font: string };
+  header_xs_regular: { font: string };
 
-  display_2xl_bold: { font: string };
-  display_xl_bold: { font: string };
-  display_lg_bold: { font: string };
-  display_md_bold: { font: string };
-  display_sm_bold: { font: string };
-  display_xs_bold: { font: string };
+  header_2xl_bold: { font: string };
+  header_xl_bold: { font: string };
+  header_lg_bold: { font: string };
+  header_md_bold: { font: string };
+  header_sm_bold: { font: string };
+  header_xs_bold: { font: string };
 }
 
 // MUI extensions

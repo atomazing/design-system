@@ -96,11 +96,49 @@ export const commonComponentProps: Theme["components"] = {
   },
 
   MuiTextField: {
+    defaultProps: {
+      variant: 'outlined', // по умолчанию, если нужно
+    },
     styleOverrides: {
       root: ({ theme }) => ({
         "& .MuiInputBase-root": {
           borderRadius: theme.shape.borderRadius,
         },
+      }),
+    },
+  },
+
+  MuiOutlinedInput: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        color: theme.palette.primary.main,
+        '& fieldset': {
+          borderColor: theme.palette.primary.main,
+        },
+        '&:hover fieldset': {
+          borderColor: theme.palette.primary.dark,
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: theme.palette.primary.main,
+        },
+      }),
+    },
+  },
+
+  MuiInputLabel: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        color: theme.palette.primary.main,
+        '&.Mui-focused': {
+          color: theme.palette.primary.main,
+        },
+      }),
+    },
+  },
+  MuiFormHelperText: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        color: theme.palette.error.main,
       }),
     },
   },

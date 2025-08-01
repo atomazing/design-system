@@ -13,19 +13,11 @@ export const themeConfig: Record<
   string,
   { primaryColor: string; secondaryColor?: string }
 > = {
-  Lanit: {
-    primaryColor: "#33ccff",
-    secondaryColor: "#f7f7f7",
-  },
-  BPM: {
+  Future: {
     primaryColor: "#203959",
     secondaryColor: "#ffffff",
   },
-  Pampa: {
-    primaryColor: "#ffe22e",
-    secondaryColor: "#fafafa",
-  },
-  Hurma: {
+  Orange: {
     primaryColor: "#f6883d",
     secondaryColor: "#ffffff",
   },
