@@ -13,16 +13,16 @@ export const themeConfig: Record<
   string,
   { primaryColor: string; secondaryColor?: string }
 > = {
-  Neon: {
+  "Dark Blue": {
     primaryColor: "#0C141C",
     secondaryColor: "#00D2FF",
   },
-  "Dark Blue": {
+  Neon: {
     primaryColor: "#FFF",
-    secondaryColor: "#203959",
+    secondaryColor: "#00D2FF",
   },
   White: {
-    primaryColor: "#203959",
+    primaryColor: "#00D2FF",
     secondaryColor: "#FFF",
   }
 };
