@@ -33,7 +33,7 @@ export const GlobalStyles: FC = () => {
     <Global
       styles={css`
         * {
-          font-family: "Poppins", sans-serif !important;
+          font-family: "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;
           -webkit-tap-highlight-color: transparent;
           &::selection {
             background-color: ${`${primaryColor}e1`};
