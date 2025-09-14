@@ -50,7 +50,8 @@ export const GlobalStyles: FC = () => {
 
         :root {
           height: 100%;
-          font-family: "Poppins", sans-serif;
+          --font-family: "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+          font-family: "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
           line-height: 1.5;
           font-weight: 400;
           color-scheme: ${isDarkMode ? "dark" : "light"};
@@ -60,7 +61,6 @@ export const GlobalStyles: FC = () => {
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           -webkit-text-size-adjust: 100%;
-
           --rsbs-backdrop-bg: rgba(0, 0, 0, 0.3);
           --rsbs-bg: ${isDarkMode ? "#383838" : "#ffffff"};
         }
