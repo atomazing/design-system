@@ -32,26 +32,18 @@ export const ThemeProviderWrapper: FC<PropsWithChildren> = ({ children }) => {
   const selectedTheme = useMemo(() => {
     if (systemTheme === "unknown") return themes[0].MuiTheme;
     if (theme === "system") {
-      return systemTheme === "dark" ? themes[0].MuiTheme : themes[1].MuiTheme;
+      return systemTheme === "dark" ? themes[0].MuiTheme : themes[0].MuiTheme;
     }
     return themes.find((t) => t.name === theme)?.MuiTheme || themes[0].MuiTheme;
   }, [systemTheme, theme]);
 
   const mode = useMemo(
-    () =>
-      isDarkMode(darkMode, systemTheme, selectedTheme.palette.secondary.main)
-        ? "dark"
-        : "light",
+    () => (isDarkMode(darkMode, systemTheme) ? "dark" : "light"),
     [darkMode, systemTheme, selectedTheme],
   );
 
   const muiTheme = useMemo(
-    () =>
-      createCustomTheme(
-        selectedTheme.palette.primary.main,
-        selectedTheme.palette.secondary.main,
-        mode,
-      ),
+    () => createCustomTheme(selectedTheme.palette.primary.main, mode),
     [selectedTheme, mode],
   );
 

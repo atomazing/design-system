@@ -97,7 +97,7 @@ export const commonComponentProps: Theme["components"] = {
 
   MuiTextField: {
     defaultProps: {
-      variant: 'outlined', // по умолчанию, если нужно
+      variant: "outlined", // по умолчанию, если нужно
     },
     styleOverrides: {
       root: ({ theme }) => ({
@@ -112,13 +112,13 @@ export const commonComponentProps: Theme["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         color: theme.palette.primary.main,
-        '& fieldset': {
+        "& fieldset": {
           borderColor: theme.palette.primary.main,
         },
-        '&:hover fieldset': {
+        "&:hover fieldset": {
           borderColor: theme.palette.primary.dark,
         },
-        '&.Mui-focused fieldset': {
+        "&.Mui-focused fieldset": {
           borderColor: theme.palette.primary.main,
         },
       }),
@@ -129,7 +129,7 @@ export const commonComponentProps: Theme["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         color: theme.palette.primary.main,
-        '&.Mui-focused': {
+        "&.Mui-focused": {
           color: theme.palette.primary.main,
         },
       }),
@@ -170,12 +170,6 @@ export const commonComponentProps: Theme["components"] = {
         margin: 0,
         maxHeight: "none",
       }),
-    },
-  },
-
-  MuiSvgIcon: {
-    defaultProps: {
-      color: "primary",
     },
   },
 

@@ -1,28 +1,18 @@
 export const ColorPalette = {
   fontDark: "#101727",
   fontLight: "#f0f0f0",
-  darkMode: "#383838",
-  lightMode: "#ffffff",
-  purple: "#b624ff",
-  red: "#ff3131",
-  orange: "#ff9318",
-  orangeDark: "#ff9500",
+  purple: "#440850",
+  lavender: "#9FA9EA",
+  carrot: "#F3503A",
+  pistachio: "#62ED97",
 } as const;
 
 export const themeConfig: Record<
   string,
   { primaryColor: string; secondaryColor?: string }
 > = {
-  "Dark Blue": {
-    primaryColor: "#0C141C",
-    secondaryColor: "#00D2FF",
+  Main: {
+    primaryColor: "#9FA9EA",
+    secondaryColor: "#f2f2f2",
   },
-  Neon: {
-    primaryColor: "#FFF",
-    secondaryColor: "#00D2FF",
-  },
-  White: {
-    primaryColor: "#00D2FF",
-    secondaryColor: "#FFF",
-  }
 };

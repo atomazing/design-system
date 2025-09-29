@@ -18,22 +18,25 @@ export const GlobalStyles: FC = () => {
   const isDarkMode = theme.palette.mode === "dark";
 
   const primaryColor = theme.palette.primary.main;
-  const secondaryColor = theme.palette.secondary.main;
+  const backgroundDefault = theme.palette.background.default;
 
   const primaryFontColor = useMemo(
     () => getFontColor(primaryColor),
     [primaryColor],
-  );
-  const secondaryFontColor = useMemo(
-    () => getFontColor(secondaryColor),
-    [secondaryColor],
   );
 
   return (
     <Global
       styles={css`
         * {
-          font-family: "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;
+          font-family:
+            "Mulish",
+            system-ui,
+            -apple-system,
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif !important;
           -webkit-tap-highlight-color: transparent;
           &::selection {
             background-color: ${`${primaryColor}e1`};
@@ -50,12 +53,20 @@ export const GlobalStyles: FC = () => {
 
         :root {
           height: 100%;
-          --font-family: "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-          font-family: "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+          --font-family:
+            "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+            sans-serif;
+          font-family:
+            "Mulish",
+            system-ui,
+            -apple-system,
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif;
           line-height: 1.5;
           font-weight: 400;
           color-scheme: ${isDarkMode ? "dark" : "light"};
-          color: ${secondaryFontColor};
           font-synthesis: none;
           text-rendering: optimizeLegibility;
           -webkit-font-smoothing: antialiased;
@@ -70,14 +81,14 @@ export const GlobalStyles: FC = () => {
           height: 100%;
           overflow: auto;
           touch-action: manipulation;
-          background: ${secondaryColor};
+          background: ${backgroundDefault};
           background-attachment: fixed;
           background-size: cover;
           transition: 0.3s background;
 
           ::-webkit-scrollbar {
             width: 8px;
-            background-color: ${secondaryColor};
+            background-color: ${backgroundDefault};
           }
           ::-webkit-scrollbar-thumb {
             background-color: ${primaryColor};
@@ -88,7 +99,7 @@ export const GlobalStyles: FC = () => {
           }
           ::-webkit-scrollbar-track {
             border-radius: 64px;
-            background-color: ${secondaryColor};
+            background-color: ${backgroundDefault};
           }
         }
 
