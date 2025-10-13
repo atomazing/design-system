@@ -1,5 +1,5 @@
 export { commonComponentProps } from "./commonComponents";
-export { themes, createCustomTheme } from "./createTheme";
+export { createCustomTheme } from "./createTheme";
 export { GlobalStyles } from "./GlobalStyles";
 export {
   installAppAnimation,
@@ -13,7 +13,6 @@ export {
   slideInBottom,
 } from "./keyframes";
 export {
-  themeConfig,
   getColorPalette,
   setColorPaletteOverride,
   ColorPalette,

@@ -6,18 +6,12 @@ declare module "@mui/material/styles" {
     neutral: Palette["primary"];
     accent: Palette["primary"];
     muted: Palette["primary"];
-    /** Optional dynamic registry for ad-hoc colors */
-    custom?: Record<string, Palette["primary"]>;
   }
   interface PaletteOptions {
     brand?: PaletteOptions["primary"];
     neutral?: PaletteOptions["primary"];
     accent?: PaletteOptions["primary"];
     muted?: PaletteOptions["primary"];
-    custom?: Record<
-      string,
-      { main: string; light?: string; dark?: string; contrastText?: string }
-    >;
   }
 }
 

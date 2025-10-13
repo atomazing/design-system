@@ -17,16 +17,6 @@ export const setColorPaletteOverride = (
   currentColorPalette = { ...defaultColorPalette, ...override };
 };
 
-export const themeConfig: Record<
-  string,
-  { primaryColor: string; secondaryColor?: string }
-> = {
-  Main: {
-    primaryColor: "#9FA9EA",
-    secondaryColor: "#f2f2f2",
-  },
-};
-
 /** Backward-compatible live view of the active palette. */
 export const ColorPalette: Readonly<ColorPaletteType> = {
   get fontDark() {

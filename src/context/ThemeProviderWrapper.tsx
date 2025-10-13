@@ -3,10 +3,10 @@ import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
 import {
-  themes,
   createCustomTheme,
   GlobalStyles,
   setColorPaletteOverride,
+  getColorPalette,
 } from "../styles";
 import { isDarkMode, useSystemTheme } from "../utils";
 
@@ -18,26 +18,20 @@ import type { FC, PropsWithChildren } from "react";
 type ThemeProviderWrapperProps = PropsWithChildren<{
   /** Optional font stack to apply across the app. */
   fontFamily?: string;
-  /** Optional direct override for a single theme primary color. */
-  primaryColor?: string;
-  /** Optional map to override default themeConfig with custom themes. */
-  themeConfigOverride?: Record<
-    string,
-    { primaryColor: string; secondaryColor?: string }
-  >;
+  /**
+   * Optional dynamic list of themes.
+   * Takes precedence over static defaults when provided.
+   */
+  themes?: { name: string; primaryColor: string; secondaryColor?: string }[];
   /** Optional color palette override (e.g., fontLight/fontDark/accent colors). */
   colorPaletteOverride?: Partial<ColorPaletteType>;
-  /** Optional registry of ad-hoc colors to inject into theme.palette.custom */
-  customColors?: Record<string, string>;
 }>;
 
 export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   children,
   fontFamily,
-  primaryColor,
-  themeConfigOverride,
+  themes: themesInput,
   colorPaletteOverride,
-  customColors,
 }) => {
   const systemTheme = useSystemTheme();
 
@@ -81,22 +75,21 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   }, [theme, darkMode]);
 
   const themesSource = useMemo(() => {
-    if (themeConfigOverride && Object.keys(themeConfigOverride).length > 0) {
-      return Object.entries(themeConfigOverride).map(([name, cfg]) => ({
-        name,
-        MuiTheme: createCustomTheme(cfg.primaryColor),
+    if (themesInput && themesInput.length > 0) {
+      return themesInput.map((t) => ({
+        name: t.name,
+        MuiTheme: createCustomTheme(t.primaryColor, "light", t.secondaryColor),
       }));
     }
-    if (primaryColor) {
-      return [
-        {
-          name: "Custom",
-          MuiTheme: createCustomTheme(primaryColor),
-        },
-      ];
-    }
-    return themes;
-  }, [themeConfigOverride, primaryColor]);
+    // Fallback: single default theme based on palette brand
+    const defaultPrimary = getColorPalette().brand;
+    return [
+      {
+        name: "Default",
+        MuiTheme: createCustomTheme(defaultPrimary, "light"),
+      },
+    ];
+  }, [themesInput]);
 
   const selectedTheme = useMemo(() => {
     if (theme === "system" || systemTheme === "unknown") {
@@ -124,26 +117,11 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
     );
   }, [selectedTheme, mode]);
 
-  const finalMuiTheme = useMemo(() => {
-    if (!customColors || Object.keys(customColors).length === 0)
-      return muiTheme;
-    const cloned = {
-      ...muiTheme,
-      palette: { ...muiTheme.palette },
-    } as typeof muiTheme;
-    const custom: Record<string, any> = {};
-    for (const [name, main] of Object.entries(customColors)) {
-      custom[name] = cloned.palette.augmentColor({ color: { main } });
-    }
-    cloned.palette.custom = custom;
-    return cloned;
-  }, [muiTheme, customColors]);
-
   const emotionTheme = useMemo(() => ({ darkMode: mode === "dark" }), [mode]);
 
   return (
     <ThemeContext.Provider value={{ theme, darkMode, setTheme, setDarkMode }}>
-      <MuiThemeProvider theme={finalMuiTheme}>
+      <MuiThemeProvider theme={muiTheme}>
         <EmotionThemeProvider theme={emotionTheme}>
           <GlobalStyles fontFamily={fontFamily} />
           {children}

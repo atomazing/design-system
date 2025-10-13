@@ -6,8 +6,18 @@ Contents
 - Introduction
 - Installation
 - Quick Start
+- Provider Props
+- Dynamic Themes (array)
+- Theme Switching (UI)
+- Dark Mode Control
 - Extended Palette (4 variants)
-- Ad‑hoc Custom Colors
+- Palette Overrides
+- Using Palette In SX
+- Typography Variants
+- Global Styles
+- Animations
+- Components
+- Utilities
 - SSR Notes
 - Peer Dependencies
 
@@ -33,17 +43,90 @@ export function App() {
 }
 ```
 
+If `themes` is not provided, the provider falls back to a single "Default" theme using the current palette brand color.
+
+Provider Props
+- `themes?: { name: string; primaryColor: string; secondaryColor?: string }[]`
+- `fontFamily?: string`
+- `colorPaletteOverride?: Partial<ColorPaletteType>`
+
+Dynamic Themes (array)
+Provide a fully dynamic list of themes to the provider. This takes priority over static defaults.
+
+```tsx
+<ThemeProviderWrapper
+  themes={[
+    { name: 'Blue', primaryColor: '#3B82F6' },
+    { name: 'Green', primaryColor: '#22C55E', secondaryColor: '#F6F9F6' },
+    { name: 'Gray', primaryColor: '#64748B' },
+  ]}
+>
+  {/* ... */}
+</ThemeProviderWrapper>
+```
+
+Theme Switching (UI)
+Use the theme context to read and change the active theme.
+
+```tsx
+import { useThemeSettings } from '@atomazing-org/design-system';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+
+export function ThemeToggle() {
+  const { theme, setTheme } = useThemeSettings();
+  const options = ['Blue', 'Green', 'Gray'];
+
+  return (
+    <ToggleButtonGroup
+      size="small"
+      exclusive
+      color="brand"
+      value={theme}
+      onChange={(_, v) => v && setTheme(v)}
+    >
+      {options.map((o) => (
+        <ToggleButton key={o} value={o}>{o}</ToggleButton>
+      ))}
+    </ToggleButtonGroup>
+  );
+}
+```
+
+Dark Mode Control
+Use `useThemeSettings()` to read and set dark mode. Modes: `light | dark | system | auto`.
+
+```tsx
+import { useThemeSettings, darkModeOptions } from '@atomazing-org/design-system';
+import { RadioGroup, FormControlLabel, Radio } from '@mui/material';
+
+export function DarkModeSelector() {
+  const { darkMode, setDarkMode } = useThemeSettings();
+  const options = darkModeOptions; // label + icon
+
+  return (
+    <RadioGroup
+      row
+      value={darkMode}
+      onChange={(e) => setDarkMode(e.target.value as any)}
+    >
+      {options.map((o) => (
+        <FormControlLabel key={o.value} value={o.value} control={<Radio />} label={o.label} />
+      ))}
+    </RadioGroup>
+  );
+}
+```
+
 Extended Palette (4 variants)
 The design system adds four typed colors to the MUI palette, available on common components via the `color` prop:
 
-- brand: project brand color (independent from `primary`); defaults to the currently selected theme’s primary.
+- brand: project brand color (uses the active theme `primary`).
 - neutral: neutral/gray scale color (from the design-system palette).
 - accent: supporting accent color (from palette `accent`).
 - muted: soft/desaturated color (based on neutral by default).
 
-Supported components (out of the box): `Button`, `Chip`, `Badge`, `Alert`.
+Supported components: `Button`, `Chip`, `Badge`, `Alert`.
 
-Examples
 ```tsx
 import { Button, Chip, Alert } from '@mui/material';
 
@@ -53,26 +136,129 @@ import { Button, Chip, Alert } from '@mui/material';
 <Alert color="muted" variant="filled">Muted Alert</Alert>
 ```
 
-Ad‑hoc Custom Colors
-If you need additional colors without extending types, use `customColors`. They will be available under `theme.palette.custom[<name>]` with generated light/dark/contrast shades.
+Palette Overrides
+Override base palette tokens for the whole app.
 
 ```tsx
-<ThemeProviderWrapper customColors={{ marketing: '#FF6A00', accent2: '#4ADE80' }}>
+<ThemeProviderWrapper
+  colorPaletteOverride={{
+    brand: '#4F46E5',
+    accent: '#F59E0B',
+    muted: '#94A3B8',
+    neutral: '#64748B',
+    success: '#16A34A',
+    warning: '#D97706',
+    error: '#DC2626',
+    info: '#0284C7',
+  }}
+>
   {/* ... */}
 </ThemeProviderWrapper>
-
-// Usage
-import { Box } from '@mui/material';
-
-<Box sx={{ bgcolor: (t) => t.palette.custom?.marketing.main }} />
 ```
 
-Notes
-- To add more typed colors to the `color` prop, augment MUI types (see `src/styles/muiAugmentations.d.ts`).
-- You can override the global color palette via `colorPaletteOverride` and theme map via `themeConfigOverride`.
+Using Palette In SX
+```tsx
+import { Box } from '@mui/material';
+
+<Box sx={{ bgcolor: (t) => t.palette.accent.main, color: (t) => t.palette.getContrastText(t.palette.accent.main) }}>
+  Accent surface
+</Box>
+```
+
+Typography Variants
+Extra variants are available (mapping to `<p>`/headers). Examples:
+
+```tsx
+import { Typography } from '@mui/material';
+
+<Typography variant="text_md_regular">Body text</Typography>
+<Typography variant="text_sm_bold">Strong caption</Typography>
+<Typography variant="header_lg_bold">Section Title</Typography>
+```
+
+Global Styles
+`ThemeProviderWrapper` injects global styles via Emotion. You can also set a custom font family:
+
+```tsx
+<ThemeProviderWrapper fontFamily="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">
+  {/* ... */}
+</ThemeProviderWrapper>
+```
+
+Animations
+Keyframes ready for use in Emotion/MUI `sx`:
+
+```tsx
+import { keyframes } from '@emotion/react';
+import { fadeIn, slideIn, scale, pulseAnimation, progressPulse } from '@atomazing-org/design-system';
+import styled from '@emotion/styled';
+
+const Card = styled.div`
+  animation: ${fadeIn} 300ms ease-in both;
+`;
+
+const Glowing = styled.div`
+  animation: ${progressPulse('#9FA9EA')} 2s ease-in-out infinite;
+`;
+```
+
+Components
+- ErrorBoundary
+```tsx
+import { ErrorBoundary } from '@atomazing-org/design-system';
+
+<ErrorBoundary>
+  <App />
+</ErrorBoundary>
+```
+
+- Loading
+```tsx
+import { Loading } from '@atomazing-org/design-system';
+
+<Loading />
+```
+
+- PathName / DialogBtn
+```tsx
+import { PathName, DialogBtn } from '@atomazing-org/design-system';
+
+<PathName>/settings/profile</PathName>
+<DialogBtn variant="contained" color="brand">OK</DialogBtn>
+```
+
+Utilities
+```tsx
+import {
+  getFontColor, isFontLight, isHexColor,
+  timeAgo, timeAgoFromStart,
+  useResponsiveDisplay, useSystemTheme,
+  displayGreeting, getDayIdentifier,
+  systemInfo,
+} from '@atomazing-org/design-system';
+
+// Colors
+getFontColor('#ffffff'); // '#101727' | '#f0f0f0'
+isFontLight('#222');
+isHexColor('#abc');
+
+// Time
+timeAgo(new Date(Date.now() - 3600_000));
+timeAgoFromStart(new Date(Date.now() + 90_000));
+
+// Device
+const isMobile = useResponsiveDisplay(768);
+const sysTheme = useSystemTheme(); // 'light' | 'dark' | 'unknown'
+
+// Misc
+displayGreeting(); // Good morning / afternoon / evening
+getDayIdentifier(new Date()); // 'YYYY-MM-DD'
+console.log(systemInfo.os, systemInfo.browser);
+```
 
 SSR Notes
-- The library guards `localStorage`/`navigator` usage. Wrap your app in `<ThemeProviderWrapper>` as usual in SSR frameworks; settings hydrate on the client.
+- The library guards `localStorage`/`navigator`. Use normally in SSR apps; hydration updates settings on client.
+- For Next.js, place the provider in a client boundary (e.g., `layout.tsx` with `"use client"`).
 
 Peer Dependencies
 - `@mui/material` ^7

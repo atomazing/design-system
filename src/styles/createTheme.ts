@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 
 import { commonComponentProps } from "./commonComponents";
-import { getColorPalette, themeConfig } from "./themeConfig";
+import { getColorPalette } from "./themeConfig";
 import { muiTypography, typographyVariants } from "./typography";
 
 import type { PaletteMode, Theme } from "@mui/material";
@@ -22,9 +22,8 @@ export const createCustomTheme = (
   return createTheme(base, {
     palette: {
       primary: { ...base.palette.primary, main: primaryColor },
-      brand: base.palette.augmentColor({
-        color: { main: getColorPalette().brand },
-      }),
+      // Brand follows active theme primary
+      brand: base.palette.augmentColor({ color: { main: primaryColor } }),
       neutral: base.palette.augmentColor({
         color: { main: getColorPalette().neutral },
       }),
@@ -67,13 +66,4 @@ export const createCustomTheme = (
 /**
  * A predefined list of named themes based on the `themeConfig` definition.
  */
-export const themes: { name: string; MuiTheme: Theme }[] = Object.entries(
-  themeConfig,
-).map(([name, config]) => ({
-  name,
-  MuiTheme: createCustomTheme(
-    config.primaryColor,
-    "light",
-    config.secondaryColor,
-  ),
-}));
+// No static theme list export — themes are provided dynamically via ThemeProviderWrapper.

@@ -38,15 +38,17 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           ${fontFamily ? `--app-font-family: ${fontFamily};` : ""}
         }
         * {
-          font-family: var(
-            --app-font-family,
-            "Mulish",
-            system-ui,
-            -apple-system,
-            "Segoe UI",
-            Roboto,
-            Arial
-          ),sans-serif !important;
+          font-family:
+            var(
+              --app-font-family,
+              "Mulish",
+              system-ui,
+              -apple-system,
+              "Segoe UI",
+              Roboto,
+              Arial
+            ),
+            sans-serif !important;
           -webkit-tap-highlight-color: transparent;
           &::selection {
             background-color: ${`${primaryColor}e1`};
