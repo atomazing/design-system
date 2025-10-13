@@ -1,10 +1,9 @@
 import { createTheme } from "@mui/material";
 
 import { commonComponentProps } from "./commonComponents";
-import { ColorPalette, themeConfig } from "./themeConfig";
+import { getColorPalette, themeConfig } from "./themeConfig";
 import { muiTypography, typographyVariants } from "./typography";
 
-import type { AppSettings, SystemTheme } from "../models";
 import type { PaletteMode, Theme } from "@mui/material";
 
 export const createCustomTheme = (
@@ -22,8 +21,10 @@ export const createCustomTheme = (
   return createTheme(base, {
     palette: {
       primary: { ...base.palette.primary, main: primaryColor },
-      error: { ...base.palette.error, main: ColorPalette.carrot },
-      warning: { ...base.palette.warning, main: ColorPalette.carrot },
+      error: { ...base.palette.error, main: getColorPalette().error },
+      warning: { ...base.palette.warning, main: getColorPalette().warning },
+      success: { ...base.palette.success, main: getColorPalette().success },
+      info: { ...base.palette.info, main: getColorPalette().info },
 
       background: isDark
         ? { ...base.palette.background, default: "#1C1C1E", paper: "#2C2C2E" }
@@ -37,7 +38,12 @@ export const createCustomTheme = (
       ...commonComponentProps,
       MuiTypography: muiTypography,
     },
-    typography: typographyVariants,
+    typography: {
+      ...typographyVariants,
+      // Let application control font via CSS variable; default to Mulish stack
+      fontFamily:
+        'var(--app-font-family, "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif)',
+    } as any,
     shape: { borderRadius: 24 },
   });
 };
@@ -51,31 +57,3 @@ export const themes: { name: string; MuiTheme: Theme }[] = Object.entries(
   name,
   MuiTheme: createCustomTheme(config.primaryColor),
 }));
-
-/**
- * Determines whether dark mode should be enabled based on user settings and system conditions.
- *
- * @param darkMode - User preference: 'light' | 'dark' | 'system' | 'auto'.
- * @param systemTheme - Detected OS-level theme: 'light' | 'dark'.
- * @param backgroundColor - The background color to assess contrast in 'auto' mode.
- * @returns True if dark mode should be used.
- */
-export const isDarkMode = (
-  darkMode: AppSettings["darkMode"],
-  systemTheme: SystemTheme,
-): boolean => {
-  switch (darkMode) {
-    case "light": {
-      return false;
-    }
-    case "dark": {
-      return true;
-    }
-    case "system": {
-      return systemTheme === "dark";
-    }
-    default: {
-      return false;
-    }
-  }
-};

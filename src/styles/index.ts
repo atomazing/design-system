@@ -1,7 +1,5 @@
-export { isFontLight, getFontColor, isHexColor } from "./colorUtils";
 export { commonComponentProps } from "./commonComponents";
-export { themes, createCustomTheme, isDarkMode } from "./createTheme";
-export { darkModeOptions } from "./darkModeOptions";
+export { themes, createCustomTheme } from "./createTheme";
 export { GlobalStyles } from "./GlobalStyles";
 export {
   installAppAnimation,
@@ -14,4 +12,9 @@ export {
   pulseAnimation,
   slideInBottom,
 } from "./keyframes";
-export { ColorPalette, themeConfig } from "./themeConfig";
+export {
+  themeConfig,
+  getColorPalette,
+  setColorPaletteOverride,
+  ColorPalette,
+} from "./themeConfig";

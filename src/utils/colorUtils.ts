@@ -1,4 +1,4 @@
-import { ColorPalette } from "./themeConfig";
+import { getColorPalette } from "../styles/themeConfig";
 
 /**
  * Validates whether a given string is a valid 3- or 6-digit hex color code (e.g., "#fff" or "#ffffff").
@@ -21,7 +21,7 @@ export const getFontColor = (backgroundColor: string): string => {
   if (!isHexColor(backgroundColor)) {
     // eslint-disable-next-line no-console -- Allow
     console.error("Invalid hex color provided:", backgroundColor);
-    return ColorPalette.fontDark;
+    return getColorPalette().fontDark;
   }
 
   const hex = backgroundColor.slice(1);
@@ -40,7 +40,8 @@ export const getFontColor = (backgroundColor: string): string => {
 
   const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
 
-  return brightness > 128 ? ColorPalette.fontDark : ColorPalette.fontLight;
+  const palette = getColorPalette();
+  return brightness > 128 ? palette.fontDark : palette.fontLight;
 };
 
 /**
@@ -50,4 +51,4 @@ export const getFontColor = (backgroundColor: string): string => {
  * @returns `true` if white text is recommended; otherwise, `false`.
  */
 export const isFontLight = (color: string): boolean =>
-  getFontColor(color) === ColorPalette.fontLight;
+  getFontColor(color) === getColorPalette().fontLight;

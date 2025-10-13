@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Global, css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 
-import { getFontColor } from "./colorUtils";
+import { getFontColor } from "../utils";
 
 import type { FC } from "react";
 
@@ -13,7 +13,12 @@ import type { FC } from "react";
  *
  * Uses the MUI theme to dynamically adjust colors for light/dark mode.
  */
-export const GlobalStyles: FC = () => {
+interface GlobalStylesProps {
+  /** Optional font stack to apply across the app. */
+  fontFamily?: string;
+}
+
+export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
 
@@ -28,15 +33,21 @@ export const GlobalStyles: FC = () => {
   return (
     <Global
       styles={css`
+        /* Allow application to control font via CSS var or prop */
+        :root {
+          ${fontFamily ? `--app-font-family: ${fontFamily};` : ""}
+        }
         * {
-          font-family:
+          font-family: var(
+            --app-font-family,
             "Mulish",
             system-ui,
             -apple-system,
             "Segoe UI",
             Roboto,
             Arial,
-            sans-serif !important;
+            sans-serif
+          ) !important;
           -webkit-tap-highlight-color: transparent;
           &::selection {
             background-color: ${`${primaryColor}e1`};
@@ -53,16 +64,17 @@ export const GlobalStyles: FC = () => {
 
         :root {
           height: 100%;
-          --font-family:
-            "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
-            sans-serif;
-          font-family:
-            "Mulish",
-            system-ui,
-            -apple-system,
-            "Segoe UI",
-            Roboto,
-            Arial,
+          /* default fallback font; apps can override via --app-font-family */
+          font-family: var(
+              --app-font-family,
+              "Mulish",
+              system-ui,
+              -apple-system,
+              "Segoe UI",
+              Roboto,
+              Arial,
+              sans-serif
+            )
             sans-serif;
           line-height: 1.5;
           font-weight: 400;
