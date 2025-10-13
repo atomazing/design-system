@@ -1,227 +1,82 @@
-# 📚 Table of Contents
+@atomazing-org/design-system
 
-1. [Introduction](#1-introduction)
-2. [Installation](#2-installation)
-3. [Usage](#3-usage)  
-   3.1 [ThemeProvider Setup](#31-themeprovider-setup)  
-   3.2 [Switching Theme Mode (Light/Dark)](#34-switching-theme-mode-lightdark)  
-   3.3 [Custom Theme Colors](#35-custom-theme-colors)
-4. [Peer Dependencies & Requirements](#4-peer-dependencies--requirements)
-5. [Utilities](#5-utilities)  
-   5.1 [Color Utilities](#51-color-utilities)  
-   5.2 [System Info](#52-system-info)
+Modern MUI + Emotion design system with a ready theme factory, extended typography, global styles, component overrides, animations, and handy utilities.
 
-## 1. Introduction
+Contents
+- Introduction
+- Installation
+- Quick Start
+- Extended Palette (4 variants)
+- Ad‑hoc Custom Colors
+- SSR Notes
+- Peer Dependencies
 
-**@atomazing-org/design-system** is a flexible, modern, and themeable design system built on top of [Material UI (MUI)](https://mui.com/) and [Emotion](https://emotion.sh/).
+Introduction
+The package streamlines consistent theming across apps: dark/light mode, typography variants, global styles, and component defaults. Built on MUI v7 + Emotion.
 
-It provides a unified approach to building consistent, responsive, and accessible UIs across multiple frontend applications — with minimal setup and full customizability.
-
-### 🔧 What’s Included
-
-- 🌈 **Custom MUI Theme Generator**  
-  Create light/dark themes with primary/background colors in a single line.
-
-- ✍️ **Extended Typography Variants**  
-  Includes consistent, scalable font sizes and weights beyond MUI defaults.
-
-- 🎨 **Global Styles**  
-  Applies CSS resets, adaptive contrast, scrollbar styling, and system theming.
-
-- 🧩 **Component Style Overrides**  
-  Predefined visual rules for MUI components like buttons, dialogs, sliders, etc.
-
-- 🛠 **Utility Functions**  
-  Helpful tools like color contrast calculation, system info detection, and dark mode strategy.
-
-- 🎞 **Predefined Animations**  
-  Keyframes for transitions like fade, slide, pulse, and more.
-
-### 🚀 When to Use
-
-Use this design system when:
-
-- You’re building apps that require a **consistent design language**.
-- You want to **save time on theming and component styling**.
-- You work across multiple projects and need **reusable design tokens**.
-- You want **dark mode support**, animations, and global styles out of the box.
-
-This package is ideal for both small projects and large enterprise frontends looking to maintain style consistency and speed up delivery.
-
----
-
-## 2. Installation
-
-To install `@atomazing-org/design-system`, use your preferred package manager:
-
+Installation
 ```bash
-# npm
 npm install @atomazing-org/design-system
-```
-
-```bash
-# yarn
-yarn add @atomazing-org/design-system
-```
-
-```bash
-# pnpm
-pnpm add @atomazing-org/design-system
-```
-
-> **Note:** This package includes only the core functionality.  
-> You must also install the required **peer dependencies** to ensure proper integration with MUI and Emotion.
-
-## 3. Usage
-
-This section describes how to use the design system in your application, including theme setup, global styles, switching between light and dark modes, and accessing theme context via a custom hook.
-
-### 3.1 ThemeProvider Setup
-
-To enable theming, wrap your application with the `ThemeProviderWrapper` provided by `@atomazing-org/design-system`.  
-This wrapper handles theme creation, dark mode toggling, system preferences, and context setup — all out of the box.
-
-```tsx
-import { ThemeProviderWrapper } from '@atomazing-org/design-system';
-
-export const App = () => (
-  <ThemeProviderWrapper>
-    {/* Your application content */}
-  </ThemeProviderWrapper>
-);
-```
-
-### 🔍 Key Notes
-
-- `ThemeProviderWrapper` abstracts away the creation and management of the MUI theme.
-- It provides built-in support for dark mode, system preferences, and the `useAppThemeProvider` hook.
-
-### 3.2 Switching Theme Mode (Light/Dark)
-
-The design system includes a built-in hook — `useThemeSettings()` — to manage theme mode and apply it consistently across your app.
-
-It supports four modes out of the box:
-- `light`
-- `dark`
-- `system` — matches the user’s OS-level preference
-- `auto` — determines best contrast based on theme background
-
-#### 🧩 Example: Custom Toggle with Options
-
-```tsx
-import { darkModeOptions, themes, useThemeSettings } from '@atomazing-org/design-system'
-
-const { darkMode, setDarkMode } = useThemeSettings();
-
-<CustomRadioGroup
-  options={darkModeOptions}
-  value={darkMode}
-  onChange={val => setDarkMode(val)}
-/>
-```
-
-
-### 3.3 Custom Theme Colors
-
-The design system allows you to create and switch between custom color themes using the `createCustomTheme()` function internally via `ThemeProviderWrapper`.
-
-You can define as many themes as needed by specifying:
-- `primaryColor`: main branding color
-- `secondaryColor` (optional): used for background and surface elements
-
-#### 🎨 Example: Theme Definitions
-
-```ts
-export const themeConfig = {
-  "Dark Purple": {
-    primaryColor: '#b624ff',
-  },
-  "Light Orange": {
-    primaryColor: '#F26E56',
-    secondaryColor: '#F6F6F6',
-  },
-  // Other colors  
-};
-```
-
-## 4. Peer Dependencies & Requirements
-
-The `@atomazing-org/design-system` package is built on top of [Material UI v7](https://mui.com/) and [Emotion](https://emotion.sh/) and requires the following peer dependencies to be present in your project.
-
-Install them manually if not already included:
-
-### 📦 Required Peer Dependencies
-
-| Package                    | Version    | Purpose                                 |
-|----------------------------|------------|-----------------------------------------|
-| `@mui/material`            | ^7.0.0     | Core MUI components and theming         |
-| `@mui/icons-material`      | ^7.0.0     | MUI icon set                            |
-| `@emotion/react`           | ^11.0.0    | Emotion’s core rendering runtime        |
-| `@emotion/styled`          | ^11.0.0    | Styled components engine                |
-| `@emotion/css`             | ^11.0.0    | (Optional) For raw CSS class generation |
-
-You can install all required peers with:
-
-```bash
 npm install @mui/material @mui/icons-material @emotion/react @emotion/styled @emotion/css
 ```
 
-## 5. Utilities
+Quick Start
+```tsx
+import { ThemeProviderWrapper } from '@atomazing-org/design-system';
 
-The design system includes a collection of lightweight, framework-agnostic utility functions and hooks to support theming, contrast handling, and device detection.
-
----
-
-### 5.1 Color Utilities
-
-#### 🎯 `getFontColor(backgroundColor: string): string`
-
-Returns the best readable font color (`dark` or `light`) based on the background brightness.
-
-```ts
-const textColor = getFontColor('#ffffff'); // → "#101727" (dark)
+export function App() {
+  return (
+    <ThemeProviderWrapper>
+      {/* your app */}
+    </ThemeProviderWrapper>
+  );
+}
 ```
 
-- Accepts any valid hex color (`#fff`, `#ffffff`)
-- Automatically expands short hex (`#abc` → `#aabbcc`)
-- Uses WCAG-recommended brightness formula
-- Returns fallback (`fontDark`) if invalid color
+Extended Palette (4 variants)
+The design system adds four typed colors to the MUI palette, available on common components via the `color` prop:
 
-This is useful for generating accessible dynamic UI colors — especially in theme builders or color pickers.
+- brand: project brand color (independent from `primary`); defaults to the currently selected theme’s primary.
+- neutral: neutral/gray scale color (from the design-system palette).
+- accent: supporting accent color (from palette `accent`).
+- muted: soft/desaturated color (based on neutral by default).
 
----
+Supported components (out of the box): `Button`, `Chip`, `Badge`, `Alert`.
 
-### 5.2 System Info
+Examples
+```tsx
+import { Button, Chip, Alert } from '@mui/material';
 
-#### 🧩 `systemInfo: { os: OperatingSystem; browser: Browser }`
-
-Detects the user's operating system and browser at runtime based on the `navigator.userAgent`.
-
-```ts
-console.log(systemInfo.os); // "macOS" | "Windows" | "Linux" | ...
-console.log(systemInfo.browser); // "Chrome" | "Safari" | ...
+<Button color="brand" variant="contained">Brand</Button>
+<Button color="neutral" variant="outlined">Neutral</Button>
+<Chip color="accent" label="Accent" />
+<Alert color="muted" variant="filled">Muted Alert</Alert>
 ```
 
-> Uses lightweight string matching for compatibility across most modern devices.
+Ad‑hoc Custom Colors
+If you need additional colors without extending types, use `customColors`. They will be available under `theme.palette.custom[<name>]` with generated light/dark/contrast shades.
 
-#### 🌓 `useSystemTheme(): 'light' | 'dark' | 'unknown'`
+```tsx
+<ThemeProviderWrapper customColors={{ marketing: '#FF6A00', accent2: '#4ADE80' }}>
+  {/* ... */}
+</ThemeProviderWrapper>
 
-React hook that listens for system-level theme changes.
+// Usage
+import { Box } from '@mui/material';
 
-```ts
-const systemTheme = useSystemTheme();
-
-useEffect(() => {
-  console.log('System prefers:', systemTheme);
-}, [systemTheme]);
+<Box sx={{ bgcolor: (t) => t.palette.custom?.marketing.main }} />
 ```
 
-- Responds to changes in `(prefers-color-scheme)`
-- Automatically updates the value when system settings are changed
-- Useful for defaulting UI themes before user makes a selection
+Notes
+- To add more typed colors to the `color` prop, augment MUI types (see `src/styles/muiAugmentations.d.ts`).
+- You can override the global color palette via `colorPaletteOverride` and theme map via `themeConfigOverride`.
 
----
+SSR Notes
+- The library guards `localStorage`/`navigator` usage. Wrap your app in `<ThemeProviderWrapper>` as usual in SSR frameworks; settings hydrate on the client.
 
-These utilities are tree-shakable and can be used independently of the rest of the design system.
-
-
+Peer Dependencies
+- `@mui/material` ^7
+- `@mui/icons-material` ^7
+- `@emotion/react` ^11
+- `@emotion/styled` ^11
+- `@emotion/css` ^11 (optional)

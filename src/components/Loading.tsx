@@ -14,7 +14,7 @@ export const Loading = () => {
   }, []);
 
   return (
-    <Container>
+    <Container aria-live="polite" role="status">
       {showLoading && (
         <>
           <CircularProgress aria-label="loading" size={80} thickness={4} />

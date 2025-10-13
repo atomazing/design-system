@@ -5,10 +5,9 @@
  * @param lang
  * @returns {string} A string representing the relative time using `Intl` format (e.g., "2 days ago").
  */
-export const timeAgo = (
-  date: Date,
-  lang = navigator.language || "en-US",
-): string => {
+export const timeAgo = (date: Date, lang?: string): string => {
+  const locale =
+    lang ?? (typeof navigator === "undefined" ? "en-US" : navigator.language);
   // Get the current date and time
   const now = new Date();
   date = new Date(date);
@@ -16,7 +15,7 @@ export const timeAgo = (
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
   // Create an Intl.RelativeTimeFormat instance with the user's language
-  const rtf = new Intl.RelativeTimeFormat(lang, { numeric: "auto" });
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
 
   // Determine the appropriate unit and format the result
   if (diffInSeconds < 60) {
@@ -34,10 +33,9 @@ export const timeAgo = (
   return rtf.format(-days, "day");
 };
 
-export const timeAgoFromStart = (
-  date: Date,
-  lang = navigator.language || "en-US",
-): string => {
+export const timeAgoFromStart = (date: Date, lang?: string): string => {
+  const locale =
+    lang ?? (typeof navigator === "undefined" ? "en-US" : navigator.language);
   const now = new Date();
   date = new Date(date);
   const difference = (date.getTime() - now.getTime()) / 1000;
@@ -49,7 +47,7 @@ export const timeAgoFromStart = (
     difference - 60 * 60 * differenceHours - 60 * differenceMinutes,
   );
 
-  const rtf = new Intl.RelativeTimeFormat(lang, { numeric: "auto" });
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
 
   if (differenceMinutes === 0 && diffInSeconds < 60) {
     return rtf.format(diffInSeconds, "second");
@@ -58,10 +56,10 @@ export const timeAgoFromStart = (
     return rtf.format(differenceMinutes, "minute");
   }
   if (differenceHours < 24) {
-    const hours = `${new Intl.RelativeTimeFormat(lang, {
+    const hours = `${new Intl.RelativeTimeFormat(locale, {
       numeric: "auto",
     }).format(differenceHours, "hour")}`;
-    const minutes = ` ${new Intl.RelativeTimeFormat(lang, {
+    const minutes = ` ${new Intl.RelativeTimeFormat(locale, {
       localeMatcher: "lookup",
       numeric: "always",
       style: "long",

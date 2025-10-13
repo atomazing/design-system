@@ -45,9 +45,8 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
             -apple-system,
             "Segoe UI",
             Roboto,
-            Arial,
-            sans-serif
-          ) !important;
+            Arial
+          ),sans-serif !important;
           -webkit-tap-highlight-color: transparent;
           &::selection {
             background-color: ${`${primaryColor}e1`};
@@ -84,8 +83,6 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           -webkit-text-size-adjust: 100%;
-          --rsbs-backdrop-bg: rgba(0, 0, 0, 0.3);
-          --rsbs-bg: ${isDarkMode ? "#383838" : "#ffffff"};
         }
 
         body {
@@ -133,8 +130,6 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
         }
 
         pre {
-          background-color: #000000d7;
-          color: white;
           padding: 16px;
           border-radius: 18px;
           overflow-x: auto;
@@ -146,19 +141,18 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
         textarea {
           ::-webkit-scrollbar {
             width: 8px;
-            border-radius: 4px;
-            background-color: #84848415;
+            background-color: ${backgroundDefault};
           }
           ::-webkit-scrollbar-thumb {
-            background-color: #8484844b;
-            border-radius: 4px;
+            background-color: ${primaryColor};
+            border-radius: 64px;
           }
           ::-webkit-scrollbar-thumb:hover {
-            background-color: #84848476;
+            background-color: ${`${primaryColor}d8`};
           }
           ::-webkit-scrollbar-track {
-            border-radius: 4px;
-            background-color: #84848415;
+            border-radius: 64px;
+            background-color: ${backgroundDefault};
           }
         }
 
@@ -166,22 +160,6 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
         div[role="dialog"] {
           border-radius: 42px 42px 0 0;
           z-index: 9999999;
-        }
-
-        div[data-rsbs-backdrop] {
-          z-index: 999;
-        }
-
-        div[data-rsbs-header] {
-          z-index: 999999;
-          box-shadow: none;
-          &::before {
-            width: 60px;
-            height: 6px;
-            border-radius: 100px;
-            background: ${isDarkMode ? "#717171" : "#cfcfcf"};
-            margin-top: 3px;
-          }
         }
       `}
     />

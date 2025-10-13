@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 /**
  * Available options for dark mode configuration.
  * - `system`: Follows the operating system preference.
@@ -10,7 +12,7 @@ export type DarkModeOptions = "system" | "auto" | "light" | "dark";
 export interface OptionItem {
   label: string;
   value: DarkModeOptions;
-  icon: any;
+  icon: ReactNode;
 }
 
 /**

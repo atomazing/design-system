@@ -2,11 +2,10 @@ export interface ColorPaletteType {
   // Text contrast helpers
   fontDark: string;
   fontLight: string;
-  // Custom brand examples
-  purple: string;
-  lavender: string;
-  carrot: string;
-  pistachio: string;
+  // App-agnostic tokens
+  brand: string;
+  accent: string;
+  muted: string;
   // Standard semantic colors
   success: string;
   info: string;

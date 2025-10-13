@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/class-methods-use-this -- only for ErrorBoundary*/
+/* eslint-disable @typescript-eslint/class-methods-use-this -- only for ErrorBoundary */
 import React from "react";
 import styled from "@emotion/styled";
 import ErrorOutlineRounded from "@mui/icons-material/ErrorOutlineRounded";
@@ -18,7 +18,6 @@ interface ErrorBoundaryState {
 /**
  * ErrorBoundary component that catches and displays errors.
  */
-
 export class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
@@ -38,9 +37,9 @@ export class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // eslint-disable-next-line no-console -- Выводим ошибку в консоль
+    // eslint-disable-next-line no-console -- Allow console output for error reporting
     console.error("Error:", error);
-    // eslint-disable-next-line no-console -- Выводим ошибку в консоль
+    // eslint-disable-next-line no-console -- Allow console output for error reporting
     console.error("Error Info:", errorInfo);
   }
 
@@ -50,7 +49,7 @@ export class ErrorBoundary extends React.Component<
       return (
         <Container>
           <ErrorHeader>
-            <Box>Ошибка.&nbsp;</Box>
+            <Box>Something went wrong.&nbsp;</Box>
           </ErrorHeader>
           <h3>
             <Box style={{ color: "#ff3131", display: "inline-block" }}>

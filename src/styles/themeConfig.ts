@@ -35,17 +35,14 @@ export const ColorPalette: Readonly<ColorPaletteType> = {
   get fontLight() {
     return currentColorPalette.fontLight;
   },
-  get purple() {
-    return currentColorPalette.purple;
+  get brand() {
+    return currentColorPalette.brand;
   },
-  get lavender() {
-    return currentColorPalette.lavender;
+  get accent() {
+    return currentColorPalette.accent;
   },
-  get carrot() {
-    return currentColorPalette.carrot;
-  },
-  get pistachio() {
-    return currentColorPalette.pistachio;
+  get muted() {
+    return currentColorPalette.muted;
   },
   get success() {
     return currentColorPalette.success;

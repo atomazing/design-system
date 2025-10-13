@@ -8,7 +8,8 @@ import type { PaletteMode, Theme } from "@mui/material";
 
 export const createCustomTheme = (
   primaryColor: string,
-  mode: PaletteMode = "dark",
+  mode: PaletteMode = "light",
+  secondaryColor?: string,
 ): Theme => {
   const isDark = mode === "dark";
 
@@ -21,6 +22,21 @@ export const createCustomTheme = (
   return createTheme(base, {
     palette: {
       primary: { ...base.palette.primary, main: primaryColor },
+      brand: base.palette.augmentColor({
+        color: { main: getColorPalette().brand },
+      }),
+      neutral: base.palette.augmentColor({
+        color: { main: getColorPalette().neutral },
+      }),
+      accent: base.palette.augmentColor({
+        color: { main: getColorPalette().accent },
+      }),
+      muted: base.palette.augmentColor({
+        color: { main: getColorPalette().muted },
+      }),
+      ...(secondaryColor
+        ? { secondary: { ...base.palette.secondary, main: secondaryColor } }
+        : {}),
       error: { ...base.palette.error, main: getColorPalette().error },
       warning: { ...base.palette.warning, main: getColorPalette().warning },
       success: { ...base.palette.success, main: getColorPalette().success },
@@ -55,5 +71,9 @@ export const themes: { name: string; MuiTheme: Theme }[] = Object.entries(
   themeConfig,
 ).map(([name, config]) => ({
   name,
-  MuiTheme: createCustomTheme(config.primaryColor),
+  MuiTheme: createCustomTheme(
+    config.primaryColor,
+    "light",
+    config.secondaryColor,
+  ),
 }));

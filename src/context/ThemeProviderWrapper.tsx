@@ -27,6 +27,8 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
   >;
   /** Optional color palette override (e.g., fontLight/fontDark/accent colors). */
   colorPaletteOverride?: Partial<ColorPaletteType>;
+  /** Optional registry of ad-hoc colors to inject into theme.palette.custom */
+  customColors?: Record<string, string>;
 }>;
 
 export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
@@ -35,26 +37,47 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   primaryColor,
   themeConfigOverride,
   colorPaletteOverride,
+  customColors,
 }) => {
   const systemTheme = useSystemTheme();
 
-  // Allow app to override system-wide color palette before theme creation
-  setColorPaletteOverride(colorPaletteOverride);
+  // Apply palette overrides when provided (no-op otherwise)
+  useEffect(() => {
+    setColorPaletteOverride(colorPaletteOverride);
+  }, [colorPaletteOverride]);
 
-  const [theme, setTheme] = useState<string>(() => {
-    const stored = localStorage.getItem("appSettings");
-    return stored ? JSON.parse(stored).theme || "system" : "system";
-  });
-
+  // SSR-safe initial settings
+  const [theme, setTheme] = useState<string>("system");
   const [darkMode, setDarkMode] = useState<
     "light" | "dark" | "system" | "auto"
-  >(() => {
-    const stored = localStorage.getItem("appSettings");
-    return stored ? JSON.parse(stored).darkMode || "auto" : "auto";
-  });
+  >("auto");
 
+  // Hydrate from localStorage on client
   useEffect(() => {
-    localStorage.setItem("appSettings", JSON.stringify({ theme, darkMode }));
+    if (globalThis.window === undefined) return;
+    try {
+      const storedRaw = globalThis.localStorage.getItem("appSettings");
+      if (storedRaw) {
+        const stored = JSON.parse(storedRaw);
+        if (stored.theme) setTheme(stored.theme);
+        if (stored.darkMode) setDarkMode(stored.darkMode);
+      }
+    } catch {
+      /* empty */
+    }
+  }, []);
+
+  // Persist settings
+  useEffect(() => {
+    if (globalThis.window === undefined) return;
+    try {
+      globalThis.localStorage.setItem(
+        "appSettings",
+        JSON.stringify({ theme, darkMode }),
+      );
+    } catch {
+      /* empty */
+    }
   }, [theme, darkMode]);
 
   const themesSource = useMemo(() => {
@@ -76,11 +99,8 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   }, [themeConfigOverride, primaryColor]);
 
   const selectedTheme = useMemo(() => {
-    if (systemTheme === "unknown") return themesSource[0].MuiTheme;
-    if (theme === "system") {
-      return systemTheme === "dark"
-        ? themesSource[0].MuiTheme
-        : themesSource[0].MuiTheme;
+    if (theme === "system" || systemTheme === "unknown") {
+      return themesSource[0].MuiTheme;
     }
     return (
       themesSource.find((t) => t.name === theme)?.MuiTheme ||
@@ -93,16 +113,37 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
     [darkMode, systemTheme],
   );
 
-  const muiTheme = useMemo(
-    () => createCustomTheme(selectedTheme.palette.primary.main, mode),
-    [selectedTheme, mode],
-  );
+  const muiTheme = useMemo(() => {
+    const secondary = (selectedTheme.palette as any)?.secondary?.main as
+      | string
+      | undefined;
+    return createCustomTheme(
+      selectedTheme.palette.primary.main,
+      mode,
+      secondary,
+    );
+  }, [selectedTheme, mode]);
+
+  const finalMuiTheme = useMemo(() => {
+    if (!customColors || Object.keys(customColors).length === 0)
+      return muiTheme;
+    const cloned = {
+      ...muiTheme,
+      palette: { ...muiTheme.palette },
+    } as typeof muiTheme;
+    const custom: Record<string, any> = {};
+    for (const [name, main] of Object.entries(customColors)) {
+      custom[name] = cloned.palette.augmentColor({ color: { main } });
+    }
+    cloned.palette.custom = custom;
+    return cloned;
+  }, [muiTheme, customColors]);
 
   const emotionTheme = useMemo(() => ({ darkMode: mode === "dark" }), [mode]);
 
   return (
     <ThemeContext.Provider value={{ theme, darkMode, setTheme, setDarkMode }}>
-      <MuiThemeProvider theme={muiTheme}>
+      <MuiThemeProvider theme={finalMuiTheme}>
         <EmotionThemeProvider theme={emotionTheme}>
           <GlobalStyles fontFamily={fontFamily} />
           {children}

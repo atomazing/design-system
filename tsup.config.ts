@@ -1,14 +1,14 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"], // точка входа
-  outDir: "dist", // куда складывать сборку
-  format: ["esm", "cjs"], // форматы вывода
-  dts: true, // генерировать *.d.ts
-  minify: true, // минифицировать сборку
-  clean: true, // очищать папку перед сборкой
-  sourcemap: true, // полезно для отладки
-  target: "es2018", // JS target (поддержка async/await и т.д.)
+  entry: ["src/index.ts"], // Entry point
+  outDir: "dist", // Output directory
+  format: ["esm", "cjs"], // Module formats
+  dts: true, // Generate TypeScript declarations
+  minify: true, // Minify output bundles
+  clean: true, // Clean outDir before build
+  sourcemap: true, // Generate sourcemaps
+  target: "es2018", // JS target (supports async/await etc.)
   external: [
     "react",
     "react-dom",
@@ -17,5 +17,5 @@ export default defineConfig({
     "@mui/icons-material",
     "@emotion/react",
     "@emotion/styled",
-  ], // не включать в сборку — потребитель сам установит
+  ], // Treat these as externals (peer deps)
 });

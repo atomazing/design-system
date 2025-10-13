@@ -1,4 +1,4 @@
-import { AppSettings, SystemTheme } from "../models";
+import type { AppSettings, SystemTheme } from "../models";
 
 /**
  * Determines whether dark mode should be enabled based on user settings and system conditions.

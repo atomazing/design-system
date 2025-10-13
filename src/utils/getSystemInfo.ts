@@ -14,15 +14,14 @@ export type OperatingSystem =
  */
 export type Browser = "Chrome" | "Firefox" | "Safari" | "Edge" | "Unknown";
 
-const { userAgent } = globalThis.navigator;
-
 /**
  * Detects the user's operating system based on the user agent string.
- *
- * @returns {OperatingSystem} The name of the detected operating system.
+ * Safe for SSR: falls back to "Unknown" on server.
  */
 export const getOperatingSystem = (): OperatingSystem => {
-  const ua = userAgent.toLowerCase();
+  const ua = (
+    typeof navigator === "undefined" ? "" : navigator.userAgent
+  ).toLowerCase();
 
   if (ua.includes("windows nt")) return "Windows";
   if (ua.includes("iphone") || ua.includes("ipad") || ua.includes("ipod"))
@@ -36,11 +35,12 @@ export const getOperatingSystem = (): OperatingSystem => {
 
 /**
  * Detects the user's browser based on the user agent string.
- *
- * @returns {Browser} The name of the detected browser.
+ * Safe for SSR: falls back to "Unknown" on server.
  */
 export const getBrowser = (): Browser => {
-  const ua = userAgent.toLowerCase();
+  const ua = (
+    typeof navigator === "undefined" ? "" : navigator.userAgent
+  ).toLowerCase();
 
   // Order matters: Edge must come before Chrome
   if (ua.includes("edg")) return "Edge";
@@ -53,8 +53,13 @@ export const getBrowser = (): Browser => {
 
 /**
  * Basic information about the user's system (OS and browser).
+ * Safe for SSR: resolves to Unknown values on server.
  */
 export const systemInfo = {
-  os: getOperatingSystem(),
-  browser: getBrowser(),
+  os:
+    typeof navigator === "undefined"
+      ? ("Unknown" as OperatingSystem)
+      : getOperatingSystem(),
+  browser:
+    typeof navigator === "undefined" ? ("Unknown" as Browser) : getBrowser(),
 };

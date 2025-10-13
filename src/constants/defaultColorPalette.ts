@@ -3,10 +3,10 @@ import type { ColorPaletteType } from "../models";
 export const defaultColorPalette: ColorPaletteType = {
   fontDark: "#101727",
   fontLight: "#f0f0f0",
-  purple: "#440850",
-  lavender: "#9FA9EA",
-  carrot: "#F3503A",
-  pistachio: "#62ED97",
+  // Generic tokens
+  brand: "#9FA9EA",
+  accent: "#F3503A",
+  muted: "#64748B",
   // MUI-like defaults
   success: "#2E7D32",
   info: "#0288D1",

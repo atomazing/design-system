@@ -6,4 +6,4 @@ export type {
 } from "./appSettings";
 export type { SystemTheme } from "./systemTheme";
 export type { CustomTypographyVariants } from "./typography";
-export type { ColorPaletteType } from "./сolorPalette";
+export type { ColorPaletteType } from "./colorPalette";

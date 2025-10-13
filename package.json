@@ -1,6 +1,6 @@
 {
   "name": "@atomazing-org/design-system",
-  "version": "1.0.62",
+  "version": "1.0.63",
   "private": false,
   "description": "A library providing a set of useful utils, MUI style extensions, and components to build your application.",
   "author": "PonomarevBPM + MarkSinD",
@@ -46,6 +46,8 @@
     "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:ts"
   },
   "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "@emotion/css": "^11.0.0",
@@ -57,8 +59,10 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@types/react": "^19.1.8",
+    "eslint": "^9.13.0",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^2.1.3"
   }
 }

@@ -11,9 +11,6 @@ export const commonComponentProps: Theme["components"] = {
     },
     styleOverrides: {
       tooltip: ({ theme }) => ({
-        color: theme.palette.mode === "dark" ? "#fff" : "#000",
-        backgroundColor:
-          theme.palette.mode === "dark" ? "#141431dd" : "#ededf3dd",
         backdropFilter: "blur(6px)",
         WebkitBackdropFilter: "blur(6px)",
         padding: "8px 16px",
@@ -82,7 +79,6 @@ export const commonComponentProps: Theme["components"] = {
     styleOverrides: {
       root: {
         fontWeight: 500,
-        color: "#fff",
       },
     },
   },
@@ -186,9 +182,6 @@ export const commonComponentProps: Theme["components"] = {
       valueLabel: ({ theme }) => ({
         borderRadius: theme.shape.borderRadius,
         padding: "6px 14px",
-        color: theme.palette.mode === "dark" ? "#fff" : "#000",
-        backgroundColor:
-          theme.palette.mode === "dark" ? "#141431dd" : "#ededf3dd",
         "&::before, &::after": {
           display: "none",
         },
