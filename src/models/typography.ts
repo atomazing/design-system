@@ -43,6 +43,14 @@ export interface CustomTypographyVariants {
   header_md_bold: { font: string };
   header_sm_bold: { font: string };
   header_xs_bold: { font: string };
+
+  // Added semibold header variants
+  header_2xl_semibold: { font: string };
+  header_xl_semibold: { font: string };
+  header_lg_semibold: { font: string };
+  header_md_semibold: { font: string };
+  header_sm_semibold: { font: string };
+  header_xs_semibold: { font: string };
 }
 
 // MUI extensions

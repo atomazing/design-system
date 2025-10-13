@@ -22,7 +22,15 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
    * Optional dynamic list of themes.
    * Takes precedence over static defaults when provided.
    */
-  themes?: { name: string; primaryColor: string; secondaryColor?: string }[];
+  themes?: {
+    name: string;
+    primaryColor: string;
+    secondaryColor?: string;
+    background?: {
+      light?: { default?: string; paper?: string };
+      dark?: { default?: string; paper?: string };
+    };
+  }[];
   /** Optional color palette override (e.g., fontLight/fontDark/accent colors). */
   colorPaletteOverride?: Partial<ColorPaletteType>;
 }>;
@@ -76,29 +84,23 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
 
   const themesSource = useMemo(() => {
     if (themesInput && themesInput.length > 0) {
-      return themesInput.map((t) => ({
-        name: t.name,
-        MuiTheme: createCustomTheme(t.primaryColor, "light", t.secondaryColor),
-      }));
+      return themesInput;
     }
     // Fallback: single default theme based on palette brand
     const defaultPrimary = getColorPalette().brand;
     return [
       {
         name: "Default",
-        MuiTheme: createCustomTheme(defaultPrimary, "light"),
+        primaryColor: defaultPrimary,
       },
     ];
   }, [themesInput]);
 
   const selectedTheme = useMemo(() => {
     if (theme === "system" || systemTheme === "unknown") {
-      return themesSource[0].MuiTheme;
+      return themesSource[0];
     }
-    return (
-      themesSource.find((t) => t.name === theme)?.MuiTheme ||
-      themesSource[0].MuiTheme
-    );
+    return themesSource.find((t) => t.name === theme) || themesSource[0];
   }, [systemTheme, theme, themesSource]);
 
   const mode = useMemo(
@@ -107,13 +109,12 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   );
 
   const muiTheme = useMemo(() => {
-    const secondary = (selectedTheme.palette as any)?.secondary?.main as
-      | string
-      | undefined;
+    const bg = selectedTheme.background?.[mode];
     return createCustomTheme(
-      selectedTheme.palette.primary.main,
+      selectedTheme.primaryColor,
       mode,
-      secondary,
+      selectedTheme.secondaryColor,
+      bg,
     );
   }, [selectedTheme, mode]);
 

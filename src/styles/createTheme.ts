@@ -10,6 +10,7 @@ export const createCustomTheme = (
   primaryColor: string,
   mode: PaletteMode = "light",
   secondaryColor?: string,
+  background?: { default?: string; paper?: string },
 ): Theme => {
   const isDark = mode === "dark";
 
@@ -41,9 +42,12 @@ export const createCustomTheme = (
       success: { ...base.palette.success, main: getColorPalette().success },
       info: { ...base.palette.info, main: getColorPalette().info },
 
-      background: isDark
-        ? { ...base.palette.background, default: "#1C1C1E", paper: "#2C2C2E" }
-        : { ...base.palette.background, default: "#F2F2F7", paper: "#FFFFFF" },
+      background: (() => {
+        const baseBg = isDark
+          ? { default: "#1C1C1E", paper: "#2C2C2E" }
+          : { default: "#F2F2F7", paper: "#FFFFFF" };
+        return { ...base.palette.background, ...baseBg, ...background };
+      })(),
 
       divider: isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)",
     },

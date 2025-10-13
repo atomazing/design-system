@@ -57,6 +57,14 @@ export const muiTypography: Components<Theme>["MuiTypography"] = {
       header_md_bold: "h4",
       header_sm_bold: "h5",
       header_xs_bold: "h6",
+
+      // HEADER SEMIBOLD
+      header_2xl_semibold: "h1",
+      header_xl_semibold: "h2",
+      header_lg_semibold: "h3",
+      header_md_semibold: "h4",
+      header_sm_semibold: "h5",
+      header_xs_semibold: "h6",
     },
   },
 };
@@ -93,17 +101,25 @@ export const typographyVariants: TypographyVariantsOptions = {
   text_xs_thin: { font: "100 12px/18px inherit inherit" },
   text_2xs_thin: { font: "100 10px/14px inherit inherit" },
 
-  header_2xl_regular: { font: "400 36px/44px inherit inherit" },
+  header_2xl_regular: { font: "400 34px/42px inherit inherit" },
   header_xl_regular: { font: "400 32px/40px inherit inherit" },
   header_lg_regular: { font: "400 28px/36px inherit inherit" },
   header_md_regular: { font: "400 24px/32px inherit inherit" },
   header_sm_regular: { font: "400 20px/28px inherit inherit" },
   header_xs_regular: { font: "400 18px/26px inherit inherit" },
 
-  header_2xl_bold: { font: "700 36px/44px inherit inherit" },
+  header_2xl_bold: { font: "700 34px/42px inherit inherit" },
   header_xl_bold: { font: "700 32px/40px inherit inherit" },
   header_lg_bold: { font: "700 28px/36px inherit inherit" },
   header_md_bold: { font: "700 24px/32px inherit inherit" },
   header_sm_bold: { font: "700 20px/28px inherit inherit" },
   header_xs_bold: { font: "700 18px/26px inherit inherit" },
+
+  // HEADER SEMIBOLD
+  header_2xl_semibold: { font: "600 34px/42px inherit inherit" },
+  header_xl_semibold: { font: "600 32px/40px inherit inherit" },
+  header_lg_semibold: { font: "600 28px/36px inherit inherit" },
+  header_md_semibold: { font: "600 24px/32px inherit inherit" },
+  header_sm_semibold: { font: "600 20px/28px inherit inherit" },
+  header_xs_semibold: { font: "600 18px/26px inherit inherit" },
 };

@@ -57,7 +57,15 @@ Provide a fully dynamic list of themes to the provider. This takes priority over
 <ThemeProviderWrapper
   themes={[
     { name: 'Blue', primaryColor: '#3B82F6' },
-    { name: 'Green', primaryColor: '#22C55E', secondaryColor: '#F6F9F6' },
+    {
+      name: 'Aurora',
+      primaryColor: '#00E952',
+      secondaryColor: '#011926',
+      background: {
+        light: { default: '#F0FFF6', paper: '#FFFFFF' },
+        dark: { default: '#071B13', paper: '#0E2A1F' },
+      },
+    },
     { name: 'Gray', primaryColor: '#64748B' },
   ]}
 >
@@ -174,6 +182,7 @@ import { Typography } from '@mui/material';
 <Typography variant="text_md_regular">Body text</Typography>
 <Typography variant="text_sm_bold">Strong caption</Typography>
 <Typography variant="header_lg_bold">Section Title</Typography>
+<Typography variant="header_md_semibold">Semibold Heading</Typography>
 ```
 
 Global Styles
