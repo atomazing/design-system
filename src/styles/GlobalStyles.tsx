@@ -24,6 +24,7 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
 
   const primaryColor = theme.palette.primary.main;
   const backgroundDefault = theme.palette.background.default;
+  const backgroundPaper = theme.palette.background.paper;
 
   const primaryFontColor = useMemo(
     () => getFontColor(primaryColor),
@@ -96,6 +97,9 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           background-attachment: fixed;
           background-size: cover;
           transition: 0.3s background;
+          /* Firefox */
+          scrollbar-color: ${primaryColor} ${backgroundDefault};
+          scrollbar-width: thin;
 
           ::-webkit-scrollbar {
             width: 8px;
@@ -141,9 +145,12 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
         .MuiDrawer-paper,
         .customScrollbar,
         textarea {
+          /* Firefox */
+          scrollbar-color: ${primaryColor} ${backgroundPaper};
+          scrollbar-width: thin;
           ::-webkit-scrollbar {
             width: 8px;
-            background-color: ${backgroundDefault};
+            background-color: ${backgroundPaper};
           }
           ::-webkit-scrollbar-thumb {
             background-color: ${primaryColor};
@@ -154,7 +161,7 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           }
           ::-webkit-scrollbar-track {
             border-radius: 64px;
-            background-color: ${backgroundDefault};
+            background-color: ${backgroundPaper};
           }
         }
 
