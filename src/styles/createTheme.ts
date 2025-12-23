@@ -4,13 +4,15 @@ import { commonComponentProps } from "./commonComponents";
 import { getColorPalette } from "./themeConfig";
 import { muiTypography, typographyVariants } from "./typography";
 
-import type { PaletteMode, Theme } from "@mui/material";
+import type { PaletteMode, Theme, ThemeOptions } from "@mui/material";
+
 
 export const createCustomTheme = (
   primaryColor: string,
   mode: PaletteMode = "light",
   secondaryColor?: string,
   background?: { default?: string; paper?: string },
+  themeOverrides?: ThemeOptions,
 ): Theme => {
   const isDark = mode === "dark";
 
@@ -20,7 +22,7 @@ export const createCustomTheme = (
   });
 
   // 2) ТОЧЕЧНЫЕ ОВЕРРАЙДЫ поверх базы
-  return createTheme(base, {
+  const designSystemTheme: ThemeOptions = {
     palette: {
       primary: { ...base.palette.primary, main: primaryColor },
       // Brand follows active theme primary
@@ -64,7 +66,11 @@ export const createCustomTheme = (
         'var(--app-font-family, "Mulish", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif)',
     } as any,
     shape: { borderRadius: 24 },
-  });
+  };
+
+  // 3) ПРИМЕНЕНИЕ ПЕРЕОПРЕДЕЛЕНИЙ ОТ ВНЕШНИХ ПОТРЕБИТЕЛЕЙ
+  // Переопределения применяются поверх дизайн-системы, позволяя полностью перезаписать любые стили
+  return createTheme(base, designSystemTheme, themeOverrides ?? {});
 };
 
 /**

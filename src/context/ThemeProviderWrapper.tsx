@@ -12,6 +12,7 @@ import { isDarkMode, useSystemTheme } from "../utils";
 
 import { ThemeContext } from "./ThemeContext";
 
+import type { ThemeOptions } from "@mui/material";
 import type { ColorPaletteType } from "../models";
 import type { FC, PropsWithChildren } from "react";
 
@@ -33,6 +34,12 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
   }[];
   /** Optional color palette override (e.g., fontLight/fontDark/accent colors). */
   colorPaletteOverride?: Partial<ColorPaletteType>;
+  /**
+   * Optional MUI theme overrides to customize design system styles.
+   * Allows external consumers to override any part of the theme (components, palette, typography, etc.).
+   * Applied after the design system theme, so it takes precedence.
+   */
+  themeOverrides?: ThemeOptions;
 }>;
 
 export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
@@ -40,6 +47,7 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   fontFamily,
   themes: themesInput,
   colorPaletteOverride,
+  themeOverrides,
 }) => {
   const systemTheme = useSystemTheme();
 
@@ -115,8 +123,9 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
       mode,
       selectedTheme.secondaryColor,
       bg,
+      themeOverrides,
     );
-  }, [selectedTheme, mode]);
+  }, [selectedTheme, mode, themeOverrides]);
 
   const emotionTheme = useMemo(() => ({ darkMode: mode === "dark" }), [mode]);
 
