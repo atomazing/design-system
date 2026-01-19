@@ -6,13 +6,9 @@ import { muiTypography, typographyVariants } from "./typography";
 
 import type { PaletteMode, Theme, ThemeOptions } from "@mui/material";
 
-
 export const createCustomTheme = (
-  primaryColor: string,
   mode: PaletteMode = "light",
-  secondaryColor?: string,
-  background?: { default?: string; paper?: string },
-  themeOverrides?: ThemeOptions,
+  overrides?: ThemeOptions,
 ): Theme => {
   const isDark = mode === "dark";
 
@@ -22,33 +18,32 @@ export const createCustomTheme = (
   });
 
   // 2) ТОЧЕЧНЫЕ ОВЕРРАЙДЫ поверх базы
+  const paletteTokens = getColorPalette();
+  const defaultPrimary = paletteTokens.brand;
   const designSystemTheme: ThemeOptions = {
     palette: {
-      primary: { ...base.palette.primary, main: primaryColor },
+      primary: { ...base.palette.primary, main: defaultPrimary },
       // Brand follows active theme primary
-      brand: base.palette.augmentColor({ color: { main: primaryColor } }),
+      brand: base.palette.augmentColor({ color: { main: defaultPrimary } }),
       neutral: base.palette.augmentColor({
-        color: { main: getColorPalette().neutral },
+        color: { main: paletteTokens.neutral },
       }),
       accent: base.palette.augmentColor({
-        color: { main: getColorPalette().accent },
+        color: { main: paletteTokens.accent },
       }),
       muted: base.palette.augmentColor({
-        color: { main: getColorPalette().muted },
+        color: { main: paletteTokens.muted },
       }),
-      ...(secondaryColor
-        ? { secondary: { ...base.palette.secondary, main: secondaryColor } }
-        : {}),
-      error: { ...base.palette.error, main: getColorPalette().error },
-      warning: { ...base.palette.warning, main: getColorPalette().warning },
-      success: { ...base.palette.success, main: getColorPalette().success },
-      info: { ...base.palette.info, main: getColorPalette().info },
+      error: { ...base.palette.error, main: paletteTokens.error },
+      warning: { ...base.palette.warning, main: paletteTokens.warning },
+      success: { ...base.palette.success, main: paletteTokens.success },
+      info: { ...base.palette.info, main: paletteTokens.info },
 
       background: (() => {
         const baseBg = isDark
           ? { default: "#1C1C1E", paper: "#2C2C2E" }
           : { default: "#F2F2F7", paper: "#FFFFFF" };
-        return { ...base.palette.background, ...baseBg, ...background };
+        return { ...base.palette.background, ...baseBg };
       })(),
 
       divider: isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)",
@@ -70,7 +65,15 @@ export const createCustomTheme = (
 
   // 3) ПРИМЕНЕНИЕ ПЕРЕОПРЕДЕЛЕНИЙ ОТ ВНЕШНИХ ПОТРЕБИТЕЛЕЙ
   // Переопределения применяются поверх дизайн-системы, позволяя полностью перезаписать любые стили
-  return createTheme(base, designSystemTheme, themeOverrides ?? {});
+  const merged = createTheme(base, designSystemTheme, overrides ?? {});
+  const primaryMain = merged.palette.primary.main;
+
+  return createTheme(merged, {
+    palette: {
+      mode,
+      brand: merged.palette.augmentColor({ color: { main: primaryMain } }),
+    },
+  });
 };
 
 /**

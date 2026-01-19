@@ -46,32 +46,58 @@ export function App() {
 If `themes` is not provided, the provider falls back to a single "Default" theme using the current palette brand color.
 
 Provider Props
-- `themes?: { name: string; primaryColor: string; secondaryColor?: string }[]`
+- `themes?: Array<ThemeOptions & { name: string }>`
 - `fontFamily?: string`
 - `colorPaletteOverride?: Partial<ColorPaletteType>`
+`ThemeOptions` is the MUI theme options type from `@mui/material`.
 
 Dynamic Themes (array)
-Provide a fully dynamic list of themes to the provider. This takes priority over static defaults.
+Provide a fully dynamic list of named `ThemeOptions` overrides. Provider-controlled `palette.mode` always wins.
 
+Minimal example (primary color only):
 ```tsx
 <ThemeProviderWrapper
   themes={[
-    { name: 'Blue', primaryColor: '#3B82F6' },
     {
-      name: 'Aurora',
-      primaryColor: '#00E952',
-      secondaryColor: '#011926',
-      background: {
-        light: { default: '#F0FFF6', paper: '#FFFFFF' },
-        dark: { default: '#071B13', paper: '#0E2A1F' },
+      name: 'Blue',
+      palette: {
+        primary: { main: '#3B82F6' },
       },
     },
-    { name: 'Gray', primaryColor: '#64748B' },
   ]}
 >
   {/* ... */}
 </ThemeProviderWrapper>
 ```
+
+Advanced example (palette + components overrides):
+```tsx
+<ThemeProviderWrapper
+  themes={[
+    {
+      name: 'BrandA',
+      palette: {
+        primary: { main: '#00A3FF' },
+        background: { default: '#F7FAFF', paper: '#FFFFFF' },
+      },
+      components: {
+        MuiButton: {
+          styleOverrides: {
+            root: { textTransform: 'none' },
+          },
+        },
+      },
+    },
+  ]}
+>
+  {/* ... */}
+</ThemeProviderWrapper>
+```
+
+Migration Notes (breaking)
+- Legacy `themes` shape (`primaryColor`, `secondaryColor`, `background`) removed.
+- `themeOverrides` prop removed.
+- Use `themes: Array<ThemeOptions & { name: string }>` for all customization.
 
 Theme Switching (UI)
 Use the theme context to read and change the active theme.

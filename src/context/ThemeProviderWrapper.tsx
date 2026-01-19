@@ -6,14 +6,13 @@ import {
   createCustomTheme,
   GlobalStyles,
   setColorPaletteOverride,
-  getColorPalette,
 } from "../styles";
 import { isDarkMode, useSystemTheme } from "../utils";
 
 import { ThemeContext } from "./ThemeContext";
 
+import type { ColorPaletteType, NamedThemeOptions } from "../models";
 import type { ThemeOptions } from "@mui/material";
-import type { ColorPaletteType } from "../models";
 import type { FC, PropsWithChildren } from "react";
 
 type ThemeProviderWrapperProps = PropsWithChildren<{
@@ -21,25 +20,11 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
   fontFamily?: string;
   /**
    * Optional dynamic list of themes.
-   * Takes precedence over static defaults when provided.
+   * Each theme is a full ThemeOptions object with a required name.
    */
-  themes?: {
-    name: string;
-    primaryColor: string;
-    secondaryColor?: string;
-    background?: {
-      light?: { default?: string; paper?: string };
-      dark?: { default?: string; paper?: string };
-    };
-  }[];
+  themes?: NamedThemeOptions[];
   /** Optional color palette override (e.g., fontLight/fontDark/accent colors). */
   colorPaletteOverride?: Partial<ColorPaletteType>;
-  /**
-   * Optional MUI theme overrides to customize design system styles.
-   * Allows external consumers to override any part of the theme (components, palette, typography, etc.).
-   * Applied after the design system theme, so it takes precedence.
-   */
-  themeOverrides?: ThemeOptions;
 }>;
 
 export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
@@ -47,7 +32,6 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   fontFamily,
   themes: themesInput,
   colorPaletteOverride,
-  themeOverrides,
 }) => {
   const systemTheme = useSystemTheme();
 
@@ -94,14 +78,7 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
     if (themesInput && themesInput.length > 0) {
       return themesInput;
     }
-    // Fallback: single default theme based on palette brand
-    const defaultPrimary = getColorPalette().brand;
-    return [
-      {
-        name: "Default",
-        primaryColor: defaultPrimary,
-      },
-    ];
+    return [{ name: "Default" }];
   }, [themesInput]);
 
   const selectedTheme = useMemo(() => {
@@ -117,15 +94,10 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   );
 
   const muiTheme = useMemo(() => {
-    const bg = selectedTheme.background?.[mode];
-    return createCustomTheme(
-      selectedTheme.primaryColor,
-      mode,
-      selectedTheme.secondaryColor,
-      bg,
-      themeOverrides,
-    );
-  }, [selectedTheme, mode, themeOverrides]);
+    const overrides: ThemeOptions = { ...selectedTheme };
+    delete (overrides as { name?: string }).name;
+    return createCustomTheme(mode, overrides);
+  }, [selectedTheme, mode]);
 
   const emotionTheme = useMemo(() => ({ darkMode: mode === "dark" }), [mode]);
 
