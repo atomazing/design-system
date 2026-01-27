@@ -1,3 +1,4 @@
+import type { ThemeOptions } from "@mui/material";
 import type { ReactNode } from "react";
 
 /**
@@ -14,6 +15,8 @@ export interface OptionItem {
   value: DarkModeOptions;
   icon: ReactNode;
 }
+
+export type NamedThemeOptions = ThemeOptions & { name: string };
 
 /**
  * Represents user-specific theme preferences stored in the application.

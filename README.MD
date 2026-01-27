@@ -46,32 +46,100 @@ export function App() {
 If `themes` is not provided, the provider falls back to a single "Default" theme using the current palette brand color.
 
 Provider Props
-- `themes?: { name: string; primaryColor: string; secondaryColor?: string }[]`
+- `themes?: ThemesProp` (single theme may omit `name`, multiple themes require `name`)
 - `fontFamily?: string`
 - `colorPaletteOverride?: Partial<ColorPaletteType>`
+`ThemeOptions` is the MUI theme options type from `@mui/material/styles`.
 
-Dynamic Themes (array)
-Provide a fully dynamic list of themes to the provider. This takes priority over static defaults.
+Theme Names
+Single theme can omit `name` (defaults to `"Default"`). Multiple themes require a non-empty `name` for each theme.
 
+Before (single theme required a name):
 ```tsx
 <ThemeProviderWrapper
   themes={[
-    { name: 'Blue', primaryColor: '#3B82F6' },
     {
-      name: 'Aurora',
-      primaryColor: '#00E952',
-      secondaryColor: '#011926',
-      background: {
-        light: { default: '#F0FFF6', paper: '#FFFFFF' },
-        dark: { default: '#071B13', paper: '#0E2A1F' },
+      name: 'Blue',
+      palette: { primary: { main: '#3B82F6' } },
+    },
+  ]}
+/>
+```
+
+After (single theme name omitted):
+```tsx
+<ThemeProviderWrapper
+  themes={[
+    {
+      palette: { primary: { main: '#3B82F6' } },
+    },
+  ]}
+/>
+```
+
+Multiple themes (name required):
+```tsx
+<ThemeProviderWrapper
+  themes={[
+    {
+      name: 'BrandA',
+      palette: { primary: { main: '#00A3FF' } },
+    },
+    {
+      name: 'BrandB',
+      palette: { primary: { main: '#10B981' } },
+    },
+  ]}
+/>
+```
+
+Dynamic Themes (array)
+Provide a fully dynamic list of `ThemeOptions` overrides. Names are required when supplying multiple themes. Provider-controlled `palette.mode` always wins.
+
+Minimal example (primary color only):
+```tsx
+<ThemeProviderWrapper
+  themes={[
+    {
+      name: 'Blue',
+      palette: {
+        primary: { main: '#3B82F6' },
       },
     },
-    { name: 'Gray', primaryColor: '#64748B' },
   ]}
 >
   {/* ... */}
 </ThemeProviderWrapper>
 ```
+
+Advanced example (palette + components overrides):
+```tsx
+<ThemeProviderWrapper
+  themes={[
+    {
+      name: 'BrandA',
+      palette: {
+        primary: { main: '#00A3FF' },
+        background: { default: '#F7FAFF', paper: '#FFFFFF' },
+      },
+      components: {
+        MuiButton: {
+          styleOverrides: {
+            root: { textTransform: 'none' },
+          },
+        },
+      },
+    },
+  ]}
+>
+  {/* ... */}
+</ThemeProviderWrapper>
+```
+
+Migration Notes (breaking)
+- Legacy `themes` shape (`primaryColor`, `secondaryColor`, `background`) removed.
+- `themeOverrides` prop removed.
+- Use `themes: ThemesProp` for customization (single theme may omit `name`, multiple themes require `name`).
 
 Theme Switching (UI)
 Use the theme context to read and change the active theme.
