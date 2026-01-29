@@ -12,8 +12,3 @@ export {
   pulseAnimation,
   slideInBottom,
 } from "./keyframes";
-export {
-  getColorPalette,
-  setColorPaletteOverride,
-  ColorPalette,
-} from "./themeConfig";
