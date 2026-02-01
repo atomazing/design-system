@@ -21,8 +21,8 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
   /** Optional font stack to apply across the app. */
   fontFamily?: string;
   /**
-   * Optional dynamic list of themes.
-   * Each theme is a full ThemeOptions object.
+   * Optional list of theme presets.
+   * Accepts only `ThemePreset[]`.
    */
   themes?: ThemesInput;
 }>;

@@ -1,6 +1,6 @@
 import { alpha } from "@mui/material/styles";
 
-import type { ThemesProp } from "@/context";
+import type { NamedThemeOptions } from "@/models";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 /**
@@ -345,7 +345,7 @@ export const modernMinimal = {
     surfaceShadowAlpha: 0.08,
     tableHeadAlpha: 0.04,
   }),
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;
 
 export const modernMinimalDark = {
   name: "Modern Minimal Dark",
@@ -443,4 +443,4 @@ export const modernMinimalDark = {
     surfaceShadowAlpha: 0.2,
     tableHeadAlpha: 0.08,
   }),
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;

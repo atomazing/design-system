@@ -1,42 +1,41 @@
 import { normalizeThemesInput } from "@/utils/normalizeThemes";
 
-import type { ThemeN, ThemesInput } from "./themeTypes";
-import type { DarkModeOptions } from "@/models";
+import type { ThemesInput } from "./themeTypes";
+import type { DarkModeOptions, NamedThemeOptions } from "@/models";
 import type { NormalizedPreset } from "@/models/themePresets";
 
 const DEFAULT_THEME_NAME = "Default";
 
-const presetToTheme = (preset: NormalizedPreset): ThemeN => ({
+const presetToTheme = (preset: NormalizedPreset): NamedThemeOptions => ({
   name: preset.id,
   ...preset.colorSchemes.light,
 });
 
 /**
- * Normalizes theme input so the result always includes valid theme names.
+ * Normalizes preset input so the result always includes valid theme names.
  * - No input/empty: returns a single default theme.
- * - Single theme: fills a missing/blank name with the default.
- * - Multiple themes: requires each theme to have a non-empty name.
+ * - Duplicate preset ids: resolved with last-wins while keeping first-order.
  */
-export const normalizeThemes = (input?: ThemesInput | ThemeN[]): ThemeN[] => {
-  const presets = normalizeThemesInput(input as ThemesInput);
+export const normalizeThemes = (input?: ThemesInput): NamedThemeOptions[] => {
+  const presets = normalizeThemesInput(input);
   if (presets.length === 0) return [{ name: DEFAULT_THEME_NAME }];
   return presets.map((preset) => presetToTheme(preset));
 };
 
 export const mergeThemes = (
-  presets?: ThemeN[],
-  customThemes?: ThemeN[],
-): ThemeN[] => {
+  presets?: ThemesInput,
+  customThemes?: ThemesInput,
+): NamedThemeOptions[] => {
   const merged = [...(presets ?? []), ...(customThemes ?? [])];
   return normalizeThemes(merged.length > 0 ? merged : undefined);
 };
 
-export const resolveDefaultThemeName = (themes: ThemeN[]): string =>
+export const resolveDefaultThemeName = (themes: NamedThemeOptions[]): string =>
   themes[0]?.name ?? DEFAULT_THEME_NAME;
 
 export const resolveThemeName = (
   themeName: string | undefined,
-  themes: ThemeN[],
+  themes: NamedThemeOptions[],
 ): string => {
   if (themeName && themes.some((theme) => theme.name === themeName)) {
     return themeName;
@@ -45,9 +44,10 @@ export const resolveThemeName = (
 };
 
 export const resolveThemeById = (
-  themes: ThemeN[],
+  themes: NamedThemeOptions[],
   themeId: string,
-): ThemeN | undefined => themes.find((theme) => theme.name === themeId);
+): NamedThemeOptions | undefined =>
+  themes.find((theme) => theme.name === themeId);
 
 export const resolveDarkMode = (
   darkMode: DarkModeOptions | undefined,

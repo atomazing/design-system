@@ -3,9 +3,9 @@ import { describe, expect, it } from "vitest";
 import { resolveDarkMode, resolveThemeName } from "@/context/settings/helper";
 import { isDarkMode } from "@/utils/isDarkMode";
 
-import type { ThemeN } from "@/context/settings/themeTypes";
+import type { NamedThemeOptions } from "@/models";
 
-const themes = [{ name: "Aurora" }, { name: "Saffron" }] as ThemeN[];
+const themes = [{ name: "Aurora" }, { name: "Saffron" }] as NamedThemeOptions[];
 
 describe("resolveThemeName", () => {
   it("returns the first theme when no theme is provided", () => {

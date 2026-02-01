@@ -1,6 +1,6 @@
 import { alpha } from "@mui/material/styles";
 
-import type { ThemesProp } from "@/context";
+import type { NamedThemeOptions } from "@/models";
 
 /**
  * Editorial Classic — magazine / editorial style.
@@ -268,7 +268,7 @@ export const editorialClassic = {
       styleOverrides: { root: { borderRadius: 12 } },
     },
   },
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;
 
 export const editorialClassicDark = {
   name: "Editorial Classic Dark",
@@ -514,4 +514,4 @@ export const editorialClassicDark = {
       styleOverrides: { root: { borderRadius: 12 } },
     },
   },
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;

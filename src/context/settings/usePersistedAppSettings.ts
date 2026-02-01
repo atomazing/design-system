@@ -9,8 +9,8 @@ import {
 
 import { resolveDarkMode, resolveThemeName } from "./helper";
 
-import type { ThemeN, ThemesInput } from "./themeTypes";
-import type { DarkModeOptions } from "@/models";
+import type { ThemesInput } from "./themeTypes";
+import type { DarkModeOptions, NamedThemeOptions } from "@/models";
 import type { NormalizedPreset } from "@/models/themePresets";
 
 const DEFAULT_DARK_MODE: DarkModeOptions = "system";
@@ -26,8 +26,8 @@ export const usePersistedAppSettings = ({
   setDarkMode: (mode: DarkModeOptions) => void;
   presetsSource: NormalizedPreset[];
   selectedPreset: NormalizedPreset;
-  themesSource: ThemeN[];
-  selectedTheme: ThemeN;
+  themesSource: NamedThemeOptions[];
+  selectedTheme: NamedThemeOptions;
 } => {
   const presetsSource = useMemo(() => normalizeThemesInput(themes), [themes]);
   const themesSource = useMemo(

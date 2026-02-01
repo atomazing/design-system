@@ -1,6 +1,6 @@
 import { alpha } from "@mui/material/styles";
 
-import type { ThemesProp } from "@/context";
+import type { NamedThemeOptions } from "@/models";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 /**
@@ -538,7 +538,7 @@ export const neoGlass = {
     shadowAlpha: 0.18,
     isDark: false,
   }),
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;
 
 export const neoGlassDark = {
   name: "Neo Glass Dark",
@@ -636,4 +636,4 @@ export const neoGlassDark = {
     shadowAlpha: 0.42,
     isDark: true,
   }),
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;

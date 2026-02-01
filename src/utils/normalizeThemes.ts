@@ -3,17 +3,6 @@ import type { NormalizedPreset, ThemePreset } from "@/models/themePresets";
 import type { ThemeOptions } from "@mui/material/styles";
 
 const DEFAULT_PRESET_ID = "Default";
-const DEFAULT_DARK_BACKGROUND_DEFAULT = "#121212";
-const DEFAULT_DARK_BACKGROUND_PAPER = "#1e1e1e";
-const DEFAULT_DARK_TEXT_PRIMARY = "#ffffff";
-const DEFAULT_DARK_TEXT_SECONDARY = "rgba(255, 255, 255, 0.7)";
-const DEFAULT_DARK_DIVIDER = "rgba(255, 255, 255, 0.12)";
-
-type LegacyThemeInput = ThemeOptions & { name?: string };
-interface LegacyThemeWrapper {
-  name: string;
-  theme: ThemeOptions;
-}
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;
@@ -37,106 +26,52 @@ const normalizeLabel = (
   return normalized;
 };
 
-const normalizeLegacyName = (
-  name: string | undefined,
-  total: number,
-): string => {
-  const normalized = name?.trim();
-  if (!normalized) {
-    if (total === 1) return DEFAULT_PRESET_ID;
-    throw new Error(
-      "normalizeThemesInput: when providing multiple themes, each theme must include a non-empty `name`.",
-    );
-  }
-  return normalized;
-};
-
 const isThemePreset = (value: unknown): value is ThemePreset => {
   if (!isRecord(value)) return false;
+  if (typeof value.id !== "string") return false;
+  if (typeof value.label !== "string") return false;
   if (!("colorSchemes" in value)) return false;
+
   const { colorSchemes } = value;
-  const schemes = colorSchemes;
-  if (!isRecord(schemes)) return false;
-  return typeof value.id === "string" && typeof value.label === "string";
-};
-
-const isLegacyThemeWrapper = (value: unknown): value is LegacyThemeWrapper => {
-  if (!isRecord(value)) return false;
-  return typeof value.name === "string" && isRecord(value.theme);
-};
-
-const applyDarkFallback = (light: ThemeOptions): ThemeOptions => {
-  const palette = light.palette ?? {};
-  return {
-    ...light,
-    palette: {
-      ...palette,
-      mode: "dark",
-      background: {
-        ...palette.background,
-        default: DEFAULT_DARK_BACKGROUND_DEFAULT,
-        paper: DEFAULT_DARK_BACKGROUND_PAPER,
-      },
-      text: {
-        ...palette.text,
-        primary: DEFAULT_DARK_TEXT_PRIMARY,
-        secondary: DEFAULT_DARK_TEXT_SECONDARY,
-      },
-      divider: DEFAULT_DARK_DIVIDER,
-    },
-  };
+  return isRecord(colorSchemes);
 };
 
 const normalizePresetLike = (
   input: unknown,
   index: number,
-  total: number,
 ): NormalizedPreset => {
-  if (isThemePreset(input)) {
-    const id = normalizeId(input.id);
-    const label = normalizeLabel(input.label, id);
-    const { colorSchemes } = input;
-    const { light, dark } = colorSchemes;
-    if (!light) {
-      throw new Error(
-        "normalizeThemesInput: preset must include colorSchemes.light.",
-      );
-    }
-    const resolvedDark = dark ?? applyDarkFallback(light);
-    return {
-      id,
-      label,
-      colorSchemes: { light, dark: resolvedDark },
-      meta: { origin: "preset" },
-    };
+  if (!isThemePreset(input)) {
+    throw new Error(
+      `normalizeThemesInput: invalid ThemePreset shape at index ${index}.`,
+    );
   }
 
-  if (isLegacyThemeWrapper(input)) {
-    const name = normalizeLegacyName(input.name, total);
-    const light = input.theme;
-    return {
-      id: name,
-      label: name,
-      colorSchemes: { light, dark: applyDarkFallback(light) },
-      meta: { origin: "legacy" },
-    };
+  const id = normalizeId(input.id);
+  const label = normalizeLabel(input.label, id);
+  const { colorSchemes } = input;
+  const { light, dark } = colorSchemes;
+
+  if (!isRecord(light)) {
+    throw new Error(
+      "normalizeThemesInput: preset must include colorSchemes.light.",
+    );
+  }
+  if (!isRecord(dark)) {
+    throw new Error(
+      "normalizeThemesInput: preset must include colorSchemes.dark.",
+    );
   }
 
-  if (isRecord(input)) {
-    const theme = input as LegacyThemeInput;
-    const { name: legacyName, ...light } = theme;
-    const name = normalizeLegacyName(legacyName, total);
-    return {
-      id: name,
-      label: name,
-      colorSchemes: { light, dark: applyDarkFallback(light) },
-      meta: { origin: "legacy" },
-    };
-  }
-
-  throw new Error(
-    `normalizeThemesInput: invalid theme shape at index ${index}.`,
-  );
+  return {
+    ...input,
+    id,
+    label,
+    colorSchemes: {
+      light: light as ThemeOptions,
+      dark: dark as ThemeOptions,
+    },
+    meta: { origin: "preset" },
+  };
 };
 
 const dedupePresets = (presets: NormalizedPreset[]): NormalizedPreset[] => {
@@ -163,27 +98,22 @@ const dedupePresets = (presets: NormalizedPreset[]): NormalizedPreset[] => {
   return deduped;
 };
 
-const createDefaultPreset = (): NormalizedPreset => {
-  const light: ThemeOptions = {};
-  return {
-    id: DEFAULT_PRESET_ID,
-    label: DEFAULT_PRESET_ID,
-    colorSchemes: { light, dark: applyDarkFallback(light) },
-    meta: { origin: "legacy" },
-  };
-};
+const createDefaultPreset = (): NormalizedPreset => ({
+  id: DEFAULT_PRESET_ID,
+  label: DEFAULT_PRESET_ID,
+  colorSchemes: { light: {}, dark: {} },
+  meta: { origin: "custom" },
+});
 
 export const normalizeThemesInput = (
   input?: ThemesInput,
 ): NormalizedPreset[] => {
-  if (!input) return [createDefaultPreset()];
-  const items = Array.isArray(input) ? input : [input];
-  const filtered = items.filter(Boolean);
-  if (filtered.length === 0) return [createDefaultPreset()];
+  if (!input || input.length === 0) return [createDefaultPreset()];
 
-  const normalized = filtered.map((item, index) =>
-    normalizePresetLike(item, index, filtered.length),
+  const normalized = input.map((item, index) =>
+    normalizePresetLike(item, index),
   );
+  if (normalized.length === 0) return [createDefaultPreset()];
 
   return dedupePresets(normalized);
 };

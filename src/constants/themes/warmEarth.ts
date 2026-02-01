@@ -1,6 +1,6 @@
 import { alpha } from "@mui/material/styles";
 
-import type { ThemesProp } from "@/context";
+import type { NamedThemeOptions } from "@/models";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 /**
@@ -413,7 +413,7 @@ export const warmEarth = {
     panelShadowAlpha: 0.14,
     appBarAlpha: 0.88,
   }),
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;
 
 export const warmEarthDark = {
   name: "Warm Earth Dark",
@@ -509,4 +509,4 @@ export const warmEarthDark = {
     panelShadowAlpha: 0.32,
     appBarAlpha: 0.78,
   }),
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;

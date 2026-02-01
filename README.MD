@@ -3,7 +3,7 @@
 Modern MUI v7 + Emotion design system with strongly differentiated visual presets, scheme-based light/dark tokens, SSR-safe theming, and persistence.
 
 ## Preview
-![Design system preview](./preview.gif)
+![Design system preview](https://raw.githubusercontent.com/atomazing/design-system/master/preview.gif)
 
 ## Contents
 - Preview
@@ -65,6 +65,7 @@ Built-in presets:
 - Modern Minimal
 - Neo Glass
 - Retro Terminal
+- Kids Cartoon
 
 ## Dark mode
 `darkMode` controls which scheme is active. Supported values:
@@ -141,11 +142,11 @@ Duplicate preset ids are resolved by last-wins while preserving the first-occurr
 ### ThemeProviderWrapper
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `themes` | `ThemesInput` | `Default` preset | `ThemePreset[]` (recommended) or legacy `ThemeOptions[]` with optional `name`. |
+| `themes` | `ThemesInput` | `Default` preset | `ThemePreset[]` list used for runtime preset selection. |
 | `fontFamily` | `string` | `undefined` | Optional global font stack. |
 | `children` | `ReactNode` | required | Application content. |
 
-Legacy themes without an explicit dark scheme receive a safe dark fallback derived from the light scheme.
+`ThemeProviderWrapper` no longer supports legacy theme tuple/object contracts (`Theme1`, `ThemeN`, `ThemesProp`) and expects `ThemePreset[]` only.
 
 ### ThemePreset
 | Field | Type | Description |

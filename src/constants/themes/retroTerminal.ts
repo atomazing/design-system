@@ -1,6 +1,6 @@
 import { alpha } from "@mui/material/styles";
 
-import type { ThemesProp } from "@/context";
+import type { NamedThemeOptions } from "@/models";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 const FONT_MONO =
@@ -487,7 +487,7 @@ export const retroTerminal = {
     surfaceBorderAlpha: 0.44,
     panelGlowAlpha: 0.2,
   }),
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;
 
 export const retroTerminalDark = {
   name: "Retro Terminal Dark",
@@ -581,4 +581,4 @@ export const retroTerminalDark = {
     surfaceBorderAlpha: 0.62,
     panelGlowAlpha: 0.32,
   }),
-} satisfies ThemesProp[number];
+} satisfies NamedThemeOptions;

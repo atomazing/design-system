@@ -16,10 +16,9 @@ export interface OptionItem {
   icon: ReactNode;
 }
 
-export interface ThemeModeBackground {
-  light?: Partial<TypeBackground>;
-  dark?: Partial<TypeBackground>;
-}
+export type ThemeModeBackground = Partial<
+  Record<"light" | "dark", Partial<TypeBackground>>
+>;
 
 export type NamedThemeOptions = ThemeOptions & {
   name: string;

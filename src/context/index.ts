@@ -6,4 +6,4 @@ export {
   resolveDefaultThemeName,
   resolveThemeById,
 } from "./settings";
-export type { Theme1, ThemeN, ThemesInput, ThemesProp } from "./settings";
+export type { ThemesInput } from "./settings";
