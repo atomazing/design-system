@@ -1,8 +1,12 @@
 # @atomazing-org/design-system
 
-Modern MUI v7 + Emotion design system with scheme-based presets, SSR-safe theming, and persistence.
+Modern MUI v7 + Emotion design system with strongly differentiated visual presets, scheme-based light/dark tokens, SSR-safe theming, and persistence.
+
+## Preview
+![Design system preview](./preview.gif)
 
 ## Contents
+- Preview
 - Why this library
 - Installation
 - Quickstart
@@ -19,6 +23,7 @@ Modern MUI v7 + Emotion design system with scheme-based presets, SSR-safe themin
 
 ## Why this library
 - True light/dark presets via colorSchemes (not just palette.mode)
+- Distinct preset identities (minimal, liquid glass, editorial, warm organic, retro terminal)
 - Persisted theme and darkMode with safe defaults
 - SSR-safe (no module-scope browser APIs)
 - MUI v7 + Emotion ready, with typography variants and component overrides
