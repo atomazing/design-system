@@ -1,14 +1,20 @@
 import { useMemo } from "react";
-import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
-import { createCustomTheme, GlobalStyles } from "../styles";
-import { isDarkMode, useSystemTheme } from "../utils";
+import {
+  ThemeContext,
+  resolveDefaultThemeName,
+  usePersistedAppSettings,
+} from "@/context/settings";
+import {
+  GlobalStyles,
+  buildMuiTheme,
+  resolveEffectiveMode,
+  selectThemeOptions,
+} from "@/styles";
+import { useSystemTheme } from "@/utils";
 
-import { ThemeContext } from "./ThemeContext";
-import { usePersistedAppSettings } from "./usePersistedAppSettings";
-
-import type { ThemesProp } from "./themeTypes";
+import type { ThemesInput } from "@/context/settings";
 import type { FC, PropsWithChildren } from "react";
 
 type ThemeProviderWrapperProps = PropsWithChildren<{
@@ -18,7 +24,7 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
    * Optional dynamic list of themes.
    * Each theme is a full ThemeOptions object.
    */
-  themes?: ThemesProp;
+  themes?: ThemesInput;
 }>;
 
 export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
@@ -27,33 +33,50 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   themes,
 }) => {
   const systemTheme = useSystemTheme();
-  const { theme, setTheme, darkMode, setDarkMode, selectedTheme } =
-    usePersistedAppSettings({ themes });
+  const {
+    theme,
+    setTheme,
+    darkMode,
+    setDarkMode,
+    themesSource,
+    selectedTheme,
+    selectedPreset,
+  } = usePersistedAppSettings({ themes });
 
-  const mode = useMemo(
-    () => (isDarkMode(darkMode, systemTheme) ? "dark" : "light"),
+  const effectiveMode = useMemo(
+    () => resolveEffectiveMode(darkMode, systemTheme),
     [darkMode, systemTheme],
   );
+  const selectedOptions = useMemo(
+    () => selectThemeOptions(selectedPreset, effectiveMode),
+    [selectedPreset, effectiveMode],
+  );
 
-  const muiTheme = useMemo(() => {
-    const { name, ...customTheme } = selectedTheme;
-    if (!name) {
-      throw new Error(
-        "ThemeProviderWrapper: selected theme must include a non-empty `name`.",
-      );
-    }
-    return createCustomTheme(mode, customTheme);
-  }, [selectedTheme, mode]);
+  const muiTheme = useMemo(
+    () => buildMuiTheme(selectedOptions, effectiveMode),
+    [selectedOptions, effectiveMode],
+  );
 
-  const emotionTheme = useMemo(() => ({ darkMode: mode === "dark" }), [mode]);
+  const defaultThemeName = useMemo(
+    () => resolveDefaultThemeName(themesSource),
+    [themesSource],
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme, darkMode, setTheme, setDarkMode }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        darkMode,
+        setTheme,
+        setDarkMode,
+        themes: themesSource,
+        selectedTheme,
+        defaultThemeName,
+      }}
+    >
       <MuiThemeProvider theme={muiTheme}>
-        <EmotionThemeProvider theme={emotionTheme}>
-          <GlobalStyles fontFamily={fontFamily} />
-          {children}
-        </EmotionThemeProvider>
+        <GlobalStyles fontFamily={fontFamily} />
+        {children}
       </MuiThemeProvider>
     </ThemeContext.Provider>
   );

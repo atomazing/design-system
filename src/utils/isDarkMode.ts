@@ -1,11 +1,10 @@
-import type { AppSettings, SystemTheme } from "../models";
+import type { AppSettings, SystemTheme } from "@/models";
 
 /**
  * Determines whether dark mode should be enabled based on user settings and system conditions.
  *
  * @param darkMode - User preference: 'light' | 'dark' | 'system' | 'auto'.
  * @param systemTheme - Detected OS-level theme: 'light' | 'dark'.
- * @param backgroundColor - The background color to assess contrast in 'auto' mode.
  * @returns True if dark mode should be used.
  */
 export const isDarkMode = (
@@ -19,7 +18,8 @@ export const isDarkMode = (
     case "dark": {
       return true;
     }
-    case "system": {
+    case "system":
+    case "auto": {
       return systemTheme === "dark";
     }
     default: {

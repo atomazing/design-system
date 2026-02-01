@@ -1,8 +1,5 @@
-import { useMemo } from "react";
 import { Global, css } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
-
-import { getFontColor } from "../utils";
 
 import type { FC } from "react";
 
@@ -23,13 +20,9 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
   const isDarkMode = theme.palette.mode === "dark";
 
   const primaryColor = theme.palette.primary.main;
+  const textColor = theme.palette.text.primary;
   const backgroundDefault = theme.palette.background.default;
   const backgroundPaper = theme.palette.background.paper;
-
-  const primaryFontColor = useMemo(
-    () => getFontColor(primaryColor),
-    [primaryColor],
-  );
 
   return (
     <Global
@@ -53,7 +46,6 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           -webkit-tap-highlight-color: transparent;
           &::selection {
             background-color: ${`${primaryColor}e1`};
-            color: ${primaryFontColor};
           }
         }
 
@@ -94,6 +86,7 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           overflow: auto;
           touch-action: manipulation;
           background: ${backgroundDefault};
+          color: ${textColor};
           background-attachment: fixed;
           background-size: cover;
           transition: 0.3s background;

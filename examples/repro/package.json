@@ -1,0 +1,38 @@
+{
+  "name": "design-system-repro",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "format:eslint": "npm run lint:eslint -- --fix",
+    "format:prettier": "npm run lint:prettier -- --write",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "lint:eslint": "eslint \"**/*.{js,ts,tsx}\"",
+    "lint:prettier": "prettier \"**/*.{json,js,ts,tsx}\" --check",
+    "lint:ts": "tsc --noEmit",
+    "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:ts",
+    "preview": "vite preview",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@atomazing-org/design-system": "file:../..",
+    "@atomazing-org/eslint-config": "2.4.0",
+    "@emotion/css": "^11.11.4",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^25.1.0",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.10"
+  }
+}

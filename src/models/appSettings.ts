@@ -1,10 +1,10 @@
-import type { ThemeOptions } from "@mui/material";
+import type { ThemeOptions, TypeBackground } from "@mui/material/styles";
 import type { ReactNode } from "react";
 
 /**
  * Available options for dark mode configuration.
  * - `system`: Follows the operating system preference.
- * - `auto`: Uses contrast-based detection (e.g., based on background color).
+ * - `auto`: Alias of `system` (no contrast-based detection in current contract).
  * - `light`: Forces light mode.
  * - `dark`: Forces dark mode.
  */
@@ -16,17 +16,25 @@ export interface OptionItem {
   icon: ReactNode;
 }
 
-export type NamedThemeOptions = ThemeOptions & { name: string };
+export interface ThemeModeBackground {
+  light?: Partial<TypeBackground>;
+  dark?: Partial<TypeBackground>;
+}
+
+export type NamedThemeOptions = ThemeOptions & {
+  name: string;
+  background?: ThemeModeBackground;
+};
 
 /**
  * Represents user-specific theme preferences stored in the application.
  */
 export interface AppSettings {
   /**
-   * The selected theme name. `"system"` indicates the app should follow system preference.
-   * Other values are custom theme names defined by the application.
+   * The selected theme name from the available themes list.
+   * Invalid or missing values are normalized to the first available theme.
    */
-  theme: "system" | (string & {});
+  theme: string;
 
   /**
    * Controls how dark mode is applied in the app.
@@ -39,4 +47,7 @@ export interface ThemeContextProps {
   darkMode: DarkModeOptions;
   setTheme: (theme: string) => void;
   setDarkMode: (mode: DarkModeOptions) => void;
+  themes: NamedThemeOptions[];
+  selectedTheme: NamedThemeOptions;
+  defaultThemeName: string;
 }

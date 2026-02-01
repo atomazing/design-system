@@ -16,7 +16,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmitOnError": false
+    "noEmitOnError": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@context/*": ["src/context/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"],
+      "@models/*": ["src/models/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "build", "**/*.test.ts", "**/*.test.tsx"]

@@ -15,9 +15,19 @@ export default [
 		'tsup.config.ts',
 		'manifest.ts',
 		'vite.config.ts',
+		'vitest.config.ts',
+		'src/__tests__/**',
+		'examples/**',
 	]),
 	...defineAtomazingConfig({ dirname: import.meta.dirname }),
 	{
+		settings: {
+			'import/resolver': {
+				typescript: {
+					project: './tsconfig.json',
+				},
+			},
+		},
 		rules: {
 			'unicorn/prefer-top-level-await': 'off',
 			'@typescript-eslint/no-empty-object-type': 'off',

@@ -1,3 +1,7 @@
+import { alpha } from "@mui/material/styles";
+
+import { getSurfaceTokens } from "../tokens";
+
 import type { Theme } from "@mui/material";
 
 /**
@@ -15,7 +19,7 @@ export const commonComponentProps: Theme["components"] = {
         WebkitBackdropFilter: "blur(6px)",
         padding: "8px 16px",
         borderRadius: theme.shape.borderRadius,
-        fontSize: "12px",
+        fontSize: theme.typography.pxToRem(12),
       }),
     },
   },
@@ -106,25 +110,28 @@ export const commonComponentProps: Theme["components"] = {
 
   MuiOutlinedInput: {
     styleOverrides: {
-      root: ({ theme }) => ({
-        color: theme.palette.primary.main,
-        "& fieldset": {
-          borderColor: theme.palette.primary.main,
-        },
-        "&:hover fieldset": {
-          borderColor: theme.palette.primary.dark,
-        },
-        "&.Mui-focused fieldset": {
-          borderColor: theme.palette.primary.main,
-        },
-      }),
+      root: ({ theme }) => {
+        const tokens = getSurfaceTokens(theme);
+        return {
+          color: tokens.textPrimary,
+          "& fieldset": {
+            borderColor: alpha(tokens.textPrimary, 0.16),
+          },
+          "&:hover fieldset": {
+            borderColor: alpha(tokens.textPrimary, 0.28),
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: theme.palette.primary.main,
+          },
+        };
+      },
     },
   },
 
   MuiInputLabel: {
     styleOverrides: {
       root: ({ theme }) => ({
-        color: theme.palette.primary.main,
+        color: alpha(theme.palette.text.primary, 0.72),
         "&.Mui-focused": {
           color: theme.palette.primary.main,
         },
@@ -134,7 +141,10 @@ export const commonComponentProps: Theme["components"] = {
   MuiFormHelperText: {
     styleOverrides: {
       root: ({ theme }) => ({
-        color: theme.palette.error.main,
+        color: theme.palette.text.secondary,
+        "&.Mui-error": {
+          color: theme.palette.error.main,
+        },
       }),
     },
   },

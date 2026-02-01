@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { canUseDom } from "@/utils/ssr";
+
 /**
  * A custom React hook to determine if the current device is a smaller device
  * based on the screen width.
@@ -10,6 +12,7 @@ export const useResponsiveDisplay = (breakpoint = 768): boolean => {
   const [isSmallerDevice, setIsSmallerDevice] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!canUseDom()) return () => {};
     const checkScreenSize = () => {
       setIsSmallerDevice(window.innerWidth < breakpoint);
     };

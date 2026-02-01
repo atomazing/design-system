@@ -3,7 +3,7 @@ import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import PersonalVideoRoundedIcon from "@mui/icons-material/PersonalVideoRounded";
 
-import type { OptionItem } from "../models";
+import type { OptionItem } from "@/models";
 
 const OPTION_ICON_SIZE = 32;
 

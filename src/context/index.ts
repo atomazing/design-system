@@ -1,3 +1,9 @@
-export { useThemeSettings } from "./ThemeContext";
 export { ThemeProviderWrapper } from "./ThemeProviderWrapper";
-export type { Theme1, ThemeN, ThemesProp } from "./themeTypes";
+export { useThemeSettings } from "./settings";
+export {
+  mergeThemes,
+  normalizeThemes,
+  resolveDefaultThemeName,
+  resolveThemeById,
+} from "./settings";
+export type { Theme1, ThemeN, ThemesInput, ThemesProp } from "./settings";

@@ -1,7 +1,12 @@
 # dependencies
 node_modules
 dist
+test-results
 
 # code editors
 .idea
 .vscode
+
+docs
+AGENTS.md
+backlog

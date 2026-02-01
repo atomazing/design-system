@@ -1,0 +1,1 @@
+export { commonComponentProps } from "./commonComponents";
