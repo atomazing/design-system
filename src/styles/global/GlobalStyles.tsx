@@ -160,8 +160,7 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
 
         /* react-spring-bottom-sheet styles */
         div[role="dialog"] {
-          border-radius: 42px 42px 0 0;
-          z-index: 9999999;
+          z-index: 9999;
         }
       `}
     />
