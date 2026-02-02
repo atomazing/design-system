@@ -269,12 +269,6 @@ const createLiquidGlassComponents = ({
       root: ({ theme }) => ({
         minHeight: 46,
         padding: theme.spacing(0.5),
-        borderRadius: 999,
-        backgroundColor: alpha(
-          theme.palette.background.paper,
-          paperAlpha - 0.06,
-        ),
-        border: `1px solid ${alpha(theme.palette.text.primary, borderAlpha)}`,
       }),
       indicator: ({ theme }) => ({
         height: "calc(100% - 8px)",

@@ -156,8 +156,6 @@ const createWarmEarthComponents = ({
       root: ({ theme }) => ({
         minHeight: 46,
         padding: theme.spacing(0.5),
-        borderRadius: 999,
-        backgroundColor: alpha(theme.palette.primary.main, 0.1),
       }),
       indicator: ({ theme }) => ({
         height: "calc(100% - 8px)",
