@@ -5,105 +5,175 @@ Modern MUI v7 + Emotion design system with strongly differentiated visual preset
 ## Preview
 ![Design system preview](https://raw.githubusercontent.com/atomazing/design-system/master/preview.gif)
 
-## Contents
-- Preview
-- Why this library
-- Installation
-- Quickstart
-- Presets
-- Dark mode
-- Custom presets
-- API reference
-- Examples
-- Troubleshooting
-- Consumer alias guidance
-- Contributing
-- Release notes
-- License
+## Why use it
 
-## Why this library
-- True light/dark presets via colorSchemes (not just palette.mode)
-- Distinct preset identities (minimal, liquid glass, editorial, warm organic, retro terminal)
-- Persisted theme and darkMode with safe defaults
-- SSR-safe (no module-scope browser APIs)
-- MUI v7 + Emotion ready, with typography variants and component overrides
-- Guardrails: contrast checks on preset tokens
-- Easy to extend with custom presets
+- **True light/dark themes**: each preset ships **two curated schemes** (`light` + `dark`), so backgrounds, cards, and text actually change (not just `palette.mode`).
+- **Works out of the box**: includes ready-made presets you can use immediately.
+- **Easy to extend**: bring your own presets, or combine defaults + custom.
+- **Consistent UI**: global styles + MUI component overrides for predictable visuals.
+- **Safe persistence**: remembers selected theme + dark mode with SSR-safe guards.
+
+---
+
 
 ## Installation
+
+Install the library:
+
 ```bash
 npm install @atomazing-org/design-system
-npm install @mui/material @mui/icons-material @emotion/react @emotion/styled @emotion/css
 ```
 
-## Quickstart
+Install required peer dependencies (MUI v7 + Emotion):
+
+```bash
+npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
+```
+
+Optional (only if your project uses Emotion `css` helpers):
+
+```bash
+npm install @emotion/css
+```
+
+---
+
+## Quick start
+
+Use built-in presets (recommended starting point):
+
 ```tsx
-import React from "react";
-import ReactDOM from "react-dom/client";
 import { ThemeProviderWrapper } from "@atomazing-org/design-system";
 import { defaultThemes } from "@atomazing-org/design-system/presets";
 
-import App from "./App";
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <ThemeProviderWrapper themes={defaultThemes}>
-    <App />
-  </ThemeProviderWrapper>
-);
+export function App() {
+  return (
+    <ThemeProviderWrapper themes={defaultThemes}>
+      {/* your app */}
+    </ThemeProviderWrapper>
+  );
+}
 ```
 
-## Presets
-Ship-ready presets live under the `/presets` subpath. `defaultThemes` contains all built-in presets.
+Notes:
+- `themes` can be **default presets**, **your presets**, or **both**.
+- Theme choice + dark mode are persisted (storage key: `appSettings`).
+
+---
+
+## Built-in presets
+
+Built-in presets are **ready-made theme packs shipped with the library**.  
+You can use them as-is, or add your own presets alongside them.
+
+| Preset | Stable id | Best for |
+|---|---|---|
+| Warm Earth | `warm-earth` | Warm and friendly apps |
+| Editorial Classic | `editorial-classic` | Content-heavy UIs |
+| Modern Minimal | `modern-minimal` | Dashboards and tooling |
+| Neo Glass | `neo-glass` | Modern “glass” style UIs |
+| Retro Terminal | `retro-terminal` | Terminal-inspired branding |
+
+Import them from:
 
 ```ts
-import { defaultThemes, modernMinimal } from "@atomazing-org/design-system/presets";
+import { defaultThemes } from "@atomazing-org/design-system/presets";
 ```
 
-Built-in presets:
-- Warm Earth
-- Editorial Classic
-- Modern Minimal
-- Neo Glass
-- Retro Terminal
-- Kids Cartoon
+## Switching theme (UI)
 
-## Dark mode
-`darkMode` controls which scheme is active. Supported values:
-- `light`
-- `dark`
-- `system`
-- `auto` (alias of `system`)
-
-`effectiveMode` is derived from `darkMode` + the OS preference. If the system preference is unknown, the library falls back to `light`.
+Build a simple theme switcher using the library’s theme settings hook.
 
 ```tsx
-import { useThemeSettings, darkModeOptions } from "@atomazing-org/design-system";
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useThemeSettings } from "@atomazing-org/design-system";
+import { defaultThemes } from "@atomazing-org/design-system/presets";
+
+export function ThemeSwitcher() {
+  const { themeId, setThemeId } = useThemeSettings();
+
+  return (
+    <ToggleButtonGroup
+      size="small"
+      exclusive
+      value={themeId}
+      onChange={(_, next) => next && setThemeId(next)}
+    >
+      {defaultThemes.map((t) => (
+        <ToggleButton key={t.id} value={t.id}>
+          {t.label}
+        </ToggleButton>
+      ))}
+    </ToggleButtonGroup>
+  );
+}
+```
+
+---
+
+## Dark mode
+
+Dark mode switches the active **scheme** inside the current preset.
+
+### Supported values
+
+- `light` — always use the preset’s light scheme
+- `dark` — always use the preset’s dark scheme
+- `system` — follow OS/browser preference (`prefers-color-scheme`)
+
+### Why `system` exists
+
+It’s the most common UX: the app automatically follows the user’s OS preference without custom code in every project.
+
+### What about `auto`?
+
+`auto` is a **legacy alias** of `system` kept for backward compatibility (e.g., older stored settings).  
+Recommendation: show **System** in UI, but accept `auto` as input and normalize it to `system`.
+
+Example selector:
+
+```tsx
+import { RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { useThemeSettings } from "@atomazing-org/design-system";
 
 export function DarkModeSelector() {
   const { darkMode, setDarkMode } = useThemeSettings();
 
   return (
-    <RadioGroup
-      row
-      value={darkMode}
-      onChange={(event) => setDarkMode(event.target.value as typeof darkMode)}
-    >
-      {darkModeOptions.map((option) => (
-        <FormControlLabel
-          key={option.value}
-          control={<Radio />}
-          label={option.label}
-          value={option.value}
-        />
-      ))}
+    <RadioGroup row value={darkMode} onChange={(e) => setDarkMode(e.target.value as any)}>
+      <FormControlLabel value="system" control={<Radio />} label="System" />
+      <FormControlLabel value="light" control={<Radio />} label="Light" />
+      <FormControlLabel value="dark" control={<Radio />} label="Dark" />
     </RadioGroup>
   );
 }
 ```
 
-## Custom presets
-Define a `ThemePreset` with `colorSchemes.light` and `colorSchemes.dark`.
+---
+
+## Custom themes
+
+Provide your own preset(s) to the provider. A preset is one identifiable theme with **two schemes**: `light` and `dark`.
+
+### API reference — `ThemePreset`
+
+| Field | Type | What it means |
+|---|---|---|
+| `id` | `string` | Stable identifier used for persistence and deduplication. Must be unique. |
+| `label` | `string` | Name shown in UI selectors. |
+| `colorSchemes.light` | `ThemeOptions` | MUI ThemeOptions for light mode. |
+| `colorSchemes.dark` | `ThemeOptions` | MUI ThemeOptions for dark mode. |
+
+### Minimum required tokens per scheme
+
+Each scheme must define:
+- `palette.background.default` — page background
+- `palette.background.paper` — Card/Paper background
+- `palette.text.primary`
+- `palette.text.secondary`
+- `palette.divider`
+
+Example:
 
 ```ts
 import type { ThemePreset } from "@atomazing-org/design-system";
@@ -130,116 +200,97 @@ export const myPreset: ThemePreset = {
 };
 ```
 
-Merge with built-ins:
+### Using defaults + custom presets
+
 ```ts
+import { defaultThemes } from "@atomazing-org/design-system/presets";
+
 const themes = [...defaultThemes, myPreset];
 ```
 
-Duplicate preset ids are resolved by last-wins while preserving the first-occurrence order.
+Then pass `themes` into `ThemeProviderWrapper`.
 
-## API reference
+---
 
-### ThemeProviderWrapper
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `themes` | `ThemesInput` | `Default` preset | `ThemePreset[]` list used for runtime preset selection. |
-| `fontFamily` | `string` | `undefined` | Optional global font stack. |
-| `children` | `ReactNode` | required | Application content. |
+## Typography variants
 
-`ThemeProviderWrapper` no longer supports legacy theme tuple/object contracts (`Theme1`, `ThemeN`, `ThemesProp`) and expects `ThemePreset[]` only.
+The library adds extra typography variants (beyond MUI defaults) so your text styles are consistent across the app.
 
-### ThemePreset
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `string` | Stable preset identifier (used for selection + persistence). |
-| `label` | `string` | Human-friendly preset name. |
-| `colorSchemes.light` | `ThemeOptions` | Light scheme tokens. |
-| `colorSchemes.dark` | `ThemeOptions` | Dark scheme tokens. |
-| `description` | `string?` | Optional description. |
-| `tags` | `string[]?` | Optional tags. |
-| `version` | `string?` | Optional preset version. |
+```tsx
+import { Typography } from "@mui/material";
 
-### DarkModeSetting
-| Value | Meaning |
-| --- | --- |
-| `light` | Force light scheme |
-| `dark` | Force dark scheme |
-| `system` | Follow OS preference |
-| `auto` | Alias of `system` |
-
-### useThemeSettings
-Returns:
-- `theme`, `setTheme`
-- `darkMode`, `setDarkMode`
-- `themes`, `selectedTheme`, `defaultThemeName`
-
-### Presets exports
-`@atomazing-org/design-system/presets` exports:
-- `defaultThemes`
-- `editorialClassic`, `modernMinimal`, `neoGlass`, `retroTerminal`, `warmEarth`
-
-## Examples
-The repro app is the fastest way to validate presets and dark mode:
-
-```bash
-pnpm -C examples/repro install
-pnpm -C examples/repro dev
-```
-
-Look for:
-- Theme controls (preset + mode)
-- Token Debug Panel (tokens + persistence)
-- Smoke Gate checklist and overlay demos
-
-## Troubleshooting
-- Dark mode does not change background:
-  - Ensure both `colorSchemes.light` and `colorSchemes.dark` set `palette.background.default` and `palette.background.paper`.
-  - Remove hardcoded `#fff`/`#000` from layouts that override theme tokens.
-- Text is unreadable in dark mode:
-  - Verify `palette.text.primary`/`secondary` for dark schemes.
-  - Check divider and surface contrast in the repro app.
-- Preset switching does not update:
-  - Ensure preset ids are unique and non-empty.
-  - Clear `localStorage` key `appSettings` if persisted values are invalid.
-- SSR warnings:
-  - Ensure the provider is mounted inside a client boundary for SSR apps.
-
-## Consumer alias guidance
-These aliases are for your application code (not library internals).
-
-`tsconfig.json`:
-```json
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@features/*": ["src/features/*"]
-    }
-  }
+export function TypographyDemo() {
+  return (
+    <>
+      <Typography variant="header_lg_bold">Page title</Typography>
+      <Typography variant="text_md_regular">Body text</Typography>
+      <Typography variant="text_sm_bold">Caption / label</Typography>
+    </>
+  );
 }
 ```
 
-`vite.config.ts`:
-```ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { resolve } from "path";
+Notes:
+- Typography sizing is expected to be **rem-based** (scales with the user’s browser font size settings).
+- Variants are defined in the design system theme (no local “one-off” styles needed).
 
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "src"),
-      "@components": resolve(__dirname, "src/components"),
-      "@features": resolve(__dirname, "src/features"),
-    },
-  },
-});
+---
+
+## Global styles
+
+`ThemeProviderWrapper` applies global styles (via Emotion) and MUI component defaults, so the app looks consistent immediately.
+
+Set a custom font stack:
+
+```tsx
+import { ThemeProviderWrapper } from "@atomazing-org/design-system";
+
+export function App() {
+  return (
+    <ThemeProviderWrapper fontFamily="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif">
+      {/* your app */}
+    </ThemeProviderWrapper>
+  );
+}
 ```
 
-## Contributing
+---
+
+## Animations
+
+The library exports reusable keyframes so you can keep motion consistent.
+
+```tsx
+import styled from "@emotion/styled";
+import { fadeIn } from "@atomazing-org/design-system";
+
+const Panel = styled.div`
+  animation: ${fadeIn} 240ms ease-in both;
+`;
+
+export function AnimatedPanel() {
+  return <Panel>Content</Panel>;
+}
+```
+
+---
+
+## SSR notes
+
+- The library is written to be **SSR-safe**: no `window`/`document`/`localStorage` access at module scope.
+- If you use **system** dark mode, the effective mode is derived from `prefers-color-scheme` on the client.
+- In Next.js, place the provider inside a client boundary (e.g., a component with `"use client"`), then wrap your app with `ThemeProviderWrapper`.
+
+## Consumer alias guidance (optional)
+
+Aliases are **optional**. They help you avoid long relative imports **inside your app**.
+
+---
+
+## Local development (repo)
+
+From the repository root:
+
 ```bash
 pnpm lint
 pnpm build
@@ -247,11 +298,127 @@ pnpm test
 pnpm -C examples/repro dev
 ```
 
-## Release notes
-Current release highlights:
-- Scheme-based presets with explicit light/dark schemes
-- Improved dark mode and persistence alignment
-- Stable `@atomazing-org/design-system/presets` subpath export
+---
+
+## Peer dependencies
+
+Make sure your app installs these (MUI v7 + Emotion):
+
+- `react`
+- `react-dom`
+- `@mui/material`
+- `@mui/icons-material` (optional, only if you use icons from MUI)
+- `@emotion/react`
+- `@emotion/styled`
+- `@emotion/css` (optional)
+
+---
+
+## Troubleshooting
+
+### Dark mode switches, but background/cards do not change
+- Ensure your preset provides **both schemes**:
+  - `colorSchemes.light.palette.background.default/paper`
+  - `colorSchemes.dark.palette.background.default/paper`
+- Avoid hardcoded colors in overrides. Use `theme.palette.*` tokens.
+
+### Text is hard to read in dark mode
+- Do not reuse light “ink” constants in dark mode.
+- Check:
+  - `palette.text.primary` vs `palette.background.default`
+  - `palette.text.secondary` vs `palette.background.paper`
+
+### I want to add my own presets
+- Create a `ThemePreset` with `colorSchemes.light` and `colorSchemes.dark`.
+- Combine with defaults: `const themes = [...defaultThemes, myPreset];`
+
+## Examples (examples/repro)
+
+The repo includes a runnable example app that demonstrates:
+- preset switching
+- dark mode switching
+- background + card surfaces changing correctly
+- token/debug view (if enabled in the example)
+
+Run it from the repository root:
+
+```bash
+pnpm -C examples/repro dev
+```
+
+What to check in the UI:
+- switching to **dark** changes the **page background** and **Card/Paper** background
+- text stays readable on both backgrounds
+- inputs, buttons, menus, and dialogs remain usable
+
+---
+
+## API reference — `ThemeProviderWrapper`
+
+`ThemeProviderWrapper` wires MUI ThemeProvider, global styles, and persisted settings.
+
+| Prop | Type | Default | What it does |
+|---|---|---|---|
+| `themes` | `ThemePreset[]` (or built-in `defaultThemes`) | `defaultThemes` | List of presets available to the user. |
+| `fontFamily` | `string` | (theme default) | Optional global font stack for the whole app. |
+| `children` | `ReactNode` | — | Your application tree. |
+
+Minimal usage:
+
+```tsx
+import { ThemeProviderWrapper } from "@atomazing-org/design-system";
+import { defaultThemes } from "@atomazing-org/design-system/presets";
+
+export function App() {
+  return (
+    <ThemeProviderWrapper themes={defaultThemes}>
+      {/* your app */}
+    </ThemeProviderWrapper>
+  );
+}
+```
+
+---
+
+## Public exports (recommended imports)
+
+Use only these stable entry points:
+
+### Core API
+```ts
+import { ThemeProviderWrapper, useThemeSettings } from "@atomazing-org/design-system";
+```
+
+### Built-in presets
+```ts
+import { defaultThemes } from "@atomazing-org/design-system/presets";
+```
+
+Tip:
+- Avoid deep imports from internal folders. They may change during refactors.
+
+---
+
+## Migration notes (if upgrading)
+
+If you previously passed a single theme object or a legacy “theme list”:
+1) Move your theme into a preset shape with **two schemes**:
+   - `colorSchemes.light`
+   - `colorSchemes.dark`
+2) Ensure each scheme defines the required tokens:
+   - `background.default`, `background.paper`
+   - `text.primary`, `text.secondary`
+   - `divider`
+3) Pass presets into the provider:
+   - `themes={[...defaultThemes, myPreset]}` or only `[myPreset]`
+
+Goal:
+- dark mode changes **real palette tokens**, so backgrounds/cards/text update together.
+
+---
 
 ## License
+
 MIT
+
+
