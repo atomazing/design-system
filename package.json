@@ -1,6 +1,6 @@
 {
   "name": "@atomazing-org/design-system",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "private": false,
   "description": "A library providing a set of useful utils, MUI style extensions, and components to build your application.",
   "author": "PonomarevBPM + MarkSinD",
@@ -62,7 +62,7 @@
     "@mui/icons-material": "^7.0.0"
   },
   "devDependencies": {
-    "@atomazing-org/eslint-config": "2.4.0",
+    "@atomazing-org/eslint-config": "3.6.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@types/react": "^19.1.8",
