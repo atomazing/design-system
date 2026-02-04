@@ -93,22 +93,6 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           /* Firefox */
           scrollbar-color: ${primaryColor} ${backgroundDefault};
           scrollbar-width: thin;
-
-          ::-webkit-scrollbar {
-            width: 8px;
-            background-color: ${backgroundDefault};
-          }
-          ::-webkit-scrollbar-thumb {
-            background-color: ${primaryColor};
-            border-radius: 64px;
-          }
-          ::-webkit-scrollbar-thumb:hover {
-            background-color: ${`${primaryColor}d8`};
-          }
-          ::-webkit-scrollbar-track {
-            border-radius: 64px;
-            background-color: ${backgroundDefault};
-          }
         }
 
         a {
@@ -141,21 +125,6 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           /* Firefox */
           scrollbar-color: ${primaryColor} ${backgroundPaper};
           scrollbar-width: thin;
-          ::-webkit-scrollbar {
-            width: 8px;
-            background-color: ${backgroundPaper};
-          }
-          ::-webkit-scrollbar-thumb {
-            background-color: ${primaryColor};
-            border-radius: 64px;
-          }
-          ::-webkit-scrollbar-thumb:hover {
-            background-color: ${`${primaryColor}d8`};
-          }
-          ::-webkit-scrollbar-track {
-            border-radius: 64px;
-            background-color: ${backgroundPaper};
-          }
         }
 
         /* react-spring-bottom-sheet styles */
