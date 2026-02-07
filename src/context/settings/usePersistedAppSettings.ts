@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 
 import { normalizeThemesInput } from "@/utils/normalizeThemes";
+import { canUseDom } from "@/utils/ssr";
 import {
   APP_SETTINGS_VERSION,
   readAppSettings,
@@ -13,13 +14,14 @@ import type { ThemesInput } from "./themeTypes";
 import type { DarkModeOptions, NamedThemeOptions } from "@/models";
 import type { NormalizedPreset } from "@/models/themePresets";
 
-const DEFAULT_DARK_MODE: DarkModeOptions = "system";
+const APP_SETTINGS_CHANGE_EVENT = "appSettings:change";
 
-export const usePersistedAppSettings = ({
-  themes,
-}: {
+interface Props {
   themes?: ThemesInput;
-}): {
+  defaultDarkMode?: DarkModeOptions;
+}
+
+interface ReturnValue {
   theme: string;
   setTheme: (theme: string) => void;
   darkMode: DarkModeOptions;
@@ -28,7 +30,56 @@ export const usePersistedAppSettings = ({
   selectedPreset: NormalizedPreset;
   themesSource: NamedThemeOptions[];
   selectedTheme: NamedThemeOptions;
-} => {
+}
+
+const getSettingsSnapshot = (): string => {
+  const stored = readAppSettings();
+  if (!stored) return "";
+
+  const themeId = typeof stored.themeId === "string" ? stored.themeId : "";
+  const darkMode = typeof stored.darkMode === "string" ? stored.darkMode : "";
+  return `${themeId}::${darkMode}`;
+};
+
+const getServerSnapshot = (): string => "";
+
+const subscribe = (onStoreChange: () => void): (() => void) => {
+  if (
+    !canUseDom() ||
+    typeof globalThis.addEventListener !== "function" ||
+    typeof globalThis.removeEventListener !== "function"
+  ) {
+    return () => {};
+  }
+
+  const onChange = () => {
+    onStoreChange();
+  };
+
+  globalThis.addEventListener(APP_SETTINGS_CHANGE_EVENT, onChange);
+  globalThis.addEventListener("storage", onChange);
+  return () => {
+    globalThis.removeEventListener(APP_SETTINGS_CHANGE_EVENT, onChange);
+    globalThis.removeEventListener("storage", onChange);
+  };
+};
+
+const notify = (): void => {
+  if (
+    !canUseDom() ||
+    typeof globalThis.dispatchEvent !== "function" ||
+    typeof globalThis.Event !== "function"
+  ) {
+    return;
+  }
+
+  globalThis.dispatchEvent(new Event(APP_SETTINGS_CHANGE_EVENT));
+};
+
+export const usePersistedAppSettings = ({
+  themes,
+  defaultDarkMode = "system",
+}: Props): ReturnValue => {
   const presetsSource = useMemo(() => normalizeThemesInput(themes), [themes]);
   const themesSource = useMemo(
     () =>
@@ -38,11 +89,20 @@ export const usePersistedAppSettings = ({
       })),
     [presetsSource],
   );
-  const [theme, setTheme] = useState<string>(() =>
-    resolveThemeName(undefined, themesSource),
+
+  const settingsSnapshot = useSyncExternalStore(
+    subscribe,
+    getSettingsSnapshot,
+    getServerSnapshot,
   );
-  const [darkMode, setDarkMode] = useState<DarkModeOptions>(DEFAULT_DARK_MODE);
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [storedThemeId = "", storedDarkMode = ""] =
+    settingsSnapshot.split("::");
+
+  const theme = resolveThemeName(storedThemeId || undefined, themesSource);
+  const darkMode = resolveDarkMode(
+    (storedDarkMode || undefined) as DarkModeOptions | undefined,
+    defaultDarkMode,
+  );
 
   const selectedPreset = useMemo(
     () =>
@@ -54,31 +114,24 @@ export const usePersistedAppSettings = ({
     [theme, themesSource],
   );
 
-  // Hydrate from localStorage on client
-  useEffect(() => {
-    if (isHydrated) return;
-    const stored = readAppSettings();
-    setTheme(resolveThemeName(stored?.themeId, themesSource));
-    setDarkMode(resolveDarkMode(stored?.darkMode, DEFAULT_DARK_MODE));
-    setIsHydrated(true);
-  }, [isHydrated, themesSource]);
+  const setTheme = (nextTheme: string) => {
+    const resolvedThemeId = resolveThemeName(nextTheme, themesSource);
+    writeAppSettings({
+      version: APP_SETTINGS_VERSION,
+      themeId: resolvedThemeId,
+      darkMode,
+    });
+    notify();
+  };
 
-  useEffect(() => {
-    const resolvedTheme = resolveThemeName(theme, themesSource);
-    if (resolvedTheme !== theme) {
-      setTheme(resolvedTheme);
-    }
-  }, [theme, themesSource]);
-
-  // Persist settings
-  useEffect(() => {
-    if (!isHydrated) return;
+  const setDarkMode = (mode: DarkModeOptions) => {
     writeAppSettings({
       version: APP_SETTINGS_VERSION,
       themeId: theme,
-      darkMode,
+      darkMode: mode,
     });
-  }, [isHydrated, theme, darkMode]);
+    notify();
+  };
 
   return {
     theme,

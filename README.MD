@@ -90,14 +90,14 @@ import { useThemeSettings } from "@atomazing-org/design-system";
 import { defaultThemes } from "@atomazing-org/design-system/presets";
 
 export function ThemeSwitcher() {
-  const { themeId, setThemeId } = useThemeSettings();
+  const { theme, setTheme } = useThemeSettings();
 
   return (
     <ToggleButtonGroup
       size="small"
       exclusive
-      value={themeId}
-      onChange={(_, next) => next && setThemeId(next)}
+      value={theme}
+      onChange={(_, next) => next && setTheme(next)}
     >
       {defaultThemes.map((t) => (
         <ToggleButton key={t.id} value={t.id}>
@@ -148,6 +148,25 @@ export function DarkModeSelector() {
   );
 }
 ```
+
+### Forcing mode (optional)
+
+If your app does not support dark mode, you can force the effective palette mode:
+
+```tsx
+import { ThemeProviderWrapper } from "@atomazing-org/design-system";
+import { defaultThemes } from "@atomazing-org/design-system/presets";
+
+export function App() {
+  return (
+    <ThemeProviderWrapper themes={defaultThemes} darkMode="light">
+      {/* your app */}
+    </ThemeProviderWrapper>
+  );
+}
+```
+
+Note: when `darkMode` is set, `darkMode` is locked and `setDarkMode` is ignored.
 
 ---
 
@@ -361,6 +380,7 @@ What to check in the UI:
 |---|---|---|---|
 | `themes` | `ThemePreset[]` (or built-in `defaultThemes`) | `defaultThemes` | List of presets available to the user. |
 | `fontFamily` | `string` | (theme default) | Optional global font stack for the whole app. |
+| `darkMode` | `DarkModeOptions` | - | Forces mode regardless of persisted settings and system preference. |
 | `children` | `ReactNode` | — | Your application tree. |
 
 Minimal usage:
@@ -420,5 +440,3 @@ Goal:
 ## License
 
 MIT
-
-

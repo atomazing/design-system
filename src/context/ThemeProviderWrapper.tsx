@@ -15,6 +15,7 @@ import {
 import { useSystemTheme } from "@/utils";
 
 import type { ThemesInput } from "@/context/settings";
+import type { DarkModeOptions } from "@/models";
 import type { FC, PropsWithChildren } from "react";
 
 type ThemeProviderWrapperProps = PropsWithChildren<{
@@ -25,28 +26,41 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
    * Accepts only `ThemePreset[]`.
    */
   themes?: ThemesInput;
+  /**
+   * Forces dark mode regardless of persisted settings and system preference.
+   * When set, `setDarkMode` becomes a no-op.
+   */
+  darkMode?: DarkModeOptions;
 }>;
 
 export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   children,
   fontFamily,
   themes,
+  darkMode: darkModeProp,
 }) => {
   const systemTheme = useSystemTheme();
   const {
     theme,
     setTheme,
-    darkMode,
-    setDarkMode,
+    darkMode: persistedDarkMode,
+    setDarkMode: setPersistedDarkMode,
     themesSource,
     selectedTheme,
     selectedPreset,
-  } = usePersistedAppSettings({ themes });
+  } = usePersistedAppSettings({ themes, defaultDarkMode: darkModeProp });
+
+  const darkMode = darkModeProp ?? persistedDarkMode;
+  const setDarkMode = useMemo(
+    () => (darkModeProp ? () => {} : setPersistedDarkMode),
+    [darkModeProp, setPersistedDarkMode],
+  );
 
   const effectiveMode = useMemo(
     () => resolveEffectiveMode(darkMode, systemTheme),
     [darkMode, systemTheme],
   );
+
   const selectedOptions = useMemo(
     () => selectThemeOptions(selectedPreset, effectiveMode),
     [selectedPreset, effectiveMode],

@@ -85,9 +85,7 @@ const dedupePresets = (presets: NormalizedPreset[]): NormalizedPreset[] => {
     lastPreset.set(preset.id, preset);
   }
 
-  const orderedIds = [...firstIndex.entries()]
-    .sort(([, a], [, b]) => a - b)
-    .map(([id]) => id);
+  const orderedIds = [...firstIndex.keys()];
 
   const deduped: NormalizedPreset[] = [];
   for (const id of orderedIds) {

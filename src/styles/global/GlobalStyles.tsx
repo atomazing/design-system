@@ -1,5 +1,5 @@
 import { Global, css } from "@emotion/react";
-import { useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 
 import type { FC } from "react";
 
@@ -23,6 +23,15 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
   const textColor = theme.palette.text.primary;
   const backgroundDefault = theme.palette.background.default;
   const backgroundPaper = theme.palette.background.paper;
+
+  const scrollbarThumb = alpha(
+    theme.palette.text.primary,
+    isDarkMode ? 0.35 : 0.25,
+  );
+  const scrollbarThumbHover = alpha(
+    theme.palette.text.primary,
+    isDarkMode ? 0.55 : 0.45,
+  );
 
   return (
     <Global
@@ -90,9 +99,27 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
           background-attachment: fixed;
           background-size: cover;
           transition: 0.3s background;
+          /* Scrollbars: neutral (b2b-friendly) */
           /* Firefox */
-          scrollbar-color: ${primaryColor} ${backgroundDefault};
+          scrollbar-color: ${scrollbarThumb} ${backgroundDefault};
           scrollbar-width: thin;
+          /* WebKit */
+          &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            background: ${backgroundDefault};
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: ${scrollbarThumb};
+            border-radius: 999px;
+            border: 3px solid ${backgroundDefault};
+            background-clip: padding-box;
+          }
+          &::-webkit-scrollbar-thumb:hover {
+            background-color: ${scrollbarThumbHover};
+          }
         }
 
         a {
@@ -123,8 +150,25 @@ export const GlobalStyles: FC<GlobalStylesProps> = ({ fontFamily }) => {
         .customScrollbar,
         textarea {
           /* Firefox */
-          scrollbar-color: ${primaryColor} ${backgroundPaper};
+          scrollbar-color: ${scrollbarThumb} ${backgroundPaper};
           scrollbar-width: thin;
+          /* WebKit */
+          &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            background: ${backgroundPaper};
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: ${scrollbarThumb};
+            border-radius: 999px;
+            border: 3px solid ${backgroundPaper};
+            background-clip: padding-box;
+          }
+          &::-webkit-scrollbar-thumb:hover {
+            background-color: ${scrollbarThumbHover};
+          }
         }
 
         /* react-spring-bottom-sheet styles */
