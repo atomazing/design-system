@@ -78,7 +78,7 @@ const notify = (): void => {
 
 export const usePersistedAppSettings = ({
   themes,
-  defaultDarkMode = "system",
+  defaultDarkMode = "light",
 }: Props): ReturnValue => {
   const presetsSource = useMemo(() => normalizeThemesInput(themes), [themes]);
   const themesSource = useMemo(
