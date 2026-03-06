@@ -1,7 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 
 import {
-  APP_SETTINGS_VERSION,
   readAppSettings,
   writeAppSettings,
 } from "@/utils/storage/appSettingsStorage";
@@ -114,7 +113,6 @@ describe("Phase 06 SSR safety helpers", () => {
     expect(readAppSettings()).toBeNull();
 
     const payload: StoredAppSettings = {
-      version: APP_SETTINGS_VERSION,
       themeId: "default",
       darkMode: "dark",
     };
@@ -126,11 +124,7 @@ describe("Phase 06 SSR safety helpers", () => {
       "appSettings",
       JSON.stringify(legacyPayload),
     );
-    expect(readAppSettings()).toEqual({
-      version: APP_SETTINGS_VERSION,
-      themeId: "legacy",
-      darkMode: "light",
-    });
+    expect(readAppSettings()).toBeNull();
   });
 
   it("returns null when localStorage throws", () => {
@@ -147,7 +141,6 @@ describe("Phase 06 SSR safety helpers", () => {
     clearBrowserEnv();
     expect(() =>
       writeAppSettings({
-        version: APP_SETTINGS_VERSION,
         themeId: "default",
         darkMode: "light",
       }),
@@ -155,7 +148,6 @@ describe("Phase 06 SSR safety helpers", () => {
 
     setBrowserEnv();
     writeAppSettings({
-      version: APP_SETTINGS_VERSION,
       themeId: "custom",
       darkMode: "dark",
     });

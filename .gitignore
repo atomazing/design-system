@@ -7,6 +7,11 @@ test-results
 .idea
 .vscode
 
-docs
 AGENTS.md
+
 backlog
+docs
+!migrations/docs/
+!migrations/docs/**
+!examples/next-app-router/docs/
+!examples/next-app-router/docs/**

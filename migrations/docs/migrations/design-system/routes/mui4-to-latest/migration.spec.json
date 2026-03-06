@@ -1,0 +1,139 @@
+{
+  "$schema": "../../schema/migration.spec.schema.json",
+  "id": "mui4-to-latest",
+  "title": "MUI v4 to MUI v7 plus @atomazing-org/design-system",
+  "detect": {
+    "packageJson": {
+      "anyDependencies": [
+        "@material-ui/core",
+        "@material-ui/styles",
+        "@material-ui/icons"
+      ]
+    }
+  },
+  "entryConditions": [
+    "package.json contains @material-ui/*",
+    "the migration needs a full route-based upgrade instead of piecemeal edits"
+  ],
+  "exitConditions": [
+    "package.json does not contain @material-ui/*",
+    "app source no longer imports @material-ui/*",
+    "the app root uses ThemeProviderWrapper",
+    "the app boots without migration-caused startup console errors",
+    "tests and build are green"
+  ],
+  "steps": [
+    {
+      "name": "Inventory and baseline",
+      "manualReview": [
+        "Map @material-ui/* imports and dependencies plus legacy styling APIs such as makeStyles, withStyles, createMuiTheme, StylesProvider, and ServerStyleSheets.",
+        "Record pre-existing failing checks separately from migration defects.",
+        "Split the repo into shared-infrastructure scope and domain migration waves before broad edits begin.",
+        "Run baseline checks with the target repository package manager (for example install/ci, tests, and build as available)."
+      ]
+    },
+    {
+      "name": "Add safety net",
+      "manualReview": [
+        "Add or tighten smoke coverage for the application shell before broad refactors.",
+        "If route guards exist, ensure at least one protected content route can be validated as a real screen.",
+        "If shared overlays will be touched, add at least one stable overlay interaction to smoke coverage."
+      ]
+    },
+    {
+      "name": "Update package.json deps (v4 to modern MUI plus design-system)",
+      "manualReview": [
+        "Edit package.json directly: remove @material-ui/core, @material-ui/styles, and @material-ui/icons; add @mui/material:^7, @mui/icons-material:^7, @emotion/react:^11, @emotion/styled:^11, and @atomazing-org/design-system:<SET_VERSION>.",
+        "Check for adjacent ecosystem packages such as mui lab, x packages, date-pickers, or data-grid and align them separately.",
+        "Treat this as a dependency landing step only; do not mix in broad visual cleanup."
+      ]
+    },
+    {
+      "name": "Install deps",
+      "manualReview": [
+        "Install dependencies with the target repository package manager (npm, pnpm, yarn, or bun)."
+      ]
+    },
+    {
+      "name": "Run official codemod (v4 to v5)",
+      "manualReview": [
+        "Run the official MUI codemod with a package-manager-appropriate executor (for example pnpm dlx, npm exec, yarn dlx, or bunx): @mui/codemod@latest v5.0.0/preset-safe src.",
+        "Review TODO markers and compile errors left by the codemod.",
+        "Treat the codemod output as a mechanical landing step, not as a finished migration."
+      ]
+    },
+    {
+      "name": "Remove legacy styling and theme APIs",
+      "manualReview": [
+        "Replace makeStyles, withStyles, createStyles, and other JSS-only patterns.",
+        "Replace createMuiTheme, legacy overrides or props usage, and deprecated theme API calls such as theme.spacing.unit.",
+        "Remove legacy styling providers that no longer belong in the runtime."
+      ]
+    },
+    {
+      "name": "Stabilize on modern MUI baseline",
+      "manualReview": [
+        "Get the app compiling and booting on modern MUI plus Emotion before changing the theme root.",
+        "Resolve duplicate React or Emotion runtime loading before design-system adoption.",
+        "Preserve the structural shell layout while modernizing the underlying MUI stack."
+      ]
+    },
+    {
+      "name": "Connect design-system provider",
+      "manualReview": [
+        "Connect ThemeProviderWrapper at the application root.",
+        "Remove or collapse any competing root ThemeProvider so the design system becomes the single theme source of truth.",
+        "Move preset selection into one explicit app-level theme module instead of leaving it scattered across generic constants layers."
+      ]
+    },
+    {
+      "name": "Runtime boot cleanup",
+      "manualReview": [
+        "Start the app with the repo's normal dev or start command and open the first route in a real browser.",
+        "Fix startup console errors before continuing.",
+        "Fix migration-caused startup warnings before continuing, especially duplicate runtime singleton warnings for react, react-dom, @emotion/react, and @emotion/styled.",
+        "Remove module-scope code that requires browser APIs, storage, or i18n locale activation.",
+        "Move browser event listeners into effects with cleanup instead of render paths or module scope.",
+        "If smoke mode disables auth redirect, seed a deterministic role-bearing user so protected routes can render real content."
+      ]
+    },
+    {
+      "name": "Shared infrastructure migration",
+      "manualReview": [
+        "Stabilize the app shell, route wrappers, and shared layout containers before domain-by-domain work.",
+        "Migrate shared primitives that should now use MUI directly or thin MUI wrappers.",
+        "Restore dialog, drawer, bottom-sheet, and search-overlay semantics before broad feature cleanup.",
+        "Preserve display, grid or flex templates, min-width, min-height, overflow, and scroll behavior when refactoring shell containers.",
+        "If shell workspaces, route wrappers, or page roots were touched, verify the main content still fills the available content region and that dashboard or workflow grids did not collapse into partial-width stacks.",
+        "Audit compact shared UI such as chart legends, chips, segmented filters, and metric badges for preset drift; replace ad hoc chip-like chrome with neutral MUI composition when needed."
+      ]
+    },
+    {
+      "name": "Apply token remap (project-specific)",
+      "manualReview": [
+        "Use token-map.csv as a reference for targeted replacements and apply changes in controlled batches.",
+        "Enable only the rows needed in token-map.csv and review the diff in controlled batches.",
+        "For large repos, apply token replacement after shared infrastructure is stable instead of doing a blind repo-wide rewrite first.",
+        "For complex replacements, add dedicated rules or perform manual edits.",
+        "If bulk replacements or file rewrites touched localized copy, scan for mojibake or replacement characters and verify non-Latin UI text still renders readable strings."
+      ]
+    },
+    {
+      "name": "Domain migration waves",
+      "manualReview": [
+        "Migrate feature areas in waves after the shared shell and shared primitives are stable.",
+        "Keep each wave small enough to validate independently.",
+        "Re-run the relevant smoke or route checks after each wave before moving to the next domain."
+      ]
+    },
+    {
+      "name": "Quality gates",
+      "manualReview": [
+        "Re-run the target repository closeout gates with its package manager: lint, tests, and build (when available).",
+        "Verify package.json and source contain no @material-ui/* dependencies or imports (for example with rg).",
+        "Run repo-local token/design-contract gates when available and manually verify forbidden legacy token usage is removed."
+      ]
+    }
+  ],
+  "gates": ["no-legacy-material-ui", "no-hardcoded-tokens", "lint", "tests", "build"]
+}

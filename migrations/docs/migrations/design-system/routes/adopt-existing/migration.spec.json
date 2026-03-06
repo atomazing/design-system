@@ -1,0 +1,118 @@
+{
+  "$schema": "../../schema/migration.spec.schema.json",
+  "id": "adopt-existing",
+  "title": "Adopt @atomazing-org/design-system in an existing modern MUI project",
+  "detect": {
+    "packageJson": {
+      "anyDependencies": ["@mui/material"]
+    }
+  },
+  "entryConditions": [
+    "the project already uses @mui/material",
+    "the migration is normalizing an existing app instead of bootstrapping a new one"
+  ],
+  "exitConditions": [
+    "ThemeProviderWrapper is connected at the app root",
+    "forbidden token imports and outdated design-system imports are removed",
+    "the app boots without browser console startup errors",
+    "migration-caused startup warnings are fixed",
+    "tests and build are green"
+  ],
+  "steps": [
+    {
+      "name": "Inventory and baseline",
+      "manualReview": [
+        "Map current design-system usage, theme entrypoints, local token modules, shared shell code, shared overlays, and protected routes.",
+        "Record pre-existing failing checks separately from migration defects.",
+        "Split the repo into shared-infrastructure scope and domain migration waves before broad edits begin.",
+        "Run the target repository baseline checks with its package manager (for example lint, tests, and build when available)."
+      ]
+    },
+    {
+      "name": "Add safety net",
+      "manualReview": [
+        "Add or tighten smoke coverage for the application shell before broad refactors.",
+        "If route guards exist, ensure at least one protected content route can be validated as a real screen.",
+        "If shared overlays will be touched, add at least one stable overlay interaction to smoke coverage."
+      ]
+    },
+    {
+      "name": "Add design-system deps",
+      "manualReview": [
+        "Edit package.json directly and add or upgrade @atomazing-org/design-system to <SET_VERSION>.",
+        "Align peer runtime package versions as needed and keep the repository package manager conventions intact."
+      ]
+    },
+    {
+      "name": "Install deps",
+      "manualReview": [
+        "Install dependencies with the target repository package manager (npm, pnpm, yarn, or bun)."
+      ]
+    },
+    {
+      "name": "Root theme unification",
+      "manualReview": [
+        "Connect ThemeProviderWrapper at the application root.",
+        "Remove or collapse any competing root ThemeProvider so the design system becomes the single theme source of truth.",
+        "Replace outdated or removed design-system root imports with the correct public API or local app abstractions.",
+        "Move preset selection into one explicit app-level theme module instead of leaving it scattered across generic constants layers."
+      ]
+    },
+    {
+      "name": "Runtime boot cleanup",
+      "manualReview": [
+        "Start the app with the repo's normal dev/start command and open the first route in a real browser.",
+        "Fix startup console errors before continuing.",
+        "Fix migration-caused startup warnings before continuing, especially duplicate runtime singleton warnings for react, react-dom, @emotion/react, and @emotion/styled.",
+        "Remove module-scope code that requires browser APIs, storage, or i18n locale activation.",
+        "Move browser event listeners into effects with cleanup instead of render paths or module scope.",
+        "If smoke mode disables auth redirect, seed a deterministic role-bearing user so protected routes can render real content."
+      ]
+    },
+    {
+      "name": "Shared infrastructure stabilization",
+      "manualReview": [
+        "Stabilize the application shell, route wrappers, and shared layout containers before domain-by-domain work.",
+        "Restore dialog, drawer, bottom-sheet, and search-overlay semantics before broad feature cleanup.",
+        "Preserve display, grid or flex templates, min-width, min-height, overflow, and scroll behavior when refactoring shell containers.",
+        "If shell workspaces, route wrappers, or page roots were touched, verify the main content still fills the available content region and that dashboard or workflow grids did not collapse into partial-width stacks.",
+        "Audit compact shared UI such as chart legends, chips, segmented filters, and metric badges for preset drift; replace ad hoc chip-like chrome with neutral MUI composition when needed.",
+        "Search for placeholder regressions in shared UI and restore explicit visual contracts before closeout."
+      ]
+    },
+    {
+      "name": "Token and primitive cleanup",
+      "manualReview": [
+        "Prepare targeted replacements for legacy tokens and review the diff file by file.",
+        "Normalize visible text to Typography with explicit semantic variants.",
+        "Remove zero-value wrapper components and zero-value surface wrappers.",
+        "Replace palette alpha suffix hacks with alpha() and simplify decorative consumer surface chrome.",
+        "If bulk replacements or file rewrites touched localized copy, scan for mojibake or replacement characters and verify non-Latin UI text still renders readable strings."
+      ]
+    },
+    {
+      "name": "Shared workflow extraction and bundler hygiene",
+      "manualReview": [
+        "If multiple pages share the same workflow shell, extract one shared layout contract and keep role-specific behavior in headers and sections.",
+        "If local barrels introduce circular chunk warnings for app internals, switch to direct local imports for those modules.",
+        "Fix consumer-owned build warnings such as stale PWA asset globs or oversized local chunks through config and chunking changes, not warning suppression."
+      ]
+    },
+    {
+      "name": "Domain migration waves",
+      "manualReview": [
+        "Migrate feature areas in waves after shared infrastructure is stable.",
+        "Keep each wave small enough to validate independently.",
+        "Re-run the relevant smoke or route checks after each wave before moving to the next domain."
+      ]
+    },
+    {
+      "name": "Quality gates",
+      "manualReview": [
+        "Re-run the target repository closeout gates with its package manager: lint, tests, and build (when available).",
+        "Run repo-local token and design-contract checks when they exist (for example lint:design-contract).",
+        "Manually verify no forbidden hardcoded token modules or identifiers remain for the target app (for example with rg searches)."
+      ]
+    }
+  ]
+}

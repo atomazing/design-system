@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { resolveDarkMode, resolveThemeName } from "@/context/settings/helper";
 import { isDarkMode } from "@/utils/isDarkMode";
 
-import type { NamedThemeOptions } from "@/models";
+import type { NamedThemeOptions } from "@/models/appSettings";
 
 const themes = [{ name: "Aurora" }, { name: "Saffron" }] as NamedThemeOptions[];
 
@@ -26,18 +26,14 @@ describe("resolveDarkMode", () => {
     expect(resolveDarkMode(undefined, "system")).toBe("system");
   });
 
-  it("preserves auto as a valid value", () => {
-    expect(resolveDarkMode("auto", "system")).toBe("auto");
-  });
-
   it("returns explicit values as-is", () => {
     expect(resolveDarkMode("dark", "system")).toBe("dark");
   });
 });
 
 describe("isDarkMode", () => {
-  it("treats auto as system preference", () => {
-    expect(isDarkMode("auto", "dark")).toBe(true);
-    expect(isDarkMode("auto", "light")).toBe(false);
+  it("treats system as system preference", () => {
+    expect(isDarkMode("system", "dark")).toBe(true);
+    expect(isDarkMode("system", "light")).toBe(false);
   });
 });

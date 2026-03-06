@@ -1,50 +1,39 @@
 import { canUseDom } from "@/utils/ssr";
 
-import type { DarkModeOptions } from "@/models";
+import type { DarkModeOptions } from "@/models/appSettings";
 
 const APP_SETTINGS_KEY = "appSettings";
-export const APP_SETTINGS_VERSION = 1;
-const DARK_MODE_OPTIONS = new Set<DarkModeOptions>([
-  "system",
-  "auto",
-  "light",
-  "dark",
-]);
+const DARK_MODE_OPTIONS = new Set<DarkModeOptions>(["system", "light", "dark"]);
 
 const isDarkModeOption = (value: unknown): value is DarkModeOptions =>
   typeof value === "string" && DARK_MODE_OPTIONS.has(value as DarkModeOptions);
 
 export interface StoredAppSettings {
-  version: typeof APP_SETTINGS_VERSION;
   themeId: string;
   darkMode: DarkModeOptions;
 }
 
-export const readAppSettings = (): Partial<StoredAppSettings> | null => {
+const isStoredAppSettings = (value: unknown): value is StoredAppSettings => {
+  if (typeof value !== "object" || value === null) return false;
+  const record = value as Record<string, unknown>;
+  const keys = Object.keys(record);
+  if (keys.length !== 2) return false;
+  if (!keys.includes("themeId") || !keys.includes("darkMode")) return false;
+
+  return (
+    typeof record.themeId === "string" &&
+    record.themeId.trim().length > 0 &&
+    isDarkModeOption(record.darkMode)
+  );
+};
+
+export const readAppSettings = (): StoredAppSettings | null => {
   if (!canUseDom() || globalThis.localStorage === undefined) return null;
   try {
     const storedRaw = globalThis.localStorage.getItem(APP_SETTINGS_KEY);
     if (!storedRaw) return null;
-    const parsed = JSON.parse(storedRaw) as {
-      version?: unknown;
-      themeId?: unknown;
-      theme?: unknown;
-      darkMode?: unknown;
-    };
-    const darkMode = isDarkModeOption(parsed.darkMode)
-      ? parsed.darkMode
-      : undefined;
-    if (parsed.version === APP_SETTINGS_VERSION) {
-      const themeId =
-        typeof parsed.themeId === "string" ? parsed.themeId : undefined;
-      if (!themeId && !darkMode) return null;
-      return { version: APP_SETTINGS_VERSION, themeId, darkMode };
-    }
-
-    const legacyTheme =
-      typeof parsed.theme === "string" ? parsed.theme : undefined;
-    if (!legacyTheme && !darkMode) return null;
-    return { version: APP_SETTINGS_VERSION, themeId: legacyTheme, darkMode };
+    const parsed = JSON.parse(storedRaw) as unknown;
+    return isStoredAppSettings(parsed) ? parsed : null;
   } catch {
     return null;
   }

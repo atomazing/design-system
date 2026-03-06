@@ -1,0 +1,936 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Перейти к содержанию" [ref=e3] [cursor=pointer]:
+      - /url: "#main_content"
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - button "APLAI" [ref=e7] [cursor=pointer]
+        - generic [ref=e8]:
+          - button "Как это работает" [ref=e9] [cursor=pointer]
+          - button "Архитектура" [ref=e10] [cursor=pointer]
+          - button "Демо" [ref=e11] [cursor=pointer]
+          - button "Шаблоны" [ref=e12] [cursor=pointer]
+          - button "Гарантии" [ref=e13] [cursor=pointer]
+          - button "FAQ" [ref=e14] [cursor=pointer]
+        - generic [ref=e15]:
+          - button "Открыть настройки темы" [ref=e16] [cursor=pointer]:
+            - img [ref=e17]
+          - button "Запросить демо" [ref=e23] [cursor=pointer]:
+            - generic [ref=e24]: Запросить демо
+    - main [ref=e25]:
+      - generic [ref=e27]:
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e32]: Без vendor-lock
+            - generic [ref=e34]: Dev/QA/Preprod/Prod
+          - heading "От сценария до проверки - за часы, а не недели" [level=1] [ref=e35]
+          - heading "От сценария до проверяемого результата - за часы, а не недели." [level=6] [ref=e36]
+          - paragraph [ref=e37]: "APLAI дает повторяемый конвейер старта и поставки: вы быстрее запускаете основу и быстрее показываете проверяемый результат."
+          - generic [ref=e39]:
+            - generic [ref=e40]:
+              - generic [ref=e42]: Question
+              - paragraph [ref=e43]: Что это и какой результат?
+            - generic [ref=e44]:
+              - generic [ref=e46]: Artifact
+              - paragraph [ref=e47]: 1/5/60 и конвейер результата.
+            - generic [ref=e48]: "Дальше: закрепить цифры и объяснить, где теряется время."
+          - generic [ref=e49]:
+            - button "Запросить демо" [ref=e50] [cursor=pointer]
+            - link "Посмотреть демо-сценарий" [ref=e51] [cursor=pointer]:
+              - /url: "#demo"
+          - paragraph [ref=e52]: Покажем этот путь на демо за 10-15 минут.
+          - generic [ref=e53]:
+            - generic [ref=e57]:
+              - heading "1 мин" [level=5] [ref=e58]
+              - paragraph [ref=e59]: Выбор сценария
+            - generic [ref=e63]:
+              - heading "5 мин" [level=5] [ref=e64]
+              - paragraph [ref=e65]: Запуск рабочих стендов
+            - generic [ref=e69]:
+              - heading "~1 час" [level=5] [ref=e70]
+              - paragraph [ref=e71]: Готово к проверке
+        - generic [ref=e75]:
+          - heading "Конвейер 1-5-60" [level=6] [ref=e76]
+          - separator [ref=e77]
+          - generic [ref=e78]:
+            - button "Шаг 1 Выбор сценария 1 мин" [ref=e80] [cursor=pointer]:
+              - generic [ref=e82]:
+                - paragraph [ref=e83]: Шаг 1
+                - heading "Выбор сценария" [level=6] [ref=e84]
+                - generic [ref=e86]: 1 мин
+            - button "Шаг 2 Запуск рабочих стендов 5 мин Dev/QA/Preprod/Prod" [ref=e88] [cursor=pointer]:
+              - generic [ref=e90]:
+                - paragraph [ref=e91]: Шаг 2
+                - heading "Запуск рабочих стендов" [level=6] [ref=e92]
+                - generic [ref=e94]: 5 мин
+                - generic [ref=e95]: Dev/QA/Preprod/Prod
+            - button "Шаг 3 Сборка функциональности AI + команда по правилам и конвенциям проекта" [ref=e97] [cursor=pointer]:
+              - generic [ref=e99]:
+                - paragraph [ref=e100]: Шаг 3
+                - heading "Сборка функциональности" [level=6] [ref=e101]
+                - generic [ref=e103]: AI + команда
+                - generic [ref=e104]: по правилам и конвенциям проекта
+            - button "Шаг 4 Готово к проверке ~1 час" [ref=e106] [cursor=pointer]:
+              - generic [ref=e108]:
+                - paragraph [ref=e109]: Шаг 4
+                - heading "Готово к проверке" [level=6] [ref=e110]
+                - generic [ref=e112]: ~1 час
+          - generic [ref=e113]:
+            - paragraph [ref=e114]: Фиксируем один приоритетный сценарий и сразу задаем границы пилота.
+            - generic [ref=e115]: Покажем этот путь на демо за 10-15 минут.
+            - generic [ref=e116]: Скорость ценна только тогда, когда она повторяема.
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - heading "Цифры, на которые можно опираться" [level=2] [ref=e121]
+          - paragraph [ref=e122]: Скорость важна только тогда, когда она повторяема и измерима.
+        - generic [ref=e123]:
+          - generic [ref=e127]:
+            - heading "1 мин" [level=3] [ref=e128]
+            - paragraph [ref=e129]: Выбор сценария
+          - generic [ref=e133]:
+            - heading "5 мин" [level=3] [ref=e134]
+            - paragraph [ref=e135]: Запуск рабочих стендов
+          - generic [ref=e139]:
+            - heading "~1 час" [level=3] [ref=e140]
+            - paragraph [ref=e141]: Готово к проверке
+        - generic [ref=e142]:
+          - generic [ref=e144]: Dev/QA/Preprod/Prod
+          - generic [ref=e146]: Без vendor-lock
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - heading "Почему старт проектов съедает недели" [level=2] [ref=e152]
+          - paragraph [ref=e153]: Большая часть задержек — это не разработка функций, а подготовка среды, процессов поставки и стандартов. APLAI превращает это в повторяемый конвейер.
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - generic [ref=e158]: Question
+            - paragraph [ref=e159]: Почему это важно для нас?
+          - generic [ref=e160]:
+            - generic [ref=e162]: Artifact
+            - paragraph [ref=e163]: 4 pain-карточки.
+          - generic [ref=e164]: "Дальше: для кого это особенно критично."
+        - generic [ref=e165]:
+          - generic [ref=e166]:
+            - generic [ref=e170]:
+              - heading "Окружения и доступы" [level=6] [ref=e171]
+              - paragraph [ref=e172]: Старт тормозится, когда среды и права доступа собираются вручную через очереди и заявки.
+            - generic [ref=e176]:
+              - heading "Пайплайны и релизный процесс" [level=6] [ref=e177]
+              - paragraph [ref=e178]: Каждый проект стартует по-разному, поэтому команда теряет предсказуемость и темп.
+            - generic [ref=e182]:
+              - heading "Качество и наблюдаемость" [level=6] [ref=e183]
+              - paragraph [ref=e184]: Критичные требования часто откладываются на потом и возвращаются как риск и переработка.
+            - generic [ref=e188]:
+              - heading "Каждый проект заново" [level=6] [ref=e189]
+              - paragraph [ref=e190]: Повторяемая рутина старта снова съедает время до первого результата для бизнеса.
+          - generic [ref=e193]:
+            - heading "Пока нет стабильных стендов — нет стабильной разработки." [level=6] [ref=e194]
+            - button "Как APLAI сокращает старт" [ref=e195] [cursor=pointer]
+      - generic [ref=e199]:
+        - generic [ref=e200]:
+          - heading "Готово из коробки — что получает команда" [level=2] [ref=e201]
+          - paragraph [ref=e202]: Это не набор инструментов. Это повторяемая стартовая линия и конвейер поставки для корпоративных приложений.
+        - generic [ref=e204]:
+          - generic [ref=e205]:
+            - generic [ref=e207]: Question
+            - paragraph [ref=e208]: Что получит команда?
+          - generic [ref=e209]:
+            - generic [ref=e211]: Artifact
+            - paragraph [ref=e212]: 3 outcome-карточки.
+          - generic [ref=e213]: "Дальше: объяснить механизм."
+        - generic [ref=e214]:
+          - generic [ref=e215]:
+            - generic [ref=e219]:
+              - heading "Основа приложения" [level=6] [ref=e220]
+              - paragraph [ref=e221]: Стартовый каркас, чтобы команда начинала с работающей базы, а не с проектирования с нуля.
+              - paragraph [ref=e222]: Front + Back шаблоны
+            - generic [ref=e226]:
+              - heading "Рабочие контуры" [level=6] [ref=e227]
+              - paragraph [ref=e228]: Стенды и процесс поставки, чтобы быстро показывать и проверять результат.
+              - paragraph [ref=e229]: Dev/QA/Preprod/Prod
+            - generic [ref=e233]:
+              - heading "Ускорение разработки" [level=6] [ref=e234]
+              - paragraph [ref=e235]: AI-поддержка, которая работает по правилам и конвенциям проекта.
+              - paragraph [ref=e236]: AI-агенты по инструкциям
+          - paragraph [ref=e237]: "Подходит для пилота: начать быстро и расширять постепенно."
+          - button "Как это работает" [ref=e238] [cursor=pointer]
+      - generic [ref=e242]:
+        - generic [ref=e243]:
+          - 'heading "Почему это работает: три опоры APLAI" [level=2] [ref=e244]'
+          - paragraph [ref=e245]: Мы стандартизируем старт, поставку и разработку, чтобы команда быстрее выпускала функциональность без хаоса.
+        - generic [ref=e247]:
+          - generic [ref=e248]:
+            - generic [ref=e250]: Question
+            - paragraph [ref=e251]: Почему это работает?
+          - generic [ref=e252]:
+            - generic [ref=e254]: Artifact
+            - paragraph [ref=e255]: 3 pillar-карточки.
+          - generic [ref=e256]: "Дальше: показать процесс."
+        - generic [ref=e257]:
+          - generic [ref=e258]:
+            - generic [ref=e262]:
+              - heading "Шаблоны и архитектура" [level=6] [ref=e263]
+              - paragraph [ref=e264]: Единая основа приложения, чтобы стартовать без проектирования с нуля.
+              - paragraph [ref=e265]: Каркас и правила работы
+            - generic [ref=e269]:
+              - heading "Контуры и поставка" [level=6] [ref=e270]
+              - paragraph [ref=e271]: Готовые стенды и повторяемый релизный процесс для Agile-разработки.
+              - paragraph [ref=e272]: Dev/QA/Preprod/Prod + CI/CD
+            - generic [ref=e276]:
+              - heading "AI-поддержка разработки" [level=6] [ref=e277]
+              - paragraph [ref=e278]: Ускорение рутинных задач и генерация кода по инструкциям и конвенциям проекта.
+              - paragraph [ref=e279]: AI-агенты + контроль качества
+          - paragraph [ref=e280]: Скорость достигается не только AI, а стандартом запуска и поставки.
+          - button "Посмотреть архитектуру интеграций" [ref=e281] [cursor=pointer]
+      - generic [ref=e285]:
+        - generic [ref=e286]:
+          - heading "Для кого APLAI" [level=2] [ref=e287]
+          - paragraph [ref=e288]: Business-first сообщение, поддержанное CTO-уровнем доказательств и понятным путем к пилоту.
+        - generic [ref=e290]:
+          - generic [ref=e291]:
+            - generic [ref=e293]: Question
+            - paragraph [ref=e294]: Для кого это и что для них меняется?
+          - generic [ref=e295]:
+            - generic [ref=e297]: Artifact
+            - paragraph [ref=e298]: 2-layer audience + сегмент-карточки.
+          - generic [ref=e299]: "Дальше: почему в это верят."
+        - generic [ref=e300]:
+          - generic [ref=e302]:
+            - generic [ref=e306]:
+              - generic [ref=e307]:
+                - generic [ref=e309]: Primary
+                - generic [ref=e311]: Обсудить пилот
+              - heading "CTO / IT-директор / Руководитель разработки" [level=6] [ref=e312]
+              - paragraph [ref=e313]: Нужно ускорить delivery, сохранив контроль над архитектурой и свободой развития после пилота.
+              - generic [ref=e314]:
+                - paragraph [ref=e315]: • Предсказуемость и повторяемость поставки
+                - paragraph [ref=e316]: • Встраиваемость в корпоративный контур
+              - paragraph [ref=e317]: "Триггеры: Измеримость 1/5/60, Enterprise-ready маршрут, Без vendor-lock"
+              - paragraph [ref=e318]: "Это не очередная платформа-ловушка: результат остается вашим активом."
+            - generic [ref=e322]:
+              - generic [ref=e323]:
+                - generic [ref=e325]: Primary
+                - generic [ref=e327]: Запросить демо
+              - heading "Delivery / Руководитель направления / Руководитель платформы" [level=6] [ref=e328]
+              - paragraph [ref=e329]: Нужно сократить хаос старта проектов и стабилизировать окружения и процесс поставки.
+              - generic [ref=e330]:
+                - paragraph [ref=e331]: • Снижение ручной рутины
+                - paragraph [ref=e332]: • Единые правила старта и поставки
+              - paragraph [ref=e333]: "Триггеры: Понятный step-by-step процесс, Демо с конкретным сценарием за 10-15 минут"
+              - paragraph [ref=e334]: Решение убирает организационные задержки, а не добавляет еще один слой хаоса.
+            - generic [ref=e338]:
+              - generic [ref=e339]:
+                - generic [ref=e341]: Secondary
+                - generic [ref=e343]: Посмотреть демо-сценарий
+              - heading "Product Manager / Product Owner" [level=6] [ref=e344]
+              - paragraph [ref=e345]: Нужен быстрый пилот и короткий цикл обратной связи вместо недель ожидания первого результата.
+              - generic [ref=e346]:
+                - paragraph [ref=e347]: • Time-to-value
+                - paragraph [ref=e348]: • Понятный результат демо
+              - paragraph [ref=e349]: "Триггеры: Один сценарий - один результат, Прозрачный блок что дальше"
+              - paragraph [ref=e350]: "Это не внедрение ради внедрения: сначала быстрый проверяемый результат, затем пилот."
+            - generic [ref=e354]:
+              - generic [ref=e355]:
+                - generic [ref=e357]: Secondary
+                - generic [ref=e359]: Обсудить пилот
+              - heading "Business Owner / Руководитель продукта или направления" [level=6] [ref=e360]
+              - paragraph [ref=e361]: Нужно снизить стоимость старта и быстрее получить рабочий результат без необратимых рисков.
+              - generic [ref=e362]:
+                - paragraph [ref=e363]: • Ускорение пилота
+                - paragraph [ref=e364]: • Контроль результата и масштаба
+              - paragraph [ref=e365]: "Триггеры: Risk reversal без vendor-lock, Маршрут от пилота к масштабу"
+              - paragraph [ref=e366]: Даже если пилот не масштабируется сразу, вы не остаетесь в чужой технологической ловушке.
+            - generic [ref=e370]:
+              - generic [ref=e371]:
+                - generic [ref=e373]: Support
+                - generic [ref=e375]: Посмотреть архитектуру интеграций
+              - heading "Security / Compliance" [level=6] [ref=e376]
+              - paragraph [ref=e377]: Нужно понять рамку пилота и требования к доступу, не ухудшая управляемость и безопасность.
+              - generic [ref=e378]:
+                - paragraph [ref=e379]: • Прозрачные требования к пилоту
+                - paragraph [ref=e380]: • Ясные границы ответственности
+              - paragraph [ref=e381]: "Триггеры: Архитектурная секция, FAQ без нереалистичных обещаний"
+              - paragraph [ref=e382]: "Пилот ограничен и прозрачен: сначала понятная рамка, потом решение о масштабировании."
+          - generic [ref=e384]:
+            - generic [ref=e387]:
+              - heading "2-layer audience" [level=6] [ref=e388]
+              - paragraph [ref=e389]: "Первый слой: ценность для бизнеса и продукта - быстрый проверяемый результат, понятный следующий шаг, снижение риска старта."
+              - paragraph [ref=e390]: "Второй слой: аргументы для CTO и delivery - повторяемый процесс, встраиваемость и отсутствие vendor-lock."
+            - generic [ref=e393]:
+              - heading "Высокая квалификация" [level=6] [ref=e394]
+              - paragraph [ref=e395]: "• Есть боль: недели на подготовку и старт поставки."
+              - paragraph [ref=e396]: • Пилот или проект ожидается в ближайшие 1-3 месяца.
+              - paragraph [ref=e397]: • Есть контур и сценарий, который можно формализовать.
+            - generic [ref=e400]:
+              - heading "Средняя квалификация" [level=6] [ref=e401]
+              - paragraph [ref=e402]: • Есть интерес к демо, но проект пока не в активной фазе.
+              - paragraph [ref=e403]: • Нужна оценка подхода и сравнение вариантов.
+            - generic [ref=e406]:
+              - heading "Must-have сигналы" [level=6] [ref=e407]
+              - paragraph [ref=e408]: • 1/5/60 как измеримый факт
+              - paragraph [ref=e409]: • Понятный механизм и step-by-step процесс
+              - paragraph [ref=e410]: • Архитектурное доверие и границы пилота
+              - paragraph [ref=e411]: "• Risk reversal: без vendor-lock"
+              - paragraph [ref=e412]: • Ясный путь после заявки
+      - generic [ref=e416]:
+        - generic [ref=e417]:
+          - heading "Ценность APLAI" [level=2] [ref=e418]
+          - paragraph [ref=e419]: Сократить время до проверяемого результата с недель до часов, сохраняя управляемость и независимость решений.
+        - generic [ref=e421]:
+          - generic [ref=e422]:
+            - generic [ref=e424]: Question
+            - paragraph [ref=e425]: Почему это важно и почему это работает?
+          - generic [ref=e426]:
+            - generic [ref=e428]: Artifact
+            - paragraph [ref=e429]: 3 pillar-карточки + proof/risk stack.
+          - generic [ref=e430]: "Дальше: показать процесс шаг за шагом."
+        - generic [ref=e431]:
+          - paragraph [ref=e432]: Быстрый старт, гибкость развития и AI-ускорение работают вместе как один повторяемый подход.
+          - 'heading "APLAI дает повторяемый конвейер: быстро стартуете, быстро показываете результат и можете развивать решение без ловушек." [level=6] [ref=e435]'
+          - generic [ref=e436]:
+            - generic [ref=e440]:
+              - heading "Быстрый старт" [level=6] [ref=e441]
+              - paragraph [ref=e442]: Старт проекта перестает быть неделями подготовки.
+              - paragraph [ref=e443]: Быстрее запускаете пилот и получаете первый проверяемый результат без лишней рутины.
+              - generic [ref=e444]:
+                - paragraph [ref=e445]: • Запускаем быстрее
+                - paragraph [ref=e446]: • Меньше подготовительных шагов
+                - paragraph [ref=e447]: • Быстрее первый результат
+              - paragraph [ref=e448]: Повторяемые рабочие контуры как второй уровень доверия.
+            - generic [ref=e452]:
+              - heading "Гибкость развития" [level=6] [ref=e453]
+              - paragraph [ref=e454]: Решение не упирается в потолок и не остается одноразовым прототипом.
+              - paragraph [ref=e455]: Можно начинать быстро и развивать как полноценное корпоративное приложение.
+              - generic [ref=e456]:
+                - paragraph [ref=e457]: • Подходит для долгого жизненного цикла
+                - paragraph [ref=e458]: • Сложные сценарии не упираются в ограничения
+                - paragraph [ref=e459]: • Контроль остается у вашей команды
+            - generic [ref=e463]:
+              - heading "Ускорение разработки" [level=6] [ref=e464]
+              - paragraph [ref=e465]: AI-поддержка ускоряет работу, но остается управляемой.
+              - paragraph [ref=e466]: Меньше рутины, быстрее выпуск функциональности и стабильнее качество.
+              - generic [ref=e467]:
+                - paragraph [ref=e468]: • AI-поддержка ускоряет рутинные задачи
+                - paragraph [ref=e469]: • Работает по правилам проекта
+                - paragraph [ref=e470]: • Качество важнее магии
+          - generic [ref=e471]:
+            - generic [ref=e475]:
+              - heading "Proof stack" [level=6] [ref=e476]
+              - generic [ref=e477]:
+                - heading "Измеримые факты" [level=6] [ref=e478]
+                - paragraph [ref=e479]: 1/5/60 как визуальные якоря и понятная рамка time-to-value.
+              - generic [ref=e480]:
+                - heading "Понятный процесс" [level=6] [ref=e481]
+                - paragraph [ref=e482]: "Stepper по шагам: что происходит от сценария до результата."
+              - generic [ref=e483]:
+                - heading "Enterprise-доверие" [level=6] [ref=e484]
+                - paragraph [ref=e485]: Архитектурная карта и прозрачный блок о том, что нужно от вашей команды.
+              - generic [ref=e486]:
+                - heading "Конкретика демо" [level=6] [ref=e487]
+                - paragraph [ref=e488]: Один сценарий, 10-15 минут и понятный результат на выходе.
+            - generic [ref=e490]:
+              - generic [ref=e493]:
+                - heading "Risk reversal" [level=6] [ref=e494]
+                - generic [ref=e495]:
+                  - heading "Vendor-lock" [level=6] [ref=e496]
+                  - paragraph [ref=e497]: Приложение остается вашим активом и может развиваться независимо.
+                - generic [ref=e498]:
+                  - heading "Потолок развития" [level=6] [ref=e499]
+                  - paragraph [ref=e500]: Быстрый старт не означает ограничение долгого развития и сложных сценариев.
+                - generic [ref=e501]:
+                  - heading "Не впишется в контур" [level=6] [ref=e502]
+                  - paragraph [ref=e503]: Показываем, что нужно от вас для пилота и как решение встроится в существующий процесс.
+              - generic [ref=e506]:
+                - heading "Границы применимости" [level=6] [ref=e507]
+                - paragraph [ref=e508]: • Не обещаем универсальную применимость без условий.
+                - paragraph [ref=e509]: • Не обещаем конкретные сроки внедрения без согласования.
+                - paragraph [ref=e510]: • Не обещаем запуск без участия вашей команды.
+                - paragraph [ref=e511]: • Не используем ценовые или лицензионные сравнения без утвержденного текста.
+          - button "Как это работает" [ref=e512] [cursor=pointer]
+      - generic [ref=e516]:
+        - generic [ref=e517]:
+          - heading "Как APLAI доводит идею до проверки" [level=2] [ref=e518]
+          - paragraph [ref=e519]: "Вы видите процесс целиком: от выбора сценария до результата, который можно проверить и показать на демо."
+        - generic [ref=e521]:
+          - generic [ref=e522]:
+            - generic [ref=e524]: Question
+            - paragraph [ref=e525]: Как это выглядит шаг за шагом?
+          - generic [ref=e526]:
+            - generic [ref=e528]: Artifact
+            - paragraph [ref=e529]: stepper 1 -> 5 -> разработка -> ~1 час.
+          - generic [ref=e530]: "Дальше: проверить, как это впишется в контур."
+        - generic [ref=e531]:
+          - generic [ref=e532]:
+            - generic [ref=e536]:
+              - generic [ref=e537]:
+                - heading "Выбор сценария" [level=6] [ref=e538]
+                - generic [ref=e540]: 1 мин
+              - paragraph [ref=e541]: Стартовая конфигурация и правила работы - без проектирования с нуля.
+            - generic [ref=e545]:
+              - generic [ref=e546]:
+                - heading "Запуск рабочих стендов" [level=6] [ref=e547]
+                - generic [ref=e549]: 5 мин
+              - paragraph [ref=e550]: Команда получает среду для работы и проверки результата.
+              - paragraph [ref=e551]: Dev/QA/Preprod/Prod
+            - generic [ref=e555]:
+              - generic [ref=e556]:
+                - heading "Сборка функциональности" [level=6] [ref=e557]
+                - generic [ref=e559]: AI + команда
+              - paragraph [ref=e560]: Реализуем бизнес-логику в рамках конвенций проекта.
+              - paragraph [ref=e561]: по правилам и конвенциям проекта
+            - generic [ref=e565]:
+              - generic [ref=e566]:
+                - heading "Готово к проверке" [level=6] [ref=e567]
+                - generic [ref=e569]: ~1 час
+              - paragraph [ref=e570]: Результат доступен для проверки и демонстрации.
+          - paragraph [ref=e571]: "~1 час — пример: UI 10-20 полей + логика + БД + 1 интеграция."
+          - paragraph [ref=e572]: Покажем этот путь на демо за 10-15 минут.
+          - button "Посмотреть демо-сценарий" [ref=e573] [cursor=pointer]
+      - generic [ref=e577]:
+        - generic [ref=e578]:
+          - heading "Встраивается в ваш корпоративный контур" [level=2] [ref=e579]
+          - paragraph [ref=e580]: "Нажмите на узел карты, чтобы открыть короткую карточку: зачем это нужно, какой контур затрагиваем, что вы получаете и что нужно от вашей команды."
+        - generic [ref=e582]:
+          - generic [ref=e583]:
+            - generic [ref=e585]: Question
+            - paragraph [ref=e586]: Впишется ли это в наш контур?
+          - generic [ref=e587]:
+            - generic [ref=e589]: Artifact
+            - paragraph [ref=e590]: Интерактивная карта + drawer деталей.
+          - generic [ref=e591]: "Дальше: показать демо вживую."
+        - generic [ref=e592]:
+          - paragraph [ref=e593]: "Карта должна читаться сразу: ядро APLAI, пять зон корпоративного контура и одинаково структурированный drawer для каждого узла."
+          - generic [ref=e594]:
+            - generic [ref=e598]:
+              - generic [ref=e599]:
+                - heading "Карта интеграций APLAI" [level=6] [ref=e600]
+                - paragraph [ref=e601]: Схема показывает не список технологий, а ключевые точки, где APLAI встраивается в текущий контур и делает поставку предсказуемой.
+              - generic [ref=e604]:
+                - heading "APLAI" [level=6] [ref=e605]
+                - paragraph [ref=e606]: Ускорение старта и поставки приложений.
+              - generic [ref=e607]:
+                - generic [ref=e609]: Поставка
+                - generic [ref=e611]: Доступы
+                - generic [ref=e613]: Надежность
+                - generic [ref=e615]: Качество и контроль
+                - generic [ref=e617]: Данные и интеграции
+              - generic [ref=e618]:
+                - button "Поставка Пайплайн поставки" [ref=e620] [cursor=pointer]:
+                  - generic [ref=e621]:
+                    - generic [ref=e622]: Поставка
+                    - paragraph [ref=e624]: Пайплайн поставки
+                - button "Поставка Рабочие стенды" [ref=e626] [cursor=pointer]:
+                  - generic [ref=e627]:
+                    - generic [ref=e628]: Поставка
+                    - paragraph [ref=e630]: Рабочие стенды
+                - button "Поставка Релизный процесс" [ref=e632] [cursor=pointer]:
+                  - generic [ref=e633]:
+                    - generic [ref=e634]: Поставка
+                    - paragraph [ref=e636]: Релизный процесс
+                - button "Доступы Роли и права" [ref=e638] [cursor=pointer]:
+                  - generic [ref=e639]:
+                    - generic [ref=e640]: Доступы
+                    - paragraph [ref=e642]: Роли и права
+                - button "Доступы Единый вход (SSO)" [ref=e644] [cursor=pointer]:
+                  - generic [ref=e645]:
+                    - generic [ref=e646]: Доступы
+                    - paragraph [ref=e648]: Единый вход (SSO)
+                - button "Доступы Аудит действий" [ref=e650] [cursor=pointer]:
+                  - generic [ref=e651]:
+                    - generic [ref=e652]: Доступы
+                    - paragraph [ref=e654]: Аудит действий
+                - button "Надежность Логи" [ref=e656] [cursor=pointer]:
+                  - generic [ref=e657]:
+                    - generic [ref=e658]: Надежность
+                    - paragraph [ref=e660]: Логи
+                - button "Надежность Наблюдаемость" [ref=e662] [cursor=pointer]:
+                  - generic [ref=e663]:
+                    - generic [ref=e664]: Надежность
+                    - paragraph [ref=e666]: Наблюдаемость
+                - button "Надежность Инциденты и оповещения" [ref=e668] [cursor=pointer]:
+                  - generic [ref=e669]:
+                    - generic [ref=e670]: Надежность
+                    - paragraph [ref=e672]: Инциденты и оповещения
+                - button "Качество и контроль Проверки качества" [ref=e674] [cursor=pointer]:
+                  - generic [ref=e675]:
+                    - generic [ref=e676]: Качество и контроль
+                    - paragraph [ref=e678]: Проверки качества
+                - button "Качество и контроль Стандарты и конвенции" [ref=e680] [cursor=pointer]:
+                  - generic [ref=e681]:
+                    - generic [ref=e682]: Качество и контроль
+                    - paragraph [ref=e684]: Стандарты и конвенции
+                - button "Качество и контроль Контроль изменений" [ref=e686] [cursor=pointer]:
+                  - generic [ref=e687]:
+                    - generic [ref=e688]: Качество и контроль
+                    - paragraph [ref=e690]: Контроль изменений
+                - button "Данные и интеграции Модель данных" [ref=e692] [cursor=pointer]:
+                  - generic [ref=e693]:
+                    - generic [ref=e694]: Данные и интеграции
+                    - paragraph [ref=e696]: Модель данных
+                - button "Данные и интеграции Внешние интеграции" [ref=e698] [cursor=pointer]:
+                  - generic [ref=e699]:
+                    - generic [ref=e700]: Данные и интеграции
+                    - paragraph [ref=e702]: Внешние интеграции
+                - button "Данные и интеграции Секреты и параметры" [ref=e704] [cursor=pointer]:
+                  - generic [ref=e705]:
+                    - generic [ref=e706]: Данные и интеграции
+                    - paragraph [ref=e708]: Секреты и параметры
+                - button "Данные и интеграции Сообщения и события" [ref=e710] [cursor=pointer]:
+                  - generic [ref=e711]:
+                    - generic [ref=e712]: Данные и интеграции
+                    - generic [ref=e713]:
+                      - paragraph [ref=e714]: Сообщения и события
+                      - generic [ref=e716]: Опционально
+              - paragraph [ref=e717]: Сверьте этот контур с вашими текущими ограничениями и требованиями.
+            - generic [ref=e719]:
+              - generic [ref=e722]:
+                - heading "Поддерживает Dev, QA, Preprod, Prod и повторяемую поставку." [level=6] [ref=e723]
+                - paragraph [ref=e724]: • APLAI встраивается, а не ломает текущий контур.
+                - paragraph [ref=e725]: • Каждый узел открывает одинаковую структуру деталей без длинной документации.
+                - paragraph [ref=e726]: • В drawer используется бизнес-язык, а не список вендоров и стека.
+              - generic [ref=e729]:
+                - heading "Без vendor-lock" [level=6] [ref=e730]
+                - paragraph [ref=e731]: "Без vendor-lock: Приложение остается вашим активом и может развиваться независимо."
+      - generic [ref=e735]:
+        - generic [ref=e736]:
+          - heading "Что вы увидите на демо за 10-15 минут" [level=2] [ref=e737]
+          - paragraph [ref=e738]: Покажем путь 1-5-60 на понятном сценарии и обсудим, как быстро запустить пилот в вашем контуре.
+        - generic [ref=e740]:
+          - generic [ref=e741]:
+            - generic [ref=e743]: Question
+            - paragraph [ref=e744]: Что вы покажете на демо?
+          - generic [ref=e745]:
+            - generic [ref=e747]: Artifact
+            - paragraph [ref=e748]: Демо-процесс и результат на выходе.
+          - generic [ref=e749]: "Дальше: показать широту сценариев."
+        - generic [ref=e750]:
+          - generic [ref=e751]:
+            - generic [ref=e755]:
+              - generic [ref=e757]: "Сценарий демо: CRM - обращения"
+              - heading "Что покажем" [level=6] [ref=e758]
+              - paragraph [ref=e759]: 10-15 минут
+              - paragraph [ref=e760]: • Один сценарий -> один результат.
+              - paragraph [ref=e761]: "• Якорный сценарий: CRM \"обращения\"."
+              - paragraph [ref=e762]: "• Результат: работающий процесс + понятный план пилота."
+              - paragraph [ref=e763]: Регистрация -> рассмотрение / ответ -> согласование -> отправка
+              - paragraph [ref=e764]: Покажем также, как быстро добавляется новая бизнес-функциональность, не уходя в технические детали.
+            - generic [ref=e766]:
+              - generic [ref=e769]:
+                - heading "Как проходит демо" [level=6] [ref=e770]
+                - generic [ref=e771]:
+                  - generic [ref=e772]:
+                    - generic [ref=e774]: 1-4 мин
+                    - heading "Запуск основы" [level=6] [ref=e775]
+                  - paragraph [ref=e776]: Показываем путь 1-5-60 от сценария до первого проверяемого результата.
+                - generic [ref=e777]:
+                  - generic [ref=e778]:
+                    - generic [ref=e780]: 4-8 мин
+                    - heading "Процесс в работе" [level=6] [ref=e781]
+                  - paragraph [ref=e782]: Разбираем CRM "обращения" как понятный и проверяемый сценарий.
+                - generic [ref=e783]:
+                  - generic [ref=e784]:
+                    - generic [ref=e786]: 8-12 мин
+                    - heading "Добавление функции" [level=6] [ref=e787]
+                  - paragraph [ref=e788]: Показываем, как новая бизнес-функция добавляется без долгого цикла.
+                - generic [ref=e789]:
+                  - generic [ref=e790]:
+                    - generic [ref=e792]: 12-15 мин
+                    - heading "Готово к проверке" [level=6] [ref=e793]
+                  - paragraph [ref=e794]: Фиксируем, что остается после демо и какой следующий шаг по пилоту.
+              - generic [ref=e797]:
+                - heading "Что будет на выходе" [level=6] [ref=e798]
+                - paragraph [ref=e799]: • Процесс в работе.
+                - paragraph [ref=e800]: • Понятный следующий шаг пилота.
+                - paragraph [ref=e801]: "• Прозрачно: что нужно от вашей стороны."
+          - generic [ref=e804]:
+            - heading "Что у вас остается после демо" [level=6] [ref=e805]
+            - paragraph [ref=e806]: • Понимаю обещание 1-5-60 и что оно значит на практике.
+            - paragraph [ref=e807]: • Вижу результат, который можно проверить.
+            - paragraph [ref=e808]: • Понимаю, как применить это к нашему сценарию через пилот.
+            - paragraph [ref=e809]: • Понимаю, что нужно от нас для пилота.
+            - paragraph [ref=e810]: • Понимаю следующий шаг после демо.
+          - generic [ref=e811]:
+            - button "Запросить демо" [ref=e812] [cursor=pointer]
+            - link "Перейти к форме" [ref=e813] [cursor=pointer]:
+              - /url: "#final_cta"
+            - button "Обсудить пилот под ваш сценарий" [ref=e814] [cursor=pointer]
+      - generic [ref=e818]:
+        - generic [ref=e819]:
+          - heading "Шаблоны, с которых можно начать" [level=2] [ref=e820]
+          - paragraph [ref=e821]: "Шаблоны дают стандартизированную основу: можно быстро запуститься и развивать решение как полноценное корпоративное приложение."
+        - generic [ref=e823]:
+          - generic [ref=e824]:
+            - generic [ref=e826]: Question
+            - paragraph [ref=e827]: А если сценарий другой?
+          - generic [ref=e828]:
+            - generic [ref=e830]: Artifact
+            - paragraph [ref=e831]: 4 карточки точек входа.
+          - generic [ref=e832]: "Дальше: показать быстрый старт без потолка развития."
+        - generic [ref=e833]:
+          - generic [ref=e834]:
+            - generic [ref=e838]:
+              - heading "BPM-шаблон" [level=6] [ref=e839]
+              - paragraph [ref=e840]: "Запуск процессных приложений: задачи, статусы и маршрут согласования."
+              - generic [ref=e841]: Портал задач • демо-процесс
+            - generic [ref=e845]:
+              - heading "CRM-шаблон" [level=6] [ref=e846]
+              - paragraph [ref=e847]: "Работа с обращениями и активностями: от регистрации до ответа."
+              - generic [ref=e848]: Контакты и контрагенты • сценарии обращений
+            - generic [ref=e852]:
+              - heading "Конвертер из legacy / low-code" [level=6] [ref=e853]
+              - paragraph [ref=e854]: "Переезд с платформы: анализ, требования и план миграции."
+              - generic [ref=e855]: Legacy / low-code • нейтральные требования миграции
+            - generic [ref=e859]:
+              - heading "UI-layout шаблон" [level=6] [ref=e860]
+              - paragraph [ref=e861]: Быстрые кликабельные макеты и UI-каркас для согласования.
+              - generic [ref=e862]: Стилизация по референсам • быстрое развертывание
+          - generic [ref=e863]:
+            - paragraph [ref=e864]: Если вашего сценария нет - обсудим пилот под вашу задачу.
+            - generic [ref=e865]: Детали и названия раскрываем на демо при необходимости.
+            - button "Обсудить пилот" [ref=e866] [cursor=pointer]
+      - generic [ref=e870]:
+        - generic [ref=e871]:
+          - heading "Быстрый старт без потолка развития" [level=2] [ref=e872]
+          - paragraph [ref=e873]: "Можно стартовать быстро, но дальше развивать решение как полноценный инженерный продукт: без смены модели работы по мере роста требований."
+        - generic [ref=e875]:
+          - generic [ref=e876]:
+            - generic [ref=e878]: Question
+            - paragraph [ref=e879]: Упрется ли это в потолок платформы?
+          - generic [ref=e880]:
+            - generic [ref=e882]: Artifact
+            - paragraph [ref=e883]: 2 comparison cards + when-to-choose card.
+          - generic [ref=e884]: "Дальше: добавить тихий внешний сигнал доверия."
+        - generic [ref=e885]:
+          - paragraph [ref=e886]: Сравнение ниже про типовые trade-offs. Конкретные ограничения и риски проверяем на пилоте под ваш контур.
+          - generic [ref=e887]:
+            - generic [ref=e891]:
+              - heading "Типичный low-code" [level=6] [ref=e892]
+              - paragraph [ref=e893]: Подходит для быстрого старта на простых сценариях, но ограничения появляются раньше.
+              - generic [ref=e894]:
+                - paragraph [ref=e895]: • Быстро запускается на типовых процессах.
+                - paragraph [ref=e896]: • Сложные требования и интеграции чаще требуют обходных решений.
+                - paragraph [ref=e897]: • При развитии сильнее растет зависимость от платформенных механизмов.
+            - generic [ref=e901]:
+              - heading "APLAI" [level=6] [ref=e902]
+              - paragraph [ref=e903]: Сохраняет быстрый старт, но оставляет развитие в привычной инженерной модели.
+              - generic [ref=e904]:
+                - paragraph [ref=e905]: • Быстрый старт через шаблоны и конвейер поставки.
+                - paragraph [ref=e906]: • Сложные сценарии развиваются без смены подхода к разработке.
+                - paragraph [ref=e907]: "• Контроль и независимость решения: Без vendor-lock."
+          - generic [ref=e910]:
+            - heading "Когда выбирать APLAI" [level=6] [ref=e911]
+            - paragraph [ref=e912]: • Нужен быстрый пилот, но заранее понятны будущие интеграции, нагрузка или длинный жизненный цикл.
+            - paragraph [ref=e913]: • Важно сохранить повторяемую поставку через Dev/QA/Preprod/Prod.
+            - paragraph [ref=e914]: • Нужен быстрый старт без перехода в платформенный потолок по мере развития решения.
+            - 'button "Гарантия: без vendor-lock" [ref=e915] [cursor=pointer]'
+      - generic [ref=e919]:
+        - generic [ref=e920]:
+          - heading "Контексты применения" [level=2] [ref=e921]
+          - paragraph [ref=e922]: Детали и примеры раскрываем на демо.
+        - generic [ref=e924]:
+          - generic [ref=e925]:
+            - generic [ref=e927]: Question
+            - paragraph [ref=e928]: Есть ли внешний сигнал доверия?
+          - generic [ref=e929]:
+            - generic [ref=e931]: Artifact
+            - paragraph [ref=e932]: Лента контекстов и бейджей.
+          - generic [ref=e933]: "Дальше: раскрыть более сильный блок зрелости."
+        - generic [ref=e934]:
+          - generic [ref=e935]:
+            - generic [ref=e937]: CRM-модернизация
+            - generic [ref=e939]: Миграции low-code
+            - generic [ref=e941]: Enterprise-пилоты
+          - button "Подробнее о зрелости подхода" [ref=e942] [cursor=pointer]
+      - generic [ref=e946]:
+        - generic [ref=e947]:
+          - heading "Проверено в корпоративных контурах" [level=2] [ref=e948]
+          - paragraph [ref=e949]: Показываем не обещания, а контексты, где подход уже обсуждался и проверялся, без раскрытия конфиденциальных деталей.
+        - generic [ref=e951]:
+          - generic [ref=e952]:
+            - generic [ref=e954]: Question
+            - paragraph [ref=e955]: Это зрелое решение?
+          - generic [ref=e956]:
+            - generic [ref=e958]: Artifact
+            - paragraph [ref=e959]: Контрастный showcase-блок.
+          - generic [ref=e960]: "Дальше: где ловушки и гарантии."
+        - generic [ref=e963]:
+          - generic [ref=e965]:
+            - generic [ref=e966]:
+              - generic [ref=e968]: Mode B
+              - generic [ref=e970]: Без логотипов и названий
+            - heading "Проверяемость важнее громких кейсов" [level=6] [ref=e971]
+            - paragraph [ref=e972]: Зрелость здесь подтверждается процессом, архитектурой и прозрачными требованиями к пилоту, а не громкими именами.
+            - generic [ref=e973]:
+              - generic [ref=e975]: 1/5/60 и конвейер
+              - generic [ref=e977]: Повторяемый процесс
+              - generic [ref=e979]: Встраиваемость и прозрачность
+              - generic [ref=e981]: Конкретный demo-результат
+              - generic [ref=e983]: Гарантии перед пилотом
+            - generic [ref=e984]:
+              - generic [ref=e986]: Повторяемый конвейер
+              - generic [ref=e988]: Прозрачные требования к пилоту
+              - generic [ref=e990]: Без vendor-lock
+            - generic [ref=e991]: Детали и названия раскрываем на демо при необходимости.
+          - generic [ref=e993]:
+            - generic [ref=e994]:
+              - generic [ref=e998]:
+                - heading "CRM-модернизация в enterprise-контуре" [level=6] [ref=e999]
+                - paragraph [ref=e1000]: Когда нужен быстрый пилот вокруг обращений, активностей и маршрута обработки.
+              - generic [ref=e1004]:
+                - heading "Миграции с legacy и low-code" [level=6] [ref=e1005]
+                - paragraph [ref=e1006]: Когда важно быстро зафиксировать требования и показать реалистичный путь перехода.
+              - generic [ref=e1010]:
+                - heading "Пилоты в сложном корпоративном контуре" [level=6] [ref=e1011]
+                - paragraph [ref=e1012]: Когда нужно доказать встраиваемость, прозрачность требований и управляемую поставку.
+            - button "Обсудить пилот" [ref=e1013] [cursor=pointer]
+      - generic [ref=e1017]:
+        - generic [ref=e1018]:
+          - 'heading "Снятие рисков: можно начинать с пилота без ловушек" [level=2] [ref=e1019]'
+          - paragraph [ref=e1020]: "Мы ускоряем старт и поставку, но не забираем контроль: код и развитие остаются у вас."
+        - generic [ref=e1022]:
+          - generic [ref=e1023]:
+            - generic [ref=e1025]: Question
+            - paragraph [ref=e1026]: Где ловушки?
+          - generic [ref=e1027]:
+            - generic [ref=e1029]: Artifact
+            - paragraph [ref=e1030]: Гарантийные карточки.
+          - generic [ref=e1031]: "Дальше: закрыть оставшиеся вопросы перед пилотом."
+        - generic [ref=e1032]:
+          - generic [ref=e1033]:
+            - generic [ref=e1037]:
+              - heading "Без vendor-lock" [level=6] [ref=e1038]
+              - paragraph [ref=e1039]: APLAI помогает создавать и поставлять приложения, но не становится обязательной средой исполнения. Ваше приложение может развиваться независимо.
+              - generic [ref=e1040]: Пилот = быстрый старт без необратимой зависимости
+            - generic [ref=e1044]:
+              - heading "Не low-code ловушка" [level=6] [ref=e1045]
+              - paragraph [ref=e1046]: "Быстрый старт не упирается в потолок платформы: вы сохраняете гибкость и масштабируемость для долгого развития."
+              - generic [ref=e1047]: Подходит для развития, а не только для прототипа
+          - generic [ref=e1048]:
+            - generic [ref=e1050]: Что остается у вас
+            - generic [ref=e1052]: Что нужно от вас
+            - generic [ref=e1054]: Что будет дальше
+            - generic [ref=e1056]: Контакты только по запросу
+          - generic [ref=e1057]:
+            - generic [ref=e1058]: Детали по требованиям безопасности и встраиванию в контур - в Архитектуре и FAQ.
+            - generic [ref=e1059]:
+              - button "Запросить демо" [ref=e1060] [cursor=pointer]
+              - button "Подробнее в FAQ" [ref=e1061] [cursor=pointer]
+      - generic [ref=e1065]:
+        - generic [ref=e1066]:
+          - heading "Вопросы перед пилотом" [level=2] [ref=e1067]
+          - paragraph [ref=e1068]: Если вашего вопроса нет - оставьте заявку, и мы разберем ваш сценарий на коротком созвоне.
+        - generic [ref=e1070]:
+          - generic [ref=e1071]:
+            - generic [ref=e1073]: Question
+            - paragraph [ref=e1074]: Что еще нужно понять перед пилотом?
+          - generic [ref=e1075]:
+            - generic [ref=e1077]: Artifact
+            - paragraph [ref=e1078]: Короткие FAQ-ответы.
+          - generic [ref=e1079]: "Дальше: показать, как это масштабируется после пилота."
+        - generic [ref=e1080]:
+          - paragraph [ref=e1081]: Открывайте вопросы по одному - ответы короткие.
+          - generic [ref=e1082]:
+            - heading "Как APLAI встраивается в наш корпоративный контур?" [level=3] [ref=e1083]:
+              - button "Как APLAI встраивается в наш корпоративный контур?" [expanded] [ref=e1084] [cursor=pointer]:
+                - heading "Как APLAI встраивается в наш корпоративный контур?" [level=6] [ref=e1086]
+            - region [ref=e1090]:
+              - generic [ref=e1092]:
+                - paragraph [ref=e1093]: APLAI подключается к ключевым зонам контура и делает путь до проверки результата предсказуемым. Основной контур уже показан в архитектурной секции.
+                - 'button "Подробнее: Архитектура" [ref=e1094] [cursor=pointer]'
+          - heading "Нужно ли отдельное внедрение на месяцы?" [level=3] [ref=e1096]:
+            - button "Нужно ли отдельное внедрение на месяцы?" [ref=e1097] [cursor=pointer]:
+              - heading "Нужно ли отдельное внедрение на месяцы?" [level=6] [ref=e1099]
+          - heading "Что нужно от нас для пилота?" [level=3] [ref=e1101]:
+            - button "Что нужно от нас для пилота?" [ref=e1102] [cursor=pointer]:
+              - heading "Что нужно от нас для пилота?" [level=6] [ref=e1104]
+          - heading "Что мы получим на выходе пилота?" [level=3] [ref=e1106]:
+            - button "Что мы получим на выходе пилота?" [ref=e1107] [cursor=pointer]:
+              - heading "Что мы получим на выходе пилота?" [level=6] [ref=e1109]
+          - heading "Останемся ли мы в зависимости от платформы?" [level=3] [ref=e1111]:
+            - button "Останемся ли мы в зависимости от платформы?" [ref=e1112] [cursor=pointer]:
+              - heading "Останемся ли мы в зависимости от платформы?" [level=6] [ref=e1114]
+          - heading "Чем это отличается от low-code?" [level=3] [ref=e1116]:
+            - button "Чем это отличается от low-code?" [ref=e1117] [cursor=pointer]:
+              - heading "Чем это отличается от low-code?" [level=6] [ref=e1119]
+          - heading "Что вы покажете на демо?" [level=3] [ref=e1121]:
+            - button "Что вы покажете на демо?" [ref=e1122] [cursor=pointer]:
+              - heading "Что вы покажете на демо?" [level=6] [ref=e1124]
+          - heading "Что будет после заявки?" [level=3] [ref=e1126]:
+            - button "Что будет после заявки?" [ref=e1127] [cursor=pointer]:
+              - heading "Что будет после заявки?" [level=6] [ref=e1129]
+          - generic [ref=e1131]:
+            - paragraph [ref=e1132]: После снятия последних вопросов нужен спокойный возврат к CTA.
+            - button "Обсудить пилот" [ref=e1133] [cursor=pointer]
+      - generic [ref=e1137]:
+        - generic [ref=e1138]:
+          - heading "Куда развивается APLAI" [level=2] [ref=e1139]
+          - paragraph [ref=e1140]: "Фокус сохраняется на enterprise-направлении: повторяемая поставка, контроль, масштабирование и миграции без потери гибкости."
+        - generic [ref=e1142]:
+          - generic [ref=e1143]:
+            - generic [ref=e1145]: Question
+            - paragraph [ref=e1146]: Что будет после пилота?
+          - generic [ref=e1147]:
+            - generic [ref=e1149]: Artifact
+            - paragraph [ref=e1150]: Now / Next / Later таймлайн.
+          - generic [ref=e1151]: "Дальше: перевести в запрос на пилот."
+        - generic [ref=e1152]:
+          - generic [ref=e1153]:
+            - generic [ref=e1157]:
+              - heading "Сейчас" [level=6] [ref=e1158]
+              - paragraph [ref=e1159]: • Быстрый старт приложений и повторяемая поставка.
+              - paragraph [ref=e1160]: • Усиление шаблонов под BPM, CRM и миграции.
+              - paragraph [ref=e1161]: • Более строгие conventions для AI-assisted разработки.
+            - generic [ref=e1165]:
+              - heading "Дальше" [level=6] [ref=e1166]
+              - paragraph [ref=e1167]: • Управление командами и проектами в delivery-конвейере.
+              - paragraph [ref=e1168]: • Расширение интеграций, observability и governance.
+              - paragraph [ref=e1169]: • Ускорение миграций с legacy и low-code контуров.
+            - generic [ref=e1173]:
+              - heading "Затем" [level=6] [ref=e1174]
+              - paragraph [ref=e1175]: • Набор повторно используемых бизнес-компонентов.
+              - paragraph [ref=e1176]: • Более глубокая автоматизация enterprise-контуров и политик.
+          - generic [ref=e1177]:
+            - paragraph [ref=e1178]: Дорожная карта - ориентир направления. Конкретные приоритеты уточняем под ваш сценарий пилота.
+            - button "Обсудить пилот" [ref=e1179] [cursor=pointer]
+            - generic [ref=e1180]: Обсудим, что важно именно для вашего контура.
+      - generic [ref=e1184]:
+        - generic [ref=e1185]:
+          - heading "Запросить демо APLAI" [level=2] [ref=e1186]
+          - paragraph [ref=e1187]: Покажем путь 1-5-60 и предложим формат пилота под ваш контур.
+        - generic [ref=e1189]:
+          - generic [ref=e1190]:
+            - generic [ref=e1192]: Question
+            - paragraph [ref=e1193]: Что будет после заявки?
+          - generic [ref=e1194]:
+            - generic [ref=e1196]: Artifact
+            - paragraph [ref=e1197]: Форма + 3 шага что дальше + прямой контакт.
+        - generic [ref=e1198]:
+          - paragraph [ref=e1199]: Уточним задачу -> покажем демо -> предложим план пилота
+          - generic [ref=e1202]:
+            - generic [ref=e1204]:
+              - heading "Пилот под ваш сценарий" [level=6] [ref=e1205]
+              - paragraph [ref=e1206]: За короткий цикл запускаем прикладной сценарий в вашем контуре и доводим его до проверяемого результата, чтобы вы приняли решение о следующем шаге.
+            - generic [ref=e1208]:
+              - heading "Когда это имеет смысл" [level=6] [ref=e1209]
+              - paragraph [ref=e1210]: • Есть сценарий, который важно быстро проверить.
+              - paragraph [ref=e1211]: • Нужно сократить время старта и быстрее увидеть результат.
+              - paragraph [ref=e1212]: • Важно начать безопасно и без vendor-lock.
+            - generic [ref=e1214]:
+              - heading "Когда это не подходит" [level=6] [ref=e1215]
+              - paragraph [ref=e1216]: • Нет владельца сценария и критериев готовности.
+              - paragraph [ref=e1217]: • Ожидается, что все сделают без участия вашей команды.
+              - paragraph [ref=e1218]: • Нужен финальный production без этапа проверки и итераций.
+          - generic [ref=e1219]:
+            - generic [ref=e1223]:
+              - generic [ref=e1226]:
+                - heading "Что дальше" [level=6] [ref=e1227]
+                - paragraph [ref=e1228]: 1) Уточним сценарий и контур. 2) Проведем демо. 3) Предложим план пилота
+              - generic [ref=e1230]:
+                - generic [ref=e1231]:
+                  - generic: Компания
+                  - generic [ref=e1232]:
+                    - textbox "Компания" [ref=e1233]:
+                      - /placeholder: "Например: Компания N"
+                    - group:
+                      - generic: Компания
+                  - paragraph [ref=e1234]: Опционально. Поможет подготовить демо под ваш контур.
+                - generic [ref=e1235]:
+                  - generic: Роль
+                  - generic [ref=e1236]:
+                    - combobox "Роль" [ref=e1237] [cursor=pointer]:
+                      - paragraph [ref=e1238]: Выберите
+                    - textbox
+                    - img
+                    - group:
+                      - generic: Роль *
+                - generic [ref=e1239]:
+                  - generic:
+                    - text: Контакт
+                    - generic: "*"
+                  - generic [ref=e1240]:
+                    - textbox "Контакт" [ref=e1241]:
+                      - /placeholder: Email или телефон
+                    - group:
+                      - generic: Контакт *
+                  - paragraph [ref=e1242]: Используем только для связи по запросу
+                - generic [ref=e1243]:
+                  - generic: Коротко о задаче
+                  - generic [ref=e1244]:
+                    - textbox "Коротко о задаче" [ref=e1245]:
+                      - /placeholder: "1-2 предложения: что хотите ускорить или запустить"
+                    - group:
+                      - generic: Коротко о задаче
+                  - paragraph [ref=e1246]: "Опционально. Например: нужен быстрый пилот CRM, процессов или миграции"
+                - generic [ref=e1247]:
+                  - generic [ref=e1249]: 10-15 минут демо
+                  - generic [ref=e1251]: Без vendor-lock
+                - paragraph [ref=e1252]: Не передаем контакты в аналитику. Используем только для связи по запросу.
+                - generic [ref=e1254]:
+                  - button "Запросить демо" [disabled]
+                  - link "Написать напрямую" [ref=e1255] [cursor=pointer]:
+                    - /url: mailto:hello@aplai.dev
+            - generic [ref=e1257]:
+              - generic [ref=e1260]:
+                - heading "Нужен быстрый старт?" [level=6] [ref=e1261]
+                - paragraph [ref=e1262]: Можно открыть форму в модальном окне и отправить запрос без скролла.
+                - button "Запросить демо" [ref=e1263] [cursor=pointer]
+              - generic [ref=e1266]:
+                - heading "Связаться напрямую" [level=6] [ref=e1267]
+                - paragraph [ref=e1268]: Если удобнее без формы, напишите напрямую. Используем этот канал только для связи по вашему запросу.
+                - link "Написать напрямую" [ref=e1269] [cursor=pointer]:
+                  - /url: mailto:hello@aplai.dev
+              - generic [ref=e1272]:
+                - heading "Входит в пилот" [level=6] [ref=e1273]
+                - paragraph [ref=e1274]: • Работающий и проверяемый сценарий.
+                - paragraph [ref=e1275]: • Демонстрация результата на встрече.
+                - paragraph [ref=e1276]: • План следующего шага и границ масштабирования.
+                - paragraph [ref=e1277]: • Прозрачный список условий для продолжения.
+                - separator [ref=e1278]
+                - heading "Не входит в пилот" [level=6] [ref=e1279]
+                - paragraph [ref=e1280]: • Полный production-запуск как финальная цель.
+                - paragraph [ref=e1281]: • Все интеграции и все требования сразу.
+                - paragraph [ref=e1282]: • Универсальная коробка без адаптации.
+              - generic [ref=e1285]:
+                - heading "Критерии успеха" [level=6] [ref=e1286]
+                - paragraph [ref=e1287]: • Сценарий доведен до проверяемого результата.
+                - paragraph [ref=e1288]: • Понятен следующий шаг для расширения или масштабирования.
+                - paragraph [ref=e1289]: • Сняты ключевые риски по встраиваемости и vendor-lock.
+                - paragraph [ref=e1290]: • Ритм поставки доказан на выбранном сценарии.
+              - generic [ref=e1293]:
+                - heading "Что нужно от вас" [level=6] [ref=e1294]
+                - paragraph [ref=e1295]: • Владелец сценария со стороны Product / Business.
+                - paragraph [ref=e1296]: • Контакт со стороны IT для согласования контуров.
+                - paragraph [ref=e1297]: • Согласованные границы пилота и критерии успеха.
+                - heading "Желательно" [level=6] [ref=e1298]
+                - paragraph [ref=e1299]: • Описание текущего процесса.
+                - paragraph [ref=e1300]: • Понимание приоритетной интеграции, если она нужна на пилоте.
+                - paragraph [ref=e1301]: Мы заранее говорим, что нужно от вас, без сюрпризов в процессе.
+              - generic [ref=e1304]:
+                - heading "Почему пилот безопасен" [level=6] [ref=e1305]
+                - paragraph [ref=e1306]: "• Без vendor-lock: результат остается вашим активом."
+                - paragraph [ref=e1307]: "• Прозрачные условия: что нужно от вашей стороны известно заранее."
+                - paragraph [ref=e1308]: "• Сфокусированный объем: один сценарий -> один результат."
+                - paragraph [ref=e1309]: "• Следующий шаг понятен: после результата фиксируем план масштабирования."
+    - contentinfo [ref=e1310]:
+      - generic [ref=e1312]:
+        - generic [ref=e1313]:
+          - generic [ref=e1315]:
+            - paragraph [ref=e1316]: APLAI landing prototype. Demo flow and trust path for enterprise leads.
+            - paragraph [ref=e1317]: © 2026 APLAI
+          - generic [ref=e1319]:
+            - heading "Навигация" [level=6] [ref=e1320]
+            - generic [ref=e1321]:
+              - button "Как это работает" [ref=e1322] [cursor=pointer]
+              - button "Архитектура" [ref=e1323] [cursor=pointer]
+              - button "Демо" [ref=e1324] [cursor=pointer]
+              - button "Шаблоны" [ref=e1325] [cursor=pointer]
+              - button "Гарантии" [ref=e1326] [cursor=pointer]
+              - button "FAQ" [ref=e1327] [cursor=pointer]
+          - generic [ref=e1329]:
+            - heading "Контакты" [level=6] [ref=e1330]
+            - link "Написать напрямую" [ref=e1332] [cursor=pointer]:
+              - /url: mailto:hello@aplai.dev
+        - separator [ref=e1333]
+        - generic [ref=e1334]:
+          - generic [ref=e1335]: © 2026 APLAI. All rights reserved.
+          - generic [ref=e1336]: Информация на сайте носит ознакомительный характер.
+  - alert [ref=e1337]

@@ -1,0 +1,17 @@
+▲ Next.js 16.1.6 (webpack)
+- Local:         http://127.0.0.1:3010
+- Network:       http://127.0.0.1:3010
+
+✓ Starting...
+Error: An IO error occurred while attempting to create and acquire the lockfile
+    at ignore-listed frames {
+  [cause]: Error: Access is denied. (os error 5)
+      at ignore-listed frames {
+    code: 'GenericFailure'
+  }
+}
+[?25h
+undefined
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command "next" not found
+
+Did you mean "pnpm exec next"?

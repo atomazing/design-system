@@ -1,0 +1,39 @@
+{
+  "name": "design-system-next-app-router-reference",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@9.14.4",
+  "scripts": {
+    "predev": "pnpm --dir ../.. build && node -e \"try{require('node:fs').rmSync('.next',{recursive:true,force:true});}catch{}\"",
+    "dev": "next dev --webpack",
+    "prebuild": "pnpm --dir ../.. build",
+    "build": "next build && node tools/export-static-to-dist.mjs",
+    "start": "node tools/serve-dist.mjs",
+    "lint:eslint": "eslint .",
+    "lint:ts": "tsc --noEmit",
+    "lint": "pnpm run lint:eslint && pnpm run lint:ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@atomazing-org/design-system": "workspace:*",
+    "@emotion/cache": "11.14.0",
+    "@emotion/react": "11.14.0",
+    "@emotion/styled": "11.14.1",
+    "@mui/icons-material": "7.3.8",
+    "@mui/material": "7.3.8",
+    "@mui/material-nextjs": "7.3.8",
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "@types/node": "25.3.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.3",
+    "eslint-config-next": "16.1.6",
+    "typescript": "5.9.3"
+  }
+}

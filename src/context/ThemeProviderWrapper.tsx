@@ -31,6 +31,14 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
    * When set, `setDarkMode` becomes a no-op.
    */
   darkMode?: DarkModeOptions;
+  /**
+   * Initial theme id used as fallback when persisted settings are not available.
+   */
+  initialThemeId?: string;
+  /**
+   * Initial dark mode used as fallback when persisted settings are not available.
+   */
+  initialDarkMode?: DarkModeOptions;
 }>;
 
 export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
@@ -38,6 +46,8 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   fontFamily,
   themes,
   darkMode: darkModeProp,
+  initialThemeId,
+  initialDarkMode,
 }) => {
   const systemTheme = useSystemTheme();
   const {
@@ -48,7 +58,12 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
     themesSource,
     selectedTheme,
     selectedPreset,
-  } = usePersistedAppSettings({ themes, defaultDarkMode: darkModeProp });
+  } = usePersistedAppSettings({
+    themes,
+    defaultDarkMode: darkModeProp,
+    initialThemeId,
+    initialDarkMode,
+  });
 
   const darkMode = darkModeProp ?? persistedDarkMode;
   const setDarkMode = useMemo(

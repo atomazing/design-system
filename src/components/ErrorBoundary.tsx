@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/class-methods-use-this -- only for ErrorBoundary */
 import React from "react";
 import styled from "@emotion/styled";
-import ErrorOutlineRounded from "@mui/icons-material/ErrorOutlineRounded";
 import { Box } from "@mui/material";
 
 import type { ErrorInfo } from "react";
@@ -53,19 +52,13 @@ export class ErrorBoundary extends React.Component<
           </ErrorHeader>
           <h3>
             <Box style={{ color: "#ff3131", display: "inline-block" }}>
-              <ErrorOutlineRounded
-                sx={{ verticalAlign: "middle", mb: "4px" }}
-              />{" "}
               ERROR:
             </Box>{" "}
             <Box translate="no">
               [{state.error?.name}] {state.error?.message}
             </Box>
             <Box style={{ color: "#ff3131", display: "inline-block" }}>
-              <ErrorOutlineRounded
-                sx={{ verticalAlign: "middle", mb: "4px" }}
-              />{" "}
-              Stack:
+              STACK:
             </Box>{" "}
             <Box translate="no">[{state.error?.stack}]</Box>
           </h3>

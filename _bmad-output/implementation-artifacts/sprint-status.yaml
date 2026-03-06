@@ -1,0 +1,109 @@
+# generated: 2026-03-01
+# project: next-app-router-aplai
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: backlog/06_next-app-router-aplai
+#
+# STATUS DEFINITIONS:
+# Epic Status:
+#   - backlog
+#   - in-progress
+#   - done
+#
+# Story Status:
+#   - backlog
+#   - ready-for-dev
+#   - in-progress
+#   - review
+#   - done
+#
+# Retrospective Status:
+#   - optional
+#   - done
+#
+# Scope note:
+# - This sprint-status file is scoped to the `examples/next-app-router` APLAI execution track.
+# - Story-level source of truth remains the APLAI delivery board and review gates.
+
+generated: 2026-03-01
+project: next-app-router-aplai
+project_key: NOKEY
+tracking_system: file-system
+story_location: backlog/06_next-app-router-aplai
+
+development_status:
+  epic-0: done
+  0-01-lock-cta-route-policy: done
+  0-02-lock-trust-logo-publication-policy: done
+  0-03-lock-analytics-consent-policy: done
+  epic-0-retrospective: optional
+  epic-1: done
+  1-01-aplai-message-map: done
+  1-02-aplai-icp-pack: done
+  1-03-aplai-value-proposition-framework: done
+  1-04-aplai-content-blueprint: done
+  1-05-aplai-ux-rhythm-visual-rules: done
+  1-06-aplai-scroll-journey-navigation: done
+  1-07-aplai-copy-pack-v1: done
+  1-08-aplai-glossary-term-rules: done
+  1-09-aplai-microcopy-system: done
+  1-10-aplai-conversion-architecture: done
+  epic-1-retrospective: optional
+  epic-2: done
+  2-01-aplai-landing-section-header: done
+  2-02-aplai-landing-section-hero: done
+  2-03-aplai-landing-section-proof-strip: done
+  2-04-aplai-landing-section-problem: done
+  2-05-aplai-landing-section-outcomes: done
+  2-06-aplai-landing-section-mechanism: done
+  2-07-aplai-landing-section-how-it-works: done
+  2-08-aplai-landing-section-value-proposition: done
+  2-09-aplai-landing-section-not-low-code: done
+  epic-2-retrospective: optional
+  epic-3: done
+  3-01-aplai-landing-section-architecture-reactflow: done
+  3-02-aplai-landing-section-demo-anchor: done
+  3-03-aplai-landing-section-templates-gallery: done
+  3-04-aplai-demo-narrative-spec: done
+  3-05-aplai-pilot-offer-one-pager: done
+  3-06-aplai-architecture-ux-concept: done
+  3-07-aplai-architecture-drawer-content-pack: done
+  3-08-aplai-pipeline-ux-spec: done
+  epic-3-retrospective: optional
+  epic-4: done
+  4-01-aplai-landing-section-trust-showcase: done
+  4-02-aplai-landing-section-guarantees: done
+  4-03-aplai-landing-section-faq: done
+  4-04-aplai-landing-section-social-proof: done
+  4-05-aplai-faq-strategy-outline: done
+  4-06-aplai-risk-reversal-pack: done
+  4-07-aplai-proof-stack: done
+  4-08-aplai-trust-content-policy: done
+  epic-4-retrospective: optional
+  epic-5: done
+  5-01-aplai-landing-section-final-cta: done
+  5-02-aplai-landing-section-footer: done
+  5-03-aplai-landing-section-roadmap: done
+  5-04-aplai-landing-section-sticky-cta-rail: done
+  5-05-aplai-landing-pattern-lead-form-modal: done
+  5-06-aplai-landing-pattern-page-blueprint: done
+  5-07-aplai-lead-capture-ux-spec: done
+  5-08-aplai-form-trust-friction-spec: done
+  epic-5-retrospective: optional
+  epic-6: done
+  6-01-aplai-page-variants-strategy: done
+  6-02-aplai-content-qa-checklist: done
+  6-03-aplai-content-governance: done
+  6-04-aplai-sales-use-cases: done
+  6-05-aplai-one-liners-pack: done
+  6-06-aplai-champion-pack: done
+  6-07-aplai-internal-alignment-pack: done
+  6-08-aplai-lead-qualification-pack: done
+  6-09-aplai-post-demo-next-steps-pack: done
+  epic-6-retrospective: optional
+  epic-7: done
+  7-01-aplai-mobile-ux-guidance: done
+  7-02-aplai-desktop-ux-guidance: done
+  7-03-aplai-landing-validation-plan: done
+  7-04-aplai-content-backlog-v1: done
+  epic-7-retrospective: optional

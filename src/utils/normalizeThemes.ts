@@ -2,7 +2,8 @@ import type { ThemesInput } from "@/context/settings/themeTypes";
 import type { NormalizedPreset, ThemePreset } from "@/models/themePresets";
 import type { ThemeOptions } from "@mui/material/styles";
 
-const DEFAULT_PRESET_ID = "Default";
+const DEFAULT_PRESET_ID = "default";
+const PRESET_ID_SLUG_RE = /^[\da-z]+(?:-[\da-z]+)*$/;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;
@@ -11,6 +12,11 @@ const normalizeId = (id: string | undefined): string => {
   const normalized = id?.trim();
   if (!normalized) {
     throw new Error("normalizeThemesInput: preset `id` must be a non-empty.");
+  }
+  if (!PRESET_ID_SLUG_RE.test(normalized)) {
+    throw new Error(
+      `normalizeThemesInput: preset \`id\` must be a slug, got "${normalized}".`,
+    );
   }
   return normalized;
 };
@@ -98,7 +104,7 @@ const dedupePresets = (presets: NormalizedPreset[]): NormalizedPreset[] => {
 
 const createDefaultPreset = (): NormalizedPreset => ({
   id: DEFAULT_PRESET_ID,
-  label: DEFAULT_PRESET_ID,
+  label: "Default",
   colorSchemes: { light: {}, dark: {} },
   meta: { origin: "custom" },
 });
@@ -115,3 +121,5 @@ export const normalizeThemesInput = (
 
   return dedupePresets(normalized);
 };
+
+export const PRESET_ID_SLUG_REGEX = PRESET_ID_SLUG_RE;

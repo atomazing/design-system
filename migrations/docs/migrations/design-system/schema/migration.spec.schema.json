@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atomazing.org/schemas/design-system/migration.spec.schema.json",
+  "title": "Design System Migration Spec",
+  "type": "object",
+  "required": ["id", "title", "steps"],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "detect": {
+      "type": "object",
+      "properties": {
+        "packageJson": {
+          "type": "object",
+          "properties": {
+            "anyDependencies": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "allDependencies": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "entryConditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "exitConditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "run": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "manualReview": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

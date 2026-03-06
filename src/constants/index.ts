@@ -1,2 +1,2 @@
+export * from "./darkModeOptions";
 export * from "./themes";
-export { darkModeOptions } from "./darkModeOptions";

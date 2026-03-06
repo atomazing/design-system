@@ -4,11 +4,10 @@ import type { ReactNode } from "react";
 /**
  * Available options for dark mode configuration.
  * - `system`: Follows the operating system preference.
- * - `auto`: Alias of `system` (no contrast-based detection in current contract).
  * - `light`: Forces light mode.
  * - `dark`: Forces dark mode.
  */
-export type DarkModeOptions = "system" | "auto" | "light" | "dark";
+export type DarkModeOptions = "system" | "light" | "dark";
 
 export interface OptionItem {
   label: string;
@@ -30,10 +29,10 @@ export type NamedThemeOptions = ThemeOptions & {
  */
 export interface AppSettings {
   /**
-   * The selected theme name from the available themes list.
+   * The selected preset id from the available themes list.
    * Invalid or missing values are normalized to the first available theme.
    */
-  theme: string;
+  themeId: string;
 
   /**
    * Controls how dark mode is applied in the app.

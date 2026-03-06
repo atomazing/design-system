@@ -1,0 +1,4 @@
+kind,from,to,notes,enabled
+literal,colors.primary,"(t) => t.palette.brand.main","пример: локальный colors.primary → theme.palette.brand.main",false
+literal,colors.accent,"(t) => t.palette.accent.main",,"",false
+regex,"\\bspacing\\((\\d+)\\)","(t) => t.spacing($1)","пример: перенос spacing() на theme.spacing",false

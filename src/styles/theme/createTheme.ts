@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-import type { ThemeModeBackground } from "@/models";
+import type { ThemeModeBackground } from "@/models/appSettings";
 import type { PaletteMode, Theme, ThemeOptions } from "@mui/material/styles";
 
 type ThemeInput = ThemeOptions & {

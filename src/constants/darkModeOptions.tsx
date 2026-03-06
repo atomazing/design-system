@@ -1,23 +1,13 @@
-import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import PersonalVideoRoundedIcon from "@mui/icons-material/PersonalVideoRounded";
 
 import type { OptionItem } from "@/models";
 
+// Keep `@mui/icons-material` as a peer dependency: this export is public.
 const OPTION_ICON_SIZE = 32;
 
 export const darkModeOptions: OptionItem[] = [
-  {
-    label: "Auto",
-    value: "auto",
-    icon: (
-      <BrightnessAutoRoundedIcon
-        color="inherit"
-        sx={{ fontSize: OPTION_ICON_SIZE }}
-      />
-    ),
-  },
   {
     label: "System",
     value: "system",

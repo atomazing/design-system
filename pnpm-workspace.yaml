@@ -1,0 +1,4 @@
+packages:
+  - "examples/next-app-router"
+  - "examples/react-app"
+

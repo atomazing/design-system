@@ -1,10 +1,10 @@
 import { normalizeThemesInput } from "@/utils/normalizeThemes";
 
 import type { ThemesInput } from "./themeTypes";
-import type { DarkModeOptions, NamedThemeOptions } from "@/models";
+import type { DarkModeOptions, NamedThemeOptions } from "@/models/appSettings";
 import type { NormalizedPreset } from "@/models/themePresets";
 
-const DEFAULT_THEME_NAME = "Default";
+const DEFAULT_THEME_NAME = "default";
 
 const presetToTheme = (preset: NormalizedPreset): NamedThemeOptions => ({
   name: preset.id,

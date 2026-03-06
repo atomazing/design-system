@@ -1,0 +1,59 @@
+{
+  "$schema": "../../schema/migration.spec.schema.json",
+  "id": "greenfield",
+  "title": "Greenfield install of @atomazing-org/design-system",
+  "entryConditions": ["package.json exists"],
+  "exitConditions": [
+    "ThemeProviderWrapper is connected at the app root",
+    "the app boots cleanly on the first route",
+    "tests and build are green"
+  ],
+  "steps": [
+    {
+      "name": "Baseline",
+      "manualReview": [
+        "Confirm the repo installs and the normal validation commands can run.",
+        "Record any pre-existing setup failures separately from integration defects."
+      ]
+    },
+    {
+      "name": "Add deps",
+      "manualReview": [
+        "Edit package.json directly and add @atomazing-org/design-system:<SET_VERSION>, @mui/material:^7, @mui/icons-material:^7, @emotion/react:^11, and @emotion/styled:^11.",
+        "Preserve the target repository package manager conventions and lockfile strategy."
+      ]
+    },
+    {
+      "name": "Install deps",
+      "manualReview": [
+        "Install dependencies with the target repository package manager (npm, pnpm, yarn, or bun)."
+      ]
+    },
+    {
+      "name": "Manual integration",
+      "manualReview": [
+        "Connect ThemeProviderWrapper at the application root.",
+        "If the app exposes multiple presets, keep selection in one explicit app-level theme module.",
+        "If Next.js or another SSR framework is in use, ensure the provider lives in a client boundary."
+      ]
+    },
+    {
+      "name": "Runtime boot verification",
+      "manualReview": [
+        "Start the app with the repo's normal dev/start command and open the first route in a real browser.",
+        "Fix startup console errors before closeout.",
+        "Keep browser-only APIs out of module scope during initial provider integration.",
+        "If the app shell exposes a dedicated workspace or content pane, verify the first route root fills that region instead of shrinking to intrinsic content width.",
+        "If the app ships non-Latin copy or localized mocks, scan for mojibake or replacement characters and verify readable text on the first route."
+      ]
+    },
+    {
+      "name": "Quality",
+      "manualReview": [
+        "Run the target repository quality gates with its package manager: lint, tests, and build (when available).",
+        "If the repository provides smoke, style-contract, design-contract, or typography-contract checks, include them in closeout."
+      ]
+    }
+  ],
+  "gates": ["lint", "tests", "build"]
+}

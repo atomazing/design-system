@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createTheme } from "@mui/material/styles";
 
+import { allBuiltInThemes, defaultThemes, landingPageThemes } from "@/presets";
 import { typographyVariants } from "@/styles/typography";
 
 describe("Phase 01 baseline reproduction (code-level)", () => {
@@ -30,5 +31,28 @@ describe("Phase 01 baseline reproduction (code-level)", () => {
     expect(String(textMd?.lineHeight)).toContain("rem");
     expect(String(headerMd?.fontSize)).toContain("rem");
     expect(String(headerMd?.lineHeight)).toContain("rem");
+  });
+
+  it("keeps landing presets separate from the default preset pack", () => {
+    expect(defaultThemes.map((preset) => preset.id)).toEqual([
+      "editorial-classic",
+      "airport-ops",
+      "modern-minimal",
+      "neo-glass",
+      "retro-terminal",
+      "warm-earth",
+    ]);
+    expect(landingPageThemes).toHaveLength(21);
+    expect(landingPageThemes.some((preset) => preset.id === "brand-neon-motion")).toBe(true);
+    expect(landingPageThemes.some((preset) => preset.id === "neon-bauhaus-grid")).toBe(true);
+    expect(landingPageThemes.some((preset) => preset.id === "neon-bauhaus-ops")).toBe(true);
+    expect(allBuiltInThemes).toHaveLength(
+      defaultThemes.length + landingPageThemes.length,
+    );
+    expect(
+      landingPageThemes.some((preset) =>
+        defaultThemes.some((defaultPreset) => defaultPreset.id === preset.id),
+      ),
+    ).toBe(false);
   });
 });

@@ -1,6 +1,6 @@
 import { alpha } from "@mui/material/styles";
 
-import type { NamedThemeOptions } from "@/models";
+import type { NamedThemeOptions } from "@/models/appSettings";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 /**

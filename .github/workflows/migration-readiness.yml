@@ -1,0 +1,44 @@
+name: Migration Readiness
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/migration-readiness.yml"
+      - "migrations/**"
+      - "tools/checks/migration-readiness.mjs"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".gitignore"
+  push:
+    branches: ["master", "main"]
+    paths:
+      - ".github/workflows/migration-readiness.yml"
+      - "migrations/**"
+      - "tools/checks/migration-readiness.mjs"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".gitignore"
+
+jobs:
+  check-migration-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.19.0"
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.14.4
+
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run migration readiness preflight
+        run: pnpm run check:migration-readiness
