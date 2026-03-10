@@ -183,7 +183,7 @@ const createComponents = (): ThemeOptions["components"] => ({
           `linear-gradient(0deg, ${alpha(theme.palette.text.primary, 0.04)} 1px, transparent 1px)`,
           `linear-gradient(90deg, ${alpha(theme.palette.text.primary, 0.03)} 1px, transparent 1px)`,
           `radial-gradient(1400px 520px at 10% 0%, ${alpha(theme.palette.secondary.main, 0.1)} 0%, transparent 55%)`,
-          `radial-gradient(1200px 520px at 90% 0%, ${alpha("#00A3FF", 0.06)} 0%, transparent 58%)`,
+          `radial-gradient(1200px 520px at 90% 0%, ${alpha(theme.palette.info.main, 0.06)} 0%, transparent 58%)`,
         ].join(", "),
         backgroundSize: "28px 28px, 34px 34px, auto, auto",
         backgroundAttachment: "fixed",

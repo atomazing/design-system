@@ -1,39 +1,46 @@
-import { Box, Container, Divider, Stack, Typography } from "@mui/material";
+import { Button, Divider, Paper, Stack, Typography } from "@mui/material";
 
-import { FocusedPageHeader } from "@/components/ui/FocusedPageHeader";
+import { MuiNextLink } from "@/components/ui/MuiNextLink";
+import {
+  StarterIntroPanel,
+  StarterPageShell,
+} from "@/components/ui/StarterPageShell";
 import { exampleThemes } from "@/theme/exampleThemes";
 
 export default function PresetsPage() {
   return (
-    <Box sx={{ minHeight: "calc(100svh - var(--starter-header-height))", py: { xs: 3, md: 4 } }}>
-      <Container maxWidth="md">
-        <Stack spacing={4}>
-          <FocusedPageHeader
-            eyebrow="Пресеты"
-            title="Выберите визуальное направление."
-            description="Просмотрите набор пресетов, используемый в стартовом шаблоне."
-            primaryAction={{ href: "/debug/theme", label: "Настройки темы" }}
-            secondaryAction={{ href: "/", label: "Главная" }}
-          />
+    <StarterPageShell>
+      <StarterIntroPanel
+        title="Preset pack"
+        description="The starter keeps preset selection explicit in one app-owned theme module."
+        actions={
+          <>
+            <Button component={MuiNextLink} href="/debug/theme" variant="text">
+              <Typography component="span" variant="subtitle2">
+                Open theme controls
+              </Typography>
+            </Button>
+            <Button component={MuiNextLink} href="/" variant="text">
+              <Typography component="span" variant="subtitle2">
+                Back home
+              </Typography>
+            </Button>
+          </>
+        }
+      />
 
-          <Stack divider={<Divider flexItem />} spacing={2.5}>
-            {exampleThemes.map((preset) => (
-              <Stack
-                key={preset.id}
-                direction={{ xs: "column", sm: "row" }}
-                spacing={1}
-                justifyContent="space-between"
-                alignItems={{ xs: "flex-start", sm: "baseline" }}
-              >
-                <Typography variant="text_md_semibold">{preset.label}</Typography>
-                <Typography variant="text_sm_regular" color="text.secondary">
-                  {preset.id}
-                </Typography>
-              </Stack>
-            ))}
-          </Stack>
+      <Paper variant="outlined" sx={{ p: 3 }}>
+        <Stack divider={<Divider flexItem />} spacing={2}>
+          {exampleThemes.map((preset: (typeof exampleThemes)[number]) => (
+            <Stack key={preset.id} spacing={0.5}>
+              <Typography variant="h6">{preset.label}</Typography>
+              <Typography variant="body2" color="text.secondary">
+                {preset.id}
+              </Typography>
+            </Stack>
+          ))}
         </Stack>
-      </Container>
-    </Box>
+      </Paper>
+    </StarterPageShell>
   );
 }

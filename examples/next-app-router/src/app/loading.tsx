@@ -2,12 +2,15 @@ import { Box, Card, CardContent, Container, LinearProgress, Stack, Typography } 
 
 export default function Loading() {
   return (
-    <Box sx={{ minHeight: "calc(100svh - var(--starter-header-height))", py: 2 }}>
+    <Box sx={{ minHeight: "100vh", py: 2 }}>
       <Container maxWidth="lg">
         <Card elevation={0}>
           <CardContent>
             <Stack spacing={2}>
-              <Typography variant="header_xs_semibold">Загрузка...</Typography>
+              <Typography variant="h6">Loading reference page…</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Next.js route loading state for the App Router example.
+              </Typography>
               <LinearProgress />
             </Stack>
           </CardContent>

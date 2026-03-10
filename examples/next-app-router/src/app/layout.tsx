@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 import { AppProviders } from "@/components/providers/AppProviders";
-import { AppHeader } from "@/components/ui/AppHeader";
-import { starterFontVariables } from "@/theme/appFonts";
 
 import "./globals.css";
 
@@ -12,12 +10,12 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Запускайте быстрее со стартовым шаблоном дизайн-системы",
-    template: "%s | Стартовый шаблон дизайн-системы",
+    default: "Design System Next.js Static Export Reference",
+    template: "%s | DS Next Static Reference",
   },
   description:
-    "Стартовый шаблон на Next.js в продуктовом стиле для @atomazing-org/design-system с пресетами, настройками темы, диагностикой рантайма, визуальной проверкой и подтверждением статического экспорта.",
-  applicationName: "Стартовый шаблон дизайн-системы",
+    "Reference integration of @atomazing-org/design-system with Next.js App Router static export and MUI.",
+  applicationName: "DS Next Static Reference",
   alternates: {
     canonical: "/",
   },
@@ -26,17 +24,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "Стартовый шаблон дизайн-системы",
-    title: "Запускайте быстрее со стартовым шаблоном дизайн-системы",
+    siteName: "DS Next Static Reference",
+    title: "Design System Next.js Static Export Reference",
     description:
-      "Стартовый шаблон на Next.js в продуктовом стиле для @atomazing-org/design-system с пресетами, настройками темы, диагностикой рантайма, визуальной проверкой и подтверждением статического экспорта.",
+      "Reference integration of @atomazing-org/design-system with Next.js App Router static export and MUI.",
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Запускайте быстрее со стартовым шаблоном дизайн-системы",
+    title: "Design System Next.js Static Export Reference",
     description:
-      "Стартовый шаблон на Next.js в продуктовом стиле для @atomazing-org/design-system с пресетами, настройками темы, диагностикой рантайма, визуальной проверкой и подтверждением статического экспорта.",
+      "Reference integration of @atomazing-org/design-system with Next.js App Router static export and MUI.",
   },
 };
 
@@ -53,13 +51,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body className={starterFontVariables}>
+    <html lang="en">
+      <body>
         <AppRouterCacheProvider>
-          <AppProviders>
-            <AppHeader />
-            {children}
-          </AppProviders>
+          <AppProviders>{children}</AppProviders>
         </AppRouterCacheProvider>
       </body>
     </html>

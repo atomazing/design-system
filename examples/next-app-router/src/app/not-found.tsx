@@ -1,19 +1,29 @@
-import { Box, Container, Stack } from "@mui/material";
-
-import { FocusedPageHeader } from "@/components/ui/FocusedPageHeader";
+import { Box, Button, Card, CardContent, Container, Stack, Typography } from "@mui/material";
 
 export default function NotFoundPage() {
   return (
-    <Box sx={{ minHeight: "calc(100svh - var(--starter-header-height))", py: { xs: 3, md: 4 } }}>
+    <Box sx={{ minHeight: "100vh", py: 2 }}>
       <Container maxWidth="md">
-        <Stack spacing={4}>
-          <FocusedPageHeader
-            eyebrow="404"
-            title="Страница не найдена"
-            description="Открытая страница не существует."
-            primaryAction={{ href: "/", label: "Главная" }}
-          />
-        </Stack>
+        <Card elevation={0}>
+          <CardContent>
+            <Stack spacing={2}>
+              <Typography variant="h4" component="h1">
+                Page not found
+              </Typography>
+              <Typography color="text.secondary">
+                This route does not exist in the Next.js SSR reference example.
+              </Typography>
+              <Stack direction="row" spacing={1}>
+                <Button href="/" variant="contained">
+                  Go to home
+                </Button>
+                <Button href="/showcase" variant="outlined">
+                  Open showcase
+                </Button>
+              </Stack>
+            </Stack>
+          </CardContent>
+        </Card>
       </Container>
     </Box>
   );

@@ -1,331 +1,251 @@
 "use client";
 
 import {
-  Avatar,
+  Alert,
+  Box,
   Button,
   Card,
   CardActions,
   CardContent,
   Chip,
   Divider,
-  List,
-  ListItem,
-  ListItemText,
   Paper,
   Stack,
+  Tab,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Tabs,
   TextField,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 
 export function CanonicalThemeProbe() {
   const theme = useTheme();
-  const radius = typeof theme.shape.borderRadius === "number" ? theme.shape.borderRadius : 0;
-  const modeLabel = theme.palette.mode === "dark" ? "темный" : "светлый";
-
-  const swatches = [
-    {
-      label: "Основной",
-      bg: theme.palette.primary.main,
-      fg: theme.palette.primary.contrastText,
-    },
-    {
-      label: "Дополнительный",
-      bg: theme.palette.secondary.main,
-      fg: theme.palette.secondary.contrastText,
-    },
-    {
-      label: "Поверхность",
-      bg: theme.palette.background.paper,
-      fg: theme.palette.text.primary,
-    },
-    {
-      label: "Фон",
-      bg: theme.palette.background.default,
-      fg: theme.palette.text.primary,
-    },
-  ] as const;
+  const radius =
+    typeof theme.shape.borderRadius === "number" ? theme.shape.borderRadius : 0;
 
   return (
     <Stack spacing={2}>
-      <Card elevation={0}>
-        <CardContent>
-          <Stack spacing={1.5}>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={1}
-              justifyContent="space-between"
-              alignItems={{ xs: "flex-start", sm: "center" }}
-            >
-              <Typography variant="header_xs_semibold">Обзор поверхностей</Typography>
-              <Chip
-                label={
-                  <Typography component="span" variant="text_xs_semibold" color="inherit">
-                    {`режим: ${modeLabel}`}
-                  </Typography>
-                }
-                color="primary"
-                size="small"
-                variant="outlined"
-              />
-            </Stack>
-
-            <Divider />
-
-            <Stack spacing={0.5}>
-              <Typography variant="header_sm_semibold">Типографика</Typography>
-              <Typography variant="text_md_semibold">
-                Пример подзаголовка в активном пресете
+      <Paper elevation={0} sx={{ p: 2.5 }}>
+        <Stack spacing={1.25}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={1}
+            justifyContent="space-between"
+            alignItems={{ xs: "flex-start", sm: "center" }}
+          >
+            <Box>
+              <Typography variant="h6">Canonical Theme Probe</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Local probe for this Next example.
               </Typography>
-              <Typography variant="text_md_regular">
-                Пример текста для сравнения семейства шрифта, интервалов и насыщенности.
-              </Typography>
-              <Typography variant="text_xs_regular" color="text.secondary">
-                {theme.typography.fontFamily}
-              </Typography>
-            </Stack>
-
-            <Stack direction="row" spacing={{ xs: 2, sm: 3 }} useFlexGap flexWrap="wrap">
-              {swatches.map((swatch) => (
-                <Stack key={swatch.label} spacing={1} alignItems="center">
-                  <Avatar
-                    sx={{
-                      width: 56,
-                      height: 56,
-                      bgcolor: swatch.bg,
-                      color: swatch.fg,
-                      border: "1px solid",
-                      borderColor: "divider",
-                    }}
-                  >
-                    <Typography variant="text_xs_semibold">
-                      {swatch.label.slice(0, 1)}
-                    </Typography>
-                  </Avatar>
-                  <Typography variant="text_xs_regular" color="text.secondary">
-                    {swatch.label}
-                  </Typography>
-                </Stack>
-              ))}
-            </Stack>
+            </Box>
+            <Chip
+              label={`mode: ${theme.palette.mode}`}
+              color="primary"
+              size="small"
+              variant="outlined"
+            />
           </Stack>
-        </CardContent>
-      </Card>
+
+          <Divider />
+
+          <Stack spacing={0.5}>
+            <Typography variant="h4">Aa - Typography probe</Typography>
+            <Typography variant="subtitle1">
+              Subtitle sample with active preset typography
+            </Typography>
+            <Typography variant="body1">
+              Body sample sentence to compare font family, spacing, and weight
+              across presets.
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              {theme.typography.fontFamily}
+            </Typography>
+          </Stack>
+
+          <Box
+            sx={{
+              display: "grid",
+              gap: 1,
+              gridTemplateColumns: {
+                xs: "repeat(2, minmax(0, 1fr))",
+                sm: "repeat(4, minmax(0, 1fr))",
+              },
+            }}
+          >
+            {[
+              {
+                label: "primary",
+                bg: "primary.main",
+                fg: "primary.contrastText",
+              },
+              {
+                label: "secondary",
+                bg: "secondary.main",
+                fg: "secondary.contrastText",
+              },
+              { label: "paper", bg: "background.paper", fg: "text.primary" },
+              { label: "default", bg: "background.default", fg: "text.primary" },
+            ].map((swatch) => (
+              <Box
+                key={swatch.label}
+                sx={{
+                  p: 1.25,
+                  borderRadius: 1.5,
+                  border: 1,
+                  borderColor: "divider",
+                  bgcolor: swatch.bg,
+                  color: swatch.fg,
+                }}
+              >
+                <Typography variant="caption" sx={{ display: "block" }}>
+                  {swatch.label}
+                </Typography>
+                <Typography variant="body2">token</Typography>
+              </Box>
+            ))}
+          </Box>
+
+          <Tabs value={0} aria-label="canonical probe tabs">
+            <Tab label="Overview" />
+            <Tab label="Inputs" />
+            <Tab label="Table" />
+          </Tabs>
+        </Stack>
+      </Paper>
 
       <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
         <Card elevation={0} sx={{ flex: 1 }}>
           <CardContent>
             <Stack spacing={1.5}>
-              <Typography variant="header_xs_semibold">Поля и кнопки</Typography>
+              <Typography variant="h6">Inputs and buttons</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Good for seeing input chrome, button shape, and typography.
+              </Typography>
               <TextField
                 size="small"
-                label="Название проекта"
-                defaultValue="Каноническая проверка"
+                label="Project name"
+                defaultValue="Canonical probe"
                 fullWidth
               />
               <TextField
                 size="small"
-                label="Заметки"
+                label="Notes"
                 multiline
                 minRows={3}
-                placeholder="Здесь должны быть заметны различия между пресетами"
+                placeholder="Preset differences should be visible here"
                 fullWidth
               />
             </Stack>
           </CardContent>
           <CardActions sx={{ px: 2, pb: 2, pt: 0 }}>
-            <Button variant="contained">
-              <Typography component="span" variant="text_sm_semibold" color="inherit">
-                Основная
-              </Typography>
-            </Button>
-            <Button variant="outlined">
-              <Typography component="span" variant="text_sm_semibold" color="inherit">
-                Вторичная
-              </Typography>
-            </Button>
-            <Button variant="text">
-              <Typography component="span" variant="text_sm_semibold" color="inherit">
-                Текст
-              </Typography>
-            </Button>
+            <Button variant="contained">Primary</Button>
+            <Button variant="outlined">Secondary</Button>
+            <Button variant="text">Ghost</Button>
           </CardActions>
         </Card>
 
         <Card elevation={0} sx={{ flex: 1 }}>
           <CardContent>
             <Stack spacing={1.5}>
-              <Typography variant="header_xs_semibold">Форма и поверхности</Typography>
+              <Typography variant="h6">Shape and surface probe</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Makes `shape.borderRadius`, divider tone, and surface treatment
+                easier to compare.
+              </Typography>
 
-              <List dense disablePadding>
-                <ListItem disableGutters>
-                  <ListItemText
-                    primary="Базовый радиус"
-                    secondary={`theme.shape.borderRadius = ${String(theme.shape.borderRadius)}`}
-                    primaryTypographyProps={{ variant: "text_sm_semibold" }}
-                    secondaryTypographyProps={{ variant: "text_sm_regular", color: "text.secondary" }}
-                  />
-                </ListItem>
-                <ListItem disableGutters>
-                  <ListItemText
-                    primary="Токен поверхности"
-                    secondary={theme.palette.background.paper}
-                    primaryTypographyProps={{ variant: "text_sm_semibold" }}
-                    secondaryTypographyProps={{ variant: "text_sm_regular", color: "text.secondary" }}
-                  />
-                </ListItem>
-                <ListItem disableGutters>
-                  <ListItemText
-                    primary="Тон разделителя"
-                    secondary={theme.palette.divider}
-                    primaryTypographyProps={{ variant: "text_sm_semibold" }}
-                    secondaryTypographyProps={{ variant: "text_sm_regular", color: "text.secondary" }}
-                  />
-                </ListItem>
-              </List>
+              <Paper
+                elevation={0}
+                sx={{
+                  p: 1.5,
+                  border: `1px solid ${theme.palette.divider}`,
+                  borderRadius: radius,
+                }}
+              >
+                <Typography variant="subtitle2">Radius base</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  theme.shape.borderRadius = {String(theme.shape.borderRadius)}
+                </Typography>
+              </Paper>
 
-              <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                <Chip
-                  size="small"
-                  variant="outlined"
-                  label={
-                    <Typography component="span" variant="text_xs_semibold" color="inherit">
-                      {`радиус ${radius}`}
-                    </Typography>
-                  }
-                />
-                <Chip
-                  size="small"
-                  variant="outlined"
-                  label={
-                    <Typography component="span" variant="text_xs_semibold" color="inherit">
-                      тон поверхности
-                    </Typography>
-                  }
-                />
-                <Chip
-                  size="small"
-                  variant="outlined"
-                  label={
-                    <Typography component="span" variant="text_xs_semibold" color="inherit">
-                      разделитель
-                    </Typography>
-                  }
-                />
-              </Stack>
+              <Paper
+                elevation={0}
+                sx={{
+                  p: 1.5,
+                  border: `1px solid ${theme.palette.divider}`,
+                  borderRadius: radius * 2,
+                  background: `linear-gradient(135deg, ${alpha(
+                    theme.palette.primary.main,
+                    0.12,
+                  )}, ${alpha(theme.palette.secondary.main, 0.12)})`,
+                }}
+              >
+                <Typography variant="subtitle2">Radius x2 + token blend</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Highlights shape and palette differences beyond page background.
+                </Typography>
+              </Paper>
             </Stack>
           </CardContent>
         </Card>
       </Stack>
 
-      <Stack spacing={1.5}>
-        <Stack spacing={0.5}>
-          <Typography variant="header_xs_semibold">Таблицы</Typography>
-          <Typography variant="text_sm_regular" color="text.secondary">
-            Сравните границы, чипы и контраст в одном месте.
-          </Typography>
-        </Stack>
+      <Card elevation={0}>
+        <CardContent>
+          <Stack spacing={1.5}>
+            <Typography variant="h6">Table / border override probe</Typography>
+            <Typography variant="body2" color="text.secondary">
+              Preset `MuiTableHead` and `MuiTableCell` overrides are often easier
+              to compare than plain white cards.
+            </Typography>
 
-        <TableContainer component={Paper} variant="outlined">
-          <Table size="small" aria-label="таблица проверки темы">
-            <TableHead>
-              <TableRow>
-                <TableCell>
-                  <Typography component="span" variant="text_sm_semibold">
-                    Проверка
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography component="span" variant="text_sm_semibold">
-                    Статус
-                  </Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Typography component="span" variant="text_sm_semibold">
-                    Источник
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <Typography component="span" variant="text_sm_regular">
-                    Типографика
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Chip
-                    size="small"
-                    label={
-                      <Typography component="span" variant="text_xs_semibold" color="inherit">
-                        набор шрифтов
-                      </Typography>
-                    }
-                    color="secondary"
-                  />
-                </TableCell>
-                <TableCell align="right">
-                  <Typography component="span" variant="text_sm_regular">
-                    пресет
-                  </Typography>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Typography component="span" variant="text_sm_regular">
-                    Оформление Card / Paper
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Chip
-                    size="small"
-                    label={
-                      <Typography component="span" variant="text_xs_semibold" color="inherit">
-                        граница + форма
-                      </Typography>
-                    }
-                  />
-                </TableCell>
-                <TableCell align="right">
-                  <Typography component="span" variant="text_sm_regular">
-                    переопределения MUI
-                  </Typography>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Typography component="span" variant="text_sm_regular">
-                    Обводка поля
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Chip
-                    size="small"
-                    label={
-                      <Typography component="span" variant="text_xs_semibold" color="inherit">
-                        divider / alpha
-                      </Typography>
-                    }
-                    variant="outlined"
-                  />
-                </TableCell>
-                <TableCell align="right">
-                  <Typography component="span" variant="text_sm_regular">
-                    MuiOutlinedInput
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Stack>
+            <Alert severity="info" variant="outlined">
+              Compare the same preset here across routes to validate consistency.
+            </Alert>
+
+            <TableContainer component={Paper} variant="outlined">
+              <Table size="small" aria-label="canonical theme probe table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Probe</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell align="right">Source</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Typography</TableCell>
+                    <TableCell>
+                      <Chip size="small" label="font stack" color="secondary" />
+                    </TableCell>
+                    <TableCell align="right">preset</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Card / Paper chrome</TableCell>
+                    <TableCell>
+                      <Chip size="small" label="border + shape" />
+                    </TableCell>
+                    <TableCell align="right">MUI overrides</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Input outline</TableCell>
+                    <TableCell>
+                      <Chip size="small" label="divider/alpha" variant="outlined" />
+                    </TableCell>
+                    <TableCell align="right">MuiOutlinedInput</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Stack>
+        </CardContent>
+      </Card>
     </Stack>
   );
 }

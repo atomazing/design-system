@@ -1,5 +1,5 @@
-import { GuidedStarterFlow } from "@/components/home/GuidedStarterFlow";
+import { AplaiLanding } from "@/components/aplai/AplaiLanding";
 
 export default function HomePage() {
-  return <GuidedStarterFlow />;
+  return <AplaiLanding />;
 }

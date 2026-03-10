@@ -20,8 +20,8 @@ import {
   useThemeSettings,
   type DarkModeOptions,
 } from "@atomazing-org/design-system";
+import { defaultThemes } from "@atomazing-org/design-system/presets";
 
-import { exampleThemes } from "@/theme/exampleThemes";
 import { writeThemePreferenceCookies } from "@/theme/themePreferenceCookies";
 
 const darkModeValues = new Set<DarkModeOptions>(
@@ -30,12 +30,6 @@ const darkModeValues = new Set<DarkModeOptions>(
 
 const isDarkModeOption = (value: unknown): value is DarkModeOptions =>
   typeof value === "string" && darkModeValues.has(value as DarkModeOptions);
-
-const darkModeLabels: Record<DarkModeOptions, string> = {
-  system: "Системный",
-  light: "Светлый",
-  dark: "Темный",
-};
 
 export function ThemeControls() {
   const { theme, setTheme, darkMode, setDarkMode } = useThemeSettings();
@@ -57,22 +51,23 @@ export function ThemeControls() {
       <CardContent>
         <Stack spacing={2}>
           <Box>
-            <Typography variant="header_xs_semibold">Настройки темы</Typography>
+            <Typography variant="h6">Theme controls</Typography>
+            <Typography variant="body2" color="text.secondary">
+              Root import for controls, presets subpath for built-in themes.
+            </Typography>
           </Box>
 
           <FormControl fullWidth size="small">
-            <InputLabel id="preset-select-label">Пресет</InputLabel>
+            <InputLabel id="preset-select-label">Preset</InputLabel>
             <Select
               labelId="preset-select-label"
               value={theme}
-              label="Пресет"
+              label="Preset"
               onChange={(event) => setTheme(event.target.value)}
             >
-              {exampleThemes.map((preset) => (
+              {defaultThemes.map((preset) => (
                 <MenuItem key={preset.id} value={preset.id}>
-                  <Typography component="span" variant="text_sm_regular">
-                    {preset.label}
-                  </Typography>
+                  {preset.label}
                 </MenuItem>
               ))}
             </Select>
@@ -83,7 +78,7 @@ export function ThemeControls() {
             fullWidth
             value={darkMode}
             onChange={handleDarkModeChange}
-            aria-label="выбор режима темы"
+            aria-label="dark mode selection"
             sx={{
               display: "grid",
               gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
@@ -99,14 +94,12 @@ export function ThemeControls() {
               <ToggleButton
                 key={option.value}
                 value={option.value}
-                aria-label={`Установить режим: ${darkModeLabels[option.value]}`}
+                aria-label={`Set dark mode: ${option.label}`}
               >
                 <Box component="span" aria-hidden="true" sx={{ display: "inline-flex" }}>
                   {option.icon}
                 </Box>
-                <Typography component="span" variant="text_sm_semibold" color="inherit">
-                  {darkModeLabels[option.value]}
-                </Typography>
+                <span>{option.label}</span>
               </ToggleButton>
             ))}
           </ToggleButtonGroup>

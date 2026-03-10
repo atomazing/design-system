@@ -1,28 +1,45 @@
-import { Box, Container, Divider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 
-import { FocusedPageHeader } from "@/components/ui/FocusedPageHeader";
+import { ThemeSnapshotCard } from "@/components/theme/ThemeSnapshotCard";
 
 export default async function SsrDiagnosticsPage() {
   const renderedAt = new Date().toISOString();
 
   return (
-    <Box sx={{ minHeight: "calc(100svh - var(--starter-header-height))", py: { xs: 3, md: 4 } }}>
-      <Container maxWidth="md">
-        <Stack spacing={4}>
-          <FocusedPageHeader
-            eyebrow="Статический вывод"
-            title="Проверьте результат сборки."
-            description="Метка времени ниже должна оставаться неизменной до следующей сборки."
-            primaryAction={{ href: "/", label: "Главная" }}
-            secondaryAction={{ href: "/showcase", label: "Обзор" }}
-          />
+    <Box sx={{ minHeight: "100vh", py: 2 }}>
+      <Container maxWidth="lg">
+        <Stack spacing={2}>
+          <Card elevation={0}>
+            <CardContent>
+              <Stack spacing={2}>
+                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                  <Chip label="Static export route" color="primary" />
+                  <Chip label="App Router" variant="outlined" />
+                </Stack>
+                <Typography variant="h4" component="h1">
+                  Static diagnostics
+                </Typography>
+                <Typography color="text.secondary">
+                  This page is pre-rendered at build time and can be deployed as static files.
+                </Typography>
+                <Divider />
+                <Typography variant="body2">
+                  <strong>Built at:</strong> {renderedAt}
+                </Typography>
+              </Stack>
+            </CardContent>
+          </Card>
 
-          <Divider />
-
-          <Stack spacing={1}>
-            <Typography variant="header_xs_semibold">Метка сборки</Typography>
-            <Typography variant="text_md_regular">Собрано: {renderedAt}</Typography>
-          </Stack>
+          <ThemeSnapshotCard />
         </Stack>
       </Container>
     </Box>

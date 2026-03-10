@@ -3,10 +3,9 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProviderWrapper } from "@atomazing-org/design-system";
 import type { DarkModeOptions } from "@atomazing-org/design-system";
+import { defaultThemes } from "@atomazing-org/design-system/presets";
 
 import type { PropsWithChildren } from "react";
-
-import { exampleThemes } from "@/theme/exampleThemes";
 
 type AppProvidersProps = PropsWithChildren<{
   initialThemeId?: string;
@@ -20,7 +19,7 @@ export function AppProviders({
 }: AppProvidersProps) {
   return (
     <ThemeProviderWrapper
-      themes={exampleThemes}
+      themes={defaultThemes}
       initialThemeId={initialThemeId}
       initialDarkMode={initialDarkMode}
     >

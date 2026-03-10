@@ -1,12 +1,11 @@
 import type { DarkModeOptions } from "@atomazing-org/design-system";
-
-import { exampleThemes } from "@/theme/exampleThemes";
+import { defaultThemes } from "@atomazing-org/design-system/presets";
 
 export const THEME_ID_COOKIE = "ds_theme_id";
 export const DARK_MODE_COOKIE = "ds_dark_mode";
 export const THEME_PREFERENCES_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 
-const themeIds = new Set(exampleThemes.map((preset) => preset.id));
+const themeIds = new Set(defaultThemes.map((preset) => preset.id));
 const darkModeValues = new Set<DarkModeOptions>(["light", "dark", "system"]);
 
 const decodeCookieValue = (value: string): string => {
