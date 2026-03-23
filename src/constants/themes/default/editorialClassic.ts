@@ -1,6 +1,7 @@
 import { alpha } from "@mui/material/styles";
 
 import type { NamedThemeOptions } from "@/models/appSettings";
+import type { Theme } from "@mui/material/styles";
 
 /**
  * Editorial Classic — magazine / editorial style.
@@ -13,12 +14,39 @@ import type { NamedThemeOptions } from "@/models/appSettings";
  * - Therefore the Dark variant below sets `palette.mode: "dark"`.
  */
 
-const FONT_EDITORIAL =
-  '"Source Serif 4","Noto Naskh Arabic","Tajawal","Cairo","Georgia","Times New Roman",serif';
+const FONT_EDITORIAL_UI =
+  '"Source Sans 3","IBM Plex Sans","Golos Text","Segoe UI","Roboto","Arial",sans-serif';
+const FONT_EDITORIAL_DISPLAY =
+  '"Source Serif 4","Noto Serif","Georgia","Times New Roman",serif';
+
+const createEditorialBodyBackground = (theme: Theme) => {
+  const isDark = theme.palette.mode === "dark";
+  const rulingColor = alpha(theme.palette.text.primary, isDark ? 0.032 : 0.016);
+  const fiberColor = alpha(theme.palette.text.primary, isDark ? 0.018 : 0.012);
+
+  return {
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.primary,
+    backgroundImage: [
+      `linear-gradient(180deg, ${alpha(
+        isDark ? theme.palette.common.black : theme.palette.common.white,
+        isDark ? 0.18 : 0.72,
+      )} 0%, transparent 24%, transparent 100%)`,
+      `radial-gradient(1100px 380px at 50% -6%, ${alpha(
+        theme.palette.secondary.main,
+        isDark ? 0.1 : 0.06,
+      )}, transparent 62%)`,
+      `repeating-linear-gradient(90deg, transparent 0px, transparent 127px, ${rulingColor} 127px, ${rulingColor} 128px)`,
+      `repeating-linear-gradient(0deg, ${fiberColor} 0px, ${fiberColor} 1px, transparent 1px, transparent 7px)`,
+    ].join(", "),
+    backgroundAttachment: "fixed",
+    backgroundSize: "auto, auto, auto, auto",
+  };
+};
 
 export const editorialClassic = {
   name: "Editorial Classic",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "light",
@@ -65,7 +93,7 @@ export const editorialClassic = {
     },
 
     background: {
-      default: "#FBF7F0", // warm paper
+      default: "#F4EDE3", // warm paper
       paper: "#FFFFFF",
     },
 
@@ -101,33 +129,77 @@ export const editorialClassic = {
   },
 
   typography: {
-    fontFamily: FONT_EDITORIAL,
+    fontFamily: FONT_EDITORIAL_UI,
 
     // Editorial hierarchy (a little more "print" feel)
     h1: {
-      fontWeight: 800,
+      fontFamily: FONT_EDITORIAL_DISPLAY,
+      fontWeight: 700,
       fontSize: "2.1rem",
-      lineHeight: 1.2,
-      letterSpacing: "-0.02em",
+      lineHeight: 1.24,
+      letterSpacing: "-0.012em",
     },
     h2: {
-      fontWeight: 800,
+      fontFamily: FONT_EDITORIAL_DISPLAY,
+      fontWeight: 700,
       fontSize: "1.6rem",
-      lineHeight: 1.25,
-      letterSpacing: "-0.01em",
+      lineHeight: 1.3,
+      letterSpacing: "-0.008em",
     },
-    h3: { fontWeight: 800, fontSize: "1.3rem", lineHeight: 1.3 },
-    h4: { fontWeight: 700, fontSize: "1.125rem", lineHeight: 1.4 },
+    h3: {
+      fontFamily: FONT_EDITORIAL_DISPLAY,
+      fontWeight: 700,
+      fontSize: "1.3rem",
+      lineHeight: 1.36,
+      letterSpacing: "-0.004em",
+    },
+    h4: {
+      fontFamily: FONT_EDITORIAL_DISPLAY,
+      fontWeight: 600,
+      fontSize: "1.125rem",
+      lineHeight: 1.44,
+    },
 
-    subtitle1: { fontWeight: 700, fontSize: "0.95rem" },
-    subtitle2: { fontWeight: 700, fontSize: "0.875rem" },
+    subtitle1: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontWeight: 600,
+      fontSize: "0.95rem",
+      lineHeight: 1.56,
+    },
+    subtitle2: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontWeight: 600,
+      fontSize: "0.875rem",
+      lineHeight: 1.52,
+    },
 
-    body1: { fontSize: "1rem", lineHeight: 1.85 },
-    body2: { fontSize: "0.9rem", lineHeight: 1.75 },
+    body1: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontSize: "1rem",
+      lineHeight: 1.72,
+    },
+    body2: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontSize: "0.9rem",
+      lineHeight: 1.66,
+    },
 
-    button: { textTransform: "none", fontWeight: 700 },
-    caption: { fontSize: "0.78rem" },
-    overline: { fontSize: "0.75rem", letterSpacing: "0.12em" },
+    button: {
+      fontFamily: FONT_EDITORIAL_UI,
+      textTransform: "none",
+      fontWeight: 600,
+      letterSpacing: "0.01em",
+    },
+    caption: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontSize: "0.78rem",
+      lineHeight: 1.5,
+    },
+    overline: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontSize: "0.75rem",
+      letterSpacing: "0.06em",
+    },
   },
 
   shape: { borderRadius: 10 },
@@ -136,10 +208,7 @@ export const editorialClassic = {
   components: {
     MuiCssBaseline: {
       styleOverrides: (theme) => ({
-        body: {
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.text.primary,
-        },
+        body: createEditorialBodyBackground(theme),
       }),
     },
 
@@ -272,7 +341,7 @@ export const editorialClassic = {
 
 export const editorialClassicDark = {
   name: "Editorial Classic Dark",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "dark",
@@ -318,8 +387,8 @@ export const editorialClassicDark = {
     },
 
     background: {
-      default: "#0E1116", // editorial charcoal
-      paper: "#141A22",
+      default: "#0A0E13", // editorial charcoal
+      paper: "#18202A",
     },
 
     text: {
@@ -354,32 +423,76 @@ export const editorialClassicDark = {
   },
 
   typography: {
-    fontFamily: FONT_EDITORIAL,
+    fontFamily: FONT_EDITORIAL_UI,
 
     h1: {
-      fontWeight: 800,
+      fontFamily: FONT_EDITORIAL_DISPLAY,
+      fontWeight: 700,
       fontSize: "2.1rem",
-      lineHeight: 1.2,
-      letterSpacing: "-0.02em",
+      lineHeight: 1.24,
+      letterSpacing: "-0.012em",
     },
     h2: {
-      fontWeight: 800,
+      fontFamily: FONT_EDITORIAL_DISPLAY,
+      fontWeight: 700,
       fontSize: "1.6rem",
-      lineHeight: 1.25,
-      letterSpacing: "-0.01em",
+      lineHeight: 1.3,
+      letterSpacing: "-0.008em",
     },
-    h3: { fontWeight: 800, fontSize: "1.3rem", lineHeight: 1.3 },
-    h4: { fontWeight: 700, fontSize: "1.125rem", lineHeight: 1.4 },
+    h3: {
+      fontFamily: FONT_EDITORIAL_DISPLAY,
+      fontWeight: 700,
+      fontSize: "1.3rem",
+      lineHeight: 1.36,
+      letterSpacing: "-0.004em",
+    },
+    h4: {
+      fontFamily: FONT_EDITORIAL_DISPLAY,
+      fontWeight: 600,
+      fontSize: "1.125rem",
+      lineHeight: 1.44,
+    },
 
-    subtitle1: { fontWeight: 700, fontSize: "0.95rem" },
-    subtitle2: { fontWeight: 700, fontSize: "0.875rem" },
+    subtitle1: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontWeight: 600,
+      fontSize: "0.95rem",
+      lineHeight: 1.56,
+    },
+    subtitle2: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontWeight: 600,
+      fontSize: "0.875rem",
+      lineHeight: 1.52,
+    },
 
-    body1: { fontSize: "1rem", lineHeight: 1.85 },
-    body2: { fontSize: "0.9rem", lineHeight: 1.75 },
+    body1: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontSize: "1rem",
+      lineHeight: 1.72,
+    },
+    body2: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontSize: "0.9rem",
+      lineHeight: 1.66,
+    },
 
-    button: { textTransform: "none", fontWeight: 700 },
-    caption: { fontSize: "0.78rem" },
-    overline: { fontSize: "0.75rem", letterSpacing: "0.12em" },
+    button: {
+      fontFamily: FONT_EDITORIAL_UI,
+      textTransform: "none",
+      fontWeight: 600,
+      letterSpacing: "0.01em",
+    },
+    caption: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontSize: "0.78rem",
+      lineHeight: 1.5,
+    },
+    overline: {
+      fontFamily: FONT_EDITORIAL_UI,
+      fontSize: "0.75rem",
+      letterSpacing: "0.06em",
+    },
   },
 
   shape: { borderRadius: 10 },
@@ -388,10 +501,7 @@ export const editorialClassicDark = {
   components: {
     MuiCssBaseline: {
       styleOverrides: (theme) => ({
-        body: {
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.text.primary,
-        },
+        body: createEditorialBodyBackground(theme),
       }),
     },
 

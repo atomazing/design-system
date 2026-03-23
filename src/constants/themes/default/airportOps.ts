@@ -10,13 +10,40 @@ import type { Theme, ThemeOptions } from "@mui/material/styles";
  */
 
 const FONT_OPS_UI =
-  'var(--font-airport-ui),"IBM Plex Sans","Inter","Segoe UI","Arial",sans-serif';
+  'var(--font-airport-ui),"IBM Plex Sans","Golos Text","Inter","Segoe UI","Roboto","Arial",sans-serif';
 const FONT_OPS_DISPLAY =
-  'var(--font-airport-display),"Golos Text","IBM Plex Sans","Inter","Segoe UI","Arial",sans-serif';
+  'var(--font-airport-display),"Golos Text","IBM Plex Sans","Inter","Segoe UI","Roboto","Arial",sans-serif';
 const FONT_OPS_MONO =
-  'var(--font-airport-mono),"IBM Plex Mono","JetBrains Mono","Roboto Mono","Consolas",monospace';
+  'var(--font-airport-mono),"IBM Plex Mono","JetBrains Mono","Roboto Mono","Cascadia Mono","Consolas",monospace';
 
 const OPS_RADIUS = 6;
+
+const createOpsBodyBackground = (theme: Theme) => {
+  const isDark = theme.palette.mode === "dark";
+  const gridLine = alpha(theme.palette.text.primary, isDark ? 0.06 : 0.024);
+
+  return {
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.primary,
+    backgroundImage: [
+      `radial-gradient(980px 440px at 8% -10%, ${alpha(
+        theme.palette.primary.main,
+        isDark ? 0.18 : 0.12,
+      )}, transparent 60%)`,
+      `radial-gradient(860px 420px at 104% 10%, ${alpha(
+        theme.palette.info.main,
+        isDark ? 0.14 : 0.1,
+      )}, transparent 58%)`,
+      `repeating-linear-gradient(90deg, ${gridLine} 0px, ${gridLine} 1px, transparent 1px, transparent 44px)`,
+      `repeating-linear-gradient(0deg, ${gridLine} 0px, ${gridLine} 1px, transparent 1px, transparent 36px)`,
+    ].join(", "),
+    backgroundAttachment: "fixed",
+    backgroundSize: "auto, auto, auto, auto",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+    fontKerning: "normal",
+  };
+};
 
 const OPS_TYPOGRAPHY = {
   fontFamily: FONT_OPS_UI,
@@ -25,56 +52,56 @@ const OPS_TYPOGRAPHY = {
     fontFamily: FONT_OPS_DISPLAY,
     fontWeight: 700,
     fontSize: "2rem",
-    lineHeight: 1.2,
-    letterSpacing: "-0.012em",
+    lineHeight: 1.24,
+    letterSpacing: "-0.008em",
   },
   h2: {
     fontFamily: FONT_OPS_DISPLAY,
     fontWeight: 650,
     fontSize: "1.6rem",
-    lineHeight: 1.26,
-    letterSpacing: "-0.008em",
+    lineHeight: 1.3,
+    letterSpacing: "-0.004em",
   },
   h3: {
     fontFamily: FONT_OPS_UI,
     fontWeight: 650,
     fontSize: "1.26rem",
-    lineHeight: 1.32,
-    letterSpacing: "-0.006em",
+    lineHeight: 1.36,
+    letterSpacing: "0",
   },
   h4: {
     fontFamily: FONT_OPS_UI,
     fontWeight: 650,
     fontSize: "1.04rem",
-    lineHeight: 1.4,
-    letterSpacing: "-0.004em",
+    lineHeight: 1.44,
+    letterSpacing: "0",
   },
 
   subtitle1: {
     fontFamily: FONT_OPS_UI,
     fontWeight: 600,
     fontSize: "0.94rem",
-    lineHeight: 1.52,
+    lineHeight: 1.56,
     letterSpacing: "0",
   },
   subtitle2: {
     fontFamily: FONT_OPS_UI,
     fontWeight: 600,
     fontSize: "0.86rem",
-    lineHeight: 1.48,
+    lineHeight: 1.52,
     letterSpacing: "0",
   },
 
   body1: {
     fontFamily: FONT_OPS_UI,
     fontSize: "0.95rem",
-    lineHeight: 1.64,
+    lineHeight: 1.68,
     letterSpacing: "0",
   },
   body2: {
     fontFamily: FONT_OPS_UI,
     fontSize: "0.875rem",
-    lineHeight: 1.58,
+    lineHeight: 1.62,
     letterSpacing: "0",
   },
 
@@ -82,7 +109,7 @@ const OPS_TYPOGRAPHY = {
     fontFamily: FONT_OPS_UI,
     textTransform: "none",
     fontWeight: 600,
-    letterSpacing: "0.005em",
+    letterSpacing: "0.01em",
   },
   caption: {
     fontFamily: FONT_OPS_UI,
@@ -114,13 +141,7 @@ const createOpsComponents = ({
 }): ThemeOptions["components"] => ({
   MuiCssBaseline: {
     styleOverrides: (theme: Theme) => ({
-      body: {
-        backgroundColor: theme.palette.background.default,
-        color: theme.palette.text.primary,
-        WebkitFontSmoothing: "antialiased",
-        MozOsxFontSmoothing: "grayscale",
-        fontKerning: "normal",
-      },
+      body: createOpsBodyBackground(theme),
       "code, kbd, samp, pre, .ops-code, .ops-time, .ops-value": {
         fontFamily: FONT_OPS_MONO,
         fontVariantNumeric: "tabular-nums",
@@ -379,7 +400,7 @@ export const airportOps = {
     },
 
     background: {
-      default: "#F4F7FB",
+      default: "#E8EEF5",
       paper: "#FFFFFF",
     },
 
@@ -478,8 +499,8 @@ export const airportOpsNight = {
     },
 
     background: {
-      default: "#0A1118",
-      paper: "#111A24",
+      default: "#06101A",
+      paper: "#162230",
     },
 
     text: {

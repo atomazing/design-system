@@ -10,7 +10,7 @@ import type { Theme, ThemeOptions } from "@mui/material/styles";
  */
 
 const FONT_WARM =
-  '"Tajawal","Cairo","Noto Naskh Arabic","Noto Sans Arabic","Inter","Roboto","Arial",sans-serif';
+  '"Golos Text","Source Sans 3","IBM Plex Sans","Segoe UI","Roboto","Arial",sans-serif';
 
 const TERRACOTTA = "#D08A6B";
 const TERRACOTTA_DARK = "#B96F4F";
@@ -27,24 +27,24 @@ const WARM_TYPOGRAPHY = {
   fontFamily: FONT_WARM,
 
   h1: {
-    fontWeight: 800,
-    fontSize: "2rem",
-    lineHeight: 1.24,
-    letterSpacing: "-0.01em",
+    fontWeight: 700,
+    fontSize: "1.98rem",
+    lineHeight: 1.28,
+    letterSpacing: "-0.006em",
   },
-  h2: { fontWeight: 800, fontSize: "1.5rem", lineHeight: 1.3 },
-  h3: { fontWeight: 700, fontSize: "1.24rem", lineHeight: 1.36 },
-  h4: { fontWeight: 700, fontSize: "1.1rem", lineHeight: 1.42 },
+  h2: { fontWeight: 700, fontSize: "1.5rem", lineHeight: 1.34 },
+  h3: { fontWeight: 600, fontSize: "1.24rem", lineHeight: 1.4 },
+  h4: { fontWeight: 600, fontSize: "1.1rem", lineHeight: 1.46 },
 
-  subtitle1: { fontWeight: 600, fontSize: "0.95rem" },
-  subtitle2: { fontWeight: 600, fontSize: "0.875rem" },
+  subtitle1: { fontWeight: 600, fontSize: "0.95rem", lineHeight: 1.58 },
+  subtitle2: { fontWeight: 600, fontSize: "0.875rem", lineHeight: 1.54 },
 
-  body1: { fontSize: "0.95rem", lineHeight: 1.78 },
-  body2: { fontSize: "0.875rem", lineHeight: 1.68 },
+  body1: { fontSize: "0.95rem", lineHeight: 1.72 },
+  body2: { fontSize: "0.875rem", lineHeight: 1.64 },
 
-  button: { textTransform: "none", fontWeight: 700, letterSpacing: "0.01em" },
+  button: { textTransform: "none", fontWeight: 600, letterSpacing: "0.008em" },
   caption: { fontSize: "0.75rem" },
-  overline: { fontSize: "0.75rem", letterSpacing: "0.06em" },
+  overline: { fontSize: "0.75rem", letterSpacing: "0.04em" },
 } as const;
 
 const createWarmEarthComponents = ({
@@ -97,7 +97,7 @@ const createWarmEarthComponents = ({
       root: ({ theme }) => ({
         borderRadius: SOFT_RADIUS + 2,
         backgroundImage: "none",
-        backgroundColor: alpha(theme.palette.background.paper, 0.97),
+        backgroundColor: alpha(theme.palette.background.paper, 0.985),
         border: `1px solid ${alpha(theme.palette.text.primary, surfaceBorderAlpha)}`,
         boxShadow: `0 14px 36px ${alpha(theme.palette.text.primary, panelShadowAlpha)}`,
       }),
@@ -319,7 +319,7 @@ const createWarmEarthComponents = ({
 
 export const warmEarth = {
   name: "Warm Earth",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "light",
@@ -364,7 +364,7 @@ export const warmEarth = {
     },
 
     background: {
-      default: "#FBF4EC",
+      default: "#F3E9DB",
       paper: "#FFFDF9",
     },
 
@@ -415,7 +415,7 @@ export const warmEarth = {
 
 export const warmEarthDark = {
   name: "Warm Earth Dark",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "dark",
@@ -460,8 +460,8 @@ export const warmEarthDark = {
     },
 
     background: {
-      default: "#18120E",
-      paper: "#241C17",
+      default: "#120D0A",
+      paper: "#2A211B",
     },
 
     text: {

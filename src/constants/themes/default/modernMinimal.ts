@@ -10,49 +10,75 @@ import type { Theme, ThemeOptions } from "@mui/material/styles";
  */
 
 const FONT_MINIMAL =
-  '"IBM Plex Sans","Tajawal","Cairo","Noto Sans Arabic","Inter","Arial",sans-serif';
+  '"IBM Plex Sans","Golos Text","Inter","Segoe UI","Roboto","Arial",sans-serif';
 
 const MINIMAL_RADIUS = 6;
+
+const createMinimalBodyBackground = (theme: Theme) => {
+  const isDark = theme.palette.mode === "dark";
+  const dotColor = alpha(theme.palette.primary.main, isDark ? 0.14 : 0.08);
+
+  return {
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.primary,
+    backgroundImage: [
+      `radial-gradient(920px 420px at 12% -10%, ${alpha(
+        theme.palette.primary.main,
+        isDark ? 0.16 : 0.1,
+      )}, transparent 60%)`,
+      `linear-gradient(180deg, ${alpha(
+        isDark ? theme.palette.common.black : theme.palette.common.white,
+        isDark ? 0.12 : 0.54,
+      )} 0%, transparent 32%)`,
+      `radial-gradient(${dotColor} 1px, transparent 1px)`,
+    ].join(", "),
+    backgroundAttachment: "fixed",
+    backgroundSize: "auto, auto, 26px 26px",
+    backgroundPosition: "0 0, 0 0, -13px -13px",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+  };
+};
 
 const MINIMAL_TYPOGRAPHY = {
   fontFamily: FONT_MINIMAL,
 
   h1: {
-    fontWeight: 900,
-    fontSize: "2.1rem",
-    lineHeight: 1.16,
-    letterSpacing: "-0.03em",
+    fontWeight: 800,
+    fontSize: "2.04rem",
+    lineHeight: 1.18,
+    letterSpacing: "-0.018em",
   },
   h2: {
-    fontWeight: 800,
-    fontSize: "1.68rem",
-    lineHeight: 1.22,
-    letterSpacing: "-0.02em",
+    fontWeight: 700,
+    fontSize: "1.64rem",
+    lineHeight: 1.26,
+    letterSpacing: "-0.012em",
   },
   h3: {
     fontWeight: 700,
     fontSize: "1.32rem",
-    lineHeight: 1.3,
-    letterSpacing: "-0.01em",
+    lineHeight: 1.34,
+    letterSpacing: "-0.006em",
   },
-  h4: { fontWeight: 700, fontSize: "1.08rem", lineHeight: 1.4 },
+  h4: { fontWeight: 600, fontSize: "1.08rem", lineHeight: 1.44 },
 
-  subtitle1: { fontWeight: 600, fontSize: "0.94rem" },
-  subtitle2: { fontWeight: 600, fontSize: "0.86rem" },
+  subtitle1: { fontWeight: 600, fontSize: "0.94rem", lineHeight: 1.56 },
+  subtitle2: { fontWeight: 600, fontSize: "0.86rem", lineHeight: 1.5 },
 
-  body1: { fontSize: "0.94rem", lineHeight: 1.62 },
-  body2: { fontSize: "0.86rem", lineHeight: 1.56 },
+  body1: { fontSize: "0.94rem", lineHeight: 1.68 },
+  body2: { fontSize: "0.86rem", lineHeight: 1.62 },
 
   button: {
-    textTransform: "uppercase",
-    fontWeight: 700,
-    letterSpacing: "0.05em",
+    textTransform: "none",
+    fontWeight: 600,
+    letterSpacing: "0.01em",
   },
   caption: { fontSize: "0.74rem" },
   overline: {
     fontSize: "0.72rem",
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
+    letterSpacing: "0.05em",
+    textTransform: "none",
   },
 } as const;
 
@@ -69,12 +95,7 @@ const createMinimalComponents = ({
 }): ThemeOptions["components"] => ({
   MuiCssBaseline: {
     styleOverrides: (theme: Theme) => ({
-      body: {
-        backgroundColor: theme.palette.background.default,
-        color: theme.palette.text.primary,
-        WebkitFontSmoothing: "antialiased",
-        MozOsxFontSmoothing: "grayscale",
-      },
+      body: createMinimalBodyBackground(theme),
     }),
   },
 
@@ -251,7 +272,7 @@ const createMinimalComponents = ({
 
 export const modernMinimal = {
   name: "Modern Minimal",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "light",
@@ -299,7 +320,7 @@ export const modernMinimal = {
     },
 
     background: {
-      default: "#F3F4F6",
+      default: "#EAEEF3",
       paper: "#FFFFFF",
     },
 
@@ -349,7 +370,7 @@ export const modernMinimal = {
 
 export const modernMinimalDark = {
   name: "Modern Minimal Dark",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "dark",
@@ -397,8 +418,8 @@ export const modernMinimalDark = {
     },
 
     background: {
-      default: "#0B0F14",
-      paper: "#111827",
+      default: "#080D13",
+      paper: "#18212E",
     },
 
     text: {

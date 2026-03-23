@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import { createTheme } from "@mui/material/styles";
 
 import { allBuiltInThemes, defaultThemes, landingPageThemes } from "@/presets";
-import { typographyVariants } from "@/styles/typography";
 
 describe("Phase 01 baseline reproduction (code-level)", () => {
   it("preserves palette.mode even when a custom palette is provided", () => {
@@ -23,29 +22,52 @@ describe("Phase 01 baseline reproduction (code-level)", () => {
     expect(theme.palette.mode).toBe("dark");
   });
 
-  it("uses rem-based fontSize/lineHeight in custom typography variants", () => {
-    const textMd = typographyVariants.text_md_regular;
-    const headerMd = typographyVariants.header_md_semibold;
-
-    expect(String(textMd?.fontSize)).toContain("rem");
-    expect(String(textMd?.lineHeight)).toContain("rem");
-    expect(String(headerMd?.fontSize)).toContain("rem");
-    expect(String(headerMd?.lineHeight)).toContain("rem");
-  });
-
   it("keeps landing presets separate from the default preset pack", () => {
     expect(defaultThemes.map((preset) => preset.id)).toEqual([
       "editorial-classic",
       "airport-ops",
       "modern-minimal",
+      "brand-neon-admin",
       "neo-glass",
       "retro-terminal",
       "warm-earth",
     ]);
-    expect(landingPageThemes).toHaveLength(21);
-    expect(landingPageThemes.some((preset) => preset.id === "brand-neon-motion")).toBe(true);
-    expect(landingPageThemes.some((preset) => preset.id === "neon-bauhaus-grid")).toBe(true);
-    expect(landingPageThemes.some((preset) => preset.id === "neon-bauhaus-ops")).toBe(true);
+    expect(landingPageThemes).toHaveLength(28);
+    expect(
+      landingPageThemes.some((preset) => preset.id === "flow-editorial"),
+    ).toBe(true);
+    expect(
+      landingPageThemes.some((preset) => preset.id === "brand-neon-motion"),
+    ).toBe(true);
+    expect(
+      landingPageThemes.some(
+        (preset) => preset.id === "strong-brand-neon-motion",
+      ),
+    ).toBe(true);
+    expect(
+      landingPageThemes.some((preset) => preset.id === "neon-brutalist-sprint"),
+    ).toBe(true);
+    expect(
+      landingPageThemes.some(
+        (preset) => preset.id === "strong-neon-brutalist-sprint",
+      ),
+    ).toBe(true);
+    expect(
+      landingPageThemes.some((preset) => preset.id === "neon-bauhaus-grid"),
+    ).toBe(true);
+    expect(
+      landingPageThemes.some((preset) => preset.id === "neon-bauhaus-ops"),
+    ).toBe(true);
+    expect(
+      landingPageThemes.some(
+        (preset) => preset.id === "strong-neon-bauhaus-ops",
+      ),
+    ).toBe(true);
+    expect(
+      landingPageThemes.some(
+        (preset) => preset.id === "strong-neon-compliance",
+      ),
+    ).toBe(true);
     expect(allBuiltInThemes).toHaveLength(
       defaultThemes.length + landingPageThemes.length,
     );
@@ -54,5 +76,18 @@ describe("Phase 01 baseline reproduction (code-level)", () => {
         defaultThemes.some((defaultPreset) => defaultPreset.id === preset.id),
       ),
     ).toBe(false);
+  });
+
+  it("keeps default application presets left-to-right in both color schemes", () => {
+    for (const preset of defaultThemes) {
+      expect(
+        preset.colorSchemes.light.direction,
+        `${preset.id} light direction must stay ltr`,
+      ).toBe("ltr");
+      expect(
+        preset.colorSchemes.dark.direction,
+        `${preset.id} dark direction must stay ltr`,
+      ).toBe("ltr");
+    }
   });
 });

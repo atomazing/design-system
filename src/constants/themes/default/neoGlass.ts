@@ -10,7 +10,7 @@ import type { Theme, ThemeOptions } from "@mui/material/styles";
  */
 
 const FONT_LIQUID =
-  '"Space Grotesk","Tajawal","Cairo","Noto Sans Arabic","Inter","Roboto","Arial",sans-serif';
+  '"Golos Text","IBM Plex Sans","Inter","Segoe UI","Roboto","Arial",sans-serif';
 
 const LIQUID_RADIUS = 26;
 const LIQUID_BLUR = "blur(18px) saturate(165%)";
@@ -20,29 +20,29 @@ const LIQUID_TYPOGRAPHY = {
   fontFamily: FONT_LIQUID,
 
   h1: {
-    fontWeight: 800,
+    fontWeight: 700,
     fontSize: "2.08rem",
-    lineHeight: 1.2,
-    letterSpacing: "-0.025em",
+    lineHeight: 1.24,
+    letterSpacing: "-0.016em",
   },
   h2: {
-    fontWeight: 800,
+    fontWeight: 700,
     fontSize: "1.56rem",
-    lineHeight: 1.25,
-    letterSpacing: "-0.02em",
+    lineHeight: 1.3,
+    letterSpacing: "-0.01em",
   },
-  h3: { fontWeight: 700, fontSize: "1.28rem", lineHeight: 1.32 },
-  h4: { fontWeight: 700, fontSize: "1.13rem", lineHeight: 1.4 },
+  h3: { fontWeight: 700, fontSize: "1.28rem", lineHeight: 1.36 },
+  h4: { fontWeight: 600, fontSize: "1.13rem", lineHeight: 1.44 },
 
-  subtitle1: { fontWeight: 700, fontSize: "0.95rem" },
-  subtitle2: { fontWeight: 700, fontSize: "0.875rem" },
+  subtitle1: { fontWeight: 600, fontSize: "0.95rem", lineHeight: 1.56 },
+  subtitle2: { fontWeight: 600, fontSize: "0.875rem", lineHeight: 1.52 },
 
-  body1: { fontSize: "0.95rem", lineHeight: 1.64 },
-  body2: { fontSize: "0.875rem", lineHeight: 1.58 },
+  body1: { fontSize: "0.95rem", lineHeight: 1.68 },
+  body2: { fontSize: "0.875rem", lineHeight: 1.62 },
 
-  button: { textTransform: "none", fontWeight: 700, letterSpacing: "0.01em" },
+  button: { textTransform: "none", fontWeight: 600, letterSpacing: "0.008em" },
   caption: { fontSize: "0.75rem" },
-  overline: { fontSize: "0.75rem", letterSpacing: "0.08em" },
+  overline: { fontSize: "0.75rem", letterSpacing: "0.04em" },
 } as const;
 
 const createLiquidGlassComponents = ({
@@ -438,7 +438,7 @@ const createLiquidGlassComponents = ({
 
 export const neoGlass = {
   name: "Neo Glass",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "light",
@@ -483,8 +483,8 @@ export const neoGlass = {
     },
 
     background: {
-      default: "#EAF4FF",
-      paper: "#F7FBFF",
+      default: "#DEEBFA",
+      paper: "#FCFEFF",
     },
 
     text: {
@@ -527,7 +527,7 @@ export const neoGlass = {
     bodyPrimaryGlowAlpha: 0.32,
     bodySecondaryGlowAlpha: 0.24,
     bodyTertiaryGlowAlpha: 0.2,
-    paperAlpha: 0.64,
+    paperAlpha: 0.82,
     borderAlpha: 0.2,
     shadowAlpha: 0.18,
     isDark: false,
@@ -536,7 +536,7 @@ export const neoGlass = {
 
 export const neoGlassDark = {
   name: "Neo Glass Dark",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "dark",
@@ -581,8 +581,8 @@ export const neoGlassDark = {
     },
 
     background: {
-      default: "#040918",
-      paper: "#0E1630",
+      default: "#030713",
+      paper: "#162243",
     },
 
     text: {
@@ -607,7 +607,7 @@ export const neoGlassDark = {
     },
 
     action: {
-      hover: alpha("#7DCCFF", 0.18),
+      hover: alpha("#E8F2FF", 0.1),
       selected: alpha("#7DCCFF", 0.28),
       focus: alpha("#C59BFF", 0.28),
       active: alpha("#E8F2FF", 0.58),
@@ -625,7 +625,7 @@ export const neoGlassDark = {
     bodyPrimaryGlowAlpha: 0.28,
     bodySecondaryGlowAlpha: 0.22,
     bodyTertiaryGlowAlpha: 0.18,
-    paperAlpha: 0.46,
+    paperAlpha: 0.62,
     borderAlpha: 0.32,
     shadowAlpha: 0.42,
     isDark: true,

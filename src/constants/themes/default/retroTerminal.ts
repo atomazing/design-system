@@ -4,51 +4,61 @@ import type { NamedThemeOptions } from "@/models/appSettings";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 const FONT_MONO =
-  '"IBM Plex Mono","JetBrains Mono","Tajawal","Cairo","Noto Sans Arabic","Roboto Mono","Consolas","Arial",monospace';
+  '"IBM Plex Mono","JetBrains Mono","Roboto Mono","Cascadia Mono","Consolas","Courier New",monospace';
 
 const TERMINAL_TYPOGRAPHY = {
   fontFamily: FONT_MONO,
 
   h1: {
-    fontWeight: 800,
+    fontWeight: 700,
     fontSize: "1.85rem",
-    lineHeight: 1.2,
-    letterSpacing: "0.03em",
+    lineHeight: 1.24,
+    letterSpacing: "0.016em",
   },
   h2: {
-    fontWeight: 800,
+    fontWeight: 700,
     fontSize: "1.42rem",
-    lineHeight: 1.24,
-    letterSpacing: "0.025em",
+    lineHeight: 1.28,
+    letterSpacing: "0.014em",
   },
   h3: {
-    fontWeight: 800,
+    fontWeight: 700,
     fontSize: "1.14rem",
-    lineHeight: 1.3,
-    letterSpacing: "0.02em",
+    lineHeight: 1.34,
+    letterSpacing: "0.012em",
   },
   h4: {
-    fontWeight: 700,
+    fontWeight: 600,
     fontSize: "1.02rem",
-    lineHeight: 1.35,
-    letterSpacing: "0.015em",
+    lineHeight: 1.4,
+    letterSpacing: "0.01em",
   },
 
-  subtitle1: { fontWeight: 700, fontSize: "0.92rem", letterSpacing: "0.02em" },
-  subtitle2: { fontWeight: 700, fontSize: "0.84rem", letterSpacing: "0.02em" },
+  subtitle1: {
+    fontWeight: 600,
+    fontSize: "0.92rem",
+    lineHeight: 1.56,
+    letterSpacing: "0.012em",
+  },
+  subtitle2: {
+    fontWeight: 600,
+    fontSize: "0.84rem",
+    lineHeight: 1.5,
+    letterSpacing: "0.01em",
+  },
 
-  body1: { fontSize: "0.92rem", lineHeight: 1.72 },
-  body2: { fontSize: "0.84rem", lineHeight: 1.62 },
+  body1: { fontSize: "0.92rem", lineHeight: 1.78 },
+  body2: { fontSize: "0.84rem", lineHeight: 1.68 },
 
   button: {
     textTransform: "uppercase",
-    fontWeight: 800,
-    letterSpacing: "0.08em",
+    fontWeight: 700,
+    letterSpacing: "0.04em",
   },
-  caption: { fontSize: "0.73rem", letterSpacing: "0.03em" },
+  caption: { fontSize: "0.73rem", letterSpacing: "0.02em" },
   overline: {
     fontSize: "0.7rem",
-    letterSpacing: "0.14em",
+    letterSpacing: "0.08em",
     textTransform: "uppercase",
   },
 } as const;
@@ -397,7 +407,7 @@ const createTerminalComponents = ({
 
 export const retroTerminal = {
   name: "Retro Terminal",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "light",
@@ -442,8 +452,8 @@ export const retroTerminal = {
     },
 
     background: {
-      default: "#E9FDEE",
-      paper: "#F7FFF9",
+      default: "#D7F1DF",
+      paper: "#FAFFFB",
     },
 
     text: {
@@ -491,7 +501,7 @@ export const retroTerminal = {
 
 export const retroTerminalDark = {
   name: "Retro Terminal Dark",
-  direction: "rtl",
+  direction: "ltr",
 
   palette: {
     mode: "dark",
@@ -536,8 +546,8 @@ export const retroTerminalDark = {
     },
 
     background: {
-      default: "#040805",
-      paper: "#09110B",
+      default: "#000402",
+      paper: "#0F1B12",
     },
 
     text: {
@@ -562,7 +572,7 @@ export const retroTerminalDark = {
     },
 
     action: {
-      hover: alpha("#33FF85", 0.18),
+      hover: alpha("#9CFFB6", 0.1),
       selected: alpha("#33FF85", 0.28),
       focus: alpha("#FF9D57", 0.3),
       active: alpha("#9CFFB6", 0.58),

@@ -5,18 +5,31 @@ import {
   acidEditorialNight as acidEditorialDark,
   bauhausOps as bauhausOpsLight,
   bauhausOpsNight as bauhausOpsDark,
+  brandNeonAdmin as brandNeonAdminLight,
+  brandNeonAdminDark,
   neonBauhausGrid as neonBauhausGridLight,
   neonBauhausGridNight as neonBauhausGridDark,
+  strongNeonBauhausGrid as strongNeonBauhausGridLight,
+  strongNeonBauhausGridNight as strongNeonBauhausGridDark,
   neonBauhausOps as neonBauhausOpsLight,
   neonBauhausOpsNight as neonBauhausOpsDark,
+  strongNeonBauhausOps as strongNeonBauhausOpsLight,
+  strongNeonBauhausOpsNight as strongNeonBauhausOpsDark,
   brutalistSprint as brutalistSprintLight,
   brutalistSprintNight as brutalistSprintDark,
+  neonBrutalistSprint as neonBrutalistSprintLight,
+  neonBrutalistSprintNight as neonBrutalistSprintDark,
+  strongNeonBrutalistSprint as strongNeonBrutalistSprintLight,
+  strongNeonBrutalistSprintNight as strongNeonBrutalistSprintDark,
   ceramicFluxLight,
   ceramicFlux as ceramicFluxDark,
   chromaticWireframeLight,
   chromaticWireframe as chromaticWireframeDark,
   editorialClassic as editorialClassicLight,
   brandNeonMotion as brandNeonMotionTheme,
+  flowEditorial as flowEditorialLight,
+  flowEditorialNight as flowEditorialDark,
+  strongBrandNeonMotion as strongBrandNeonMotionTheme,
   editorialClassicDark,
   holographicLedgerLight,
   glassReactor as glassReactorDark,
@@ -36,6 +49,8 @@ import {
   neoMemphisMetricsNight as neoMemphisMetricsDark,
   neonComplianceLight,
   neonCompliance as neonComplianceDark,
+  strongNeonComplianceLight,
+  strongNeonCompliance as strongNeonComplianceDark,
   noirInterfaceLight,
   noirInterface as noirInterfaceDark,
   quantizedHeatmapLight,
@@ -93,6 +108,13 @@ export const modernMinimal = createPreset(
   modernMinimalDark,
 );
 
+export const brandNeonAdmin = createPreset(
+  "brand-neon-admin",
+  "Brand Neon Admin",
+  brandNeonAdminLight,
+  brandNeonAdminDark,
+);
+
 export const neoGlass = createPreset(
   "neo-glass",
   "Neo Glass",
@@ -121,6 +143,13 @@ export const acidEditorial = createPreset(
   acidEditorialDark,
 );
 
+export const flowEditorial = createPreset(
+  "flow-editorial",
+  "Flow Editorial",
+  flowEditorialLight,
+  flowEditorialDark,
+);
+
 export const bauhausOps = createPreset(
   "bauhaus-ops",
   "Bauhaus Ops",
@@ -135,11 +164,25 @@ export const neonBauhausOps = createPreset(
   neonBauhausOpsDark,
 );
 
+export const strongNeonBauhausOps = createPreset(
+  "strong-neon-bauhaus-ops",
+  "Strong Neon Bauhaus Ops",
+  strongNeonBauhausOpsLight,
+  strongNeonBauhausOpsDark,
+);
+
 export const neonBauhausGrid = createPreset(
   "neon-bauhaus-grid",
   "Neon Bauhaus Grid",
   neonBauhausGridLight,
   neonBauhausGridDark,
+);
+
+export const strongNeonBauhausGrid = createPreset(
+  "strong-neon-bauhaus-grid",
+  "Strong Neon Bauhaus Grid",
+  strongNeonBauhausGridLight,
+  strongNeonBauhausGridDark,
 );
 
 export const brutalistSprint = createPreset(
@@ -149,11 +192,32 @@ export const brutalistSprint = createPreset(
   brutalistSprintDark,
 );
 
+export const neonBrutalistSprint = createPreset(
+  "neon-brutalist-sprint",
+  "Neon Brutalist Sprint",
+  neonBrutalistSprintLight,
+  neonBrutalistSprintDark,
+);
+
+export const strongNeonBrutalistSprint = createPreset(
+  "strong-neon-brutalist-sprint",
+  "Strong Neon Brutalist Sprint",
+  strongNeonBrutalistSprintLight,
+  strongNeonBrutalistSprintDark,
+);
+
 export const brandNeonMotion = createPreset(
   "brand-neon-motion",
   "Brand Neon Motion",
   brandNeonMotionTheme.colorSchemes.light,
   brandNeonMotionTheme.colorSchemes.dark,
+);
+
+export const strongBrandNeonMotion = createPreset(
+  "strong-brand-neon-motion",
+  "Strong Brand Neon Motion",
+  strongBrandNeonMotionTheme.colorSchemes.light,
+  strongBrandNeonMotionTheme.colorSchemes.dark,
 );
 
 export const ceramicFlux = createPreset(
@@ -219,6 +283,13 @@ export const neonCompliance = createPreset(
   neonComplianceDark,
 );
 
+export const strongNeonCompliance = createPreset(
+  "strong-neon-compliance",
+  "Strong Neon Compliance",
+  strongNeonComplianceLight,
+  strongNeonComplianceDark,
+);
+
 export const noirInterface = createPreset(
   "noir-interface",
   "Noir Interface",
@@ -265,6 +336,7 @@ export const defaultThemes: ThemePreset[] = [
   editorialClassic,
   airportOps,
   modernMinimal,
+  brandNeonAdmin,
   neoGlass,
   retroTerminal,
   warmEarth,
@@ -272,12 +344,18 @@ export const defaultThemes: ThemePreset[] = [
 
 // Extended visual pack intended for marketing and landing page surfaces.
 export const landingPageThemes: ThemePreset[] = [
+  flowEditorial,
   acidEditorial,
   bauhausOps,
   neonBauhausGrid,
+  strongNeonBauhausGrid,
   neonBauhausOps,
+  strongNeonBauhausOps,
   brutalistSprint,
+  neonBrutalistSprint,
+  strongNeonBrutalistSprint,
   brandNeonMotion,
+  strongBrandNeonMotion,
   ceramicFlux,
   chromaticWireframe,
   glassReactor,
@@ -287,6 +365,7 @@ export const landingPageThemes: ThemePreset[] = [
   monochromeKinetics,
   neoMemphisMetrics,
   neonCompliance,
+  strongNeonCompliance,
   noirInterface,
   quantizedHeatmap,
   retroFutureTerminal,
