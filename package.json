@@ -1,6 +1,6 @@
 {
   "name": "@atomazing-org/design-system",
-  "version": "3.7.2",
+  "version": "3.7.3",
   "private": false,
   "type": "module",
   "packageManager": "pnpm@9.14.4",
@@ -60,7 +60,7 @@
     "smoke:next": "pnpm --dir examples/next-app-router run lint && pnpm run check:runtime-alignment && pnpm --dir examples/next-app-router run build",
     "version-packages": "changeset version",
     "format": "pnpm run format:eslint && pnpm run format:prettier",
-    "format:eslint": "pnpm run lint:eslint -- --fix",
+    "format:eslint": "pnpm exec eslint \"**/*.{js,ts,tsx}\" --fix",
     "format:prettier": "prettier \"**/*.{json,js,ts,tsx}\" --write",
     "lint:eslint": "eslint \"**/*.{js,ts,tsx}\"",
     "lint:prettier": "prettier \"**/*.{json,js,ts,tsx}\" --check",
