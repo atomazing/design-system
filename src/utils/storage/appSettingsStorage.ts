@@ -2,7 +2,7 @@ import { canUseDom } from "@/utils/ssr";
 
 import type { DarkModeOptions } from "@/models/appSettings";
 
-const APP_SETTINGS_KEY = "appSettings";
+export const DEFAULT_APP_SETTINGS_KEY = "appSettings";
 const DARK_MODE_OPTIONS = new Set<DarkModeOptions>(["system", "light", "dark"]);
 
 const isDarkModeOption = (value: unknown): value is DarkModeOptions =>
@@ -27,10 +27,12 @@ const isStoredAppSettings = (value: unknown): value is StoredAppSettings => {
   );
 };
 
-export const readAppSettings = (): StoredAppSettings | null => {
+export const readAppSettings = (
+  storageKey = DEFAULT_APP_SETTINGS_KEY,
+): StoredAppSettings | null => {
   if (!canUseDom() || globalThis.localStorage === undefined) return null;
   try {
-    const storedRaw = globalThis.localStorage.getItem(APP_SETTINGS_KEY);
+    const storedRaw = globalThis.localStorage.getItem(storageKey);
     if (!storedRaw) return null;
     const parsed = JSON.parse(storedRaw) as unknown;
     return isStoredAppSettings(parsed) ? parsed : null;
@@ -39,10 +41,13 @@ export const readAppSettings = (): StoredAppSettings | null => {
   }
 };
 
-export const writeAppSettings = (settings: StoredAppSettings): void => {
+export const writeAppSettings = (
+  settings: StoredAppSettings,
+  storageKey = DEFAULT_APP_SETTINGS_KEY,
+): void => {
   if (!canUseDom() || globalThis.localStorage === undefined) return;
   try {
-    globalThis.localStorage.setItem(APP_SETTINGS_KEY, JSON.stringify(settings));
+    globalThis.localStorage.setItem(storageKey, JSON.stringify(settings));
   } catch {
     /* empty */
   }

@@ -46,7 +46,7 @@ const FONT_MONO =
 
 const BRAND_RADIUS = 20;
 
-type BrandScriptProfile = {
+interface BrandScriptProfile {
   heroWeight: number;
   displayWeight: number;
   secondaryWeight: number;
@@ -54,9 +54,9 @@ type BrandScriptProfile = {
   strongLabelWeight: number;
   heroCaps: boolean;
   compactCaps: boolean;
-};
+}
 
-type BrandLocaleProfile = {
+interface BrandLocaleProfile {
   button: {
     letterSpacing: string;
     lineHeight: number;
@@ -82,7 +82,7 @@ type BrandLocaleProfile = {
       textWrap: "pretty";
     };
   };
-};
+}
 
 interface BrandLandingControls {
   luxuryLevel: number;
@@ -149,9 +149,8 @@ const withLangSelectors = (
   selectors: string[],
   styles: Record<string, string | number>,
 ) => ({
-  [selectors
-    .map((selector) => `html[lang='${lang}'] ${selector}`)
-    .join(", ")]: styles,
+  [selectors.map((selector) => `html[lang='${lang}'] ${selector}`).join(", ")]:
+    styles,
 });
 
 const createDisplayTypeStyle = ({
@@ -1292,7 +1291,13 @@ const createBrandComponents = (
           },
         },
         "&.Mui-focusVisible": {
-          boxShadow: createFocusHalo(theme, controls, theme.palette.primary.main, 2, 4),
+          boxShadow: createFocusHalo(
+            theme,
+            controls,
+            theme.palette.primary.main,
+            2,
+            4,
+          ),
         },
         "&.Mui-selected": {
           color: theme.palette.primary.main,
@@ -1332,7 +1337,13 @@ const createBrandComponents = (
           borderColor: "transparent",
         },
         "&.Mui-focused": {
-          boxShadow: createFocusHalo(theme, controls, theme.palette.primary.main, 1, 4),
+          boxShadow: createFocusHalo(
+            theme,
+            controls,
+            theme.palette.primary.main,
+            1,
+            4,
+          ),
         },
         "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
           borderColor: "transparent",
@@ -1589,7 +1600,10 @@ const createBrandComponents = (
         padding: "10px 12px",
       }),
       arrow: ({ theme }) => ({
-        color: alpha(theme.palette.background.paper, theme.palette.mode === "dark" ? 0.82 : 0.94),
+        color: alpha(
+          theme.palette.background.paper,
+          theme.palette.mode === "dark" ? 0.82 : 0.94,
+        ),
       }),
     },
   },
@@ -1643,7 +1657,10 @@ const createBrandComponents = (
         marginRight: theme.spacing(0.5),
       }),
       standardInfo: ({ theme }) => ({
-        backgroundColor: alpha(theme.palette.info.main, theme.palette.mode === "dark" ? 0.14 : 0.1),
+        backgroundColor: alpha(
+          theme.palette.info.main,
+          theme.palette.mode === "dark" ? 0.14 : 0.1,
+        ),
       }),
       standardSuccess: ({ theme }) => ({
         backgroundColor: alpha(
@@ -1658,7 +1675,10 @@ const createBrandComponents = (
         ),
       }),
       standardError: ({ theme }) => ({
-        backgroundColor: alpha(theme.palette.error.main, theme.palette.mode === "dark" ? 0.16 : 0.1),
+        backgroundColor: alpha(
+          theme.palette.error.main,
+          theme.palette.mode === "dark" ? 0.16 : 0.1,
+        ),
       }),
     },
   },
@@ -1683,9 +1703,12 @@ const createBrandComponents = (
       root: ({ theme }) => ({
         minHeight: 58,
         paddingInline: theme.spacing(2.5),
-        transition: theme.transitions.create(["background-color", "box-shadow"], {
-          duration: motionDuration(theme, controls, 140, 220),
-        }),
+        transition: theme.transitions.create(
+          ["background-color", "box-shadow"],
+          {
+            duration: motionDuration(theme, controls, 140, 220),
+          },
+        ),
         "&:hover": {
           backgroundColor: alpha(
             theme.palette.primary.main,
@@ -1738,7 +1761,13 @@ const createBrandComponents = (
         },
         "&:focus-visible": {
           outline: "none",
-          boxShadow: createFocusHalo(theme, controls, theme.palette.primary.main, 1, 3),
+          boxShadow: createFocusHalo(
+            theme,
+            controls,
+            theme.palette.primary.main,
+            1,
+            3,
+          ),
         },
       }),
     },
@@ -1790,7 +1819,13 @@ const createBrandComponents = (
           },
         },
         "&.Mui-focusVisible": {
-          boxShadow: createFocusHalo(theme, controls, theme.palette.primary.main, 1, 3),
+          boxShadow: createFocusHalo(
+            theme,
+            controls,
+            theme.palette.primary.main,
+            1,
+            3,
+          ),
         },
       }),
     },

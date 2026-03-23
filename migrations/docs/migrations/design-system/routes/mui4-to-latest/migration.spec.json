@@ -135,5 +135,11 @@
       ]
     }
   ],
-  "gates": ["no-legacy-material-ui", "no-hardcoded-tokens", "lint", "tests", "build"]
+  "gates": [
+    "no-legacy-material-ui",
+    "no-hardcoded-tokens",
+    "lint",
+    "tests",
+    "build"
+  ]
 }

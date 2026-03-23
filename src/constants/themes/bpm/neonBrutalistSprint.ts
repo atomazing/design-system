@@ -1,19 +1,20 @@
 import { alpha } from "@mui/material/styles";
 
-import { brutalistSprint } from "./brutalistSprint";
+import { brutalistSprint } from "../landing/brutalistSprint";
+
 import { neonCompliance, neonComplianceLight } from "./neonCompliance";
 
 import type { NamedThemeOptions } from "@/models/appSettings";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
-type Controls = {
+interface Controls {
   luxuryLevel: number;
   extravagance: number;
   heroDrama: number;
   ctaPower: number;
   motionPolish: number;
   blurBudget: number;
-};
+}
 
 type SurfaceLevel = "surface" | "elevated" | "overlay";
 
@@ -268,7 +269,7 @@ const createComponents = (
         backgroundImage: rail(theme, controls, isDark ? 0.82 : 0.64),
         filter: `blur(${Math.round(scale(controls.heroDrama, 18, 28))}px)`,
         opacity: isDark ? 0.88 : 0.74,
-        animation: `nbsScene ${motion(theme, controls, 9000, 12000)}ms ease-in-out infinite`,
+        animation: `nbsScene ${motion(theme, controls, 9000, 12_000)}ms ease-in-out infinite`,
       },
       ".nbs-surface-hero, [data-nbs-surface='hero']": surface(
         theme,

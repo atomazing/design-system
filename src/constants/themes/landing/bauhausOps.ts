@@ -4,30 +4,30 @@ import type { NamedThemeOptions } from "@/models/appSettings";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 const FONT_DISPLAY =
-  "\"IBM Plex Sans\",\"Inter\",\"Manrope\",\"Helvetica\",\"Arial\",sans-serif";
+  '"IBM Plex Sans","Inter","Manrope","Helvetica","Arial",sans-serif';
 const FONT_TEXT =
-  "\"IBM Plex Sans\",\"Inter\",\"Manrope\",\"Helvetica\",\"Arial\",sans-serif";
+  '"IBM Plex Sans","Inter","Manrope","Helvetica","Arial",sans-serif';
 const FONT_MONO =
-  "\"IBM Plex Mono\",\"JetBrains Mono\",\"Roboto Mono\",\"Menlo\",\"Consolas\",monospace";
+  '"IBM Plex Mono","JetBrains Mono","Roboto Mono","Menlo","Consolas",monospace';
 
 const BAUHAUS_RADIUS = 20;
 
-type BauhausScriptProfile = {
+interface BauhausScriptProfile {
   displayWeight: number;
   secondaryWeight: number;
   labelWeight: number;
   heroCaps: boolean;
   compactCaps: boolean;
-};
+}
 
-type BauhausLandingControls = {
+interface BauhausLandingControls {
   luxuryLevel: number;
   extravagance: number;
   heroDrama: number;
   ctaPower: number;
   motionPolish: number;
   blurBudget: number;
-};
+}
 
 type SurfaceLevel = "surface" | "elevated" | "overlay";
 
@@ -191,11 +191,7 @@ const typography = {
 const bauhausInk = (theme: Theme): string =>
   theme.palette.mode === "dark" ? theme.palette.common.white : "#111114";
 
-const bauhausRail = (
-  theme: Theme,
-  opacity = 0.92,
-  angle = 90,
-): string =>
+const bauhausRail = (theme: Theme, opacity = 0.92, angle = 90): string =>
   `linear-gradient(${angle}deg, ${alpha(theme.palette.primary.main, opacity)} 0%, ${alpha(
     theme.palette.primary.main,
     opacity,
@@ -290,7 +286,11 @@ const bauhausSurface = (
     level === "overlay"
       ? scale(controls.luxuryLevel, isDark ? 0.84 : 0.9, isDark ? 0.9 : 0.96)
       : level === "elevated"
-        ? scale(controls.luxuryLevel, isDark ? 0.78 : 0.86, isDark ? 0.86 : 0.94)
+        ? scale(
+            controls.luxuryLevel,
+            isDark ? 0.78 : 0.86,
+            isDark ? 0.86 : 0.94,
+          )
         : scale(controls.luxuryLevel, isDark ? 0.7 : 0.82, isDark ? 0.8 : 0.9);
   const accentAlpha =
     level === "overlay"
@@ -387,15 +387,27 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(980px 620px at 12% 10%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.18 : 0.22, isDark ? 0.28 : 0.32),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.18 : 0.22,
+                isDark ? 0.28 : 0.32,
+              ),
             )} 0%, transparent 58%)`,
             `radial-gradient(840px 520px at 88% 14%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.heroDrama, isDark ? 0.12 : 0.16, isDark ? 0.22 : 0.24),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.12 : 0.16,
+                isDark ? 0.22 : 0.24,
+              ),
             )} 0%, transparent 54%)`,
             `radial-gradient(920px 560px at 38.2% 108%, ${alpha(
               theme.palette.warning.main,
-              scale(controls.heroDrama, isDark ? 0.14 : 0.16, isDark ? 0.24 : 0.26),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.14 : 0.16,
+                isDark ? 0.24 : 0.26,
+              ),
             )} 0%, transparent 56%)`,
             `linear-gradient(180deg, transparent 0%, transparent 58%, ${alpha(
               theme.palette.background.default,
@@ -414,7 +426,7 @@ const createComponents = (
           backgroundAttachment: "fixed",
         },
         "body::before": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInlineStart: "-12vw",
           insetBlockStart: "8vh",
@@ -436,7 +448,7 @@ const createComponents = (
           )}s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate`,
         },
         "body::after": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInline: 0,
           insetBlockStart: 0,
@@ -462,7 +474,12 @@ const createComponents = (
             accent: theme.palette.secondary.main,
           }),
           boxShadow: [
-            bauhausShadow(theme, controls, "overlay", theme.palette.secondary.main),
+            bauhausShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.secondary.main,
+            ),
             `0 0 ${Math.round(scale(controls.heroDrama, 28, 52))}px ${alpha(
               theme.palette.primary.main,
               scale(controls.heroDrama, 0.12, 0.22),
@@ -473,15 +490,27 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(1160px 720px at 10% 8%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.24 : 0.28, isDark ? 0.34 : 0.38),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.24 : 0.28,
+                isDark ? 0.34 : 0.38,
+              ),
             )} 0%, transparent 58%)`,
             `radial-gradient(980px 620px at 88% 12%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.heroDrama, isDark ? 0.18 : 0.2, isDark ? 0.28 : 0.3),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.18 : 0.2,
+                isDark ? 0.28 : 0.3,
+              ),
             )} 0%, transparent 54%)`,
             `radial-gradient(1040px 640px at 38.2% 112%, ${alpha(
               theme.palette.warning.main,
-              scale(controls.heroDrama, isDark ? 0.18 : 0.22, isDark ? 0.3 : 0.34),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.18 : 0.22,
+                isDark ? 0.3 : 0.34,
+              ),
             )} 0%, transparent 56%)`,
             `linear-gradient(180deg, transparent 0%, transparent 58%, ${alpha(
               theme.palette.background.default,
@@ -498,14 +527,15 @@ const createComponents = (
           ].join(", "),
           backgroundSize: "auto, auto, auto, auto, 36px 36px, 36px 36px",
         },
-        "body.bh-showcase-mode::before, body[data-bh-scene='showcase']::before": {
-          insetInlineStart: "-14vw",
-          width: "50vw",
-          maxWidth: 780,
-          height: 34,
-          filter: `blur(${Math.round(scale(controls.blurBudget, 16, 28))}px)`,
-          opacity: 1,
-        },
+        "body.bh-showcase-mode::before, body[data-bh-scene='showcase']::before":
+          {
+            insetInlineStart: "-14vw",
+            width: "50vw",
+            maxWidth: 780,
+            height: 34,
+            filter: `blur(${Math.round(scale(controls.blurBudget, 16, 28))}px)`,
+            opacity: 1,
+          },
         "body.bh-showcase-mode::after, body[data-bh-scene='showcase']::after": {
           height: 5,
           boxShadow: [
@@ -571,7 +601,7 @@ const createComponents = (
           gap: theme.spacing(3),
         },
         "&[data-bh-section='hero']::before": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInline: 0,
           insetBlockStart: 0,
@@ -606,7 +636,7 @@ const createComponents = (
         marginInline: theme.spacing(1),
         marginTop: theme.spacing(1),
         "&::after": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInline: 0,
           insetBlockEnd: 0,
@@ -673,7 +703,12 @@ const createComponents = (
             accent: theme.palette.secondary.main,
           }),
           boxShadow: [
-            bauhausShadow(theme, controls, "overlay", theme.palette.secondary.main),
+            bauhausShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.secondary.main,
+            ),
             `0 0 ${Math.round(scale(controls.heroDrama, 30, 56))}px ${alpha(
               theme.palette.primary.main,
               scale(controls.heroDrama, 0.14, 0.24),
@@ -760,7 +795,12 @@ const createComponents = (
         borderStyle: "solid",
         fontWeight: 700,
         transition: theme.transitions.create(
-          ["transform", "box-shadow", "background-position", "background-color"],
+          [
+            "transform",
+            "box-shadow",
+            "background-position",
+            "background-color",
+          ],
           {
             duration: Math.round(scale(controls.motionPolish, 200, 300)),
           },
@@ -806,7 +846,12 @@ const createComponents = (
         backgroundSize: `${Math.round(scale(controls.ctaPower, 170, 210))}% 170%, 100% 100%`,
         backgroundPosition: "0% 50%, 0 0",
         boxShadow: [
-          bauhausShadow(theme, controls, "elevated", theme.palette.warning.main),
+          bauhausShadow(
+            theme,
+            controls,
+            "elevated",
+            theme.palette.warning.main,
+          ),
           `0 0 ${Math.round(scale(controls.ctaPower, 22, 38))}px ${alpha(
             theme.palette.primary.main,
             scale(controls.ctaPower, 0.22, 0.36),
@@ -834,14 +879,24 @@ const createComponents = (
         },
         "&.Mui-focusVisible": {
           boxShadow: [
-            bauhausShadow(theme, controls, "overlay", theme.palette.warning.main),
+            bauhausShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.warning.main,
+            ),
             bauhausFocusRing(theme, controls, 4),
           ].join(", "),
         },
         "&.bh-showcase-cta, &[data-bh-tone='showcase']": {
           backgroundSize: `${Math.round(scale(controls.ctaPower, 210, 250))}% 180%, 100% 100%`,
           boxShadow: [
-            bauhausShadow(theme, controls, "overlay", theme.palette.secondary.main),
+            bauhausShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.secondary.main,
+            ),
             `0 0 ${Math.round(scale(controls.ctaPower, 36, 56))}px ${alpha(
               theme.palette.primary.main,
               scale(controls.ctaPower, 0.28, 0.44),
@@ -1129,7 +1184,7 @@ const createComponents = (
           accent: theme.palette.secondary.main,
         }),
         "&::before": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInlineStart: 0,
           insetBlockStart: 0,
@@ -1273,12 +1328,42 @@ export const bauhausOps = {
   direction: "ltr",
   palette: {
     mode: "light",
-    primary: { main: "#0057FF", dark: "#003FDB", light: "#6D92FF", contrastText: "#FFFFFF" },
-    secondary: { main: "#FF4A1C", dark: "#DA3310", light: "#FF8A6A", contrastText: "#FFFFFF" },
-    warning: { main: "#FFD500", dark: "#D9B500", light: "#FFE56B", contrastText: "#111114" },
-    info: { main: "#00B7C3", dark: "#008C97", light: "#63D6DE", contrastText: "#081112" },
-    success: { main: "#00C16A", dark: "#009A53", light: "#63DEA1", contrastText: "#06110A" },
-    error: { main: "#111114", dark: "#09090B", light: "#2B2B32", contrastText: "#FFFFFF" },
+    primary: {
+      main: "#0057FF",
+      dark: "#003FDB",
+      light: "#6D92FF",
+      contrastText: "#FFFFFF",
+    },
+    secondary: {
+      main: "#FF4A1C",
+      dark: "#DA3310",
+      light: "#FF8A6A",
+      contrastText: "#FFFFFF",
+    },
+    warning: {
+      main: "#FFD500",
+      dark: "#D9B500",
+      light: "#FFE56B",
+      contrastText: "#111114",
+    },
+    info: {
+      main: "#00B7C3",
+      dark: "#008C97",
+      light: "#63D6DE",
+      contrastText: "#081112",
+    },
+    success: {
+      main: "#00C16A",
+      dark: "#009A53",
+      light: "#63DEA1",
+      contrastText: "#06110A",
+    },
+    error: {
+      main: "#111114",
+      dark: "#09090B",
+      light: "#2B2B32",
+      contrastText: "#FFFFFF",
+    },
     background: { default: "#F3ECDD", paper: "#FFFDF8" },
     text: {
       primary: "#111114",
@@ -1307,10 +1392,30 @@ export const bauhausOpsNight = {
   palette: {
     ...bauhausOps.palette,
     mode: "dark",
-    primary: { main: "#7A97FF", dark: "#5473F5", light: "#AEBEFF", contrastText: "#09101D" },
-    secondary: { main: "#FF7B57", dark: "#EB5D35", light: "#FFB19B", contrastText: "#130B08" },
-    warning: { main: "#FFD86A", dark: "#E0B94B", light: "#FFE7A2", contrastText: "#130F07" },
-    info: { main: "#4FD9D4", dark: "#27B9B3", light: "#8BEDEA", contrastText: "#061112" },
+    primary: {
+      main: "#7A97FF",
+      dark: "#5473F5",
+      light: "#AEBEFF",
+      contrastText: "#09101D",
+    },
+    secondary: {
+      main: "#FF7B57",
+      dark: "#EB5D35",
+      light: "#FFB19B",
+      contrastText: "#130B08",
+    },
+    warning: {
+      main: "#FFD86A",
+      dark: "#E0B94B",
+      light: "#FFE7A2",
+      contrastText: "#130F07",
+    },
+    info: {
+      main: "#4FD9D4",
+      dark: "#27B9B3",
+      light: "#8BEDEA",
+      contrastText: "#061112",
+    },
     background: { default: "#08101B", paper: "#101A2A" },
     text: {
       primary: "#F8F1E5",

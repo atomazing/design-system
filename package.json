@@ -1,6 +1,6 @@
 {
   "name": "@atomazing-org/design-system",
-  "version": "2.0.2",
+  "version": "3.7.2",
   "private": false,
   "type": "module",
   "packageManager": "pnpm@9.14.4",
@@ -18,16 +18,19 @@
     "styles",
     "utils"
   ],
+  "main": "./dist/index.js",
   "module": "dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./presets": {
       "types": "./dist/presets/index.d.ts",
-      "import": "./dist/presets/index.js"
+      "import": "./dist/presets/index.js",
+      "default": "./dist/presets/index.js"
     }
   },
   "files": [
@@ -44,14 +47,18 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node tools/fix-dts-runtime-stubs.mjs",
+    "changeset": "changeset",
     "dev": "tsup --watch",
     "test": "vitest run",
     "check:runtime-alignment": "node tools/checks/runtime-version-alignment.mjs",
     "check:migration-readiness": "node tools/checks/migration-readiness.mjs",
+    "release": "changeset publish",
+    "release:verify": "pnpm lint && pnpm test && pnpm build && pnpm run smoke:esm && pnpm run smoke:react-app && pnpm run smoke:next && pnpm run check:migration-readiness",
     "smoke:esm": "node tools/smoke/esm-imports.mjs",
     "smoke:react-app": "pnpm --dir examples/react-app run lint:ts && pnpm --dir examples/react-app run build",
     "smoke:next": "pnpm --dir examples/next-app-router run lint && pnpm run check:runtime-alignment && pnpm --dir examples/next-app-router run build",
+    "version-packages": "changeset version",
     "format": "pnpm run format:eslint && pnpm run format:prettier",
     "format:eslint": "pnpm run lint:eslint -- --fix",
     "format:prettier": "prettier \"**/*.{json,js,ts,tsx}\" --write",
@@ -75,6 +82,7 @@
   },
   "devDependencies": {
     "@atomazing-org/eslint-config": "3.6.0",
+    "@changesets/cli": "^2.30.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "7.3.8",

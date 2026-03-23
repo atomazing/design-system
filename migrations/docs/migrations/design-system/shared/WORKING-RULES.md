@@ -83,10 +83,10 @@ Across consumer components in general:
 - Visible application text should be rendered through `Typography`, not left as raw JSX text inside layout wrappers.
 - Every `Typography` must declare an explicit `variant`.
 - Pick variants by semantics, not convenience:
-  - headings and section titles: `header_*`
-  - main body copy and helper text: `text_*_regular`
-  - button and action labels: compact semibold text such as `text_sm_semibold`
-  - chip, badge, and compact status labels: compact text such as `text_xs_semibold`
+  - headings and section titles: `h1` through `h6`
+  - main body copy and helper text: `subtitle1`, `body1`, `body2`
+  - button and action labels: compact standard variants such as `subtitle2` or `button`
+  - chip, badge, and compact status labels: compact standard variants such as `caption`
 - When MUI interactive components such as `Button`, `ToggleButton`, `MenuItem`, `Chip`, or `Alert` need visible text, wrap that text in `Typography component="span"` with an explicit variant.
 - If the repo has a typography contract lint or script, keep it green as part of the migration gate.
 - If bulk replacements or file rewrites touch localized copy, keep files in UTF-8 and scan touched files for mojibake or replacement characters before closeout.

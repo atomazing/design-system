@@ -2,10 +2,18 @@
 node_modules
 dist
 test-results
+.playwright-cli
+output
+*.log
+*.err
+*.fig
 
 # code editors
 .idea
 .vscode
+
+examples/**/output
+examples/**/.fig-extract
 
 AGENTS.md
 

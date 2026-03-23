@@ -485,20 +485,22 @@ const createComponents = (): ThemeOptions["components"] => ({
           maxInlineSize: "26ch",
           lineHeight: 1.22,
         },
-        "html[lang='ru'] &.MuiTypography-h1::after, html[lang='ru'] &.MuiTypography-h2::after": {
-          left: 0,
-          right: "8%",
-          bottom: "0.1em",
-          height: "0.24em",
-          background: `linear-gradient(90deg,
+        "html[lang='ru'] &.MuiTypography-h1::after, html[lang='ru'] &.MuiTypography-h2::after":
+          {
+            left: 0,
+            right: "8%",
+            bottom: "0.1em",
+            height: "0.24em",
+            background: `linear-gradient(90deg,
             ${alpha(theme.palette.secondary.main, 0.18)} 0%,
             ${alpha(theme.palette.secondary.main, 0.28)} 58%,
             ${alpha(theme.palette.info.main, 0.14)} 100%)`,
-        },
-        "html[lang='ru'] &.MuiTypography-subtitle1, html[lang='ru'] &.MuiTypography-subtitle2, html[lang='ru'] &.MuiTypography-body1, html[lang='ru'] &.MuiTypography-body2": {
-          hyphens: "auto",
-          textWrap: "pretty",
-        },
+          },
+        "html[lang='ru'] &.MuiTypography-subtitle1, html[lang='ru'] &.MuiTypography-subtitle2, html[lang='ru'] &.MuiTypography-body1, html[lang='ru'] &.MuiTypography-body2":
+          {
+            hyphens: "auto",
+            textWrap: "pretty",
+          },
 
         // Inline code = editorial tag
         "& code": {
@@ -586,7 +588,13 @@ const createComponents = (): ThemeOptions["components"] => ({
         position: "relative",
         overflow: "hidden",
         transition: theme.transitions.create(
-          ["transform", "box-shadow", "background-color", "border-color", "background-position"],
+          [
+            "transform",
+            "box-shadow",
+            "background-color",
+            "border-color",
+            "background-position",
+          ],
           {
             duration: Math.round(
               mix(

@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { allBuiltInThemes } from "@/presets";
+import { allBuiltInThemes, defaultThemes } from "@/presets";
 import {
+  composite,
   contrastRatio,
+  parseColor,
   resolveColor,
   type Rgb,
   type Rgba,
@@ -202,5 +204,75 @@ describe("preset contrast guardrails", () => {
         );
       });
     }
+  }
+});
+
+describe("default dark hover guardrails", () => {
+  const MAX_DARK_HOVER_ALPHA = 0.12;
+
+  for (const preset of defaultThemes) {
+    it(`${preset.id} dark keeps hover overlays subtle and readable`, () => {
+      const palette = preset.colorSchemes.dark.palette ?? {};
+      const background = palette.background ?? {};
+      const text = palette.text ?? {};
+      const action = palette.action ?? {};
+
+      const backgroundDefaultRaw = requireToken(
+        background.default,
+        "palette.background.default",
+        preset.id,
+        "dark",
+      );
+      const backgroundPaperRaw = requireToken(
+        background.paper,
+        "palette.background.paper",
+        preset.id,
+        "dark",
+      );
+      const textPrimaryRaw = requireToken(
+        text.primary,
+        "palette.text.primary",
+        preset.id,
+        "dark",
+      );
+      const actionHoverRaw = requireToken(
+        action.hover,
+        "palette.action.hover",
+        preset.id,
+        "dark",
+      );
+
+      const hoverOverlay = parseColor(actionHoverRaw);
+      expect(
+        hoverOverlay.a,
+        `${preset.id} [dark] palette.action.hover alpha must stay <= ${MAX_DARK_HOVER_ALPHA}`,
+      ).toBeLessThanOrEqual(MAX_DARK_HOVER_ALPHA);
+
+      const backgroundDefault = resolveColor(backgroundDefaultRaw);
+      const backgroundPaper = resolveColor(backgroundPaperRaw, {
+        ...backgroundDefault,
+        a: 1,
+      });
+      const hoverBackground = composite(hoverOverlay, {
+        ...backgroundPaper,
+        a: 1,
+      });
+      const textPrimary = resolveColor(textPrimaryRaw, {
+        ...hoverBackground,
+        a: 1,
+      });
+
+      assertRatio(
+        preset.id,
+        preset.label,
+        "dark",
+        "text.primary/action.hover over background.paper",
+        textPrimaryRaw,
+        `${actionHoverRaw} over ${backgroundPaperRaw}`,
+        textPrimary,
+        hoverBackground,
+        THRESHOLDS.primary,
+      );
+    });
   }
 });

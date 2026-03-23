@@ -1,23 +1,41 @@
 # Changelog
 
-## Unreleased
+## 3.7.2
 
-### Packaging cleanup (v2.x)
+### Summary
 
-- publish build is now ESM-only artifacts (`.js` + `.d.ts`) to match `exports`
-- sourcemaps are disabled by default in release builds (opt-in with `SOURCEMAP=1`)
-- removed broken `migration:validate` script (legacy migration automation scripts were removed)
-- removed unused `@emotion/css` peer dependency
-- kept `darkModeOptions` in the root public API (`@atomazing-org/design-system`)
+Release hardens the v3 public contract around a preset-first theming surface,
+customizable persistence keys, and publish-ready ESM packaging.
 
-### Root API slimming (v3.0, breaking)
+### Added
 
-- removed demo/app-level components from the root API (`DialogBtn`, `Loading`, `PathName`, `ErrorBoundary`)
-- removed generic app/browser/time helpers from the root API (for example `displayGreeting`, `timeAgo`, `getSystemInfo`, `useResponsiveDisplay`)
-- removed raw built-in theme constants from the root API (`editorialClassic`, `modernMinimal`, `neoGlass`, `retroTerminal`, `warmEarth`)
-- built-in presets remain available via `@atomazing-org/design-system/presets`
-- `darkModeOptions` remains available from the root import
-- removed app-specific keyframe exports from the root API (`logoutAnimation`, `installAppAnimation`)
+- `ThemeProviderWrapper` now accepts `settingsStorageKey` so multiple apps on one
+  origin can persist theme settings independently
+- built-in BPM/strong neon presets are exposed through
+  `@atomazing-org/design-system/presets`
+- default preset typography was refined for Cyrillic-first application surfaces
+
+### Changed
+
+- publish build now ships ESM artifacts plus generated runtime stubs for
+  declaration-only runtime references
+- root package exports now include `default` conditions for `.` and `/presets`
+- migration pack remains bundled with the published package and validated via
+  `check:migration-readiness`
+
+### Breaking changes
+
+- root API was intentionally slimmed down; demo/app-level exports such as
+  `DialogBtn`, `Loading`, `PathName`, and `ErrorBoundary` were removed
+- generic app/browser/time helpers such as `displayGreeting`, `timeAgo`,
+  `getSystemInfo`, and `useResponsiveDisplay` were removed from the root import
+- raw built-in theme constants are no longer exported from the root import;
+  consume presets from `@atomazing-org/design-system/presets`
+- legacy typography exports were removed from the public surface:
+  `muiTypography`, `typographyVariants`, `src/styles/typography`, and
+  `src/models/typography`
+- app-specific keyframe exports such as `logoutAnimation` and
+  `installAppAnimation` were removed from the root import
 
 ## 2.0.0
 

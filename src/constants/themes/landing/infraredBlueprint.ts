@@ -16,14 +16,14 @@ const FONT_MONO =
 
 const INFRA_RADIUS = 18;
 
-type InfraLandingControls = {
+interface InfraLandingControls {
   luxuryLevel: number;
   extravagance: number;
   heroDrama: number;
   ctaPower: number;
   motionPolish: number;
   blurBudget: number;
-};
+}
 
 type BlueprintSurfaceLevel = "surface" | "elevated" | "overlay";
 
@@ -295,13 +295,25 @@ const blueprintPanel = (
     opts?.borderAlpha ?? (theme.palette.mode === "dark" ? 0.12 : 0.08);
   const notchAlpha =
     opts?.notchAlpha ??
-    scale(controls.extravagance, theme.palette.mode === "dark" ? 0.32 : 0.18, theme.palette.mode === "dark" ? 0.56 : 0.3);
+    scale(
+      controls.extravagance,
+      theme.palette.mode === "dark" ? 0.32 : 0.18,
+      theme.palette.mode === "dark" ? 0.56 : 0.3,
+    );
   const measureAlpha =
     opts?.measureAlpha ??
-    scale(controls.luxuryLevel, theme.palette.mode === "dark" ? 0.18 : 0.1, theme.palette.mode === "dark" ? 0.34 : 0.18);
+    scale(
+      controls.luxuryLevel,
+      theme.palette.mode === "dark" ? 0.18 : 0.1,
+      theme.palette.mode === "dark" ? 0.34 : 0.18,
+    );
   const shadowAlpha =
     opts?.shadowAlpha ??
-    scale(controls.luxuryLevel, theme.palette.mode === "dark" ? 0.32 : 0.08, theme.palette.mode === "dark" ? 0.6 : 0.16);
+    scale(
+      controls.luxuryLevel,
+      theme.palette.mode === "dark" ? 0.32 : 0.08,
+      theme.palette.mode === "dark" ? 0.6 : 0.16,
+    );
   const showNotches = opts?.showNotches ?? true;
   const showMeasure = opts?.showMeasure ?? true;
 
@@ -470,11 +482,19 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(1040px 620px at 14% 8%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.1 : 0.06, isDark ? 0.18 : 0.1),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.1 : 0.06,
+                isDark ? 0.18 : 0.1,
+              ),
             )} 0%, transparent 62%)`,
             `radial-gradient(940px 560px at 86% 10%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, isDark ? 0.06 : 0.03, isDark ? 0.1 : 0.06),
+              scale(
+                controls.extravagance,
+                isDark ? 0.06 : 0.03,
+                isDark ? 0.1 : 0.06,
+              ),
             )} 0%, transparent 64%)`,
             `linear-gradient(180deg, ${alpha(
               theme.palette.background.default,
@@ -502,7 +522,7 @@ const createComponents = (
         },
 
         "body::before": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInlineStart: 0,
           insetInlineEnd: 0,
@@ -529,7 +549,7 @@ const createComponents = (
         },
 
         "body::after": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInlineStart: "-10vw",
           insetBlockStart: "8vh",
@@ -664,11 +684,19 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(1180px 720px at 12% 6%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.14 : 0.08, isDark ? 0.24 : 0.14),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.14 : 0.08,
+                isDark ? 0.24 : 0.14,
+              ),
             )} 0%, transparent 62%)`,
             `radial-gradient(1080px 660px at 88% 8%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, isDark ? 0.08 : 0.04, isDark ? 0.14 : 0.08),
+              scale(
+                controls.extravagance,
+                isDark ? 0.08 : 0.04,
+                isDark ? 0.14 : 0.08,
+              ),
             )} 0%, transparent 64%)`,
             `linear-gradient(180deg, ${alpha(
               theme.palette.background.default,
@@ -694,20 +722,21 @@ const createComponents = (
           ].join(", "),
         },
 
-        "body.ib-showcase-mode::before, body[data-ib-scene='showcase']::before": {
-          height: 5,
-          backgroundImage: blueprintRail(theme, controls, 1, 90),
-          boxShadow: [
-            `0 0 ${Math.round(scale(controls.heroDrama, 24, 42))}px ${alpha(
-              theme.palette.primary.main,
-              scale(controls.heroDrama, 0.16, 0.3),
-            )}`,
-            `0 0 ${Math.round(scale(controls.extravagance, 28, 46))}px ${alpha(
-              theme.palette.secondary.main,
-              scale(controls.extravagance, 0.08, 0.16),
-            )}`,
-          ].join(", "),
-        },
+        "body.ib-showcase-mode::before, body[data-ib-scene='showcase']::before":
+          {
+            height: 5,
+            backgroundImage: blueprintRail(theme, controls, 1, 90),
+            boxShadow: [
+              `0 0 ${Math.round(scale(controls.heroDrama, 24, 42))}px ${alpha(
+                theme.palette.primary.main,
+                scale(controls.heroDrama, 0.16, 0.3),
+              )}`,
+              `0 0 ${Math.round(scale(controls.extravagance, 28, 46))}px ${alpha(
+                theme.palette.secondary.main,
+                scale(controls.extravagance, 0.08, 0.16),
+              )}`,
+            ].join(", "),
+          },
 
         "body.ib-showcase-mode::after, body[data-ib-scene='showcase']::after": {
           width: "58vw",
@@ -779,7 +808,7 @@ const createComponents = (
             gap: theme.spacing(3),
           },
           "&[data-ib-section='hero']::before": {
-            content: "\"\"",
+            content: '""',
             position: "absolute",
             insetInline: 0,
             insetBlockStart: 0,
@@ -924,7 +953,12 @@ const createComponents = (
           "&:hover": {
             transform: "translateY(-2px)",
             boxShadow: [
-              blueprintShadow(theme, controls, "elevated", theme.palette.primary.main),
+              blueprintShadow(
+                theme,
+                controls,
+                "elevated",
+                theme.palette.primary.main,
+              ),
               `0 0 ${Math.round(scale(controls.heroDrama, 22, 42))}px ${alpha(
                 theme.palette.primary.main,
                 scale(controls.heroDrama, 0.08, 0.14),
@@ -943,7 +977,12 @@ const createComponents = (
               blurMax: 28,
             }),
             boxShadow: [
-              blueprintShadow(theme, controls, "overlay", theme.palette.primary.main),
+              blueprintShadow(
+                theme,
+                controls,
+                "overlay",
+                theme.palette.primary.main,
+              ),
               `0 0 ${Math.round(scale(controls.heroDrama, 30, 56))}px ${alpha(
                 theme.palette.primary.main,
                 scale(controls.heroDrama, 0.12, 0.22),
@@ -1029,7 +1068,7 @@ const createComponents = (
         ),
         opacity: 0.88,
         "&::after": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInline: "18%",
           insetBlockStart: -1,
@@ -1079,11 +1118,17 @@ const createComponents = (
         transform: "translateZ(0)",
         ...blurStyle(controls, 8, 12),
         transition: theme.transitions.create(
-          ["transform", "box-shadow", "background-color", "border-color", "color"],
+          [
+            "transform",
+            "box-shadow",
+            "background-color",
+            "border-color",
+            "color",
+          ],
           { duration: motionDuration(controls, 180, 280) },
         ),
         "&::before": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           inset: 0,
           background: blueprintRail(
@@ -1155,7 +1200,7 @@ const createComponents = (
             )}`,
           ].join(", "),
           "&::after": {
-            content: "\"\"",
+            content: '""',
             position: "absolute",
             inset: 0,
             background: blueprintRail(
@@ -1219,10 +1264,7 @@ const createComponents = (
         return {
           color: theme.palette.text.primary,
           borderWidth: 1,
-          borderColor: alpha(
-            theme.palette.text.primary,
-            isDark ? 0.18 : 0.12,
-          ),
+          borderColor: alpha(theme.palette.text.primary, isDark ? 0.18 : 0.12),
           backgroundColor: alpha(
             theme.palette.text.primary,
             isDark ? 0.04 : 0.03,
@@ -1405,10 +1447,7 @@ const createComponents = (
           )} inset`,
           ...blurStyle(controls, 8, 12),
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: alpha(
-              theme.palette.text.primary,
-              isDark ? 0.2 : 0.14,
-            ),
+            borderColor: alpha(theme.palette.text.primary, isDark ? 0.2 : 0.14),
           },
           "&.Mui-focused": {
             backgroundColor: alpha(
@@ -1774,9 +1813,12 @@ const createComponents = (
   MuiTableRow: {
     styleOverrides: {
       root: ({ theme }) => ({
-        transition: theme.transitions.create(["background-color", "transform"], {
-          duration: motionDuration(controls, 140, 220),
-        }),
+        transition: theme.transitions.create(
+          ["background-color", "transform"],
+          {
+            duration: motionDuration(controls, 140, 220),
+          },
+        ),
         "&:hover": {
           backgroundColor: alpha(
             theme.palette.primary.main,
@@ -1959,9 +2001,12 @@ const createComponents = (
         fontWeight: 700,
         textDecorationColor: alpha(theme.palette.info.main, 0.26),
         textUnderlineOffset: "0.22em",
-        transition: theme.transitions.create(["color", "text-decoration-color"], {
-          duration: motionDuration(controls, 140, 220),
-        }),
+        transition: theme.transitions.create(
+          ["color", "text-decoration-color"],
+          {
+            duration: motionDuration(controls, 140, 220),
+          },
+        ),
         "&:hover": {
           color: theme.palette.primary.main,
           textDecorationColor: alpha(theme.palette.primary.main, 0.34),

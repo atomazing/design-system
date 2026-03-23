@@ -4,22 +4,22 @@ import type { NamedThemeOptions } from "@/models/appSettings";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 const FONT_DISPLAY =
-  "\"Sora\",\"Space Grotesk\",\"Avenir Next Condensed\",\"Arial Black\",\"Inter\",\"Helvetica\",\"Arial\",sans-serif";
+  '"Sora","Space Grotesk","Avenir Next Condensed","Arial Black","Inter","Helvetica","Arial",sans-serif';
 const FONT_TEXT =
-  "\"IBM Plex Sans\",\"Inter\",\"Manrope\",\"Helvetica\",\"Arial\",sans-serif";
+  '"IBM Plex Sans","Inter","Manrope","Helvetica","Arial",sans-serif';
 const FONT_MONO =
-  "\"IBM Plex Mono\",\"JetBrains Mono\",\"Roboto Mono\",\"Menlo\",\"Consolas\",monospace";
+  '"IBM Plex Mono","JetBrains Mono","Roboto Mono","Menlo","Consolas",monospace';
 
-const BAUHAUS_RADIUS = 20;
+const BAUHAUS_RADIUS = 0;
 
-type BauhausLandingControls = {
+interface BauhausLandingControls {
   luxuryLevel: number;
   extravagance: number;
   heroDrama: number;
   ctaPower: number;
   motionPolish: number;
   blurBudget: number;
-};
+}
 
 type SurfaceLevel = "surface" | "elevated" | "overlay";
 
@@ -40,21 +40,21 @@ const createLandingControls = (
 });
 
 const lightControls = createLandingControls({
-  luxuryLevel: 0.82,
-  extravagance: 0.84,
-  heroDrama: 0.9,
-  ctaPower: 0.94,
-  motionPolish: 0.78,
-  blurBudget: 0.62,
+  luxuryLevel: 0.72,
+  extravagance: 0.56,
+  heroDrama: 0.78,
+  ctaPower: 0.74,
+  motionPolish: 0.68,
+  blurBudget: 0.22,
 });
 
 const darkControls = createLandingControls({
-  luxuryLevel: 0.86,
-  extravagance: 0.9,
-  heroDrama: 0.94,
-  ctaPower: 0.96,
-  motionPolish: 0.82,
-  blurBudget: 0.68,
+  luxuryLevel: 0.76,
+  extravagance: 0.62,
+  heroDrama: 0.82,
+  ctaPower: 0.78,
+  motionPolish: 0.72,
+  blurBudget: 0.28,
 });
 
 const typography = {
@@ -137,21 +137,17 @@ const typography = {
 const bauhausInk = (theme: Theme): string =>
   theme.palette.mode === "dark" ? "#FFFFFF" : "#0C141C";
 
-const bauhausRail = (
-  theme: Theme,
-  opacity = 0.92,
-  angle = 90,
-): string =>
+const bauhausRail = (theme: Theme, opacity = 0.92, angle = 90): string =>
   `linear-gradient(${angle}deg, ${alpha(theme.palette.primary.main, opacity)} 0%, ${alpha(
     theme.palette.primary.main,
     opacity,
-  )} 56%, ${alpha(theme.palette.primary.main, opacity * 0.74)} 56%, ${alpha(
+  )} 58%, ${alpha(theme.palette.primary.main, opacity * 0.72)} 58%, ${alpha(
     theme.palette.primary.main,
-    opacity * 0.74,
-  )} 76%, ${alpha(theme.palette.secondary.main, opacity * 0.54)} 76%, ${alpha(
+    opacity * 0.72,
+  )} 78%, ${alpha(theme.palette.secondary.main, opacity * 0.5)} 78%, ${alpha(
     theme.palette.secondary.main,
-    opacity * 0.54,
-  )} 88%, ${alpha(bauhausInk(theme), opacity * 0.72)} 88%, ${alpha(
+    opacity * 0.5,
+  )} 90%, ${alpha(bauhausInk(theme), opacity * 0.72)} 90%, ${alpha(
     bauhausInk(theme),
     opacity * 0.72,
   )} 100%)`;
@@ -164,11 +160,11 @@ const bauhausFocusRing = (
   [
     `0 0 0 ${width}px ${alpha(
       theme.palette.info.main,
-      scale(controls.ctaPower, 0.18, 0.3),
+      scale(controls.ctaPower, 0.1, 0.18),
     )}`,
-    `0 0 ${Math.round(scale(controls.ctaPower, 18, 34))}px ${alpha(
+    `0 0 ${Math.round(scale(controls.ctaPower, 8, 16))}px ${alpha(
       theme.palette.secondary.main,
-      scale(controls.extravagance, 0.18, 0.28),
+      scale(controls.extravagance, 0.08, 0.14),
     )}`,
   ].join(", ");
 
@@ -181,35 +177,33 @@ const bauhausShadow = (
   const isDark = theme.palette.mode === "dark";
   const lift =
     level === "overlay"
-      ? scale(controls.luxuryLevel, 24, 40)
+      ? scale(controls.luxuryLevel, 12, 20)
       : level === "elevated"
-        ? scale(controls.luxuryLevel, 18, 30)
-        : scale(controls.luxuryLevel, 12, 22);
+        ? scale(controls.luxuryLevel, 10, 16)
+        : scale(controls.luxuryLevel, 8, 12);
   const blur =
     level === "overlay"
-      ? scale(controls.luxuryLevel, 38, 72)
+      ? scale(controls.luxuryLevel, 12, 20)
       : level === "elevated"
-        ? scale(controls.luxuryLevel, 28, 54)
-        : scale(controls.luxuryLevel, 20, 40);
+        ? scale(controls.luxuryLevel, 10, 16)
+        : scale(controls.luxuryLevel, 8, 12);
   const accentGlow =
     level === "overlay"
-      ? scale(controls.extravagance, 0.14, 0.24)
+      ? scale(controls.extravagance, 0.04, 0.08)
       : level === "elevated"
-        ? scale(controls.extravagance, 0.12, 0.2)
-        : scale(controls.extravagance, 0.08, 0.16);
+        ? scale(controls.extravagance, 0.03, 0.06)
+        : scale(controls.extravagance, 0.02, 0.04);
 
   return [
-    `0 ${Math.round(lift * 0.6)}px ${Math.round(blur)}px ${alpha(
+    `0 ${Math.round(lift * 0.35)}px ${Math.round(blur)}px ${alpha(
       bauhausInk(theme),
-      isDark ? 0.4 : 0.12,
+      isDark ? 0.24 : 0.08,
     )}`,
-    `0 0 ${Math.round(scale(controls.extravagance, 18, 38))}px ${alpha(
+    `0 0 ${Math.round(scale(controls.extravagance, 4, 10))}px ${alpha(
       accent,
       accentGlow,
     )}`,
-    `${Math.round(scale(controls.luxuryLevel, 8, 16))}px ${Math.round(
-      scale(controls.luxuryLevel, 8, 16),
-    )}px 0 ${alpha(
+    `0 0 0 ${Math.round(scale(controls.luxuryLevel, 1, 2))}px ${alpha(
       accent,
       isDark
         ? scale(controls.luxuryLevel, 0.16, 0.24)
@@ -234,22 +228,20 @@ const bauhausSurface = (
   const isDark = theme.palette.mode === "dark";
   const fillAlpha =
     level === "overlay"
-      ? scale(controls.luxuryLevel, isDark ? 0.84 : 0.9, isDark ? 0.9 : 0.96)
+      ? scale(controls.luxuryLevel, isDark ? 0.9 : 0.94, isDark ? 0.94 : 0.98)
       : level === "elevated"
-        ? scale(controls.luxuryLevel, isDark ? 0.78 : 0.86, isDark ? 0.86 : 0.94)
-        : scale(controls.luxuryLevel, isDark ? 0.7 : 0.82, isDark ? 0.8 : 0.9);
+        ? scale(controls.luxuryLevel, isDark ? 0.86 : 0.9, isDark ? 0.92 : 0.96)
+        : scale(
+            controls.luxuryLevel,
+            isDark ? 0.82 : 0.88,
+            isDark ? 0.88 : 0.94,
+          );
   const accentAlpha =
     level === "overlay"
-      ? scale(controls.extravagance, 0.08, 0.16)
+      ? scale(controls.extravagance, 0.03, 0.06)
       : level === "elevated"
-        ? scale(controls.extravagance, 0.06, 0.13)
-        : scale(controls.extravagance, 0.05, 0.1);
-  const blurPx =
-    level === "overlay"
-      ? scale(controls.blurBudget, 14, 22)
-      : level === "elevated"
-        ? scale(controls.blurBudget, 10, 16)
-        : scale(controls.blurBudget, 8, 12);
+        ? scale(controls.extravagance, 0.02, 0.05)
+        : scale(controls.extravagance, 0.015, 0.035);
 
   return {
     position: "relative" as const,
@@ -258,7 +250,7 @@ const bauhausSurface = (
     borderRadius: radius,
     backgroundColor: alpha(theme.palette.background.paper, fillAlpha),
     backgroundImage: [
-      `linear-gradient(160deg, ${alpha(
+      `linear-gradient(180deg, ${alpha(
         theme.palette.common.white,
         isDark
           ? scale(controls.luxuryLevel, 0.06, 0.12)
@@ -266,39 +258,29 @@ const bauhausSurface = (
       )} 0%, ${alpha(
         theme.palette.background.paper,
         Math.min(0.99, fillAlpha + 0.08),
-      )} 18%, ${alpha(
+      )} 12%, ${alpha(
         theme.palette.background.paper,
         fillAlpha,
-      )} 64%, ${alpha(accent, accentAlpha)} 100%)`,
-      `linear-gradient(135deg, ${alpha(
+      )} 80%, ${alpha(accent, accentAlpha)} 100%)`,
+      `linear-gradient(90deg, ${alpha(
         theme.palette.primary.main,
         scale(controls.extravagance, 0.08, 0.16),
       )} 0%, ${alpha(
         theme.palette.primary.main,
         scale(controls.extravagance, 0.08, 0.16),
-      )} 14%, transparent 14%, transparent 100%)`,
-      `linear-gradient(90deg, transparent 0%, transparent 78%, ${alpha(
+      )} 10%, transparent 10%, transparent 100%)`,
+      `linear-gradient(180deg, transparent 0%, transparent 82%, ${alpha(
         theme.palette.secondary.main,
         scale(controls.extravagance, 0.08, 0.16),
-      )} 78%, ${alpha(
+      )} 82%, ${alpha(
         theme.palette.secondary.main,
         scale(controls.extravagance, 0.08, 0.16),
       )} 100%)`,
-      bauhausRail(theme, scale(controls.extravagance, 0.18, 0.34), 135),
+      bauhausRail(theme, scale(controls.extravagance, 0.18, 0.34), 90),
     ].join(", "),
     backgroundOrigin: "padding-box, padding-box, padding-box, border-box",
     backgroundClip: "padding-box, padding-box, padding-box, border-box",
     boxShadow: bauhausShadow(theme, controls, level, accent),
-    backdropFilter: `blur(${Math.round(blurPx)}px) saturate(${Math.round(
-      scale(controls.luxuryLevel, 110, 145),
-    )}%)`,
-    WebkitBackdropFilter: `blur(${Math.round(blurPx)}px) saturate(${Math.round(
-      scale(controls.luxuryLevel, 110, 145),
-    )}%)`,
-    "@media (hover: none), (max-width: 900px)": {
-      backdropFilter: `blur(${Math.max(6, Math.round(blurPx * 0.65))}px)`,
-      WebkitBackdropFilter: `blur(${Math.max(6, Math.round(blurPx * 0.65))}px)`,
-    },
   };
 };
 
@@ -308,7 +290,7 @@ const bauhausHoverState = (
   {
     accent = theme.palette.primary.main,
     level = "elevated",
-    translate = "translate(-2px, -2px)",
+    translate = "translateY(-2px)",
     glow = accent,
   }: {
     accent?: string;
@@ -318,12 +300,12 @@ const bauhausHoverState = (
   } = {},
 ) => ({
   transform: translate,
-  borderColor: alpha(accent, theme.palette.mode === "dark" ? 0.38 : 0.3),
+  borderColor: alpha(accent, theme.palette.mode === "dark" ? 0.34 : 0.26),
   boxShadow: [
     bauhausShadow(theme, controls, level, accent),
-    `0 0 ${Math.round(scale(controls.ctaPower, 24, 44))}px ${alpha(
+    `0 0 ${Math.round(scale(controls.ctaPower, 18, 32))}px ${alpha(
       glow,
-      scale(controls.extravagance, 0.18, 0.3),
+      scale(controls.extravagance, 0.14, 0.24),
     )}`,
   ].join(", "),
 });
@@ -338,15 +320,15 @@ const createComponents = (
       return {
         "@keyframes bauhausBeamFloat": {
           "0%": {
-            transform: "translate3d(-4%, 0, 0) rotate(-16deg)",
+            transform: "translate3d(-4%, 0, 0)",
             opacity: 0.62,
           },
           "50%": {
-            transform: "translate3d(0, 2%, 0) rotate(-14deg)",
+            transform: "translate3d(0, 0, 0)",
             opacity: 0.86,
           },
           "100%": {
-            transform: "translate3d(5%, 0, 0) rotate(-16deg)",
+            transform: "translate3d(4%, 0, 0)",
             opacity: 0.66,
           },
         },
@@ -359,15 +341,27 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(980px 620px at 12% 10%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.18 : 0.22, isDark ? 0.28 : 0.32),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.18 : 0.22,
+                isDark ? 0.28 : 0.32,
+              ),
             )} 0%, transparent 58%)`,
             `radial-gradient(840px 520px at 88% 14%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.heroDrama, isDark ? 0.12 : 0.16, isDark ? 0.22 : 0.24),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.12 : 0.16,
+                isDark ? 0.22 : 0.24,
+              ),
             )} 0%, transparent 54%)`,
             `radial-gradient(920px 560px at 40% 108%, ${alpha(
               theme.palette.warning.main,
-              scale(controls.heroDrama, isDark ? 0.14 : 0.16, isDark ? 0.24 : 0.26),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.14 : 0.16,
+                isDark ? 0.24 : 0.26,
+              ),
             )} 0%, transparent 56%)`,
             `linear-gradient(180deg, transparent 0%, transparent 58%, ${alpha(
               theme.palette.background.default,
@@ -386,14 +380,14 @@ const createComponents = (
           backgroundAttachment: "fixed",
         },
         "body::before": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInlineStart: "-8vw",
           insetBlockStart: "8vh",
           width: "46vw",
           minWidth: 280,
           maxWidth: 620,
-          height: 24,
+          height: 18,
           backgroundImage: bauhausRail(
             theme,
             scale(controls.heroDrama, 0.44, 0.72),
@@ -402,13 +396,13 @@ const createComponents = (
           filter: `blur(${Math.round(scale(controls.blurBudget, 10, 18))}px)`,
           pointerEvents: "none",
           opacity: 0.92,
-          transform: "translate3d(-4%, 0, 0) rotate(-16deg)",
+          transform: "translate3d(-4%, 0, 0)",
           animation: `bauhausBeamFloat ${Math.round(
             scale(controls.motionPolish, 14, 10),
           )}s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate`,
         },
         "body::after": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInline: 0,
           insetBlockStart: 0,
@@ -423,7 +417,7 @@ const createComponents = (
         "@media (prefers-reduced-motion: reduce)": {
           "body::before": {
             animation: "none",
-            transform: "translate3d(0, 0, 0) rotate(-16deg)",
+            transform: "translate3d(0, 0, 0)",
             opacity: 0.72,
           },
         },
@@ -476,7 +470,7 @@ const createComponents = (
       root: ({ theme }) => ({
         ...bauhausSurface(theme, controls, {
           level: "surface",
-          radius: "24px 12px 24px 12px",
+          radius: 0,
           accent: theme.palette.primary.main,
         }),
         transition: theme.transitions.create(
@@ -491,11 +485,11 @@ const createComponents = (
           "&:hover": bauhausHoverState(theme, controls, {
             accent: theme.palette.primary.main,
             level: "elevated",
-            translate: "translate(-1px, -1px)",
+            translate: "translateY(-1px)",
           }),
         },
         "&::after": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInline: 0,
           insetBlockEnd: 0,
@@ -510,7 +504,7 @@ const createComponents = (
       root: ({ theme }) => ({
         ...bauhausSurface(theme, controls, {
           level: "surface",
-          radius: "26px 12px 26px 12px",
+          radius: 0,
           accent: theme.palette.secondary.main,
         }),
         transition: theme.transitions.create(
@@ -523,7 +517,7 @@ const createComponents = (
           "&:hover": bauhausHoverState(theme, controls, {
             accent: theme.palette.secondary.main,
             level: "elevated",
-            translate: "translate(-1px, -1px)",
+            translate: "translateY(-1px)",
           }),
         },
       }),
@@ -534,7 +528,7 @@ const createComponents = (
       root: ({ theme }) => ({
         ...bauhausSurface(theme, controls, {
           level: "elevated",
-          radius: "32px 14px 32px 14px",
+          radius: 2,
           accent: theme.palette.warning.main,
         }),
         transition: theme.transitions.create(
@@ -577,7 +571,7 @@ const createComponents = (
           fontFamily: FONT_MONO,
           fontSize: "0.95em",
           padding: "0.12em 0.42em",
-          borderRadius: 12,
+          borderRadius: 0,
           backgroundColor: alpha(
             theme.palette.warning.main,
             theme.palette.mode === "dark" ? 0.18 : 0.24,
@@ -591,12 +585,12 @@ const createComponents = (
     styleOverrides: {
       root: ({ theme }) => ({
         border: 0,
-        height: 2,
-        backgroundImage: bauhausRail(theme, 0.94, 90),
-        boxShadow: `0 0 18px ${alpha(
+        height: 3,
+        backgroundImage: `repeating-linear-gradient(90deg, ${alpha(
           theme.palette.primary.main,
-          scale(controls.extravagance, 0.08, 0.16),
-        )}`,
+          0.86,
+        )} 0 18px, transparent 18px 36px)`,
+        boxShadow: `0 0 0 1px ${alpha(bauhausInk(theme), 0.16)}`,
       }),
     },
   },
@@ -612,7 +606,7 @@ const createComponents = (
         paddingInline: 20,
         paddingBlock: 12,
         borderRadius: BAUHAUS_RADIUS,
-        borderWidth: 1,
+        borderWidth: 2,
         borderStyle: "solid",
         fontWeight: 900,
         transition: theme.transitions.create(
@@ -630,7 +624,7 @@ const createComponents = (
         ),
         "@media (hover: hover)": {
           "&:hover": {
-            filter: "brightness(1.1) saturate(1.14)",
+            filter: "brightness(1.08) saturate(1.12)",
           },
         },
         "&.Mui-focusVisible": {
@@ -654,30 +648,33 @@ const createComponents = (
         borderColor: "transparent",
         backgroundColor: theme.palette.primary.main,
         backgroundImage: [
-          `linear-gradient(135deg, ${alpha(
+          `linear-gradient(90deg, ${alpha(theme.palette.primary.main, 0.98)} 0%, ${alpha(
             theme.palette.primary.main,
-            0.98,
-          )} 0%, ${alpha(theme.palette.primary.main, 0.96)} 42%, ${alpha(
-            theme.palette.primary.main,
-            0.88,
-          )} 64%, ${alpha(
+            0.96,
+          )} 44%, ${alpha(theme.palette.primary.main, 0.88)} 66%, ${alpha(
             theme.palette.secondary.main,
-            0.78,
+            0.82,
           )} 100%)`,
-          bauhausRail(theme, scale(controls.extravagance, 0.16, 0.3), 132),
+          `linear-gradient(180deg, ${alpha(theme.palette.common.white, 0.18)} 0 2px, transparent 2px calc(100% - 2px), ${alpha(
+            theme.palette.primary.dark,
+            0.18,
+          )} calc(100% - 2px) 100%)`,
         ].join(", "),
-        backgroundOrigin: "padding-box, border-box",
-        backgroundClip: "padding-box, border-box",
-        backgroundSize: `${Math.round(scale(controls.ctaPower, 170, 210))}% 170%, 100% 100%`,
-        backgroundPosition: "0% 50%, 0 0",
+        backgroundOrigin: "padding-box, padding-box",
+        backgroundClip: "padding-box, padding-box",
+        backgroundSize: "100% 100%, 100% 100%",
+        backgroundPosition: "0 0, 0 0",
         boxShadow: [
-          bauhausShadow(theme, controls, "elevated", theme.palette.primary.main),
+          bauhausShadow(
+            theme,
+            controls,
+            "elevated",
+            theme.palette.primary.main,
+          ),
           `0 0 ${Math.round(scale(controls.ctaPower, 22, 38))}px ${alpha(
             theme.palette.primary.main,
             scale(controls.ctaPower, 0.14, 0.24),
           )}`,
-          `inset 0 1px 0 ${alpha(theme.palette.common.white, 0.36)}`,
-          `inset 0 -1px 0 ${alpha(theme.palette.primary.dark, 0.18)}`,
         ].join(", "),
         "@media (hover: hover)": {
           "&:hover": {
@@ -685,7 +682,6 @@ const createComponents = (
               accent: theme.palette.secondary.main,
               level: "overlay",
             }),
-            backgroundPosition: "100% 50%, 0 0",
             boxShadow: [
               bauhausHoverState(theme, controls, {
                 accent: theme.palette.secondary.main,
@@ -700,21 +696,26 @@ const createComponents = (
         },
         "&.Mui-focusVisible": {
           boxShadow: [
-            bauhausShadow(theme, controls, "overlay", theme.palette.primary.main),
+            bauhausShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.primary.main,
+            ),
             bauhausFocusRing(theme, controls, 4),
           ].join(", "),
         },
         "&.Mui-disabled": {
           color: alpha(theme.palette.primary.contrastText, 0.62),
           backgroundImage: [
-            `linear-gradient(135deg, ${alpha(
+            `linear-gradient(90deg, ${alpha(
               theme.palette.primary.main,
               0.28,
-            )} 0%, ${alpha(theme.palette.primary.main, 0.22)} 56%, ${alpha(
+            )} 0%, ${alpha(theme.palette.primary.main, 0.22)} 58%, ${alpha(
               theme.palette.secondary.main,
-              0.14,
+              0.16,
             )} 100%)`,
-            bauhausRail(theme, 0.12, 132),
+            bauhausRail(theme, 0.18, 90),
           ].join(", "),
         },
       }),
@@ -723,20 +724,20 @@ const createComponents = (
         borderColor: "transparent",
         backgroundColor: theme.palette.secondary.main,
         backgroundImage: [
-          `linear-gradient(135deg, ${alpha(
+          `linear-gradient(90deg, ${alpha(
             theme.palette.secondary.main,
             0.96,
-          )} 0%, ${alpha(theme.palette.secondary.main, 0.92)} 44%, ${alpha(
+          )} 0%, ${alpha(theme.palette.secondary.main, 0.92)} 46%, ${alpha(
             theme.palette.secondary.main,
             0.84,
-          )} 66%, ${alpha(
-            theme.palette.primary.main,
-            0.76,
-          )} 100%)`,
-          bauhausRail(theme, 0.14, 132),
+          )} 68%, ${alpha(theme.palette.primary.main, 0.8)} 100%)`,
+          `linear-gradient(180deg, ${alpha(theme.palette.common.white, 0.16)} 0 2px, transparent 2px calc(100% - 2px), ${alpha(
+            theme.palette.secondary.dark,
+            0.18,
+          )} calc(100% - 2px) 100%)`,
         ].join(", "),
-        backgroundOrigin: "padding-box, border-box",
-        backgroundClip: "padding-box, border-box",
+        backgroundOrigin: "padding-box, padding-box",
+        backgroundClip: "padding-box, padding-box",
         boxShadow: bauhausShadow(
           theme,
           controls,
@@ -757,23 +758,23 @@ const createComponents = (
         borderColor: "transparent",
         backgroundColor: alpha(theme.palette.background.paper, 0.78),
         backgroundImage: [
-          `linear-gradient(160deg, ${alpha(
-            theme.palette.background.paper,
-            0.86,
-          )} 0%, ${alpha(theme.palette.background.paper, 0.66)} 100%)`,
-          bauhausRail(theme, scale(controls.extravagance, 0.08, 0.16), 132),
+          `linear-gradient(180deg, ${alpha(theme.palette.background.paper, 0.9)} 0 100%)`,
+          `repeating-linear-gradient(90deg, ${alpha(
+            theme.palette.primary.main,
+            scale(controls.extravagance, 0.08, 0.14),
+          )} 0 14px, transparent 14px 42px)`,
         ].join(", "),
         backgroundOrigin: "padding-box, border-box",
         backgroundClip: "padding-box, border-box",
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
         "@media (hover: hover)": {
           "&:hover": {
-            ...bauhausHoverState(theme, controls, {
-              accent: theme.palette.warning.main,
-              level: "elevated",
-              translate: "translate(-1px, -1px)",
-            }),
+            transform: "translateY(-1px)",
+            boxShadow: bauhausShadow(
+              theme,
+              controls,
+              "surface",
+              theme.palette.warning.main,
+            ),
           },
         },
       }),
@@ -788,8 +789,8 @@ const createComponents = (
   MuiChip: {
     styleOverrides: {
       root: ({ theme }) => ({
-        borderRadius: 999,
-        border: "1px solid transparent",
+        borderRadius: 0,
+        border: `1px solid ${alpha(bauhausInk(theme), 0.18)}`,
         fontFamily: FONT_DISPLAY,
         fontWeight: 900,
         letterSpacing: "0.12em",
@@ -797,26 +798,21 @@ const createComponents = (
         color: theme.palette.text.primary,
         backgroundColor: alpha(theme.palette.background.paper, 0.86),
         backgroundImage: [
-          `linear-gradient(150deg, ${alpha(
-            theme.palette.background.paper,
-            0.94,
-          )} 0%, ${alpha(theme.palette.background.paper, 0.82)} 78%, ${alpha(
+          `linear-gradient(180deg, ${alpha(theme.palette.background.paper, 0.92)} 0 100%)`,
+          `repeating-linear-gradient(90deg, ${alpha(
             theme.palette.primary.main,
-            scale(controls.extravagance, 0.04, 0.08),
-          )} 100%)`,
-          bauhausRail(theme, scale(controls.extravagance, 0.08, 0.16), 132),
+            scale(controls.extravagance, 0.1, 0.16),
+          )} 0 12px, transparent 12px 44px)`,
         ].join(", "),
-        backgroundOrigin: "padding-box, border-box",
-        backgroundClip: "padding-box, border-box",
+        backgroundOrigin: "padding-box, padding-box",
+        backgroundClip: "padding-box, padding-box",
         boxShadow: [
-          `inset 0 1px 0 ${alpha(theme.palette.common.white, 0.34)}`,
           `0 10px 22px ${alpha(
             bauhausInk(theme),
             theme.palette.mode === "dark" ? 0.2 : 0.08,
           )}`,
+          `inset 0 -2px 0 ${alpha(theme.palette.primary.main, 0.18)}`,
         ].join(", "),
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
         transition: theme.transitions.create(
           ["transform", "box-shadow", "border-color", "background-color"],
           {
@@ -828,11 +824,11 @@ const createComponents = (
             ...bauhausHoverState(theme, controls, {
               accent: theme.palette.primary.main,
               level: "elevated",
-              translate: "translate(-1px, -1px)",
+              translate: "translateY(-1px)",
             }),
             backgroundColor: alpha(
               theme.palette.primary.main,
-              theme.palette.mode === "dark" ? 0.14 : 0.08,
+              theme.palette.mode === "dark" ? 0.12 : 0.06,
             ),
           },
         },
@@ -845,9 +841,9 @@ const createComponents = (
   MuiAvatar: {
     styleOverrides: {
       root: ({ theme }) => ({
-        borderRadius: "50%",
+        borderRadius: 0,
         border: `2px solid ${alpha(bauhausInk(theme), 0.18)}`,
-        backgroundImage: bauhausRail(theme, 0.9, 135),
+        backgroundImage: bauhausRail(theme, 0.9, 90),
         color: theme.palette.common.white,
         fontFamily: FONT_DISPLAY,
         fontWeight: 900,
@@ -862,9 +858,9 @@ const createComponents = (
             ...bauhausHoverState(theme, controls, {
               accent: theme.palette.primary.main,
               level: "elevated",
-              translate: "translate(-1px, -1px)",
+              translate: "translateY(-1px)",
             }),
-            filter: "brightness(1.1) saturate(1.14)",
+            filter: "brightness(1.08) saturate(1.12)",
           },
         },
       }),
@@ -876,10 +872,11 @@ const createComponents = (
         minHeight: 48,
         ...bauhausSurface(theme, controls, {
           level: "surface",
-          radius: 999,
+          radius: 0,
           accent: theme.palette.primary.main,
         }),
-        padding: theme.spacing(0.5),
+        padding: 0,
+        border: `1px solid ${alpha(bauhausInk(theme), 0.18)}`,
         transition: theme.transitions.create(
           ["transform", "box-shadow", "border-color"],
           {
@@ -890,18 +887,18 @@ const createComponents = (
           "&:hover": bauhausHoverState(theme, controls, {
             accent: theme.palette.primary.main,
             level: "elevated",
-            translate: "translate(-1px, -1px)",
+            translate: "translateY(-1px)",
           }),
         },
       }),
       indicator: ({ theme }) => ({
-        height: "calc(100% - 8px)",
-        top: 4,
-        borderRadius: 999,
+        height: "100%",
+        top: 0,
+        borderRadius: 0,
         backgroundImage: bauhausRail(
           theme,
           scale(controls.extravagance, 0.3, 0.52),
-          132,
+          90,
         ),
         boxShadow: `0 0 20px ${alpha(
           theme.palette.primary.main,
@@ -926,10 +923,13 @@ const createComponents = (
             duration: Math.round(scale(controls.motionPolish, 160, 240)),
           },
         ),
+        "&:not(:last-of-type)": {
+          borderInlineEnd: `1px solid ${alpha(bauhausInk(theme), 0.14)}`,
+        },
         "&:hover": {
           color: theme.palette.text.primary,
-          backgroundColor: alpha(theme.palette.primary.main, 0.18),
-          boxShadow: `inset 0 -2px 0 ${alpha(theme.palette.primary.main, 0.26)}`,
+          backgroundColor: alpha(theme.palette.primary.main, 0.16),
+          boxShadow: `inset 0 -2px 0 ${alpha(theme.palette.primary.main, 0.24)}`,
         },
         "&.Mui-selected": {
           color: theme.palette.text.primary,
@@ -946,6 +946,17 @@ const createComponents = (
           radius: BAUHAUS_RADIUS,
           accent: theme.palette.primary.main,
         }),
+        border: `2px solid ${alpha(bauhausInk(theme), 0.18)}`,
+        backgroundImage: [
+          `linear-gradient(180deg, ${alpha(theme.palette.background.paper, 0.9)} 0 100%)`,
+          `repeating-linear-gradient(90deg, transparent 0 20px, ${alpha(
+            theme.palette.primary.main,
+            0.05,
+          )} 20px 40px)`,
+          bauhausRail(theme, scale(controls.extravagance, 0.16, 0.24), 90),
+        ].join(", "),
+        backgroundOrigin: "padding-box, padding-box, border-box",
+        backgroundClip: "padding-box, padding-box, border-box",
         transition: theme.transitions.create(
           ["box-shadow", "border-color", "background-color"],
           {
@@ -953,31 +964,44 @@ const createComponents = (
           },
         ),
         "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: alpha(bauhausInk(theme), 0.16),
-          borderWidth: 2,
+          borderColor: "transparent",
+          borderWidth: 0,
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          borderColor: "transparent",
         },
         "&:hover": {
           ...bauhausHoverState(theme, controls, {
             accent: theme.palette.primary.main,
             level: "elevated",
-            translate: "translate(0, 0)",
+            translate: "translateY(0)",
           }),
           backgroundColor: alpha(
             theme.palette.primary.main,
-            theme.palette.mode === "dark" ? 0.14 : 0.06,
+            theme.palette.mode === "dark" ? 0.12 : 0.05,
           ),
         },
-        "&:hover .MuiOutlinedInput-notchedOutline": {
-          borderColor: alpha(bauhausInk(theme), 0.28),
-        },
         "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-          borderColor: theme.palette.secondary.main,
-          boxShadow: bauhausFocusRing(theme, controls, 4),
+          borderColor: "transparent",
+        },
+        "&.Mui-focused": {
+          boxShadow: [
+            bauhausFocusRing(theme, controls, 4),
+            `inset 0 0 0 2px ${alpha(theme.palette.secondary.main, 0.2)}`,
+          ].join(", "),
+        },
+        "& .MuiInputAdornment-root": {
+          minHeight: "100%",
+          margin: 0,
+          paddingInline: theme.spacing(1.5),
+          borderInlineEnd: `2px solid ${alpha(bauhausInk(theme), 0.12)}`,
         },
       }),
-      input: {
+      input: ({ theme }) => ({
         paddingBlock: 13,
-      },
+        paddingInline: theme.spacing(1.75),
+        letterSpacing: "0.01em",
+      }),
     },
   },
   MuiInputLabel: {
@@ -1000,12 +1024,12 @@ const createComponents = (
         padding: 10,
       },
       thumb: ({ theme }) => ({
-        borderRadius: "50%",
+        borderRadius: 0,
         boxShadow: `0 0 0 2px ${alpha(bauhausInk(theme), 0.18)}`,
         backgroundColor: theme.palette.background.paper,
       }),
       track: ({ theme }) => ({
-        borderRadius: 999,
+        borderRadius: 0,
         border: `2px solid ${alpha(bauhausInk(theme), 0.18)}`,
         backgroundImage: bauhausRail(theme, 0.2, 90),
         opacity: 1,
@@ -1018,13 +1042,13 @@ const createComponents = (
       }),
       switchBase: ({ theme }) => ({
         "&:hover": {
-          backgroundColor: alpha(theme.palette.primary.main, 0.14),
+          backgroundColor: alpha(theme.palette.primary.main, 0.12),
         },
         "&:hover + .MuiSwitch-track": {
-          borderColor: alpha(theme.palette.primary.main, 0.3),
-          boxShadow: `0 0 ${Math.round(scale(controls.ctaPower, 14, 24))}px ${alpha(
+          borderColor: alpha(theme.palette.primary.main, 0.28),
+          boxShadow: `0 0 ${Math.round(scale(controls.ctaPower, 12, 20))}px ${alpha(
             theme.palette.primary.main,
-            scale(controls.extravagance, 0.16, 0.26),
+            scale(controls.extravagance, 0.14, 0.22),
           )}`,
         },
         "&.Mui-checked": {
@@ -1034,10 +1058,10 @@ const createComponents = (
             opacity: 1,
           },
           "&:hover + .MuiSwitch-track": {
-            borderColor: alpha(theme.palette.secondary.main, 0.34),
-            boxShadow: `0 0 ${Math.round(scale(controls.ctaPower, 16, 28))}px ${alpha(
+            borderColor: alpha(theme.palette.secondary.main, 0.3),
+            boxShadow: `0 0 ${Math.round(scale(controls.ctaPower, 14, 24))}px ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, 0.18, 0.28),
+              scale(controls.extravagance, 0.16, 0.26),
             )}`,
           },
         },
@@ -1053,14 +1077,14 @@ const createComponents = (
           duration: Math.round(scale(controls.motionPolish, 160, 240)),
         }),
         "&:hover": {
-          filter: "brightness(1.1) saturate(1.14)",
+          filter: "brightness(1.08) saturate(1.12)",
         },
         "&:hover .MuiSlider-thumb": {
-          borderColor: alpha(theme.palette.primary.main, 0.32),
+          borderColor: alpha(theme.palette.primary.main, 0.3),
           boxShadow: bauhausHoverState(theme, controls, {
             accent: theme.palette.primary.main,
             level: "elevated",
-            translate: "translate(0, 0)",
+            translate: "translateY(0)",
           }).boxShadow,
         },
       }),
@@ -1077,7 +1101,7 @@ const createComponents = (
       thumb: ({ theme }) => ({
         width: 20,
         height: 20,
-        borderRadius: "50%",
+        borderRadius: 0,
         border: `2px solid ${alpha(bauhausInk(theme), 0.18)}`,
         backgroundColor: theme.palette.background.paper,
         boxShadow: bauhausShadow(
@@ -1094,9 +1118,20 @@ const createComponents = (
       root: ({ theme }) => ({
         ...bauhausSurface(theme, controls, {
           level: "surface",
-          radius: "22px 12px 22px 12px",
+          radius: 0,
           accent: theme.palette.secondary.main,
         }),
+        border: `2px solid ${alpha(bauhausInk(theme), 0.18)}`,
+        backgroundImage: [
+          `linear-gradient(180deg, ${alpha(theme.palette.background.paper, 0.9)} 0 100%)`,
+          `repeating-linear-gradient(90deg, transparent 0 18px, ${alpha(
+            theme.palette.info.main,
+            0.05,
+          )} 18px 36px, transparent 36px 54px)`,
+          bauhausRail(theme, scale(controls.extravagance, 0.14, 0.22), 90),
+        ].join(", "),
+        backgroundOrigin: "padding-box, padding-box, border-box",
+        backgroundClip: "padding-box, padding-box, border-box",
         transition: theme.transitions.create(
           ["transform", "box-shadow", "border-color"],
           {
@@ -1107,11 +1142,11 @@ const createComponents = (
           "&:hover": bauhausHoverState(theme, controls, {
             accent: theme.palette.secondary.main,
             level: "elevated",
-            translate: "translate(-1px, -1px)",
+            translate: "translateY(-1px)",
           }),
         },
         "&::before": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInlineStart: 0,
           insetBlockStart: 0,
@@ -1120,17 +1155,32 @@ const createComponents = (
           backgroundImage: bauhausRail(theme, 0.94, 180),
         },
       }),
+      icon: ({ theme }) => ({
+        marginRight: theme.spacing(1.5),
+        paddingRight: theme.spacing(1.5),
+        borderInlineEnd: `2px solid ${alpha(bauhausInk(theme), 0.12)}`,
+      }),
+      message: ({ theme }) => ({
+        width: "100%",
+        paddingBlock: theme.spacing(0.5),
+      }),
+      action: ({ theme }) => ({
+        marginRight: 0,
+        marginLeft: theme.spacing(1.5),
+        paddingLeft: theme.spacing(1.5),
+        borderInlineStart: `2px solid ${alpha(bauhausInk(theme), 0.12)}`,
+      }),
       standardInfo: ({ theme }) => ({
-        backgroundColor: alpha(theme.palette.info.main, 0.14),
+        backgroundColor: alpha(theme.palette.info.main, 0.1),
       }),
       standardSuccess: ({ theme }) => ({
-        backgroundColor: alpha(theme.palette.success.main, 0.14),
+        backgroundColor: alpha(theme.palette.success.main, 0.1),
       }),
       standardWarning: ({ theme }) => ({
-        backgroundColor: alpha(theme.palette.warning.main, 0.18),
+        backgroundColor: alpha(theme.palette.warning.main, 0.12),
       }),
       standardError: ({ theme }) => ({
-        backgroundColor: alpha(theme.palette.secondary.main, 0.14),
+        backgroundColor: alpha(theme.palette.secondary.main, 0.1),
       }),
     },
   },
@@ -1139,15 +1189,22 @@ const createComponents = (
       root: ({ theme }) => ({
         ...bauhausSurface(theme, controls, {
           level: "surface",
-          radius: "26px 12px 26px 12px",
+          radius: 0,
           accent: theme.palette.primary.main,
         }),
+        boxShadow: [
+          bauhausShadow(theme, controls, "surface", theme.palette.primary.main),
+          `inset 0 -2px 0 ${alpha(bauhausInk(theme), 0.14)}`,
+        ].join(", "),
         transition: theme.transitions.create(
           ["transform", "box-shadow", "border-color"],
           {
             duration: Math.round(scale(controls.motionPolish, 220, 320)),
           },
         ),
+        "& + &": {
+          marginTop: theme.spacing(1),
+        },
         "&::before": {
           display: "none",
         },
@@ -1155,7 +1212,7 @@ const createComponents = (
           "&:hover": bauhausHoverState(theme, controls, {
             accent: theme.palette.primary.main,
             level: "elevated",
-            translate: "translate(-1px, -1px)",
+            translate: "translateY(-1px)",
           }),
         },
       }),
@@ -1166,19 +1223,45 @@ const createComponents = (
       root: ({ theme }) => ({
         minHeight: 58,
         paddingInline: theme.spacing(2.5),
+        borderBottom: `2px solid ${alpha(bauhausInk(theme), 0.14)}`,
+        backgroundImage: `repeating-linear-gradient(90deg, transparent 0 18px, ${alpha(
+          theme.palette.primary.main,
+          0.08,
+        )} 18px 36px, transparent 36px 54px)`,
         "&:hover": {
           backgroundColor: alpha(theme.palette.primary.main, 0.18),
           boxShadow: `inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.18)}`,
         },
+        "&.Mui-expanded": {
+          minHeight: 58,
+        },
       }),
-      content: {
+      content: () => ({
         margin: 0,
+        width: "100%",
         "& .MuiTypography-root": {
           fontFamily: FONT_DISPLAY,
           fontWeight: 900,
           textTransform: "uppercase",
         },
-      },
+      }),
+      expandIconWrapper: ({ theme }) => ({
+        borderInlineStart: `2px solid ${alpha(bauhausInk(theme), 0.14)}`,
+        marginInlineStart: theme.spacing(2),
+        paddingInlineStart: theme.spacing(1.5),
+      }),
+    },
+  },
+  MuiAccordionDetails: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        padding: theme.spacing(2.5),
+        borderTop: 0,
+        backgroundImage: `repeating-linear-gradient(0deg, transparent 0 22px, ${alpha(
+          theme.palette.info.main,
+          0.05,
+        )} 22px 23px)`,
+      }),
     },
   },
   MuiTableContainer: {
@@ -1186,7 +1269,7 @@ const createComponents = (
       root: ({ theme }) => ({
         ...bauhausSurface(theme, controls, {
           level: "elevated",
-          radius: "26px 12px 26px 12px",
+          radius: 0,
           accent: theme.palette.warning.main,
         }),
         transition: theme.transitions.create(
@@ -1199,7 +1282,7 @@ const createComponents = (
           "&:hover": bauhausHoverState(theme, controls, {
             accent: theme.palette.warning.main,
             level: "overlay",
-            translate: "translate(-1px, -1px)",
+            translate: "translateY(-1px)",
           }),
         },
       }),
@@ -1208,14 +1291,19 @@ const createComponents = (
   MuiTableHead: {
     styleOverrides: {
       root: ({ theme }) => ({
+        backgroundImage: `repeating-linear-gradient(90deg, ${alpha(
+          theme.palette.primary.main,
+          0.12,
+        )} 0 24px, transparent 24px 72px)`,
+        boxShadow: `inset 0 -2px 0 ${alpha(bauhausInk(theme), 0.18)}`,
         "& .MuiTableCell-head:nth-of-type(3n + 1)": {
-          backgroundColor: alpha(theme.palette.primary.main, 0.18),
+          backgroundColor: alpha(theme.palette.primary.main, 0.12),
         },
         "& .MuiTableCell-head:nth-of-type(3n + 2)": {
-          backgroundColor: alpha(theme.palette.warning.main, 0.22),
+          backgroundColor: alpha(theme.palette.primary.main, 0.08),
         },
         "& .MuiTableCell-head:nth-of-type(3n)": {
-          backgroundColor: alpha(theme.palette.secondary.main, 0.14),
+          backgroundColor: alpha(theme.palette.secondary.main, 0.08),
         },
       }),
     },
@@ -1224,13 +1312,20 @@ const createComponents = (
     styleOverrides: {
       head: ({ theme }) => ({
         borderBottom: `2px solid ${alpha(bauhausInk(theme), 0.18)}`,
+        borderInlineEnd: `1px solid ${alpha(bauhausInk(theme), 0.14)}`,
         fontFamily: FONT_DISPLAY,
         fontWeight: 900,
         letterSpacing: "0.08em",
         textTransform: "uppercase",
+        boxShadow: `inset 0 2px 0 ${alpha(theme.palette.common.white, 0.08)}`,
       }),
       body: ({ theme }) => ({
         borderBottom: `1px solid ${alpha(bauhausInk(theme), 0.1)}`,
+        borderInlineEnd: `1px solid ${alpha(bauhausInk(theme), 0.08)}`,
+        backgroundImage: `linear-gradient(90deg, ${alpha(
+          theme.palette.primary.main,
+          0.03,
+        )} 0 2px, transparent 2px 100%)`,
       }),
     },
   },
@@ -1238,32 +1333,114 @@ const createComponents = (
     styleOverrides: {
       root: ({ theme }) => ({
         height: 8,
-        borderRadius: 999,
+        borderRadius: 0,
         border: `1px solid ${alpha(bauhausInk(theme), 0.16)}`,
         backgroundColor: alpha(bauhausInk(theme), 0.12),
       }),
       bar: ({ theme }) => ({
-        borderRadius: 999,
+        borderRadius: 0,
         backgroundImage: bauhausRail(theme, 0.96, 90),
       }),
     },
   },
   MuiTooltip: {
     defaultProps: {
-      arrow: true,
+      arrow: false,
     },
     styleOverrides: {
       tooltip: ({ theme }) => ({
         ...bauhausSurface(theme, controls, {
           level: "overlay",
-          radius: "18px 10px 18px 10px",
+          radius: 0,
           accent: theme.palette.secondary.main,
         }),
+        border: `2px solid ${alpha(bauhausInk(theme), 0.18)}`,
+        padding: theme.spacing(1.25, 1.5),
+        lineHeight: 1.45,
+        backgroundImage: [
+          `linear-gradient(180deg, ${alpha(theme.palette.background.paper, 0.94)} 0 100%)`,
+          `repeating-linear-gradient(90deg, transparent 0 14px, ${alpha(
+            theme.palette.secondary.main,
+            0.06,
+          )} 14px 28px)`,
+          bauhausRail(theme, scale(controls.extravagance, 0.14, 0.2), 90),
+        ].join(", "),
+        backgroundOrigin: "padding-box, padding-box, border-box",
+        backgroundClip: "padding-box, padding-box, border-box",
         color: theme.palette.text.primary,
         fontSize: "0.84rem",
       }),
-      arrow: ({ theme }) => ({
-        color: theme.palette.background.paper,
+    },
+  },
+  MuiMenu: {
+    styleOverrides: {
+      paper: ({ theme }) => ({
+        ...bauhausSurface(theme, controls, {
+          level: "overlay",
+          radius: 0,
+          accent: theme.palette.secondary.main,
+        }),
+        border: `2px solid ${alpha(bauhausInk(theme), 0.18)}`,
+        marginTop: theme.spacing(1),
+        minWidth: 220,
+        backgroundImage: [
+          `linear-gradient(180deg, ${alpha(theme.palette.background.paper, 0.94)} 0 100%)`,
+          `repeating-linear-gradient(90deg, transparent 0 18px, ${alpha(
+            theme.palette.primary.main,
+            0.05,
+          )} 18px 36px)`,
+          bauhausRail(theme, scale(controls.extravagance, 0.14, 0.22), 90),
+        ].join(", "),
+        backgroundOrigin: "padding-box, padding-box, border-box",
+        backgroundClip: "padding-box, padding-box, border-box",
+      }),
+      list: {
+        padding: 0,
+      },
+    },
+  },
+  MuiMenuItem: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        minHeight: 44,
+        borderRadius: 0,
+        borderBottom: `1px solid ${alpha(bauhausInk(theme), 0.12)}`,
+        fontFamily: FONT_DISPLAY,
+        fontWeight: 800,
+        textTransform: "uppercase",
+        letterSpacing: "0.08em",
+        transition: theme.transitions.create(
+          ["background-color", "box-shadow", "border-color"],
+          {
+            duration: Math.round(scale(controls.motionPolish, 160, 240)),
+          },
+        ),
+        "&:last-of-type": {
+          borderBottom: 0,
+        },
+        "& .MuiListItemIcon-root": {
+          minWidth: 32,
+          color: theme.palette.primary.main,
+        },
+        "&.Mui-selected": {
+          backgroundImage: `repeating-linear-gradient(90deg, ${alpha(
+            theme.palette.primary.main,
+            0.12,
+          )} 0 16px, transparent 16px 40px)`,
+          backgroundColor: alpha(theme.palette.primary.main, 0.08),
+        },
+        "&.Mui-selected:hover": {
+          backgroundColor: alpha(theme.palette.primary.main, 0.14),
+          boxShadow: `inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.18)}`,
+        },
+        "&:hover": {
+          backgroundImage: `linear-gradient(90deg, ${alpha(
+            theme.palette.primary.main,
+            0.14,
+          )} 0 12px, transparent 12px 100%)`,
+          backgroundColor: alpha(theme.palette.primary.main, 0.1),
+          boxShadow: `inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.18)}`,
+        },
       }),
     },
   },
@@ -1272,9 +1449,20 @@ const createComponents = (
       paper: ({ theme }) => ({
         ...bauhausSurface(theme, controls, {
           level: "overlay",
-          radius: "34px 14px 34px 14px",
+          radius: 2,
           accent: theme.palette.warning.main,
         }),
+        border: `2px solid ${alpha(bauhausInk(theme), 0.2)}`,
+        backgroundImage: [
+          `linear-gradient(180deg, ${alpha(theme.palette.background.paper, 0.92)} 0 100%)`,
+          `repeating-linear-gradient(90deg, transparent 0 24px, ${alpha(
+            theme.palette.primary.main,
+            0.06,
+          )} 24px 48px, transparent 48px 72px)`,
+          bauhausRail(theme, scale(controls.extravagance, 0.18, 0.28), 90),
+        ].join(", "),
+        backgroundOrigin: "padding-box, padding-box, border-box",
+        backgroundClip: "padding-box, padding-box, border-box",
         transition: theme.transitions.create(
           ["transform", "box-shadow", "border-color"],
           {
@@ -1285,25 +1473,95 @@ const createComponents = (
           "&:hover": bauhausHoverState(theme, controls, {
             accent: theme.palette.warning.main,
             level: "overlay",
-            translate: "translate(-1px, -1px)",
+            translate: "translateY(-1px)",
           }),
         },
       }),
     },
   },
+  MuiDialogTitle: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        padding: theme.spacing(2.5, 3),
+        borderBottom: `2px solid ${alpha(bauhausInk(theme), 0.16)}`,
+        backgroundImage: `repeating-linear-gradient(90deg, ${alpha(
+          theme.palette.primary.main,
+          0.08,
+        )} 0 18px, transparent 18px 36px)`,
+        fontFamily: FONT_DISPLAY,
+        fontWeight: 900,
+        textTransform: "uppercase",
+        letterSpacing: "0.08em",
+      }),
+    },
+  },
+  MuiDialogContent: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        padding: theme.spacing(3),
+        backgroundImage: `repeating-linear-gradient(0deg, transparent 0 26px, ${alpha(
+          theme.palette.info.main,
+          0.04,
+        )} 26px 27px)`,
+      }),
+    },
+  },
+  MuiDialogActions: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        padding: theme.spacing(2, 3, 3),
+        gap: theme.spacing(1.5),
+        borderTop: `2px solid ${alpha(bauhausInk(theme), 0.14)}`,
+        backgroundImage: `repeating-linear-gradient(90deg, transparent 0 20px, ${alpha(
+          theme.palette.secondary.main,
+          0.06,
+        )} 20px 40px)`,
+      }),
+    },
+  },
 });
 
-export const neonBauhausOps = {
-  name: "Neon Bauhaus Ops",
+export const neonBauhausGrid = {
+  name: "Neon Bauhaus Grid",
   direction: "ltr",
   palette: {
     mode: "light",
-    primary: { main: "#00D2FF", dark: "#00D2FF", light: "#00D2FF", contrastText: "#0C141C" },
-    secondary: { main: "#440850", dark: "#440850", light: "#440850", contrastText: "#FFFFFF" },
-    warning: { main: "#F3503A", dark: "#F3503A", light: "#F3503A", contrastText: "#FFFFFF" },
-    info: { main: "#9FA9EA", dark: "#9FA9EA", light: "#9FA9EA", contrastText: "#0C141C" },
-    success: { main: "#00D2FF", dark: "#00D2FF", light: "#00D2FF", contrastText: "#0C141C" },
-    error: { main: "#F3503A", dark: "#F3503A", light: "#F3503A", contrastText: "#FFFFFF" },
+    primary: {
+      main: "#00D2FF",
+      dark: "#00D2FF",
+      light: "#00D2FF",
+      contrastText: "#0C141C",
+    },
+    secondary: {
+      main: "#440850",
+      dark: "#440850",
+      light: "#440850",
+      contrastText: "#FFFFFF",
+    },
+    warning: {
+      main: "#F3503A",
+      dark: "#F3503A",
+      light: "#F3503A",
+      contrastText: "#FFFFFF",
+    },
+    info: {
+      main: "#9FA9EA",
+      dark: "#9FA9EA",
+      light: "#9FA9EA",
+      contrastText: "#0C141C",
+    },
+    success: {
+      main: "#00D2FF",
+      dark: "#00D2FF",
+      light: "#00D2FF",
+      contrastText: "#0C141C",
+    },
+    error: {
+      main: "#F3503A",
+      dark: "#F3503A",
+      light: "#F3503A",
+      contrastText: "#FFFFFF",
+    },
     background: { default: "#FFFFFF", paper: "#FFFFFF" },
     text: {
       primary: "#0C141C",
@@ -1312,32 +1570,62 @@ export const neonBauhausOps = {
     },
     divider: alpha("#0C141C", 0.14),
     action: {
-      hover: alpha("#00D2FF", 0.14),
-      selected: alpha("#00D2FF", 0.2),
-      focus: alpha("#00D2FF", 0.26),
+      hover: alpha("#00D2FF", 0.12),
+      selected: alpha("#00D2FF", 0.18),
+      focus: alpha("#00D2FF", 0.24),
       active: alpha("#0C141C", 0.54),
       disabled: alpha("#0C141C", 0.32),
       disabledBackground: alpha("#0C141C", 0.06),
     },
   },
   typography,
-  shape: { borderRadius: 8 },
+  shape: { borderRadius: 0 },
   spacing: 8,
   components: createComponents(lightControls),
 } satisfies NamedThemeOptions;
 
-export const neonBauhausOpsNight = {
-  ...neonBauhausOps,
-  name: "Neon Bauhaus Ops (Night)",
+export const neonBauhausGridNight = {
+  ...neonBauhausGrid,
+  name: "Neon Bauhaus Grid (Night)",
   palette: {
-    ...neonBauhausOps.palette,
+    ...neonBauhausGrid.palette,
     mode: "dark",
-    primary: { main: "#00D2FF", dark: "#00D2FF", light: "#00D2FF", contrastText: "#0C141C" },
-    secondary: { main: "#440850", dark: "#440850", light: "#440850", contrastText: "#FFFFFF" },
-    warning: { main: "#F3503A", dark: "#F3503A", light: "#F3503A", contrastText: "#FFFFFF" },
-    info: { main: "#9FA9EA", dark: "#9FA9EA", light: "#9FA9EA", contrastText: "#0C141C" },
-    success: { main: "#00D2FF", dark: "#00D2FF", light: "#00D2FF", contrastText: "#0C141C" },
-    error: { main: "#F3503A", dark: "#F3503A", light: "#F3503A", contrastText: "#FFFFFF" },
+    primary: {
+      main: "#00D2FF",
+      dark: "#00D2FF",
+      light: "#00D2FF",
+      contrastText: "#0C141C",
+    },
+    secondary: {
+      main: "#440850",
+      dark: "#440850",
+      light: "#440850",
+      contrastText: "#FFFFFF",
+    },
+    warning: {
+      main: "#F3503A",
+      dark: "#F3503A",
+      light: "#F3503A",
+      contrastText: "#FFFFFF",
+    },
+    info: {
+      main: "#9FA9EA",
+      dark: "#9FA9EA",
+      light: "#9FA9EA",
+      contrastText: "#0C141C",
+    },
+    success: {
+      main: "#00D2FF",
+      dark: "#00D2FF",
+      light: "#00D2FF",
+      contrastText: "#0C141C",
+    },
+    error: {
+      main: "#F3503A",
+      dark: "#F3503A",
+      light: "#F3503A",
+      contrastText: "#FFFFFF",
+    },
     background: { default: "#0C141C", paper: "#0C141C" },
     text: {
       primary: "#FFFFFF",
@@ -1346,9 +1634,9 @@ export const neonBauhausOpsNight = {
     },
     divider: alpha("#FFFFFF", 0.14),
     action: {
-      hover: alpha("#00D2FF", 0.18),
-      selected: alpha("#00D2FF", 0.24),
-      focus: alpha("#00D2FF", 0.3),
+      hover: alpha("#00D2FF", 0.16),
+      selected: alpha("#00D2FF", 0.22),
+      focus: alpha("#00D2FF", 0.28),
       active: alpha("#FFFFFF", 0.56),
       disabled: alpha("#FFFFFF", 0.3),
       disabledBackground: alpha("#FFFFFF", 0.08),

@@ -20,6 +20,7 @@ interface Props {
   defaultDarkMode?: DarkModeOptions;
   initialThemeId?: string;
   initialDarkMode?: DarkModeOptions;
+  storageKey?: string;
 }
 
 interface ReturnValue {
@@ -79,8 +80,9 @@ const parseSnapshot = (
 const getSettingsSnapshot = (
   initialThemeId?: string,
   initialDarkMode?: DarkModeOptions,
+  storageKey?: string,
 ): string => {
-  const stored = readAppSettings();
+  const stored = readAppSettings(storageKey);
   if (!stored) return serializeSnapshot(initialThemeId, initialDarkMode);
 
   const { themeId, darkMode } = stored;
@@ -128,6 +130,7 @@ export const usePersistedAppSettings = ({
   defaultDarkMode,
   initialThemeId,
   initialDarkMode,
+  storageKey,
 }: Props): ReturnValue => {
   const fallbackDarkMode = defaultDarkMode ?? initialDarkMode ?? "system";
   const presetsSource = useMemo(() => normalizeThemesInput(themes), [themes]);
@@ -143,7 +146,7 @@ export const usePersistedAppSettings = ({
 
   const settingsSnapshot = useSyncExternalStore(
     subscribe,
-    () => getSettingsSnapshot(initialThemeId, initialDarkMode),
+    () => getSettingsSnapshot(initialThemeId, initialDarkMode, storageKey),
     () => getServerSnapshot(initialThemeId, initialDarkMode),
   );
   const { themeId: snapshotThemeId, darkMode: snapshotDarkMode } = useMemo(
@@ -166,18 +169,24 @@ export const usePersistedAppSettings = ({
 
   const setTheme = (nextTheme: string) => {
     const resolvedThemeId = resolveThemeName(nextTheme, themesSource);
-    writeAppSettings({
-      themeId: resolvedThemeId,
-      darkMode,
-    });
+    writeAppSettings(
+      {
+        themeId: resolvedThemeId,
+        darkMode,
+      },
+      storageKey,
+    );
     notify();
   };
 
   const setDarkMode = (mode: DarkModeOptions) => {
-    writeAppSettings({
-      themeId: theme,
-      darkMode: mode,
-    });
+    writeAppSettings(
+      {
+        themeId: theme,
+        darkMode: mode,
+      },
+      storageKey,
+    );
     notify();
   };
 

@@ -16,14 +16,14 @@ const FONT_MONO =
 
 const KINTSUGI_RADIUS = 20;
 
-type KintsugiLandingControls = {
+interface KintsugiLandingControls {
   luxuryLevel: number;
   extravagance: number;
   heroDrama: number;
   ctaPower: number;
   motionPolish: number;
   blurBudget: number;
-};
+}
 
 type KintsugiSurfaceLevel = "surface" | "elevated" | "overlay";
 
@@ -252,10 +252,7 @@ const kintsugiShadow = (
       accent,
       scale(controls.extravagance, 0.06, 0.14),
     )}`,
-    `0 0 0 1px ${alpha(
-      kintsugiInk(theme),
-      isDark ? 0.03 : 0.04,
-    )} inset`,
+    `0 0 0 1px ${alpha(kintsugiInk(theme), isDark ? 0.03 : 0.04)} inset`,
   ].join(", ");
 };
 
@@ -432,15 +429,27 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(1020px 620px at 14% 8%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.12 : 0.07, isDark ? 0.22 : 0.12),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.12 : 0.07,
+                isDark ? 0.22 : 0.12,
+              ),
             )} 0%, transparent 62%)`,
             `radial-gradient(920px 540px at 86% 10%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, isDark ? 0.08 : 0.04, isDark ? 0.14 : 0.08),
+              scale(
+                controls.extravagance,
+                isDark ? 0.08 : 0.04,
+                isDark ? 0.14 : 0.08,
+              ),
             )} 0%, transparent 64%)`,
             `radial-gradient(940px 560px at 61.8% 112%, ${alpha(
               theme.palette.info.main,
-              scale(controls.luxuryLevel, isDark ? 0.05 : 0.03, isDark ? 0.1 : 0.06),
+              scale(
+                controls.luxuryLevel,
+                isDark ? 0.05 : 0.03,
+                isDark ? 0.1 : 0.06,
+              ),
             )} 0%, transparent 62%)`,
             `linear-gradient(180deg, ${alpha(
               theme.palette.background.default,
@@ -454,7 +463,7 @@ const createComponents = (
         },
 
         "body::before": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInline: 0,
           insetBlockStart: 0,
@@ -480,7 +489,7 @@ const createComponents = (
         },
 
         "body::after": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInlineStart: "-14vw",
           insetBlockStart: "6vh",
@@ -620,15 +629,27 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(1180px 760px at 12% 6%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.16 : 0.1, isDark ? 0.28 : 0.16),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.16 : 0.1,
+                isDark ? 0.28 : 0.16,
+              ),
             )} 0%, transparent 62%)`,
             `radial-gradient(1080px 700px at 88% 8%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, isDark ? 0.1 : 0.06, isDark ? 0.18 : 0.1),
+              scale(
+                controls.extravagance,
+                isDark ? 0.1 : 0.06,
+                isDark ? 0.18 : 0.1,
+              ),
             )} 0%, transparent 64%)`,
             `radial-gradient(1060px 680px at 61.8% 116%, ${alpha(
               theme.palette.info.main,
-              scale(controls.luxuryLevel, isDark ? 0.08 : 0.04, isDark ? 0.14 : 0.08),
+              scale(
+                controls.luxuryLevel,
+                isDark ? 0.08 : 0.04,
+                isDark ? 0.14 : 0.08,
+              ),
             )} 0%, transparent 62%)`,
             `linear-gradient(180deg, ${alpha(
               theme.palette.background.default,
@@ -640,20 +661,21 @@ const createComponents = (
           ].join(", "),
         },
 
-        "body.kp-showcase-mode::before, body[data-kp-scene='showcase']::before": {
-          height: 6,
-          backgroundImage: kintsugiSeam(theme, controls, 5, 90),
-          boxShadow: [
-            `0 0 ${Math.round(scale(controls.heroDrama, 30, 50))}px ${alpha(
-              theme.palette.primary.main,
-              scale(controls.heroDrama, 0.18, 0.32),
-            )}`,
-            `0 0 ${Math.round(scale(controls.extravagance, 22, 38))}px ${alpha(
-              theme.palette.secondary.main,
-              scale(controls.extravagance, 0.08, 0.14),
-            )}`,
-          ].join(", "),
-        },
+        "body.kp-showcase-mode::before, body[data-kp-scene='showcase']::before":
+          {
+            height: 6,
+            backgroundImage: kintsugiSeam(theme, controls, 5, 90),
+            boxShadow: [
+              `0 0 ${Math.round(scale(controls.heroDrama, 30, 50))}px ${alpha(
+                theme.palette.primary.main,
+                scale(controls.heroDrama, 0.18, 0.32),
+              )}`,
+              `0 0 ${Math.round(scale(controls.extravagance, 22, 38))}px ${alpha(
+                theme.palette.secondary.main,
+                scale(controls.extravagance, 0.08, 0.14),
+              )}`,
+            ].join(", "),
+          },
 
         "body.kp-showcase-mode::after, body[data-kp-scene='showcase']::after": {
           width: "54vw",
@@ -725,7 +747,7 @@ const createComponents = (
             gap: theme.spacing(3),
           },
           "&[data-kp-section='hero']::before": {
-            content: "\"\"",
+            content: '""',
             position: "absolute",
             insetInline: 0,
             insetBlockStart: 0,
@@ -865,7 +887,12 @@ const createComponents = (
           "&:hover": {
             transform: "translateY(-2px)",
             boxShadow: [
-              kintsugiShadow(theme, controls, "elevated", theme.palette.primary.main),
+              kintsugiShadow(
+                theme,
+                controls,
+                "elevated",
+                theme.palette.primary.main,
+              ),
               `0 0 ${Math.round(scale(controls.heroDrama, 22, 42))}px ${alpha(
                 theme.palette.primary.main,
                 scale(controls.heroDrama, 0.08, 0.14),
@@ -883,7 +910,12 @@ const createComponents = (
               blurMax: 30,
             }),
             boxShadow: [
-              kintsugiShadow(theme, controls, "overlay", theme.palette.primary.main),
+              kintsugiShadow(
+                theme,
+                controls,
+                "overlay",
+                theme.palette.primary.main,
+              ),
               `0 0 ${Math.round(scale(controls.heroDrama, 28, 52))}px ${alpha(
                 theme.palette.primary.main,
                 scale(controls.heroDrama, 0.12, 0.22),
@@ -969,7 +1001,7 @@ const createComponents = (
           transparent 100%)`,
         opacity: 0.88,
         "&::after": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInline: "22%",
           insetBlockStart: -1,
@@ -1017,11 +1049,17 @@ const createComponents = (
         transform: "translateZ(0)",
         ...blurStyle(controls, 8, 12),
         transition: theme.transitions.create(
-          ["transform", "box-shadow", "background-color", "border-color", "color"],
+          [
+            "transform",
+            "box-shadow",
+            "background-color",
+            "border-color",
+            "color",
+          ],
           { duration: motionDuration(controls, 180, 280) },
         ),
         "&::before": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           inset: 0,
           background: kintsugiSeam(
@@ -1091,7 +1129,7 @@ const createComponents = (
             )}`,
           ].join(", "),
           "&::after": {
-            content: "\"\"",
+            content: '""',
             position: "absolute",
             inset: 0,
             background: kintsugiSeam(
@@ -1158,10 +1196,7 @@ const createComponents = (
         return {
           color: theme.palette.text.primary,
           borderWidth: 1,
-          borderColor: alpha(
-            theme.palette.text.primary,
-            isDark ? 0.18 : 0.12,
-          ),
+          borderColor: alpha(theme.palette.text.primary, isDark ? 0.18 : 0.12),
           backgroundColor: alpha(
             theme.palette.text.primary,
             isDark ? 0.04 : 0.03,
@@ -1344,10 +1379,7 @@ const createComponents = (
           )} inset`,
           ...blurStyle(controls, 8, 12),
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: alpha(
-              theme.palette.text.primary,
-              isDark ? 0.2 : 0.14,
-            ),
+            borderColor: alpha(theme.palette.text.primary, isDark ? 0.2 : 0.14),
           },
           "&.Mui-focused": {
             backgroundColor: alpha(
@@ -1713,9 +1745,12 @@ const createComponents = (
   MuiTableRow: {
     styleOverrides: {
       root: ({ theme }) => ({
-        transition: theme.transitions.create(["background-color", "transform"], {
-          duration: motionDuration(controls, 140, 220),
-        }),
+        transition: theme.transitions.create(
+          ["background-color", "transform"],
+          {
+            duration: motionDuration(controls, 140, 220),
+          },
+        ),
         "&:hover": {
           backgroundColor: alpha(
             theme.palette.primary.main,
@@ -1894,9 +1929,12 @@ const createComponents = (
         fontWeight: 700,
         textDecorationColor: alpha(theme.palette.info.main, 0.26),
         textUnderlineOffset: "0.22em",
-        transition: theme.transitions.create(["color", "text-decoration-color"], {
-          duration: motionDuration(controls, 140, 220),
-        }),
+        transition: theme.transitions.create(
+          ["color", "text-decoration-color"],
+          {
+            duration: motionDuration(controls, 140, 220),
+          },
+        ),
         "&:hover": {
           color: theme.palette.primary.main,
           textDecorationColor: alpha(theme.palette.primary.main, 0.34),

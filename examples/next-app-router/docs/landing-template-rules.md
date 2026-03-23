@@ -115,12 +115,12 @@ Use `agents/README.md` as the execution and verification companion.
    - one heading role
    - one supporting copy role
 2. Prefer semantic starter variants over mixed MUI defaults:
-   - major headings: `header_2xl_semibold`, `header_xl_semibold`, `header_lg_semibold`
-   - panel headings: `header_sm_semibold`, `header_xs_semibold`
-   - body copy: `text_lg_regular`, `text_md_regular`
-   - quiet labels and metadata: `text_sm_regular`, `text_xs_regular`
-   - compact action labels: `text_sm_semibold`, `text_xs_semibold`
-3. Avoid `overline`, `caption`, `subtitle1`, and `subtitle2` as the primary hierarchy system for landing content.
+   - major headings: `h1`, `h2`, `h3`
+   - panel headings: `h5`, `h6`
+   - body copy: `body1`, `body2`
+   - quiet labels and metadata: `caption`
+   - compact action labels: `button`, `subtitle2`
+3. Avoid `overline` as the primary hierarchy system for landing content.
 4. When a support block reads as one thought, render it as one paragraph instead of several stacked text fragments.
 5. If a section feels noisy, reduce the number of text roles before changing sizing or weight.
 6. Visible text in interactive MUI controls should use `Typography component="span"` so action labels stay consistent with the rest of the starter.

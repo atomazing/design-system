@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
-
 type DsDarkModeOptions = "system" | "light" | "dark";
 
 type DsThemePreset = {
@@ -14,6 +12,18 @@ type DsThemePreset = {
   version?: string;
 };
 
+type DsThemeModeBackground = Partial<
+  Record<
+    "light" | "dark",
+    Partial<import("@mui/material/styles").TypeBackground>
+  >
+>;
+
+type DsNamedThemeOptions = import("@mui/material/styles").ThemeOptions & {
+  name: string;
+  background?: DsThemeModeBackground;
+};
+
 type DsOptionItem = {
   label: string;
   value: DsDarkModeOptions;
@@ -25,16 +35,22 @@ interface DsThemeContextProps {
   darkMode: DsDarkModeOptions;
   setTheme: (theme: string) => void;
   setDarkMode: (mode: DsDarkModeOptions) => void;
-  themes: DsThemePreset[];
-  selectedTheme: DsThemePreset;
+  themes: DsNamedThemeOptions[];
+  selectedTheme: DsNamedThemeOptions;
   defaultThemeName: string;
 }
+
+type DsStoredAppSettings = {
+  themeId: string;
+  darkMode: DsDarkModeOptions;
+};
 
 declare module "@atomazing-org/design-system" {
   export type DarkModeOptions = DsDarkModeOptions;
   export type ThemePreset = DsThemePreset;
   export type OptionItem = DsOptionItem;
   export type ThemeContextProps = DsThemeContextProps;
+  export type StoredAppSettings = DsStoredAppSettings;
 
   export const ThemeProviderWrapper: import("react").FC<
     import("react").PropsWithChildren<{
@@ -43,6 +59,7 @@ declare module "@atomazing-org/design-system" {
       initialThemeId?: string;
       initialDarkMode?: DsDarkModeOptions;
       fontFamily?: string;
+      settingsStorageKey?: string;
     }>
   >;
 
@@ -53,70 +70,24 @@ declare module "@atomazing-org/design-system" {
     darkMode: DsDarkModeOptions,
     systemTheme: "light" | "dark" | "unknown",
   ) => import("@mui/material/styles").PaletteMode;
+  export const readAppSettings: (
+    storageKey?: string,
+  ) => DsStoredAppSettings | null;
+  export const writeAppSettings: (
+    settings: DsStoredAppSettings,
+    storageKey?: string,
+  ) => void;
+  export const canUseDom: () => boolean;
+  export const isDarkMode: (
+    darkMode: DsDarkModeOptions,
+    systemTheme: "light" | "dark" | "unknown",
+  ) => boolean;
 }
 
 declare module "@atomazing-org/design-system/presets" {
   export const defaultThemes: DsThemePreset[];
   export const landingPageThemes: DsThemePreset[];
   export const allBuiltInThemes: DsThemePreset[];
-}
-
-interface CustomTypographyVariants {
-  text_xl_regular: import("react").CSSProperties;
-  text_lg_regular: import("react").CSSProperties;
-  text_md_regular: import("react").CSSProperties;
-  text_sm_regular: import("react").CSSProperties;
-  text_xs_regular: import("react").CSSProperties;
-  text_2xs_regular: import("react").CSSProperties;
-  text_xl_bold: import("react").CSSProperties;
-  text_lg_bold: import("react").CSSProperties;
-  text_md_bold: import("react").CSSProperties;
-  text_sm_bold: import("react").CSSProperties;
-  text_xs_bold: import("react").CSSProperties;
-  text_2xs_bold: import("react").CSSProperties;
-  text_xl_semibold: import("react").CSSProperties;
-  text_lg_semibold: import("react").CSSProperties;
-  text_md_semibold: import("react").CSSProperties;
-  text_sm_semibold: import("react").CSSProperties;
-  text_xs_semibold: import("react").CSSProperties;
-  text_2xs_semibold: import("react").CSSProperties;
-  text_xl_thin: import("react").CSSProperties;
-  text_lg_thin: import("react").CSSProperties;
-  text_md_thin: import("react").CSSProperties;
-  text_sm_thin: import("react").CSSProperties;
-  text_xs_thin: import("react").CSSProperties;
-  text_2xs_thin: import("react").CSSProperties;
-  header_2xl_regular: import("react").CSSProperties;
-  header_xl_regular: import("react").CSSProperties;
-  header_lg_regular: import("react").CSSProperties;
-  header_md_regular: import("react").CSSProperties;
-  header_sm_regular: import("react").CSSProperties;
-  header_xs_regular: import("react").CSSProperties;
-  header_2xl_bold: import("react").CSSProperties;
-  header_xl_bold: import("react").CSSProperties;
-  header_lg_bold: import("react").CSSProperties;
-  header_md_bold: import("react").CSSProperties;
-  header_sm_bold: import("react").CSSProperties;
-  header_xs_bold: import("react").CSSProperties;
-  header_2xl_semibold: import("react").CSSProperties;
-  header_xl_semibold: import("react").CSSProperties;
-  header_lg_semibold: import("react").CSSProperties;
-  header_md_semibold: import("react").CSSProperties;
-  header_sm_semibold: import("react").CSSProperties;
-  header_xs_semibold: import("react").CSSProperties;
-}
-
-type CustomTypographyVariantOverrides = {
-  [K in keyof CustomTypographyVariants]: true;
-};
-
-declare module "@mui/material/styles" {
-  interface TypographyVariants extends CustomTypographyVariants {}
-  interface TypographyVariantsOptions extends Partial<CustomTypographyVariants> {}
-}
-
-declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides extends CustomTypographyVariantOverrides {}
 }
 
 export {};

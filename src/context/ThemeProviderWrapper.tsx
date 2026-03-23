@@ -39,6 +39,11 @@ type ThemeProviderWrapperProps = PropsWithChildren<{
    * Initial dark mode used as fallback when persisted settings are not available.
    */
   initialDarkMode?: DarkModeOptions;
+  /**
+   * Optional localStorage key override used for persisted theme settings.
+   * Defaults to the shared `appSettings` key when not provided.
+   */
+  settingsStorageKey?: string;
 }>;
 
 export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
@@ -48,6 +53,7 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
   darkMode: darkModeProp,
   initialThemeId,
   initialDarkMode,
+  settingsStorageKey,
 }) => {
   const systemTheme = useSystemTheme();
   const {
@@ -63,6 +69,7 @@ export const ThemeProviderWrapper: FC<ThemeProviderWrapperProps> = ({
     defaultDarkMode: darkModeProp,
     initialThemeId,
     initialDarkMode,
+    storageKey: settingsStorageKey,
   });
 
   const darkMode = darkModeProp ?? persistedDarkMode;

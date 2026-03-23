@@ -21,7 +21,6 @@ export {
 } from "./styles/theme";
 export { alphaText, getSurfaceTokens } from "./styles/tokens";
 export type { SurfaceTokens } from "./styles/tokens";
-export { muiTypography, typographyVariants } from "./styles/typography";
 export { validateSchemeTokens } from "./styles/validateSchemeTokens";
 export {
   fadeIn,

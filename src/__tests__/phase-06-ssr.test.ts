@@ -127,6 +127,19 @@ describe("Phase 06 SSR safety helpers", () => {
     expect(readAppSettings()).toBeNull();
   });
 
+  it("supports custom storage keys", () => {
+    setBrowserEnv();
+    const payload: StoredAppSettings = {
+      themeId: "legacy",
+      darkMode: "light",
+    };
+
+    writeAppSettings(payload, "pampaLegacyThemeSettings");
+
+    expect(readAppSettings("pampaLegacyThemeSettings")).toEqual(payload);
+    expect(readAppSettings()).toBeNull();
+  });
+
   it("returns null when localStorage throws", () => {
     setBrowserEnv();
     if (globalAny.localStorage) {

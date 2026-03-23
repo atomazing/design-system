@@ -4,22 +4,20 @@ import type { NamedThemeOptions } from "@/models/appSettings";
 import type { Theme, ThemeOptions } from "@mui/material/styles";
 
 const FONT_DISPLAY =
-  "var(--font-glass-display),\"IBM Plex Sans\",\"Source Sans 3\",\"Inter\",\"Manrope\",\"Roboto\",\"Helvetica\",\"Arial\",sans-serif";
+  'var(--font-glass-display),"IBM Plex Sans","Source Sans 3","Inter","Manrope","Roboto","Helvetica","Arial",sans-serif';
 const FONT_TEXT =
-  "var(--font-glass-text),\"Golos Text\",\"IBM Plex Sans\",\"Inter\",\"Manrope\",\"Roboto\",\"Helvetica\",\"Arial\",sans-serif";
+  'var(--font-glass-text),"Golos Text","IBM Plex Sans","Inter","Manrope","Roboto","Helvetica","Arial",sans-serif';
 const FONT_MONO =
-  "var(--font-glass-mono),\"IBM Plex Mono\",\"JetBrains Mono\",\"Roboto Mono\",\"Menlo\",\"Consolas\",monospace";
+  'var(--font-glass-mono),"IBM Plex Mono","JetBrains Mono","Roboto Mono","Menlo","Consolas",monospace';
 
-const GLASS_RADIUS = 20;
-
-type GlassLandingControls = {
+interface GlassLandingControls {
   luxuryLevel: number;
   extravagance: number;
   heroDrama: number;
   ctaPower: number;
   motionPolish: number;
   blurBudget: number;
-};
+}
 
 type SurfaceLevel = "surface" | "elevated" | "overlay";
 
@@ -138,11 +136,7 @@ const typography = {
 const reactorInk = (theme: Theme): string =>
   theme.palette.mode === "dark" ? theme.palette.common.white : "#061019";
 
-const reactorRail = (
-  theme: Theme,
-  opacity = 0.28,
-  angle = 135,
-): string =>
+const reactorRail = (theme: Theme, opacity = 0.28, angle = 135): string =>
   `linear-gradient(${angle}deg, ${alpha(theme.palette.primary.main, opacity)} 0%, ${alpha(
     theme.palette.info.main,
     opacity * 0.94,
@@ -178,13 +172,7 @@ const reactorHeadlineTreatment = (
       ? scale(controls.extravagance, 0.34, 0.56)
       : scale(controls.extravagance, 0.22, 0.38);
   const glazeOpacity =
-    tone === "showcase"
-      ? isDark
-        ? 0.18
-        : 0.28
-      : isDark
-        ? 0.12
-        : 0.2;
+    tone === "showcase" ? (isDark ? 0.18 : 0.28) : isDark ? 0.12 : 0.2;
 
   return {
     paddingInline: tone === "showcase" ? "0.08em" : "0.05em",
@@ -303,10 +291,7 @@ const reactorShadow = (
           ? scale(controls.extravagance, 0.08, 0.16)
           : scale(controls.extravagance, 0.04, 0.1),
     )}`,
-    `0 0 0 1px ${alpha(
-      theme.palette.common.white,
-      ringAlpha,
-    )} inset`,
+    `0 0 0 1px ${alpha(theme.palette.common.white, ringAlpha)} inset`,
     `inset 0 1px 0 ${alpha(theme.palette.common.white, topInsetAlpha)}`,
     `inset 0 -1px 0 ${alpha(accent, bottomInsetAlpha)}`,
   ].join(", ");
@@ -336,7 +321,11 @@ const reactorSurface = (
       ? scale(controls.luxuryLevel, isDark ? 0.8 : 0.93, isDark ? 0.9 : 0.98)
       : level === "elevated"
         ? scale(controls.luxuryLevel, isDark ? 0.68 : 0.84, isDark ? 0.8 : 0.92)
-        : scale(controls.luxuryLevel, isDark ? 0.58 : 0.76, isDark ? 0.68 : 0.88));
+        : scale(
+            controls.luxuryLevel,
+            isDark ? 0.58 : 0.76,
+            isDark ? 0.68 : 0.88,
+          ));
   const blurPx =
     level === "overlay"
       ? scale(controls.blurBudget, 22, 30)
@@ -347,8 +336,16 @@ const reactorSurface = (
     level === "overlay"
       ? scale(controls.extravagance, isDark ? 0.16 : 0.12, isDark ? 0.26 : 0.22)
       : level === "elevated"
-        ? scale(controls.extravagance, isDark ? 0.1 : 0.07, isDark ? 0.18 : 0.14)
-        : scale(controls.extravagance, isDark ? 0.05 : 0.04, isDark ? 0.11 : 0.08);
+        ? scale(
+            controls.extravagance,
+            isDark ? 0.1 : 0.07,
+            isDark ? 0.18 : 0.14,
+          )
+        : scale(
+            controls.extravagance,
+            isDark ? 0.05 : 0.04,
+            isDark ? 0.11 : 0.08,
+          );
   const topSheenAlpha =
     level === "overlay"
       ? isDark
@@ -411,7 +408,11 @@ const reactorSurface = (
         isDark ? topSheenAlpha * 0.72 : topSheenAlpha * 1.14,
       )} 0%, ${alpha(
         tint,
-        Math.min(0.99, resolvedFill + (level === "overlay" ? 0.1 : level === "elevated" ? 0.08 : 0.06)),
+        Math.min(
+          0.99,
+          resolvedFill +
+            (level === "overlay" ? 0.1 : level === "elevated" ? 0.08 : 0.06),
+        ),
       )} 22%, ${alpha(
         tint,
         resolvedFill,
@@ -483,25 +484,49 @@ const createComponents = (
           backgroundImage: [
             `linear-gradient(102deg, transparent 0%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.1 : 0.06, isDark ? 0.16 : 0.12),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.1 : 0.06,
+                isDark ? 0.16 : 0.12,
+              ),
             )} 24%, ${alpha(
               theme.palette.info.main,
-              scale(controls.heroDrama, isDark ? 0.12 : 0.08, isDark ? 0.18 : 0.14),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.12 : 0.08,
+                isDark ? 0.18 : 0.14,
+              ),
             )} 48%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, isDark ? 0.08 : 0.05, isDark ? 0.14 : 0.1),
+              scale(
+                controls.extravagance,
+                isDark ? 0.08 : 0.05,
+                isDark ? 0.14 : 0.1,
+              ),
             )} 70%, transparent 92%)`,
             `radial-gradient(1040px 620px at 14% 8%, ${alpha(
               theme.palette.info.main,
-              scale(controls.heroDrama, isDark ? 0.18 : 0.1, isDark ? 0.3 : 0.2),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.18 : 0.1,
+                isDark ? 0.3 : 0.2,
+              ),
             )} 0%, transparent 60%)`,
             `radial-gradient(980px 580px at 86% 10%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.heroDrama, isDark ? 0.14 : 0.08, isDark ? 0.22 : 0.16),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.14 : 0.08,
+                isDark ? 0.22 : 0.16,
+              ),
             )} 0%, transparent 62%)`,
             `radial-gradient(980px 540px at 76.4% 112%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.16 : 0.08, isDark ? 0.26 : 0.16),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.16 : 0.08,
+                isDark ? 0.26 : 0.16,
+              ),
             )} 0%, transparent 58%)`,
             `radial-gradient(720px 420px at 61.8% 0%, ${alpha(
               theme.palette.common.white,
@@ -529,11 +554,12 @@ const createComponents = (
               isDark ? 0.02 : 0.014,
             )} 1px, transparent 1px, transparent 32px)`,
           ].join(", "),
-          backgroundSize: "100% 240px, auto, auto, auto, auto, auto, 160px 160px, 160px 160px",
+          backgroundSize:
+            "100% 240px, auto, auto, auto, auto, auto, 160px 160px, 160px 160px",
           backgroundAttachment: "fixed",
         },
         "body::after": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInline: "clamp(20px, 6vw, 92px)",
           insetBlockStart: "clamp(82px, 15vh, 146px)",
@@ -567,25 +593,49 @@ const createComponents = (
           backgroundImage: [
             `linear-gradient(102deg, transparent 0%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.14 : 0.09, isDark ? 0.22 : 0.16),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.14 : 0.09,
+                isDark ? 0.22 : 0.16,
+              ),
             )} 22%, ${alpha(
               theme.palette.info.main,
-              scale(controls.heroDrama, isDark ? 0.16 : 0.1, isDark ? 0.24 : 0.18),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.16 : 0.1,
+                isDark ? 0.24 : 0.18,
+              ),
             )} 50%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, isDark ? 0.1 : 0.07, isDark ? 0.16 : 0.12),
+              scale(
+                controls.extravagance,
+                isDark ? 0.1 : 0.07,
+                isDark ? 0.16 : 0.12,
+              ),
             )} 72%, transparent 94%)`,
             `radial-gradient(1180px 680px at 16% 6%, ${alpha(
               theme.palette.info.main,
-              scale(controls.heroDrama, isDark ? 0.24 : 0.14, isDark ? 0.38 : 0.24),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.24 : 0.14,
+                isDark ? 0.38 : 0.24,
+              ),
             )} 0%, transparent 60%)`,
             `radial-gradient(1080px 640px at 86% 8%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.heroDrama, isDark ? 0.18 : 0.1, isDark ? 0.3 : 0.2),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.18 : 0.1,
+                isDark ? 0.3 : 0.2,
+              ),
             )} 0%, transparent 62%)`,
             `radial-gradient(1120px 620px at 76.4% 110%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.22 : 0.12, isDark ? 0.34 : 0.22),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.22 : 0.12,
+                isDark ? 0.34 : 0.22,
+              ),
             )} 0%, transparent 58%)`,
             `radial-gradient(840px 480px at 61.8% 0%, ${alpha(
               theme.palette.common.white,
@@ -660,7 +710,12 @@ const createComponents = (
             fillAlpha: isDark ? 0.78 : 0.92,
           }),
           boxShadow: [
-            reactorShadow(theme, controls, "elevated", theme.palette.primary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "elevated",
+              theme.palette.primary.main,
+            ),
             `0 0 ${Math.round(scale(controls.heroDrama, 26, 44))}px ${alpha(
               theme.palette.info.main,
               scale(controls.heroDrama, 0.08, 0.14),
@@ -675,9 +730,15 @@ const createComponents = (
             accent: theme.palette.primary.main,
             fillAlpha: isDark ? 0.86 : 0.97,
           }),
-          backgroundSize: "100% 100%, 100% 100%, 100% 100%, 100% 100%, 220% 220%",
+          backgroundSize:
+            "100% 100%, 100% 100%, 100% 100%, 100% 100%, 220% 220%",
           boxShadow: [
-            reactorShadow(theme, controls, "overlay", theme.palette.primary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.primary.main,
+            ),
             `0 0 ${Math.round(scale(controls.heroDrama, 48, 84))}px ${alpha(
               theme.palette.info.main,
               scale(controls.heroDrama, 0.12, 0.22),
@@ -692,9 +753,15 @@ const createComponents = (
             accent: theme.palette.primary.main,
             fillAlpha: isDark ? 0.9 : 0.985,
           }),
-          backgroundSize: "100% 100%, 100% 100%, 100% 100%, 100% 100%, 260% 260%",
+          backgroundSize:
+            "100% 100%, 100% 100%, 100% 100%, 100% 100%, 260% 260%",
           boxShadow: [
-            reactorShadow(theme, controls, "overlay", theme.palette.primary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.primary.main,
+            ),
             `0 0 ${Math.round(scale(controls.heroDrama, 64, 112))}px ${alpha(
               theme.palette.info.main,
               scale(controls.heroDrama, 0.16, 0.28),
@@ -785,7 +852,7 @@ const createComponents = (
           )}`,
         ].join(", "),
         "&::after": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInline: 0,
           insetBlockEnd: 0,
@@ -826,9 +893,10 @@ const createComponents = (
             paddingTop: theme.spacing(7),
             paddingBottom: theme.spacing(9),
           },
-          "& .MuiTypography-h1, & .MuiTypography-h2, & .gr-showcase-headline, & [data-gr-copy='showcase']": {
-            marginBottom: theme.spacing(1.25),
-          },
+          "& .MuiTypography-h1, & .MuiTypography-h2, & .gr-showcase-headline, & [data-gr-copy='showcase']":
+            {
+              marginBottom: theme.spacing(1.25),
+            },
           "& .MuiTypography-subtitle1, & .MuiTypography-subtitle2": {
             maxWidth: "60ch",
           },
@@ -866,32 +934,45 @@ const createComponents = (
             accent: theme.palette.primary.main,
             fillAlpha: theme.palette.mode === "dark" ? 0.82 : 0.96,
           }),
-          backgroundSize: "100% 100%, 100% 100%, 100% 100%, 100% 100%, 220% 220%",
+          backgroundSize:
+            "100% 100%, 100% 100%, 100% 100%, 100% 100%, 220% 220%",
           boxShadow: [
-            reactorShadow(theme, controls, "overlay", theme.palette.primary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.primary.main,
+            ),
             `0 0 ${Math.round(scale(controls.heroDrama, 44, 80))}px ${alpha(
               theme.palette.info.main,
               scale(controls.heroDrama, 0.12, 0.22),
             )}`,
           ].join(", "),
         },
-        "&.gr-showcase-card, &[data-gr-card='showcase'], &[data-gr-surface='showcase']": {
-          ...reactorSurface(theme, controls, {
-            level: "overlay",
-            radius: Number(theme.shape.borderRadius) + 34,
-            tint: theme.palette.background.paper,
-            accent: theme.palette.primary.main,
-            fillAlpha: theme.palette.mode === "dark" ? 0.88 : 0.98,
-          }),
-          backgroundSize: "100% 100%, 100% 100%, 100% 100%, 100% 100%, 260% 260%",
-          boxShadow: [
-            reactorShadow(theme, controls, "overlay", theme.palette.primary.main),
-            `0 0 ${Math.round(scale(controls.heroDrama, 60, 104))}px ${alpha(
-              theme.palette.info.main,
-              scale(controls.heroDrama, 0.16, 0.28),
-            )}`,
-          ].join(", "),
-        },
+        "&.gr-showcase-card, &[data-gr-card='showcase'], &[data-gr-surface='showcase']":
+          {
+            ...reactorSurface(theme, controls, {
+              level: "overlay",
+              radius: Number(theme.shape.borderRadius) + 34,
+              tint: theme.palette.background.paper,
+              accent: theme.palette.primary.main,
+              fillAlpha: theme.palette.mode === "dark" ? 0.88 : 0.98,
+            }),
+            backgroundSize:
+              "100% 100%, 100% 100%, 100% 100%, 100% 100%, 260% 260%",
+            boxShadow: [
+              reactorShadow(
+                theme,
+                controls,
+                "overlay",
+                theme.palette.primary.main,
+              ),
+              `0 0 ${Math.round(scale(controls.heroDrama, 60, 104))}px ${alpha(
+                theme.palette.info.main,
+                scale(controls.heroDrama, 0.16, 0.28),
+              )}`,
+            ].join(", "),
+          },
         "@media (hover: hover)": {
           "&:hover": {
             transform: "translateY(-1px)",
@@ -932,25 +1013,33 @@ const createComponents = (
             accent: theme.palette.primary.main,
             fillAlpha: theme.palette.mode === "dark" ? 0.84 : 0.96,
           }),
-          backgroundSize: "100% 100%, 100% 100%, 100% 100%, 100% 100%, 220% 220%",
+          backgroundSize:
+            "100% 100%, 100% 100%, 100% 100%, 100% 100%, 220% 220%",
         },
-        "&.gr-showcase-card, &[data-gr-card='showcase'], &[data-gr-surface='showcase']": {
-          ...reactorSurface(theme, controls, {
-            level: "overlay",
-            radius: Number(theme.shape.borderRadius) + 36,
-            tint: theme.palette.background.paper,
-            accent: theme.palette.primary.main,
-            fillAlpha: theme.palette.mode === "dark" ? 0.9 : 0.98,
-          }),
-          backgroundSize: "100% 100%, 100% 100%, 100% 100%, 100% 100%, 260% 260%",
-          boxShadow: [
-            reactorShadow(theme, controls, "overlay", theme.palette.primary.main),
-            `0 0 ${Math.round(scale(controls.heroDrama, 64, 116))}px ${alpha(
-              theme.palette.info.main,
-              scale(controls.heroDrama, 0.18, 0.3),
-            )}`,
-          ].join(", "),
-        },
+        "&.gr-showcase-card, &[data-gr-card='showcase'], &[data-gr-surface='showcase']":
+          {
+            ...reactorSurface(theme, controls, {
+              level: "overlay",
+              radius: Number(theme.shape.borderRadius) + 36,
+              tint: theme.palette.background.paper,
+              accent: theme.palette.primary.main,
+              fillAlpha: theme.palette.mode === "dark" ? 0.9 : 0.98,
+            }),
+            backgroundSize:
+              "100% 100%, 100% 100%, 100% 100%, 100% 100%, 260% 260%",
+            boxShadow: [
+              reactorShadow(
+                theme,
+                controls,
+                "overlay",
+                theme.palette.primary.main,
+              ),
+              `0 0 ${Math.round(scale(controls.heroDrama, 64, 116))}px ${alpha(
+                theme.palette.info.main,
+                scale(controls.heroDrama, 0.18, 0.3),
+              )}`,
+            ].join(", "),
+          },
         "@media (hover: hover)": {
           "&:hover": {
             transform: "translateY(-2px)",
@@ -1215,7 +1304,13 @@ const createComponents = (
         borderWidth: 1,
         backgroundRepeat: "no-repeat",
         transition: theme.transitions.create(
-          ["transform", "box-shadow", "background-color", "border-color", "background-position"],
+          [
+            "transform",
+            "box-shadow",
+            "background-color",
+            "border-color",
+            "background-position",
+          ],
           { duration: Math.round(scale(controls.motionPolish, 220, 320)) },
         ),
         "& .MuiButton-startIcon, & .MuiButton-endIcon": {
@@ -1253,7 +1348,12 @@ const createComponents = (
       },
 
       contained: ({ theme }) => ({
-        boxShadow: reactorShadow(theme, controls, "elevated", theme.palette.primary.main),
+        boxShadow: reactorShadow(
+          theme,
+          controls,
+          "elevated",
+          theme.palette.primary.main,
+        ),
         "@media (hover: hover)": {
           "&:hover": {
             "& .MuiButton-startIcon, & .MuiButton-endIcon": {
@@ -1293,7 +1393,12 @@ const createComponents = (
           )}`,
         ].join(", "),
         boxShadow: [
-          reactorShadow(theme, controls, "elevated", theme.palette.primary.main),
+          reactorShadow(
+            theme,
+            controls,
+            "elevated",
+            theme.palette.primary.main,
+          ),
           `0 0 ${Math.round(scale(controls.ctaPower, 34, 64))}px ${alpha(
             theme.palette.primary.main,
             scale(controls.ctaPower, 0.24, 0.42),
@@ -1313,7 +1418,12 @@ const createComponents = (
             transform: "translateY(-3px)",
             backgroundPosition: "100% 50%, 0 0",
             boxShadow: [
-              reactorShadow(theme, controls, "overlay", theme.palette.info.main),
+              reactorShadow(
+                theme,
+                controls,
+                "overlay",
+                theme.palette.info.main,
+              ),
               `0 0 ${Math.round(scale(controls.ctaPower, 44, 72))}px ${alpha(
                 theme.palette.primary.main,
                 scale(controls.ctaPower, 0.28, 0.46),
@@ -1333,7 +1443,12 @@ const createComponents = (
         },
         "&.Mui-focusVisible": {
           boxShadow: [
-            reactorShadow(theme, controls, "overlay", theme.palette.primary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.primary.main,
+            ),
             reactorFocusRing(theme, controls, 5),
           ].join(", "),
         },
@@ -1353,7 +1468,12 @@ const createComponents = (
           ].join(", "),
           backgroundSize: `${Math.round(scale(controls.ctaPower, 250, 320))}% 210%, 100% 100%`,
           boxShadow: [
-            reactorShadow(theme, controls, "overlay", theme.palette.primary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "overlay",
+              theme.palette.primary.main,
+            ),
             `0 0 ${Math.round(scale(controls.ctaPower, 56, 90))}px ${alpha(
               theme.palette.primary.main,
               scale(controls.ctaPower, 0.32, 0.52),
@@ -1368,7 +1488,12 @@ const createComponents = (
               transform: "translateY(-4px)",
               backgroundPosition: "100% 50%, 0 0",
               boxShadow: [
-                reactorShadow(theme, controls, "overlay", theme.palette.info.main),
+                reactorShadow(
+                  theme,
+                  controls,
+                  "overlay",
+                  theme.palette.info.main,
+                ),
                 `0 0 ${Math.round(scale(controls.ctaPower, 72, 110))}px ${alpha(
                   theme.palette.primary.main,
                   scale(controls.ctaPower, 0.36, 0.58),
@@ -1382,7 +1507,12 @@ const createComponents = (
           },
           "&.Mui-focusVisible": {
             boxShadow: [
-              reactorShadow(theme, controls, "overlay", theme.palette.primary.main),
+              reactorShadow(
+                theme,
+                controls,
+                "overlay",
+                theme.palette.primary.main,
+              ),
               reactorFocusRing(theme, controls, 6),
               `0 0 ${Math.round(scale(controls.ctaPower, 54, 88))}px ${alpha(
                 theme.palette.info.main,
@@ -1442,7 +1572,12 @@ const createComponents = (
         },
         "&.Mui-focusVisible": {
           boxShadow: [
-            reactorShadow(theme, controls, "elevated", theme.palette.secondary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "elevated",
+              theme.palette.secondary.main,
+            ),
             reactorFocusRing(theme, controls, 3),
           ].join(", "),
         },
@@ -1708,7 +1843,12 @@ const createComponents = (
         letterSpacing: "0.04em",
         textShadow: `0 1px 0 ${alpha(theme.palette.common.black, 0.16)}`,
         boxShadow: [
-          reactorShadow(theme, controls, "surface", theme.palette.secondary.main),
+          reactorShadow(
+            theme,
+            controls,
+            "surface",
+            theme.palette.secondary.main,
+          ),
           `0 0 26px ${alpha(
             theme.palette.primary.main,
             scale(controls.extravagance, 0.08, 0.16),
@@ -1730,7 +1870,12 @@ const createComponents = (
           fillAlpha: theme.palette.mode === "dark" ? 0.34 : 0.78,
         }),
         padding: theme.spacing(0.5),
-        boxShadow: reactorShadow(theme, controls, "surface", theme.palette.info.main),
+        boxShadow: reactorShadow(
+          theme,
+          controls,
+          "surface",
+          theme.palette.info.main,
+        ),
         transition: theme.transitions.create(["box-shadow", "transform"], {
           duration: theme.transitions.duration.shorter,
         }),
@@ -1738,7 +1883,12 @@ const createComponents = (
           "&:hover": {
             transform: "translateY(-1px)",
             boxShadow: [
-              reactorShadow(theme, controls, "elevated", theme.palette.info.main),
+              reactorShadow(
+                theme,
+                controls,
+                "elevated",
+                theme.palette.info.main,
+              ),
               `0 0 30px ${alpha(
                 theme.palette.primary.main,
                 scale(controls.extravagance, 0.08, 0.16),
@@ -1844,7 +1994,12 @@ const createComponents = (
         },
         "&.Mui-focused": {
           boxShadow: [
-            reactorShadow(theme, controls, "surface", theme.palette.primary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "surface",
+              theme.palette.primary.main,
+            ),
             reactorFocusRing(theme, controls, 3),
           ].join(", "),
         },
@@ -1989,7 +2144,12 @@ const createComponents = (
         "&:hover, &.Mui-focusVisible": {
           transform: "scale(1.04)",
           boxShadow: [
-            reactorShadow(theme, controls, "surface", theme.palette.primary.main),
+            reactorShadow(
+              theme,
+              controls,
+              "surface",
+              theme.palette.primary.main,
+            ),
             reactorFocusRing(theme, controls, 3),
           ].join(", "),
         },
@@ -2069,9 +2229,12 @@ const createComponents = (
       root: ({ theme }) => ({
         minHeight: 58,
         paddingInline: theme.spacing(2.5),
-        transition: theme.transitions.create(["background-color", "box-shadow"], {
-          duration: theme.transitions.duration.shorter,
-        }),
+        transition: theme.transitions.create(
+          ["background-color", "box-shadow"],
+          {
+            duration: theme.transitions.duration.shorter,
+          },
+        ),
         "& .MuiAccordionSummary-expandIconWrapper": {
           borderRadius: 999,
           padding: 2,
@@ -2137,7 +2300,7 @@ const createComponents = (
           fillAlpha: theme.palette.mode === "dark" ? 0.54 : 0.86,
         }),
         "&::before": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetInlineStart: 0,
           insetBlockStart: 0,
@@ -2258,9 +2421,12 @@ const createComponents = (
   MuiTableRow: {
     styleOverrides: {
       root: ({ theme }) => ({
-        transition: theme.transitions.create(["background-color", "transform"], {
-          duration: theme.transitions.duration.shorter,
-        }),
+        transition: theme.transitions.create(
+          ["background-color", "transform"],
+          {
+            duration: theme.transitions.duration.shorter,
+          },
+        ),
         "&:nth-of-type(even)": {
           backgroundColor: alpha(
             theme.palette.background.paper,
@@ -2460,7 +2626,12 @@ const createComponents = (
           fillAlpha: theme.palette.mode === "dark" ? 0.82 : 0.96,
         }),
         boxShadow: [
-          reactorShadow(theme, controls, "overlay", theme.palette.secondary.main),
+          reactorShadow(
+            theme,
+            controls,
+            "overlay",
+            theme.palette.secondary.main,
+          ),
           `0 0 28px ${alpha(
             theme.palette.info.main,
             scale(controls.extravagance, 0.08, 0.14),
@@ -2538,7 +2709,12 @@ const createComponents = (
           fillAlpha: theme.palette.mode === "dark" ? 0.86 : 0.96,
         }),
         boxShadow: [
-          reactorShadow(theme, controls, "overlay", theme.palette.secondary.main),
+          reactorShadow(
+            theme,
+            controls,
+            "overlay",
+            theme.palette.secondary.main,
+          ),
           `0 0 32px ${alpha(
             theme.palette.primary.main,
             scale(controls.extravagance, 0.08, 0.14),

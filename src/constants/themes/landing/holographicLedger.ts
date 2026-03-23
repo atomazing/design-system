@@ -11,14 +11,14 @@ const FONT_MONO =
 
 const HOLO_RADIUS = 18;
 
-type HoloLandingControls = {
+interface HoloLandingControls {
   luxuryLevel: number;
   extravagance: number;
   heroDrama: number;
   ctaPower: number;
   motionPolish: number;
   blurBudget: number;
-};
+}
 
 type SurfaceLevel = "surface" | "elevated" | "overlay";
 
@@ -151,11 +151,7 @@ const motionDuration = (
   max: number,
 ): number => Math.round(scale(controls.motionPolish, min, max));
 
-const blurStyle = (
-  controls: HoloLandingControls,
-  min: number,
-  max: number,
-) => {
+const blurStyle = (controls: HoloLandingControls, min: number, max: number) => {
   const blur = Math.round(scale(controls.blurBudget, min, max));
   const mobileBlur = Math.max(6, Math.round(blur * 0.62));
 
@@ -322,7 +318,12 @@ const holoFrame = (
             theme.palette.primary.main,
             signatureAlpha * 0.88,
           )} 100%)`
-        : holoRail(theme, controls, scale(controls.extravagance, 0.18, 0.3), 132),
+        : holoRail(
+            theme,
+            controls,
+            scale(controls.extravagance, 0.18, 0.3),
+            132,
+          ),
     ].join(", "),
     backgroundOrigin:
       "padding-box, padding-box, padding-box, padding-box, border-box",
@@ -394,15 +395,27 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(1080px 620px at 14% 8%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.12 : 0.08, isDark ? 0.24 : 0.14),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.12 : 0.08,
+                isDark ? 0.24 : 0.14,
+              ),
             )} 0%, transparent 60%)`,
             `radial-gradient(980px 560px at 86% 10%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, isDark ? 0.1 : 0.06, isDark ? 0.18 : 0.1),
+              scale(
+                controls.extravagance,
+                isDark ? 0.1 : 0.06,
+                isDark ? 0.18 : 0.1,
+              ),
             )} 0%, transparent 62%)`,
             `radial-gradient(980px 560px at 61.8% 112%, ${alpha(
               theme.palette.info.main,
-              scale(controls.extravagance, isDark ? 0.08 : 0.04, isDark ? 0.16 : 0.08),
+              scale(
+                controls.extravagance,
+                isDark ? 0.08 : 0.04,
+                isDark ? 0.16 : 0.08,
+              ),
             )} 0%, transparent 60%)`,
             `linear-gradient(180deg, ${alpha(
               theme.palette.background.default,
@@ -430,7 +443,7 @@ const createComponents = (
           backgroundAttachment: "fixed",
         },
         "body::before": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInlineStart: "-12vw",
           insetBlockStart: "8vh",
@@ -449,15 +462,20 @@ const createComponents = (
               theme.palette.common.white,
               isDark ? 0.08 : 0.18,
             )} 0%, transparent 100%)`,
-            holoRail(theme, controls, scale(controls.heroDrama, 0.44, 0.72), 102),
+            holoRail(
+              theme,
+              controls,
+              scale(controls.heroDrama, 0.44, 0.72),
+              102,
+            ),
           ].join(", "),
           filter: `blur(${Math.round(scale(controls.blurBudget, 16, 28))}px)`,
           opacity: scale(controls.heroDrama, 0.78, 0.96),
           transform: "translate3d(-2%, 0, 0) rotate(-5deg)",
-          animation: `hlRotate ${motionDuration(controls, 22000, 15000)}ms linear infinite`,
+          animation: `hlRotate ${motionDuration(controls, 22_000, 15_000)}ms linear infinite`,
         },
         "body::after": {
-          content: "\"\"",
+          content: '""',
           position: "fixed",
           insetInline: 0,
           insetBlockStart: 0,
@@ -547,15 +565,27 @@ const createComponents = (
           backgroundImage: [
             `radial-gradient(1180px 760px at 12% 6%, ${alpha(
               theme.palette.primary.main,
-              scale(controls.heroDrama, isDark ? 0.18 : 0.12, isDark ? 0.3 : 0.18),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.18 : 0.12,
+                isDark ? 0.3 : 0.18,
+              ),
             )} 0%, transparent 62%)`,
             `radial-gradient(1120px 720px at 88% 8%, ${alpha(
               theme.palette.secondary.main,
-              scale(controls.extravagance, isDark ? 0.16 : 0.1, isDark ? 0.26 : 0.16),
+              scale(
+                controls.extravagance,
+                isDark ? 0.16 : 0.1,
+                isDark ? 0.26 : 0.16,
+              ),
             )} 0%, transparent 64%)`,
             `radial-gradient(1040px 660px at 61.8% 116%, ${alpha(
               theme.palette.info.main,
-              scale(controls.heroDrama, isDark ? 0.12 : 0.08, isDark ? 0.22 : 0.12),
+              scale(
+                controls.heroDrama,
+                isDark ? 0.12 : 0.08,
+                isDark ? 0.22 : 0.12,
+              ),
             )} 0%, transparent 62%)`,
             `linear-gradient(180deg, ${alpha(
               theme.palette.background.default,
@@ -580,15 +610,16 @@ const createComponents = (
             )} 1px, transparent 1px, transparent 26px)`,
           ].join(", "),
         },
-        "body.hl-showcase-mode::before, body[data-hl-scene='showcase']::before": {
-          width: "52vw",
-          maxWidth: 860,
-          height: 156,
-          insetInlineStart: "-14vw",
-          insetBlockStart: "5vh",
-          filter: `blur(${Math.round(scale(controls.blurBudget, 24, 40))}px)`,
-          opacity: 1,
-        },
+        "body.hl-showcase-mode::before, body[data-hl-scene='showcase']::before":
+          {
+            width: "52vw",
+            maxWidth: 860,
+            height: 156,
+            insetInlineStart: "-14vw",
+            insetBlockStart: "5vh",
+            filter: `blur(${Math.round(scale(controls.blurBudget, 24, 40))}px)`,
+            opacity: 1,
+          },
         "body.hl-showcase-mode::after, body[data-hl-scene='showcase']::after": {
           height: 5,
           boxShadow: [
@@ -661,7 +692,7 @@ const createComponents = (
             gap: theme.spacing(3),
           },
           "&[data-hl-section='hero']::before": {
-            content: "\"\"",
+            content: '""',
             position: "absolute",
             insetInline: 0,
             insetBlockStart: 0,
@@ -723,7 +754,7 @@ const createComponents = (
             )} inset`,
           ].join(", "),
           "&::after": {
-            content: "\"\"",
+            content: '""',
             position: "absolute",
             insetInline: 0,
             insetBlockEnd: 0,
@@ -824,7 +855,12 @@ const createComponents = (
           "&:hover": {
             transform: "translateY(-2px)",
             boxShadow: [
-              holoShadow(theme, controls, "elevated", theme.palette.primary.main),
+              holoShadow(
+                theme,
+                controls,
+                "elevated",
+                theme.palette.primary.main,
+              ),
               `0 0 ${Math.round(scale(controls.heroDrama, 28, 52))}px ${alpha(
                 theme.palette.primary.main,
                 scale(controls.heroDrama, 0.08, 0.16),
@@ -939,7 +975,7 @@ const createComponents = (
             transparent 100%)`,
           opacity: 0.88,
           "&::after": {
-            content: "\"\"",
+            content: '""',
             position: "absolute",
             insetInline: "18%",
             insetBlockStart: -1,
@@ -989,11 +1025,17 @@ const createComponents = (
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         transition: theme.transitions.create(
-          ["transform", "box-shadow", "background-color", "border-color", "color"],
+          [
+            "transform",
+            "box-shadow",
+            "background-color",
+            "border-color",
+            "color",
+          ],
           { duration: motionDuration(controls, 180, 280) },
         ),
         "&::before": {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           inset: 0,
           opacity: 0,
@@ -1045,12 +1087,7 @@ const createComponents = (
               theme.palette.common.white,
               isDark ? 0.18 : 0.24,
             )} 0%, transparent 52%)`,
-            holoRail(
-              theme,
-              controls,
-              scale(controls.ctaPower, 0.9, 1),
-              126,
-            ),
+            holoRail(theme, controls, scale(controls.ctaPower, 0.9, 1), 126),
           ].join(", "),
           boxShadow: [
             `0 0 0 1px ${alpha(
@@ -1066,7 +1103,7 @@ const createComponents = (
             )}`,
           ].join(", "),
           "&::after": {
-            content: "\"\"",
+            content: '""',
             position: "absolute",
             inset: 1,
             borderRadius: "inherit",
@@ -1153,10 +1190,7 @@ const createComponents = (
         return {
           color: theme.palette.text.primary,
           borderWidth: 1,
-          borderColor: alpha(
-            theme.palette.text.primary,
-            isDark ? 0.2 : 0.14,
-          ),
+          borderColor: alpha(theme.palette.text.primary, isDark ? 0.2 : 0.14),
           backgroundColor: alpha(
             theme.palette.text.primary,
             isDark ? 0.045 : 0.03,
@@ -1729,9 +1763,12 @@ const createComponents = (
   MuiTableRow: {
     styleOverrides: {
       root: ({ theme }) => ({
-        transition: theme.transitions.create(["background-color", "transform"], {
-          duration: motionDuration(controls, 140, 220),
-        }),
+        transition: theme.transitions.create(
+          ["background-color", "transform"],
+          {
+            duration: motionDuration(controls, 140, 220),
+          },
+        ),
         "&:hover": {
           backgroundColor: alpha(
             theme.palette.primary.main,
@@ -1910,9 +1947,12 @@ const createComponents = (
         fontWeight: 700,
         textDecorationColor: alpha(theme.palette.info.main, 0.26),
         textUnderlineOffset: "0.22em",
-        transition: theme.transitions.create(["color", "text-decoration-color"], {
-          duration: motionDuration(controls, 140, 220),
-        }),
+        transition: theme.transitions.create(
+          ["color", "text-decoration-color"],
+          {
+            duration: motionDuration(controls, 140, 220),
+          },
+        ),
         "&:hover": {
           color: theme.palette.primary.main,
           textDecorationColor: alpha(theme.palette.primary.main, 0.36),

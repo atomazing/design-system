@@ -1,12 +1,12 @@
 export { acidEditorial, acidEditorialNight } from "./acidEditorial";
 export { bauhausOps, bauhausOpsNight } from "./bauhausOps";
-export { brandNeonMotion } from "./brandNeonMotion";
 export { brutalistSprint, brutalistSprintNight } from "./brutalistSprint";
 export { ceramicFlux, ceramicFluxLight } from "./ceramicFlux";
 export {
   chromaticWireframe,
   chromaticWireframeLight,
 } from "./chromaticWireframe";
+export { flowEditorial, flowEditorialNight } from "./flowEditorial";
 export { glassReactor, glassReactorLight } from "./glassReactor";
 export { holographicLedger, holographicLedgerLight } from "./holographicLedger";
 export { infraredBlueprint, infraredBlueprintLight } from "./infraredBlueprint";
@@ -16,17 +16,6 @@ export {
   monochromeKineticsLight,
 } from "./monochromeKinetics";
 export { neoMemphisMetrics, neoMemphisMetricsNight } from "./neoMemphisMetrics";
-export { neonBauhausGrid, neonBauhausGridNight } from "./neonBauhausGrid";
-export { neonBauhausOps, neonBauhausOpsNight } from "./neonBauhausOps";
-export {
-  neonBrutalistSprint,
-  neonBrutalistSprintNight,
-} from "./neonBrutalistSprint";
-export {
-  neonCompliance,
-  neonComplianceCalm,
-  neonComplianceLight,
-} from "./neonCompliance";
 export {
   noirInterface,
   noirInterfaceDeep,
